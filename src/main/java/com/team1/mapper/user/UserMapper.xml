@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team1.mapper.user.UserMapper">
+	<insert id="insert">
+	INSERT INTO tb_user (id, pw, email, location, nickName, introduce )
+	VALUES (#{id}, #{pw}, #{email}, #{location}, #{nickName}, #{introduce})
+	</insert>
+
+	<select id="select" resultType="com.team1.domain.user.UserVO">
+	SELECT id, pw, email, address, signupday, nickname
+	FROM tb_user
+	WHERE id = #{id}
+	</select>
+	
+	<update id="update">
+	UPDATE tb_user
+	SET pw = #{pw},
+		email = #{email},
+		location = #{location},
+		nickName = #{nickName},
+		introduce = #{introduce}
+	WHERE
+		id = #{id}
+	</update>
+	
+	<delete id="delete">
+	DELETE FROM tb_user
+	WHERE id = #{id}
+	</delete>
+	
+	<select id="login" resultType="com.team1.domain.user.UserVO">
+	SELECT nickname, pw
+	FROM tb_user
+	WHERE nickname = #{nickname}
+	AND pw = #{pw}
+	</select>
+
+</mapper>
