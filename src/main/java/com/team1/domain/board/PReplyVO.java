@@ -12,4 +12,6 @@ public class PReplyVO {
 	private String Reply;
 	private LocalDateTime Inserted;
 	private LocalDateTime Updated;
+	
+	private Boolean own;
 }

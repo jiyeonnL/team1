@@ -14,8 +14,12 @@ public class PReplyService {
 	@Setter(onMethod_=@Autowired)
 	private PReplyMapper mapper;
 	
-	public List<PReplyVO> getList() {
-		return mapper.getList();
+	public List<PReplyVO> list(Integer boardId) {
+		return mapper.list(boardId);
+	}
+	
+	public boolean insert(PReplyVO reply) {
+		return mapper.insert(reply) == 1 ;
 	}
 	
 	public boolean remove(Integer id) {
@@ -29,5 +33,14 @@ public class PReplyService {
 	public boolean modify(PReplyVO reply) {
 		return mapper.update(reply) == 1;
 	}
+
+	public PReplyVO readById(Integer ID) {
+		return mapper.selectById(ID);
+	}
+
+	public boolean update(PReplyVO newReply) {
+		return mapper.update(newReply) == 1;		
+	}
+
 	
 }
