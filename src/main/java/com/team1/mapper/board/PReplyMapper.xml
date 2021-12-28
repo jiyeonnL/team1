@@ -5,7 +5,7 @@
   
   <mapper namespace="com.team1.mapper.board.PReplyMapper">
   
-  <select id="getList" resultType="com.team1.domain.board.PReplyVO">
+  <select id="list" resultType="com.team1.domain.board.PReplyVO">
     SELECT ID, BoardId, Nickname, Reply, Inserted, Updated
     FROM PReply
     ORDER BY ID 
@@ -23,7 +23,7 @@
 	SET
 	BoardId = #{BoardId}, 
 	Reply = #{Reply},
-	Updated = #{Updated}
+	Updated = NOW(),
 	WHERE ID = #{ID}
   </update>
   
@@ -31,6 +31,11 @@
 	DELETE FROM PReply WHERE ID = #{ID}
   </delete>
   
+  <select id="selectById" resultType="com.team1.domain.board.PReplyVO">
+	SELECT ID, BoardId, Nickname, Reply, Inserted, Updated
+	FROM PReply
+	WHERE ID = #{ID}
+  </select>
   
   
   
