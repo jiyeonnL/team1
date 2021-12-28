@@ -15,7 +15,6 @@ public class UserService {
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper mapper;
 	
-	
 	public UserVO read(String id) {
 		return mapper.select(id);
 	}

@@ -51,12 +51,11 @@ public class UserController {
 	@PostMapping("/signup")
 	public String signup(UserVO user, RedirectAttributes rttr) {
 		
-		
 		boolean ok = service.register(user);
 		
 		if(ok) {
 			rttr.addFlashAttribute("ok", "가입완료");
-			return "redirect:/user/signup";
+			return "redirect:/user/login";
 		}else {
 			return "redirect:/user/signup";
 		}

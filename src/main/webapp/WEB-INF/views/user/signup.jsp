@@ -45,6 +45,58 @@
     <b:header></b:header>
       <div id="body">
         <div id="inner">
+				<h1>회원 가입</h1>
+
+				<form method="post">
+					<div class="form-group">
+						<label for="input1">아이디</label>
+
+						<div class="input-group">
+							<input type="text" class="form-control" id="input1" required name="nickname" value="${user.nickname }">
+						</div>
+
+			
+					</div>
+					<div class="form-group">
+						<label for="input2">패스워드</label> 
+						<div class="input-group">
+							<input type="password" class="form-control" id="input2" required name="pw" value="${user.pw }">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="input3">자기소개</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="input3" required name="introduce" value="${user.introduce }">
+						</div>
+						<small class="form-text" id="nickNameCheckMessage"></small>
+					</div>
+					
+					<div class="form-group">
+						<label for="input4">이메일</label> 
+						<div class="input-group">
+						<input type="email" class="form-control" id="input4" required name="email" value="${user.email }">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="input5">주소</label> 
+						<select class="form-control" id="input5" required name="location" value="${user.location }">
+							<option>강남구</option>
+							<option>마포구</option>
+							<option>서초구</option>
+							<option>성남</option>
+							
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="input6">회원 프로필 선택</label> 
+						<input type="text" class="form-control" id="input6" required name="profileurl" value="${user.profileurl }">
+					</div>
+					<button class="btn btn-outline-primary" id="submitButton1">가입</button>
+				</form>
+			</div>
+		</div>
+	</div>
         </div>
       </div>
 

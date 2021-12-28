@@ -5,8 +5,8 @@
 
 <mapper namespace="com.team1.mapper.user.UserMapper">
 	<insert id="insert">
-	INSERT INTO tb_user (id, pw, email, location, nickName, introduce )
-	VALUES (#{id}, #{pw}, #{email}, #{location}, #{nickName}, #{introduce})
+	INSERT INTO tb_user (id, pw, email, location, nickname, introduce, profileurl)
+	VALUES (#{id}, #{pw}, #{email}, #{location}, #{nickname}, #{introduce}, #{profileurl})
 	</insert>
 
 	<select id="select" resultType="com.team1.domain.user.UserVO">
