@@ -6,14 +6,15 @@ import lombok.Data;
 
 @Data
 public class PleaseVO {
-	private Integer ID;
-	private Integer UUID;
-	private String Location;
-	private Integer Up;
-	private Integer Views;
-	private String Tag;
-	private String Title;
-	private String Content;
-	private LocalDateTime Inserted;
-	private LocalDateTime Updated;
+	private Integer id;
+	private Integer memberId;
+	private String location;
+	private Integer up;
+	private Integer views;
+	private String tag;
+	private String title;
+	private String content;
+	private LocalDateTime inserted;
+	private LocalDateTime updated;
+	private String nickname;
 }
