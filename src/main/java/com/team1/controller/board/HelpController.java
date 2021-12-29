@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.team1.coverData.Cover;
 import com.team1.domain.board.HelpVO;
 import com.team1.service.board.HelpService;
 
@@ -20,18 +21,42 @@ import lombok.Setter;
 
 @Controller
 @RequestMapping("/help")
-
 public class HelpController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private HelpService service;
 	
-	@GetMapping("/list")
-	public void list(Model model) {
+	//help 페이지 (검색 쿼리 있는 버전)
+	@GetMapping(value = "/list", params = { "region", "query" })
+	public void help(@RequestParam(value = "region") String region, @RequestParam(value = "query") String query,
+			Model model) {
+
+		Cover.setCover("help", model);
+		
+		model.addAttribute("tag", "help");
+		model.addAttribute("region", region);
+		
+		List<HelpVO> list = service.getList();
+
+		model.addAttribute("list", list);
+		
+	}
+	
+	//help 페이지
+	@GetMapping(value = "/list", params = { "region"})
+	public void help(@RequestParam(value = "region") String region,Model model) {
+
+		Cover.setCover("help", model);
+		
+		model.addAttribute("tag", "help");
+		model.addAttribute("region", region);
+		
 		List<HelpVO> list = service.getList();
 
 		model.addAttribute("list", list);
 	}
+	
+
 	
 	@GetMapping({"/get", "/modify"})
 	public void get(@RequestParam("id") Integer id, Model model) {

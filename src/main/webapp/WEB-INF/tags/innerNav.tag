@@ -85,8 +85,8 @@
 						.click(function() {
 							var query = $("#keyword").val();
 							console.log(query);
-							location.href = "/controller1/board/"+tag+"?region="
-								+ region +"&tag="+tag+"&query="+query;
+							location.href = "/controller1/"+tag+"/list?region="
+								+ region +"&query="+query;
 						})
 
 						//model attribute에서 현재 어느 태그인지 검사하고 select의 현재 상태 변경시기키 (model 값을 스크립트 내부에서 사용해야 한다.)
@@ -97,7 +97,7 @@
 											"#region option:selected")
 											.val();
 
-									location.href = "/controller1/board/main?region="
+									location.href = "/controller1/all/list?region="
 											+ region;
 
 								});
@@ -110,7 +110,7 @@
 													"#region option:selected")
 													.val();
 
-											location.href = "/controller1/board/news?region="
+											location.href = "/controller1/news/list?region="
 													+ region;
 
 										});
@@ -121,7 +121,7 @@
 											var region = $(
 													"#region option:selected")
 													.val();
-											location.href = "/controller1/board/question?region="
+											location.href = "/controller1/question/list?region="
 													+ region;
 
 										});
@@ -132,7 +132,7 @@
 											var region = $(
 													"#region option:selected")
 													.val();
-											location.href = "/controller1/board/life?region="
+											location.href = "/controller1/life/list?region="
 													+ region;
 
 										});
@@ -144,7 +144,7 @@
 													"#region option:selected")
 													.val();
 											console.log(region, "news");
-											location.href = "/controller1/board/help?region="
+											location.href = "/controller1/help/list?region="
 													+ region;
 										});
 
