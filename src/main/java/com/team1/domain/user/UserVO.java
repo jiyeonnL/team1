@@ -1,6 +1,6 @@
 package com.team1.domain.user;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ public class UserVO {
 	private String email;
 	private String pw; 
 	private String nickname;
-	private LocalDateTime signupday; 
+	private LocalDate signupday; 
 	private String profileurl; 
 	private String introduce; 
 

@@ -5,7 +5,7 @@
 
 <mapper namespace="com.team1.mapper.user.UserMapper">
 	<insert id="insert">
-	INSERT INTO tb_user (id, pw, email, location, nickname, introduce, profileurl)
+	INSERT INTO team.tb_user (id, pw, email, location, nickname, introduce, profileurl)
 	VALUES (#{id}, #{pw}, #{email}, #{location}, #{nickname}, #{introduce}, #{profileurl})
 	</insert>
 

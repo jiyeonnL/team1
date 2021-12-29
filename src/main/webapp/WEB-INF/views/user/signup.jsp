@@ -1,104 +1,133 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="b" tagdir="/WEB-INF/tags/"%>
+<%@ taglib prefix="b" tagdir="/WEB-INF/tags"%>
+
 <!DOCTYPE html>
 
 <html>
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
-	<style>
-		
-		#body{
-			
-			height: 150vh;
-    /* height: calc(100vh-72px); */
-    		width: 100%;
-    		justify-content: center;
-    		display: flex;
-		
-		}
-		
-		#inner{
-    		border: 2px solid yellowgreen;
-    		width: 900px;
-    		height: 100%;		
-		}
-	</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<style>
+#body {
+	height: 150vh;
+	/* height: calc(100vh-72px); */
+	width: 100%;
+	justify-content: center;
+	display: flex;
+}
+
+#inner {
+	border: 2px solid yellowgreen;
+	width: 900px;
+	height: 100%;
+}
+
+#icon {
+	float: right;
+	margin-top: -39px;
+	background-color: #f5f5f5;
+	padding: 7px 15px;
+	height: 40px;
+	border-bottom-right-radius: 4px;
+	border-top-right-radius: 4px;
+	border: 1px solid black;
+	position: relative;
+	z-index: 999;
+}
+</style>
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
-    
-    <b:header></b:header>
-      <div id="body">
-        <div id="inner">
-				<h1>회원 가입</h1>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+		
+	</script>
 
-				<form method="post">
-					<div class="form-group">
-						<label for="input1">아이디</label>
+	<b:header></b:header>
+	<div id="body">
+		<div id="inner">
+			<b:innerNav></b:innerNav>
+			<div class="container mt-5">
+				<div class="row">
+					<div class="col-md-6 bg-secondary">여기에 로고나 장식용 그림같은거 넣기</div>
+					<div class="col-md-6  border border-5">
+						<form method="post">
+							<h3>Sign Up Now!!!</h3>
+							<div class="form-group">
+								<label for="input1">NickName</label>
 
-						<div class="input-group">
-							<input type="text" class="form-control" id="input1" required name="nickname" value="${user.nickname }">
-						</div>
+								<div class="input-group">
+									<input type="text" class="form-control" id="input1" required name="nickname" value="${user.nickname }">
+									<small class="form-text" id="nickNameCheckMessage"></small>
+								</div>
 
-			
-					</div>
-					<div class="form-group">
-						<label for="input2">패스워드</label> 
-						<div class="input-group">
-							<input type="password" class="form-control" id="input2" required name="pw" value="${user.pw }">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="input3">자기소개</label>
-						<div class="input-group">
-							<input type="text" class="form-control" id="input3" required name="introduce" value="${user.introduce }">
-						</div>
-						<small class="form-text" id="nickNameCheckMessage"></small>
-					</div>
-					
-					<div class="form-group">
-						<label for="input4">이메일</label> 
-						<div class="input-group">
-						<input type="email" class="form-control" id="input4" required name="email" value="${user.email }">
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label for="input5">주소</label> 
-						<select class="form-control" id="input5" required name="location" value="${user.location }">
-							<option>강남구</option>
-							<option>마포구</option>
-							<option>서초구</option>
-							<option>성남</option>
+
+							</div>
+							<div class="form-group">
+								<label for="input2">Password</label>
+								<div class="input-group">
+									<input type="password" class="form-control" id="input2" required name="pw" value="${user.pw }">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="input3">Email</label>
+								<div class="input-group">
+									<input type="email" class="form-control" id="input3" required name="email" value="${user.email }">
+								</div>
+								
+							</div>
+
 							
-						</select>
+
+							<div class="form-group">
+								<label for="input5">Region</label> <select class="form-control" id="input5" required name="location" value="${user.location }">
+									<option>Select your Region...</option>
+									<option>마포구</option>
+									<option>서초구</option>
+									<option>강남구</option>
+
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="input6">Profile url</label> <input type="url" class="form-control" id="input6" required name="profileurl" value="${user.profileurl }">
+							</div>
+							<button class="btn btn-outline-primary" onclick="myFunction()">기본 프로필로 설정</button>
+							<div class="form-group mt-3">
+								<label>Profile Photo</label> <input type="file" id="Profile-pic"
+									name="channel-img" class="form-control" /> <label
+									for="Profile-pic" id=icon> <i
+									class="fa fa-camera" aria-hidden="true"></i>
+								</label>
+							</div>
+							<div class="form-group">
+								<label for="input4">introduce</label>
+								<div class="input-group">
+									<input type="text" class="form-control" id="input4" required name="introduce" value="${user.introduce }">
+								</div>
+							</div>
+							<button class="btn btn-outline-primary" id="submitButton1">가입</button>
+									<div class="form-group">
+							<p class="not-yet">
+									Already have an account? <a href="#">Login</a>
+							</p>
+							</div>
+						</form>
 					</div>
-					<div class="form-group">
-						<label for="input6">회원 프로필 선택</label> 
-						<input type="text" class="form-control" id="input6" required name="profileurl" value="${user.profileurl }">
-					</div>
-					<button class="btn btn-outline-primary" id="submitButton1">가입</button>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
-        </div>
-      </div>
-
+	
+<script>
+function myFunction() {
+  document.getElementById("input6").defaultValue = "http://localhost:8080/userprofile/info";
+}
+</script>
 </body>
 </html>

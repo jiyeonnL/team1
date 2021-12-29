@@ -55,7 +55,7 @@ public class UserController {
 		
 		if(ok) {
 			rttr.addFlashAttribute("ok", "가입완료");
-			return "redirect:/user/login";
+			return "redirect:/board/main";
 		}else {
 			return "redirect:/user/signup";
 		}
