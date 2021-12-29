@@ -12,8 +12,8 @@ public interface MemberMapper {
 	
 	public int update(MemberVO member);
 	
-	public int delete(String id);
+	public int delete(String ID);
 	
 	public List<MemberVO> list();
-
+	
 }

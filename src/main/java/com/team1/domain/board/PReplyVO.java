@@ -6,12 +6,12 @@ import lombok.Data;
 
 @Data
 public class PReplyVO {
-	private Integer ID;
-	private Integer BoardId;
-	private String Nickname;
-	private String Reply;
-	private LocalDateTime Inserted;
-	private LocalDateTime Updated;
+	private Integer id;
+	private Integer boardId;
+	private String nickname;
+	private String reply;
+	private LocalDateTime inserted;
+	private LocalDateTime ipdated;
 	
 	private Boolean own;
 }

@@ -6,37 +6,43 @@
   <mapper namespace="com.team1.mapper.board.PReplyMapper">
   
   <select id="list" resultType="com.team1.domain.board.PReplyVO">
-    SELECT ID, BoardId, Nickname, Reply, Inserted, Updated
-    FROM PReply
-    ORDER BY ID 
+    SELECT id, boardId, nickname, reply, inserted, updated
+    FROM tb_reply
+    ORDER BY id
   </select>
   
-  <insert id="insert">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 	INSERT INTO
-	PReply (BoardId, Nickname, Reply, Inserted, Updated)
+	tb_reply (boardId, nickname, reply, inserted, updated)
 	VALUES
-	(#{BoardId}, #{Nickname}, #{Reply}, #{Inserted}, #{Updated})
+	(#{boardId}, #{nickname}, #{reply}, #{inserted}, #{updated})
   </insert>
   
   <update id="update">
-	UPDATE PReply
+	UPDATE tb_reply
 	SET
-	BoardId = #{BoardId}, 
-	Reply = #{Reply},
-	Updated = NOW(),
-	WHERE ID = #{ID}
+	boardId = #{boardId}, 
+	reply = #{reply},
+	updated = NOW(),
+	WHERE id = #{id}
   </update>
   
   <delete id="delete">
-	DELETE FROM PReply WHERE ID = #{ID}
+	DELETE FROM tb_user WHERE id = #{id}
   </delete>
   
   <select id="selectById" resultType="com.team1.domain.board.PReplyVO">
-	SELECT ID, BoardId, Nickname, Reply, Inserted, Updated
-	FROM PReply
-	WHERE ID = #{ID}
+	SELECT id, boardId, nickname, reply, inserted, updated
+	FROM tb_reply
+	WHERE id = #{id}
   </select>
   
+  <select id="listReplyCount" resultType="Integer">
+	SELECT
+	count(id)
+	FROM tb_reply
+	WHERE boardId=#{id}
+</select>
   
   
   
