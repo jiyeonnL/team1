@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-public class PReplyVO {
+public class HelpReplyVO {
 	private Integer id;
 	private Integer boardId;
 	private String nickname;

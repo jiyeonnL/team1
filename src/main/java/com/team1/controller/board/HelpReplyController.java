@@ -18,23 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.team1.domain.board.MemberVO;
-import com.team1.domain.board.PReplyVO;
-import com.team1.service.board.PReplyService;
+import com.team1.domain.board.HelpReplyVO;
+import com.team1.service.board.HelpReplyService;
 
 import lombok.Setter;
 
 @RestController
 @RequestMapping("/preply")
-public class PReplyController {
+public class HelpReplyController {
 	@Setter(onMethod_ = @Autowired)
-	private PReplyService service;
+	private HelpReplyService service;
 	
 	@GetMapping("/board/{boardId}")
-	public List<PReplyVO> list(@PathVariable Integer boardId, HttpSession session) {
+	public List<HelpReplyVO> list(@PathVariable Integer boardId, HttpSession session) {
 		MemberVO loggedIn = (MemberVO) session.getAttribute("loggedInMember");
-		List<PReplyVO> list = service.list(boardId);
+		List<HelpReplyVO> list = service.list(boardId);
 		if(loggedIn != null) {
-			for (PReplyVO reply : list) {
+			for (HelpReplyVO reply : list) {
 				String writerId = reply.getNickname();
 				reply.setOwn(loggedIn.getNickname().equals(writerId)); // 로그인한 사람과 댓글 작성자가 같을 때 true
 			}
@@ -43,7 +43,7 @@ public class PReplyController {
 	}
 	
 	@PostMapping("/write")
-	public ResponseEntity<String> write(PReplyVO reply, @SessionAttribute(value="loggedInMember", required = false) MemberVO logged) {
+	public ResponseEntity<String> write(HelpReplyVO reply, @SessionAttribute(value="loggedInMember", required = false) MemberVO logged) {
 		if (logged !=null && logged.getNickname().equals(reply.getNickname())) {
 			service.insert(reply);
 			return ResponseEntity.status(HttpStatus.OK).build();
@@ -53,9 +53,9 @@ public class PReplyController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<String>  modify(@PathVariable Integer id, @RequestBody PReplyVO  reply, @SessionAttribute(value="loggedInMember", required = false) MemberVO logged) {
+	public ResponseEntity<String>  modify(@PathVariable Integer id, @RequestBody HelpReplyVO  reply, @SessionAttribute(value="loggedInMember", required = false) MemberVO logged) {
 		// 댓글 조회
-		PReplyVO old = service.readById(id);
+		HelpReplyVO old = service.readById(id);
 		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만 또는 관리자일 때
 		if ((logged !=null && logged.getNickname().equals(old.getNickname()))) { // 관리자 권한 ||logged.getAdminQuali()==1
 			// 업데이트
@@ -72,7 +72,7 @@ public class PReplyController {
 	public ResponseEntity<String> remove(@PathVariable Integer id, @SessionAttribute(value="loggedInMember", required = false) MemberVO logged) {
 				
 		// 댓글 조회
-		PReplyVO old = service.readById(id);
+		HelpReplyVO old = service.readById(id);
 		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만 또는 관리자일 때
 		if ((logged !=null && logged.getNickname().equals(old.getNickname()))) {
 			// 삭제

@@ -2,37 +2,40 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.team1.mapper.board.PleaseMapper">
+
+<mapper namespace="com.team1.mapper.board.HelpMapper">
   
-  <select id="getList" resultType="com.team1.domain.board.PleaseVO">
+  <select id="getList" resultType="com.team1.domain.board.HelpVO">
   	SELECT
 	p.id, p.memberId, p.location, p.up, p.views, p.tag, 
 	p.title, p.content, p.inserted, p.updated, m.nickname
-  	FROM tb_board p 
+  	FROM tb_board_help p 
   	JOIN tb_user m 
   	ON m.id = p.memberId
   	Order By p.id DESC
   </select>
   
-  <select id="read" resultType="com.team1.domain.board.PleaseVO">
+
+  <select id="read" resultType="com.team1.domain.board.HelpVO">
 	SELECT
 	id, memberId, location, up, views, tag, 
 	title, content, inserted, updated
 	FROM
-	tb_board
+	tb_board_help
+
 	WHERE id = #{id}
   </select>
   
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 	INSERT INTO
-	tb_board (memberId, location, tag, title, content)
+	tb_board_help (memberId, location, tag, title, content)
 	VALUES
 	(#{memberId}, #{location},
 	#{tag}, #{title}, #{content})
   </insert>
   
   <update id="update">
-	UPDATE tb_board
+	UPDATE tb_board_help
 	SET
 	location = #{location},
 	tag = #{tag}, 
@@ -43,12 +46,12 @@
   </update>
   
   <delete id="delete">
-	DELETE FROM tb_board WHERE id = #{id}
+	DELETE FROM tb_board_help WHERE id = #{id}
   </delete>
   
   <select id="nickname" resultType="String">
     SELECT m.Nickname FROM tb_user m 
-    JOIN tb_board p ON m.id = p.memberId
+    JOIN tb_board_help p ON m.id = p.memberId
     WHERE p.id = #{id};
   </select>
   

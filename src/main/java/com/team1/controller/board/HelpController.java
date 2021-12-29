@@ -13,28 +13,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.team1.domain.board.PleaseVO;
-import com.team1.service.board.PleaseService;
+import com.team1.domain.board.HelpVO;
+import com.team1.service.board.HelpService;
 
 import lombok.Setter;
 
 @Controller
-@RequestMapping("/please")
-public class PleaseController {
+@RequestMapping("/help")
+
+public class HelpController {
 	
 	@Setter(onMethod_ = @Autowired)
-	private PleaseService service;
+	private HelpService service;
 	
 	@GetMapping("/list")
 	public void list(Model model) {
-		List<PleaseVO> list = service.getList();
+		List<HelpVO> list = service.getList();
 
 		model.addAttribute("list", list);
 	}
 	
 	@GetMapping({"/get", "/modify"})
 	public void get(@RequestParam("id") Integer id, Model model) {
-		PleaseVO board = service.get(id);
+		HelpVO board = service.get(id);
 		String nickname = service.getNick(id);
 		System.out.println(board);
 		System.out.println(nickname);
@@ -43,14 +44,14 @@ public class PleaseController {
 	}
 	
 	@PostMapping("/modify")
-	public String modify(PleaseVO board, RedirectAttributes rttr) {
+	public String modify(HelpVO board, RedirectAttributes rttr) {
 		System.out.println("/modify로 잘 옴.");
 		System.out.println(board);
 		if (service.modify(board)) {
 			System.out.println("수정됨");
 			rttr.addFlashAttribute("result", board.getId() + "번 게시글이 수정되었습니다.");
 		}
-		return "redirect:/please/list";
+		return "redirect:/help/list";
 	}
 	
 	@GetMapping("/register")
@@ -59,13 +60,13 @@ public class PleaseController {
 	}
 	
 	@PostMapping("/register")
-	public String register(PleaseVO board, RedirectAttributes rttr, HttpServletRequest req) {
+	public String register(HelpVO board, RedirectAttributes rttr, HttpServletRequest req) {
 
 		service.register(board);
 
 		rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
 
-		return "redirect:/please/list";
+		return "redirect:/help/list";
 	}
 	
 	
@@ -76,7 +77,7 @@ public class PleaseController {
 			rttr.addFlashAttribute("result", id + "번 게시글이 삭제되었습니다.");
 		}
 		
-		return "redirect:/please/list";
+		return "redirect:/help/list";
 	}
 	
 	
