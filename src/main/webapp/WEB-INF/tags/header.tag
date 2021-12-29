@@ -63,6 +63,6 @@
 	});
 	
 	$("#signup").click(function() {
-		location.href="/controller/user/signup"
+		location.href="/controller1/user/signup"
 	});
 </script>
