@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-public class PleaseVO {
+public class HelpVO {
 	private Integer id;
 	private Integer memberId;
 	private String location;

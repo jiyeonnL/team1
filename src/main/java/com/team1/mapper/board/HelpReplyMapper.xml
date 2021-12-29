@@ -3,23 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.team1.mapper.board.PReplyMapper">
+  <mapper namespace="com.team1.mapper.board.HelpReplyMapper">
   
-  <select id="list" resultType="com.team1.domain.board.PReplyVO">
+  <select id="list" resultType="com.team1.domain.board.HelpReplyVO">
     SELECT id, boardId, nickname, reply, inserted, updated
-    FROM tb_reply
+    FROM tb_reply_help
     ORDER BY id
   </select>
   
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 	INSERT INTO
-	tb_reply (boardId, nickname, reply, inserted, updated)
+	tb_reply_help (boardId, nickname, reply, inserted, updated)
 	VALUES
 	(#{boardId}, #{nickname}, #{reply}, #{inserted}, #{updated})
   </insert>
   
   <update id="update">
-	UPDATE tb_reply
+	UPDATE tb_reply_help
 	SET
 	boardId = #{boardId}, 
 	reply = #{reply},
@@ -28,19 +28,19 @@
   </update>
   
   <delete id="delete">
-	DELETE FROM tb_user WHERE id = #{id}
+	DELETE FROM tb_reply_help WHERE id = #{id}
   </delete>
   
-  <select id="selectById" resultType="com.team1.domain.board.PReplyVO">
+  <select id="selectById" resultType="com.team1.domain.board.HelpReplyVO">
 	SELECT id, boardId, nickname, reply, inserted, updated
-	FROM tb_reply
+	FROM tb_reply_help
 	WHERE id = #{id}
   </select>
   
   <select id="listReplyCount" resultType="Integer">
 	SELECT
 	count(id)
-	FROM tb_reply
+	FROM tb_reply_help
 	WHERE boardId=#{id}
 </select>
   
