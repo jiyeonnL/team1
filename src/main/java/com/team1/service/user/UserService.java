@@ -30,5 +30,11 @@ public class UserService {
 	public boolean remove(String id) {
 		return mapper.delete(id) == 1;
 	}
+	
+	public boolean hasNickName(String nickname) {
+		UserVO user = mapper.selectByNickName(nickname);
+
+		return user != null;
+	}
 
 }

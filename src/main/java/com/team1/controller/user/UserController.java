@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team1.domain.user.UserVO;
@@ -20,6 +21,18 @@ public class UserController {
 
 	@Setter(onMethod_ = @Autowired)
 	private UserService service;
+	
+	@RequestMapping("/nicknamecheck")
+	@ResponseBody
+	public String nicknamecheck(String nickname) {
+		boolean has = service.hasNickName(nickname);
+		
+		if (has) {
+			return "unable";
+		} else {
+			return "able";
+		}
+	}
 	
 	@GetMapping("/login")
 	public void login() {

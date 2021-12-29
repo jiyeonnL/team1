@@ -17,12 +17,10 @@
 </head>
 <body>
   <b:navBar></b:navBar>
-  <!-- .container>.row>.col>h1{회원정보} -->
   <div class="container">
     <div class="row">
       <div class="col">
         <h1>회원정보</h1>
-        <!-- form>.form-group*4>label[for=input$]+input.form-control[name][value] -->
         <form method="post" id="infoForm">
           <div class="form-group">
             <label for="input1">아이디</label>
@@ -54,7 +52,6 @@
             <label for="input4">주소</label>
             <input type="text" required id="input4" class="form-control" name="address" value="${sessionScope.loggedInMember.address }">
           </div>
-          <!-- button.btn.btn-outline-secondary{수정}+button.btn.btn-outline-danger{삭제} -->
           <button class="btn btn-outline-secondary" id="modifyButton">수정</button>
           <button class="btn btn-outline-danger" id="removeButton">삭제</button>
         </form>
