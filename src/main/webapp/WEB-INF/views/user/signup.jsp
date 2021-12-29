@@ -17,7 +17,7 @@
 
 <style>
 #body {
-	height: 150vh;
+	height: auto;
 	/* height: calc(100vh-72px); */
 	width: 100%;
 	justify-content: center;
@@ -27,7 +27,7 @@
 #inner {
 	border: 2px solid yellowgreen;
 	width: 900px;
-	height: 100%;
+	height: auto;
 }
 
 #icon {
@@ -41,6 +41,16 @@
 	border: 1px solid black;
 	position: relative;
 	z-index: 999;
+}
+
+#submitButton1 {
+	margin-top: 6px;
+	margin-right: 2px;
+	margin-left: 2px;
+}
+
+#alreadyHaveId {
+	margin-top: 20px;
 }
 </style>
 </head>
@@ -58,42 +68,42 @@
 					<div class="col-md-6 bg-secondary">여기에 로고나 장식용 그림같은거 넣기</div>
 					<div class="col-md-6  border border-5">
 						<form method="post">
-							<h3>Sign Up Now!!!</h3>
+							<h3>회원가입 정보</h3>
 							<div class="form-group">
-								<label for="input1">NickName</label>
-
+								<label for="input1">아이디 및 별명</label>
 								<div class="input-group">
 									<input type="text" class="form-control" id="input1" required name="nickname" value="${user.nickname }">
 									<small class="form-text" id="nicknameCheckMessage"></small>
+									<div class="input-group-append">
+										<button class="btn btn-secondary" id="nicknameCheckButton" type="button">중복확인</button>
+									</div>
 								</div>
-				              	<div class="input-group-append">
-              					  <button class="btn btn-secondary" id="nicknameCheckButton" type="button">중복확인</button>
-             				 	</div>
 
 							</div>
 							<div class="form-group">
-								<label for="input2">Password</label>
+								<label for="input2">비밀번호</label>
 								<div class="input-group">
 									<input type="password" class="form-control" id="input2" required name="pw" value="${user.pw }">
 								</div>
 							</div>
+
 							<div class="form-group">
-           						<label for="input6">Password Check</label>
-           						<input type="password" class="form-control" id="input7" required>
-         					</div>
+								<label for="input6">비밀번호 확인</label>
+								<br>
+								<input type="password" class="form-control" id="input7" required>
+							</div>
+
 							<div class="form-group">
-								<label for="input3">Email</label>
+								<label for="input3">이메일</label>
 								<div class="input-group">
 									<input type="email" class="form-control" id="input3" required name="email" value="${user.email }">
 								</div>
-								
 							</div>
 
-							
-
 							<div class="form-group">
-								<label for="input5">Region</label> <select class="form-control" id="input5" required name="location" value="${user.location }">
-									<option>Select your Region...</option>
+								<label for="input5">지역 선택</label>
+								<select class="form-control" id="input5" required name="location" value="${user.location }">
+									<option>소식을 전해듣고 싶은 지역을 선택해주세요.</option>
 									<option>마포구</option>
 									<option>서초구</option>
 									<option>강남구</option>
@@ -101,27 +111,37 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="input6">Profile url</label> <input type="url" class="form-control" id="input6" required name="profileurl" value="${user.profileurl }">
+								<label for="input6">Profile url </label>
+								<br>
+								<input type="url" class="form-control" id="input6" required name="profileurl" value="${user.profileurl }">
+								<div class= "input-group-append">
+								<button class="btn btn-outline-primary" onclick="myFunction()">기본 프로필로 설정</button>
+								</div>
 							</div>
-							<button class="btn btn-outline-primary" onclick="myFunction()">기본 프로필로 설정</button>
 							<div class="form-group mt-3">
-								<label>Profile Photo</label> <input type="file" id="Profile-pic"
-									name="channel-img" class="form-control" /> <label
-									for="Profile-pic" id=icon> <i
-									class="fa fa-camera" aria-hidden="true"></i>
+								<label>프로필 사진</label>
+								<input type="file" id="Profile-pic" name="channel-img" class="form-control" />
+								<label for="Profile-pic" id=icon>
+									<i class="fa fa-camera" aria-hidden="true"></i>
 								</label>
 							</div>
 							<div class="form-group">
-								<label for="input4">introduce</label>
+								<label for="input4">자기소개</label>
 								<div class="input-group">
-									<input type="text" class="form-control" id="input4" required name="introduce" value="${user.introduce }">
+									<%-- <input type="text" class="form-control" id="input4" required name="introduce" value="${user.introduce }"> --%>
+									<br>
+									<textarea class="form-control" required name="introduce" id="input4" cols="40" rows="5" value="${user.introduce }" placeholder="나만의 개성을 나타낼수 있는 자기소개를 적어보세요!(최대 500글자)"></textarea>
 								</div>
+								<!-- textarea로 바꿔서 여러줄로 나타낼 수 있음 -->
 							</div>
+
 							<button class="btn btn-outline-primary" id="submitButton1">가입</button>
-									<div class="form-group">
-							<p class="not-yet">
-									Already have an account? <a href="#">Login</a>
-							</p>
+							<br>
+							<div class="form-group">
+								<p class="not-yet" id="alreadyHaveId">
+									이미 아이디를 가지고 계신가요?
+									<a href="#">로그인</a>
+								</p>
 							</div>
 						</form>
 					</div>
@@ -129,107 +149,133 @@
 			</div>
 		</div>
 	</div>
-	
-<script>
 
-$(document).ready(
-function() {
-	
-    const pwInput = $("#input2");
-    const pwConfirmInput = $("#input7");
-    const submitButton = $("#submitButton1");
-    
-	let nicknameAble = false;
-	let pwCheck = false;
-	
-	let enableSubmit = function() {
-        if (pwCheck && nicknameAble) {
-          submitButton.removeAttr("disabled");
-        } else {
-          submitButton.attr("disabled", true);
-        }
-      }
-	
-	const appRoot = '${pageContext.request.contextPath}';
-	
-	$("#nicknameCheckButton").click(
-            function() {
-              $("#nicknameCheckButton").attr("disabled", true);
+	<script>
+		$(document)
+				.ready(
+						function() {
 
-              const nicknameValue = $("#input1").val().trim();
+							const pwInput = $("#input2");
+							const pwConfirmInput = $("#input7");
+							const submitButton = $("#submitButton1");
 
-              if (nicknameValue === "") {
-                $("#nicknameCheckMessage").text("아이디를 입력해주세요!").removeClass(
-                    "text-primary text-danger").addClass("text-warning");
-                $("#nicknameCheckButton").removeAttr("disabled");
-                return;
-              }
+							let nicknameAble = false;
+							let pwCheck = false;
 
-              $.ajax({
-                url : appRoot + "/user/nicknamecheck",
-                data : {
-                  nickname : nicknameValue
-                },
-                success : function(data) {
-                  switch (data) {
-                  case "able":
-              
-                    $("#nicknameCheckMessage").text("사용 가능한 아이디 입니다.")
-                        .removeClass("text-danger text-warning").addClass(
-                            "text-primary");
-                    
-                    $("#input1").attr("readonly", true);
+							let enableSubmit = function() {
+								if (pwCheck && nicknameAble) {
+									submitButton.removeAttr("disabled");
+								} else {
+									submitButton.attr("disabled", true);
+								}
+							}
 
-                    nicknameAble = true;
-                    break;
-                  case "unable":
-               
-                    $("#nicknameCheckMessage").text("이미 있는 아이디 입니다.")
-                        .removeClass("text-warning text-primary").addClass(
-                            "text-danger");
+							const appRoot = '${pageContext.request.contextPath}';
 
-          
-                    nicknameAble = false;
-                    break;
+							$("#nicknameCheckButton")
+									.click(
+											function() {
+												$("#nicknameCheckButton").attr(
+														"disabled", true);
 
-                  default:
-                    break;
-                  }
-                },
-                complete : function() {
-                  enableSubmit();
-                  $("#nicknameCheckButton").removeAttr("disabled");
-                }
-              });
-            });
-   			
-  			const confirmFunction = function() {
-    
- 		    const pwValue = pwInput.val();
-  		    const pwConfirmValue = pwConfirmInput.val();
+												const nicknameValue = $(
+														"#input1").val().trim();
 
-    		if (pwValue === pwConfirmValue) {
-        
-        		pwCheck = true;
-        		
-      		} else {
-       
-      				pwCheck = false;
-      			}
+												if (nicknameValue === "") {
+													$("#nicknameCheckMessage")
+															.text(
+																	"아이디를 입력해주세요!")
+															.removeClass(
+																	"text-primary text-danger")
+															.addClass(
+																	"text-warning");
+													$("#nicknameCheckButton")
+															.removeAttr(
+																	"disabled");
+													return;
+												}
 
-    		  enableSubmit();
-    		};
+												$
+														.ajax({
+															url : appRoot
+																	+ "/user/nicknamecheck",
+															data : {
+																nickname : nicknameValue
+															},
+															success : function(
+																	data) {
+																switch (data) {
+																case "able":
 
-   			submitButton.attr("disabled", true);
-   			pwInput.keyup(confirmFunction);
-   			pwConfirmInput.keyup(confirmFunction);
-   			
-   			
+																	$(
+																			"#nicknameCheckMessage")
+																			.text(
+																					"사용 가능한 아이디 입니다.")
+																			.removeClass(
+																					"text-danger text-warning")
+																			.addClass(
+																					"text-primary");
 
-	});
-	function myFunction() {
-			  document.getElementById("input6").defaultValue = "http://localhost:8080/userprofile/info";
-			}
-</script>
+																	$("#input1")
+																			.attr(
+																					"readonly",
+																					true);
+
+																	nicknameAble = true;
+																	break;
+																case "unable":
+
+																	$(
+																			"#nicknameCheckMessage")
+																			.text(
+																					"이미 존재하는 아이디 입니다.")
+																			.removeClass(
+																					"text-warning text-primary")
+																			.addClass(
+																					"text-danger");
+
+																	nicknameAble = false;
+																	break;
+
+																default:
+																	break;
+																}
+															},
+															complete : function() {
+																enableSubmit();
+																$(
+																		"#nicknameCheckButton")
+																		.removeAttr(
+																				"disabled");
+															}
+														});
+											});
+
+							const confirmFunction = function() {
+
+								const pwValue = pwInput.val();
+								const pwConfirmValue = pwConfirmInput.val();
+
+								if (pwValue === pwConfirmValue) {
+
+									pwCheck = true;
+
+								} else {
+
+									pwCheck = false;
+								}
+
+								enableSubmit();
+							};
+
+							submitButton.attr("disabled", true);
+							pwInput.keyup(confirmFunction);
+							pwConfirmInput.keyup(confirmFunction);
+
+						});
+		function myFunction() {
+			document.getElementById("input6").defaultValue = "http://localhost:8080/userprofile/info";
+		}
+	</script>
 </body>
 </html>

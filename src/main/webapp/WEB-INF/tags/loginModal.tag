@@ -3,6 +3,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <style>
+*{
+color:black;
+}
 #m_label {
 	float: left;
 	margin-top: -38px;
@@ -17,12 +20,12 @@
 	
 }
 
-#username {
+#nickname {
 	position: relative;
 	padding-left: 52px !important;
 }
 
-#password {
+#pw {
 	position: relative;
 	padding-left: 52px !important;
 }
