@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="b" tagdir="/WEB-INF/tags/"%>
+<%@ taglib prefix="b" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 
 <html>
@@ -75,33 +75,29 @@
 						<form action="" class="Signup">
 							<h3>Sign Up Now!!!</h3>
 							<div class="form-group mt-3">
-								<label for="name">NickName</label> <input type="text"
-									class="form-control" placeholder="NickName" name="name"
-									required />
+								<label for="input1">NickName</label> <input type="text"
+									class="input-group" placeholder="NickName"
+									required name="nickname" id="input1" value="${user.nickname }"/>
 							</div>
 							<div class="form-group mt-3">
-								<label for="email">Email</label> <input type="text"
-									class="form-control" placeholder="Enter Email" name="email"
-									required />
+								<label for="input2">Email</label> <input type="text"
+									class="input-group" placeholder="Enter Email" required name="email"
+									id="input2" value="${user.email }"/>
 							</div>
 							<div class="form-group mt-3">
-								<label for="psw">Password</label> <input type="password"
-									class="form-control" placeholder="Enter Password" name="psw"
-									required />
-							</div>
-							<div class="form-group mt-3">
-								<label for="psw-repeat">Repeat Password</label> <input
-									type="password" class="form-control"
-									placeholder="Repeat Password" name="psw-repeat" required />
+								<label for="input3">Password</label> <input type="password"
+									class="input-group" placeholder="Enter Password" name="pw"
+									required name="pw" id="input3" value="${user.pw }" />
 							</div>
 
 							<div class="form-group mt-3">
-								<label for="country" class="form-label"> Region </label> <select
-									class="form-select" id="country" required>
-									<option value="">Choose...</option>
-									<option>지역1</option>
-									<option>지역2</option>
-									<option>지역3</option>
+								<label for="input4" class="form-label"> Region </label> <select
+									class="input-group" id="input4"
+									required name="location" value="${user.location }">
+									<option>지역을 선택하세요..</option>
+									<option>강남구</option>
+									<option>서초구</option>
+									<option>마포구</option>
 								</select>
 							</div>
 

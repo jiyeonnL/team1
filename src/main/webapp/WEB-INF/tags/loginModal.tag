@@ -14,6 +14,7 @@
 	border: 0px solid black;
 	position: relative;
 	z-index: 999;
+	
 }
 
 #username {
@@ -26,28 +27,29 @@
 	padding-left: 52px !important;
 }
 
+
 </style>
 <!-- Modal HTML -->
 <div id="myModal" class="modal fade " tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
+			
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Bootstrap 5
-					Modal Form</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Login</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 			</div>
 			<div class="modal-body">
-				<form>
+				<form method="post">
 					<div class="mb-3">
-						<label class="form-label">Email Address</label> <input type="text"
-							class="form-control" id="username" name="Email"
+						<label class="form-label">ID</label> <input type="text"
+							class="form-control" id="nickname" name="id"
 							placeholder="Username" /> <label id="m_label" for="Profile-pic">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</label>
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Password</label> <input type="password"
-							class="form-control" id="password" name="password"
+							class="form-control" id="pw" name="password"
 							placeholder="Password" /> <label id="m_label" for="Profile-pic">
 							<i class="fa fa-key" aria-hidden="true"></i>
 						</label>

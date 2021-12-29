@@ -63,6 +63,6 @@
 	});
 	
 	$("#signup").click(function() {
-		location.href="http://localhost:8081/controller/signup/form"
+		location.href="http://localhost:8081/controller/user/signup"
 	});
 </script>
