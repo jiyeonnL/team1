@@ -4,32 +4,32 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.team1.domain.board.PleaseVO;
-import com.team1.mapper.board.PleaseMapper;
+import com.team1.domain.board.HelpVO;
+import com.team1.mapper.board.HelpMapper;
 
 import lombok.Setter;
 
 @Service
-public class PleaseService {
+public class HelpService {
 	@Setter(onMethod_ = @Autowired)
-	private PleaseMapper mapper;
+	private HelpMapper mapper;
 	
 //	@Setter(onMethod_ = @Autowired)
 //	private PReplyMapper preplyMapper;
 	
-	public List<PleaseVO> getList() {
+	public List<HelpVO> getList() {
 		return mapper.getList();
 	}
 	
-	public PleaseVO get(Integer id) {
+	public HelpVO get(Integer id) {
 		return mapper.read(id);
 	}
 	
-	public boolean register(PleaseVO board) {
+	public boolean register(HelpVO board) {
 		return mapper.insert(board) == 1;
 	}
 	
-	public boolean modify(PleaseVO board) {
+	public boolean modify(HelpVO board) {
 		return mapper.update(board) == 1;
 	}
 	
