@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>회원가입</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
@@ -64,9 +64,11 @@
 
 								<div class="input-group">
 									<input type="text" class="form-control" id="input1" required name="nickname" value="${user.nickname }">
-									<small class="form-text" id="nickNameCheckMessage"></small>
+									<small class="form-text" id="nicknameCheckMessage"></small>
 								</div>
-
+				              	<div class="input-group-append">
+              					  <button class="btn btn-secondary" id="nicknameCheckButton" type="button">중복확인</button>
+             				 	</div>
 
 							</div>
 							<div class="form-group">
@@ -75,6 +77,10 @@
 									<input type="password" class="form-control" id="input2" required name="pw" value="${user.pw }">
 								</div>
 							</div>
+							<div class="form-group">
+           						<label for="input6">Password Check</label>
+           						<input type="password" class="form-control" id="input7" required>
+         					</div>
 							<div class="form-group">
 								<label for="input3">Email</label>
 								<div class="input-group">
@@ -125,9 +131,105 @@
 	</div>
 	
 <script>
-function myFunction() {
-  document.getElementById("input6").defaultValue = "http://localhost:8080/userprofile/info";
-}
+
+$(document).ready(
+function() {
+	
+    const pwInput = $("#input2");
+    const pwConfirmInput = $("#input7");
+    const submitButton = $("#submitButton1");
+    
+	let nicknameAble = false;
+	let pwCheck = false;
+	
+	let enableSubmit = function() {
+        if (pwCheck && nicknameAble) {
+          submitButton.removeAttr("disabled");
+        } else {
+          submitButton.attr("disabled", true);
+        }
+      }
+	
+	const appRoot = '${pageContext.request.contextPath}';
+	
+	$("#nicknameCheckButton").click(
+            function() {
+              $("#nicknameCheckButton").attr("disabled", true);
+
+              const nicknameValue = $("#input1").val().trim();
+
+              if (nicknameValue === "") {
+                $("#nicknameCheckMessage").text("아이디를 입력해주세요!").removeClass(
+                    "text-primary text-danger").addClass("text-warning");
+                $("#nicknameCheckButton").removeAttr("disabled");
+                return;
+              }
+
+              $.ajax({
+                url : appRoot + "/user/nicknamecheck",
+                data : {
+                  nickname : nicknameValue
+                },
+                success : function(data) {
+                  switch (data) {
+                  case "able":
+              
+                    $("#nicknameCheckMessage").text("사용 가능한 아이디 입니다.")
+                        .removeClass("text-danger text-warning").addClass(
+                            "text-primary");
+                    
+                    $("#input1").attr("readonly", true);
+
+                    nicknameAble = true;
+                    break;
+                  case "unable":
+               
+                    $("#nicknameCheckMessage").text("이미 있는 아이디 입니다.")
+                        .removeClass("text-warning text-primary").addClass(
+                            "text-danger");
+
+          
+                    nicknameAble = false;
+                    break;
+
+                  default:
+                    break;
+                  }
+                },
+                complete : function() {
+                  enableSubmit();
+                  $("#nicknameCheckButton").removeAttr("disabled");
+                }
+              });
+            });
+   			
+  			const confirmFunction = function() {
+    
+ 		    const pwValue = pwInput.val();
+  		    const pwConfirmValue = pwConfirmInput.val();
+
+    		if (pwValue === pwConfirmValue) {
+        
+        		pwCheck = true;
+        		
+      		} else {
+       
+      				pwCheck = false;
+      			}
+
+    		  enableSubmit();
+    		};
+
+   			submitButton.attr("disabled", true);
+   			pwInput.keyup(confirmFunction);
+   			pwConfirmInput.keyup(confirmFunction);
+   			
+   			
+
+	});
+	function myFunction() {
+			  document.getElementById("input6").defaultValue = "http://localhost:8080/userprofile/info";
+			}
 </script>
 </body>
 </html>
