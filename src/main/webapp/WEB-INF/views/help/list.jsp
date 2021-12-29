@@ -86,9 +86,9 @@
 									src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"
 									class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 							</div>
-							<div class="col-md-3 bg-warning my-auto h2 align-middle">NickName</div>
+							<div class="col-md-3 bg-warning my-auto h2 align-middle">${board.nickname}</div>
 							<div class="col-md-2 bg-info my-auto h5 offset-md-6 px-2">
-								2 days ago</div>
+								${board.inserted}</div>
 						</div>
 
 						<!-- 헤더랑 body 구분 선 -->
@@ -105,8 +105,7 @@
 								<div id="tag">일반</div>
 							</div>
 							<!-- 텍스트 -->
-							<div class="col-md-10 h4 my-auto ">Lorem ipsum dolor sit
-								amet consectetur adipisicing elit. Neque,</div>
+							<div class="col-md-10 h4 my-auto ">${board.content}</div>
 						</div>
 						<!-- 이미지 파트 -->
 						<div class="row md mx-3 mt-4 mb-2 justify-content-center">

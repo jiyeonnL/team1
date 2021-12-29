@@ -18,7 +18,7 @@ public class NewsController {
 	public void life(@RequestParam(value = "region") String region, @RequestParam(value = "query") String query,
 			Model model) {
 
-		Cover.setCover("life", model);
+		Cover.setCover("news", model);
 		
 		model.addAttribute("tag", "news");
 		model.addAttribute("region", region);
@@ -29,7 +29,7 @@ public class NewsController {
 	@GetMapping(value = "/list", params = { "region"})
 	public void life(@RequestParam(value = "region") String region,Model model) {
 
-		Cover.setCover("life", model);
+		Cover.setCover("news", model);
 
 		model.addAttribute("tag", "news");
 		model.addAttribute("region", region);

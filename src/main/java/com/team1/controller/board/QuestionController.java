@@ -17,7 +17,7 @@ public class QuestionController {
 	public void life(@RequestParam(value = "region") String region, @RequestParam(value = "query") String query,
 			Model model) {
 
-		Cover.setCover("life", model);
+		Cover.setCover("question", model);
 		
 		model.addAttribute("tag", "question");
 		model.addAttribute("region", region);
@@ -28,7 +28,7 @@ public class QuestionController {
 	@GetMapping(value = "/list", params = { "region"})
 	public void life(@RequestParam(value = "region") String region,Model model) {
 
-		Cover.setCover("life", model);
+		Cover.setCover("question", model);
 
 		model.addAttribute("tag", "question");
 		model.addAttribute("region", region);
