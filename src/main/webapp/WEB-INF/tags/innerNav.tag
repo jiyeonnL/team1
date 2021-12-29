@@ -97,7 +97,7 @@
 											"#region option:selected")
 											.val();
 
-									location.href = "http://localhost:8081/controller/board/main?region="
+									location.href = "/controller/board/main?region="
 											+ region + "&tag=all";
 
 								});
@@ -110,7 +110,7 @@
 													"#region option:selected")
 													.val();
 
-											location.href = "http://localhost:8081/controller/board/main?region="
+											location.href = "/controller/board/main?region="
 													+ region + "&tag=news";
 
 										});
@@ -122,7 +122,7 @@
 													"#region option:selected")
 													.val();
 											console.log(region, "news");
-											location.href = "http://localhost:8081/controller/board/main?region="
+											location.href = "/controller/board/main?region="
 													+ region + "&tag=question";
 
 										});
@@ -134,7 +134,7 @@
 													"#region option:selected")
 													.val();
 											console.log(region, "news");
-											location.href = "http://localhost:8081/controller/board/main?region="
+											location.href = "/controller/board/main?region="
 													+ region + "&tag=life";
 
 										});
@@ -146,7 +146,7 @@
 													"#region option:selected")
 													.val();
 											console.log(region, "news");
-											location.href = "http://localhost:8081/controller/board/main?region="
+											location.href = "/controller/board/main?region="
 													+ region + "&tag=help";
 										});
 
