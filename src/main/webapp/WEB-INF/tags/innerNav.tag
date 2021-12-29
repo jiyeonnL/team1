@@ -23,19 +23,24 @@
 	<div class="container-fluid">
 		<div class="collapse navbar-collapse" id="navbarsExample03">
 			<ul class="navbar-nav me-auto mb-2 mb-sm-0">
-				<li class="nav-item"><select class="form-select" id="region">
-						<option value="">Region</option>
-						<option>강남</option>
-						<option>역삼</option>
-						<option>신촌</option>
-					</select></li>
+				<li class="nav-item">
+					<select class="form-select" id="region">
+						<option value="" <c:if test="${region eq '' || empty region}">selected</c:if>>Region</option>
+						<option <c:if test="${region eq '강남'}">selected</c:if>>강남</option>
+						<option <c:if test="${region eq '역삼'}">selected</c:if>>역삼</option>
+						<option <c:if test="${region eq '신촌'}">selected</c:if>>신촌</option>
+					</select>
+				</li>
 
 				<!-- 나중엘 radio 버튼으로 교체 -->
+				<li class="nav-item">
+					<button type="button" id="all" class="btn btn-info ms-1">전체보기</button>
+				</li>
 				<li class="nav-item">
 					<button type="button" id="news" class="btn btn-info ms-1">동네소식</button>
 				</li>
 				<li class="nav-item">
-					<button type="button" id="qeustion" class="btn btn-info ms-1">동네질문</button>
+					<button type="button" id="question" class="btn btn-info ms-1">동네질문</button>
 				</li>
 				<li class="nav-item">
 					<button type="button" id="life" class="btn btn-info ms-1">일상생활</button>
@@ -61,17 +66,41 @@
 <script>
 	$(document)
 			.ready(
+					
+					
+					
+					
 					function() {
+						
+						//현재의 tag 값과 region 값을 가져온다.
+						var region = "${region}";
+						var tag    = "${tag}";
+						//console.log(region);
+						
+						//현재 model의 값으로 select 박스의 값 세팅 (나중에 )
+						//$("#region").val(region).attr("selected", "selected");
 						
 						//검색 아이콘 누르면 call되는 함수 (현재 입력창에 있는 값을 받아서 넘긴다. 현재 select 상태와 버튼 눌려진 상태를 포함한다.) 
 						$("#icon")
 						.click(function() {
 							var query = $("#keyword").val();
 							console.log(query);
+							location.href = "/controller/board/main?region="
+								+ region +"&tag="+tag+"&query="+query;
 						})
 
 						//model attribute에서 현재 어느 태그인지 검사하고 select의 현재 상태 변경시기키 (model 값을 스크립트 내부에서 사용해야 한다.)
-						
+						$("#all")
+						.click(
+								function() {
+									var region = $(
+											"#region option:selected")
+											.val();
+
+									location.href = "http://localhost:8081/controller/board/main?region="
+											+ region + "&tag=all";
+
+								});
 						
 						//탭에 있는 버튼들 누르면 해당 링크로 이동한다. 현재 select 상태를 함께 포함해 컨트롤러에 get 요청 날린다.
 						$("#news")
@@ -80,14 +109,13 @@
 											var region = $(
 													"#region option:selected")
 													.val();
-											console.log(region, "news");
 
 											location.href = "http://localhost:8081/controller/board/main?region="
 													+ region + "&tag=news";
 
 										});
 
-						$("#qeustion")
+						$("#question")
 								.click(
 										function() {
 											var region = $(
@@ -95,7 +123,7 @@
 													.val();
 											console.log(region, "news");
 											location.href = "http://localhost:8081/controller/board/main?region="
-													+ region + "&tag=qeustion";
+													+ region + "&tag=question";
 
 										});
 
