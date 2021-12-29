@@ -11,8 +11,10 @@ public interface PReplyMapper {
 	
 	public int update(PReplyVO reply);
 	
-	public int delete(Integer id);
+	public int delete(Integer ID);
 
-	public PReplyVO selectById(Integer iD);
+	public PReplyVO selectById(Integer ID);
+
+	public Integer listReplyCount(Integer iD);
 
 }

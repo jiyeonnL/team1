@@ -22,8 +22,8 @@ public class PReplyService {
 		return mapper.insert(reply) == 1 ;
 	}
 	
-	public boolean remove(Integer id) {
-		return mapper.delete(id) == 1;
+	public boolean remove(Integer ID) {
+		return mapper.delete(ID) == 1;
 	}
 	
 	public boolean register(PReplyVO reply) {
@@ -40,6 +40,14 @@ public class PReplyService {
 
 	public boolean update(PReplyVO newReply) {
 		return mapper.update(newReply) == 1;		
+	}
+
+	public boolean delete(Integer ID) {
+		return mapper.delete(ID) == 1;
+	}
+
+	public Integer countReplyList(Integer ID) {
+		return mapper.listReplyCount(ID);
 	}
 
 	
