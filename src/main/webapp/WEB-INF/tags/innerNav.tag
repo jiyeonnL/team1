@@ -85,7 +85,7 @@
 						.click(function() {
 							var query = $("#keyword").val();
 							console.log(query);
-							location.href = "/controller1/board/main?region="
+							location.href = "/controller1/board/"+tag+"?region="
 								+ region +"&tag="+tag+"&query="+query;
 						})
 
@@ -98,7 +98,7 @@
 											.val();
 
 									location.href = "/controller1/board/main?region="
-											+ region + "&tag=all";
+											+ region;
 
 								});
 						
@@ -110,8 +110,8 @@
 													"#region option:selected")
 													.val();
 
-											location.href = "/controller1/board/main?region="
-													+ region + "&tag=news";
+											location.href = "/controller1/board/news?region="
+													+ region;
 
 										});
 
@@ -121,9 +121,8 @@
 											var region = $(
 													"#region option:selected")
 													.val();
-											console.log(region, "news");
-											location.href = "/controller1/board/main?region="
-													+ region + "&tag=question";
+											location.href = "/controller1/board/question?region="
+													+ region;
 
 										});
 
@@ -133,9 +132,8 @@
 											var region = $(
 													"#region option:selected")
 													.val();
-											console.log(region, "news");
-											location.href = "/controller1/board/main?region="
-													+ region + "&tag=life";
+											location.href = "/controller1/board/life?region="
+													+ region;
 
 										});
 
@@ -146,8 +144,8 @@
 													"#region option:selected")
 													.val();
 											console.log(region, "news");
-											location.href = "/controller1/board/main?region="
-													+ region + "&tag=help";
+											location.href = "/controller1/board/help?region="
+													+ region;
 										});
 
 					})
