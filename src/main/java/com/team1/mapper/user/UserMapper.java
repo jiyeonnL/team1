@@ -14,4 +14,5 @@ public interface UserMapper {
 	
 	public UserVO login(String nickname, String pw); // 로그인
 	
+	public UserVO selectByNickName(String nickname); // nickname으로 검색
 }
