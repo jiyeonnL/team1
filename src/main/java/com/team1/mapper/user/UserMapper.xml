@@ -19,12 +19,11 @@
 	<update id="update">
 	UPDATE tb_user
 	SET pw = #{pw},
-		email = #{email},
 		location = #{location},
-		nickName = #{nickName},
+		nickname = #{nickname},
 		introduce = #{introduce}
 	WHERE
-		id = #{id}
+		email = #{email}
 	</update>
 	
 	<delete id="delete">

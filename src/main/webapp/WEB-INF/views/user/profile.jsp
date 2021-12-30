@@ -67,7 +67,7 @@
               <div class="h4 mt-3">${sessionScope.loginUser.signupday } </div>
             </div>
             <div class="col-md-2 offset-md-2 mx-auto my-auto ">
-              <button type="button" class="btn btn-lg btn-primary">
+              <button type="button" id= "modify" class="btn btn-lg btn-primary">
             	    정보수정
               </button>
               <button type="button" class="btn btn-lg btn-danger">
@@ -90,6 +90,10 @@
         </div>
         </div>
       </div>
-
+<script>
+	$("#modify").click(function() {
+		location.href="/controller1/user/infoModify"
+	});
+</script>
 </body>
 </html>
