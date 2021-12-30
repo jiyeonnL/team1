@@ -16,6 +16,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <style>
+body {
+	background:
+		url(https://s20211227-dotori-team-project.s3.ap-northeast-2.amazonaws.com/board/background-g24f874160_1920.jpg);
+	background-size: cover;
+}
+
 #body {
 	height: auto;
 	/* height: calc(100vh-72px); */
@@ -28,7 +34,21 @@
 	border: 2px solid yellowgreen;
 	width: 900px;
 	height: auto;
+	align-items: center;
+	background-color: #FFFFFF;
+	border-radius: 15px;
+	background-color: rgba(255, 255, 255, 0.5);
+	margin-top: auto;
 }
+
+.container mt-5{
+height:auto;
+
+}
+
+.row{
+border-radius:15px;
+ }
 
 #icon {
 	float: right;
@@ -52,20 +72,36 @@
 #alreadyHaveId {
 	margin-top: 20px;
 }
-.input-groupIdEmail{
-width:260px;
-}
-#input2-1 , #input7, #input5, #input6, #input4,
-#Profile-pic{
-width:320px;
+
+.input-groupIdEmail {
+	width: 260px;
 }
 
-.input2 {
-   display: inline;
-   width: 230px;
+#input1 {
+	background-color: rgba(255, 255, 255, 0.5);
 }
+
+#input7, #input5, #input6, #input4, #Profile-pic {
+	width: 320px;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+#input2-1{
+width: 320px;
+}
+
+#input2 {
+	display: inline;
+	width: 230px;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
 .input-group {
-   width: 320px;
+	width: 320px;
+}
+
+#input3 {
+	background-color: rgba(255, 255, 255, 0.5);
 }
 </style>
 </head>
@@ -77,23 +113,27 @@ width:320px;
 	<b:header></b:header>
 	<div id="body">
 		<div id="inner">
-			<b:innerNav></b:innerNav>
+			<%-- <b:innerNav></b:innerNav> --%>
 			<div class="container mt-5">
+				<!-- 입력 박스  -->
 				<div class="row">
 					<div class="col-md-4 bg-secondary">여기에 로고나 장식용 그림같은거 넣기</div>
 					<div class="col-md-8  border border-5">
 						<form method="post">
 							<h3>회원가입 정보</h3>
+							<br>
 							<div class="form-group">
 								<label for="input1">아이디 및 별명</label>
-									<%-- <input type="text" class="form-control input2" id="input1" required name="nickname" value="${user.nickname }">
+								<%-- <input type="text" class="form-control input2" id="input1" required name="nickname" value="${user.nickname }">
 										<button class="btn btn-secondary" id="nicknameCheckButton" type="button">중복확인</button> --%>
 								<div class="input-group">
 									<input type="text" class="form-control" id="input1" required name="nickname" value="${user.nickname }">
-									<div class="input-group-append"><button class="btn btn-secondary" id="nicknameCheckButton" type="button">중복확인</button></div>
+									<div class="input-group-append">
+										<button class="btn btn-outline-dark" id="nicknameCheckButton" type="button">중복확인</button>
+									</div>
 								</div>
-									<small class="form-text" id="nicknameCheckMessage"></small>
-								
+								<small class="form-text" id="nicknameCheckMessage"></small>
+
 
 							</div>
 							<div class="form-group">
@@ -113,9 +153,9 @@ width:320px;
 								<label for="input3">이메일</label>
 								<div class="input-groupIdEmail">
 									<div class="input-group">
-   									<input type="email" class="form-control" id="input3" required name="email" value="${user.email }">
-	   								<div class="input-group-append">
-											<button class="btn btn-secondary" id="emailCheckButton" type="button">중복확인</button>
+										<input type="email" class="form-control" id="input3" required name="email" value="${user.email }">
+										<div class="input-group-append">
+											<button class="btn btn-outline-dark" id="emailCheckButton" type="button">중복확인</button>
 										</div>
 									</div>
 									<small class="form-text" id="emailCheckMessage"></small>
@@ -138,7 +178,7 @@ width:320px;
 								<br>
 								<input type="url" class="form-control" id="input6" required name="profileurl" value="${user.profileurl }">
 								<div class="input-group-append">
-									<button class="btn btn-outline-primary" onclick="myFunction()">기본 프로필로 설정</button>
+									<button class="btn btn-outline-dark" onclick="myFunction()">기본 프로필로 설정</button>
 								</div>
 							</div>
 							<div class="form-group mt-3">
@@ -146,11 +186,11 @@ width:320px;
 								<br>
 								<div class="position-relative">
 									<input type="file" id="Profile-pic" name="channel-img" class="form-control" />
-									<label for="Profile-pic" class="position-absolute" id="icon" style="left:272px;">
+									<label for="Profile-pic" class="position-absolute" id="icon" style="left: 272px;">
 										<i class="fa fa-camera" aria-hidden="true"></i>
 									</label>
 								</div>
-								
+
 								<!-- <div class="input-group">
 									<input type="file" id="Profile-pic" name="channel-img" class="form-conrol">
 									<div class="input-group-append"><label for="Profile-pic"><i class="fa fa-camera"></i></label></div>
@@ -163,7 +203,7 @@ width:320px;
 							</div>
 						</form>
 
-						<button class="btn btn-outline-primary" id="submitButton1">가입</button>
+						<button class="btn btn-outline-dark btn-lg" id="submitButton1">가입</button>
 						<br>
 						<div class="form-group">
 							<p class="not-yet" id="alreadyHaveId">
