@@ -47,8 +47,7 @@ public class HelpController {
 		List<HelpVO> list = service.getList();
 
 		model.addAttribute("list", list);
-		model.addAttribute("tag", "help");
-		model.addAttribute("region", region);
+
 	}
 	
 	//help 페이지
