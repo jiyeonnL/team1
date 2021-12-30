@@ -66,14 +66,10 @@
 <script>
 	$(document)
 			.ready(
-					
-					
-					
-					
 					function() {
 						
 						//현재의 tag 값과 region 값을 가져온다.
-						var location = "${location}";
+						var loc = "${location}";
 						var tag    = "${tag}";
 						//console.log(region);
 						
@@ -86,19 +82,19 @@
 							var query = $("#keyword").val();
 							console.log(query);
 							location.href = "/controller1/"+tag+"/list?location="
-								+ location +"&query="+query;
+								+ loc +"&query="+query;
 						})
 
 						//model attribute에서 현재 어느 태그인지 검사하고 select의 현재 상태 변경시기키 (model 값을 스크립트 내부에서 사용해야 한다.)
 						$("#all")
 						.click(
 								function() {
-									var location = $(
+									var loc = $(
 											"#location option:selected")
 											.val();
 
 									location.href = "/controller1/all/list?location="
-											+ location;
+											+ loc;
 
 								});
 						
@@ -106,46 +102,45 @@
 						$("#news")
 								.click(
 										function() {
-											var location = $(
+											var loc = $(
 													"#location option:selected")
 													.val();
 
 											location.href = "/controller1/news/list?location="
-													+ location;
+													+ loc;
 
 										});
 
 						$("#question")
 								.click(
 										function() {
-											var location = $(
+											var loc = $(
 													"#location option:selected")
 													.val();
 											location.href = "/controller1/question/list?location="
-													+ region;
+													+ loc;
 
 										});
 
 						$("#life")
 								.click(
 										function() {
-											var location = $(
+											var loc = $(
 													"#location option:selected")
 													.val();
 											location.href = "/controller1/life/list?location="
-													+ location;
+													+ loc;
 
 										});
 
 						$("#help")
 								.click(
 										function() {
-											var region = $(
+											var loc = $(
 													"#location option:selected")
 													.val();
-											console.log(region, "news");
 											location.href = "/controller1/help/list?location="
-													+ location;
+													+ loc;
 										});
 
 					})
