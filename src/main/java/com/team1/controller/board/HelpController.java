@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,14 +28,14 @@ public class HelpController {
 	private HelpService service;
 	
 	//help 페이지 (검색 쿼리 있는 버전)
-	@GetMapping(value = "/list", params = { "region", "query" })
-	public void help(@RequestParam(value = "region") String region, @RequestParam(value = "query") String query,
+	@GetMapping(value = "/list", params = { "location", "query" })
+	public void help(@RequestParam(value = "location") String location, @RequestParam(value = "query") String query,
 			Model model) {
 
 		Cover.setCover("help", model);
 		
 		model.addAttribute("tag", "help");
-		model.addAttribute("region", region);
+		model.addAttribute("location", location);
 		
 		List<HelpVO> list = service.getList();
 
@@ -43,19 +44,33 @@ public class HelpController {
 	}
 	
 	//help 페이지
-	@GetMapping(value = "/list", params = { "region"})
-	public void help(@RequestParam(value = "region") String region,Model model) {
+	@GetMapping(value = "/list", params = { "location"})
+	public void help(@RequestParam(value = "location") String location, Model model) {
 
 		Cover.setCover("help", model);
 		
 		model.addAttribute("tag", "help");
-		model.addAttribute("region", region);
+		model.addAttribute("location", location);
 		
 		List<HelpVO> list = service.getList();
 
 		model.addAttribute("list", list);
 	}
 	
+	//게시물 상세 페이지, help/list/id 와 같은 형식으로 게시물의 id를 링크에서 가져온다.
+	@GetMapping(value = "/list/{id}")
+	public String post(@PathVariable Integer id, Model model) {
+		
+		//한개의 post를 가져온다.
+		
+		HelpVO helpVO = service.get(id);
+		
+		model.addAttribute("post", helpVO);
+		
+		//화면 매칭 어떻게?
+		return "help/post";
+		
+	}
 
 	
 	@GetMapping({"/get", "/modify"})
