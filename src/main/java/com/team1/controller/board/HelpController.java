@@ -3,6 +3,7 @@ package com.team1.controller.board;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,10 +77,9 @@ public class HelpController {
 	}
 
 	
-	@GetMapping("/list/modify")
-	public String get(@RequestParam("id") Integer id, Model model) {
+	@GetMapping({"/modify"})
+	public String get(@RequestParam("id") Integer id, Model model, HttpSession session) {
 		HelpVO board = service.get(id);
-		System.out.println(board);
 		model.addAttribute("board", board);
 		return "/help/modify";
 	}

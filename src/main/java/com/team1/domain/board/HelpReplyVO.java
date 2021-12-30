@@ -14,4 +14,5 @@ public class HelpReplyVO {
 	private LocalDateTime updated;
 	
 	private Boolean own;
+	private String userprofile;
 }
