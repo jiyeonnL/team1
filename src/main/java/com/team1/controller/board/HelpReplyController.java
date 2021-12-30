@@ -17,21 +17,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import com.team1.domain.board.MemberVO;
 import com.team1.domain.board.HelpReplyVO;
+import com.team1.domain.user.UserVO;
 import com.team1.service.board.HelpReplyService;
 
 import lombok.Setter;
 
 @RestController
-@RequestMapping("/preply")
+@RequestMapping("/helpreply")
 public class HelpReplyController {
 	@Setter(onMethod_ = @Autowired)
 	private HelpReplyService service;
 	
 	@GetMapping("/board/{boardId}")
 	public List<HelpReplyVO> list(@PathVariable Integer boardId, HttpSession session) {
-		MemberVO loggedIn = (MemberVO) session.getAttribute("loggedInMember");
+		UserVO loggedIn = (UserVO) session.getAttribute("loggedInMember");
 		List<HelpReplyVO> list = service.list(boardId);
 		if(loggedIn != null) {
 			for (HelpReplyVO reply : list) {
@@ -43,17 +43,18 @@ public class HelpReplyController {
 	}
 	
 	@PostMapping("/write")
-	public ResponseEntity<String> write(HelpReplyVO reply, @SessionAttribute(value="loggedInMember", required = false) MemberVO logged) {
+	public ResponseEntity<String> write(HelpReplyVO reply, @SessionAttribute(value="loggedInMember", required = false) UserVO logged) {
 		if (logged !=null && logged.getNickname().equals(reply.getNickname())) {
-			service.insert(reply);
+		service.insert(reply);
 			return ResponseEntity.status(HttpStatus.OK).build();
-		} else {
+		} 
+		else {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();			
 		}
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<String>  modify(@PathVariable Integer id, @RequestBody HelpReplyVO  reply, @SessionAttribute(value="loggedInMember", required = false) MemberVO logged) {
+	public ResponseEntity<String>  modify(@PathVariable Integer id, @RequestBody HelpReplyVO  reply, @SessionAttribute(value="loggedInMember", required = false) UserVO logged) {
 		// 댓글 조회
 		HelpReplyVO old = service.readById(id);
 		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만 또는 관리자일 때
@@ -69,7 +70,7 @@ public class HelpReplyController {
 		}
 	}
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> remove(@PathVariable Integer id, @SessionAttribute(value="loggedInMember", required = false) MemberVO logged) {
+	public ResponseEntity<String> remove(@PathVariable Integer id, @SessionAttribute(value="loggedInMember", required = false) UserVO logged) {
 				
 		// 댓글 조회
 		HelpReplyVO old = service.readById(id);
