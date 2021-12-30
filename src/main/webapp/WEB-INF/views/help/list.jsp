@@ -48,12 +48,12 @@
 }
 
 #tag {
-    font-size: 1.0rem;
-    text-align:center;
-    justify-content: center;
-    border: 3px solid yellowgreen;
-    border-radius: 5px;
-    width: 80%;
+	font-size: 1.0rem;
+	text-align: center;
+	justify-content: center;
+	border: 3px solid yellowgreen;
+	border-radius: 5px;
+	width: 80%;
 }
 
 #line {
@@ -63,11 +63,27 @@
 }
 
 #image {
+	width: 80%;
+	height: 200px;
+	object-fit: cover;
+}
 
-    width: 80%;
-    height: 200px;
-    object-fit: cover;
+/* 텍스트가 한줄 넘어가면 ...으로 끊는다.*/
+#contentBox {
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+a:hover{
+    text-decoration: none;
+    color: inherit;
 }
 </style>
 </head>
@@ -84,6 +100,7 @@
 		<div id="inner">
 			<b:innerNav></b:innerNav>
 			<b:cover></b:cover>
+			<a href="${pageContext.request.contextPath }/help/register">글쓰기</a>
 			<!-- 검색결과 리스트 -->
 			<!-- for 문 돌면서 list에 있는 요소(게시물)들 출력 -->
 			<c:forEach items="${list}" var="board">
@@ -92,15 +109,14 @@
 						<div class="col-md-2 my-auto px-auto">
 							<div id="tag">일반</div>
 						</div>
-						<div class="col-md-10 h4 my-auto ">
+						<div class="col-md-6 my-auto h5">
 							<div>
-								<a href="list/${board.id }">
-									${board.title}
-							 	</a>
-							 </div>
+								<a href="/controller1/help/list/${board.id}"> ${board.title}
+								</a>
+							</div>
 						</div>
-						<div class="col-md-2 offset-md-6 my-auto h5">
-							<div>2days ago</div>
+						<div class="col-md-2 offset-md-2 my-auto h5">
+							<div>${board.inserted}</div>
 						</div>
 
 						<div class="row md px-0 mx-0 my-2">
@@ -108,22 +124,18 @@
 								<div id="line"></div>
 							</div>
 						</div>
-
-						<!-- body -->
-						<div class="row md ms-4 my-2 align-middle">
-							<!-- tag -->
-							<div class="col-md-2 my-auto px-auto">
-								<div id="tag">일반</div>
-							</div>
-							<!-- 텍스트 -->
-							<div class="col-md-2 my-auto h5">${board.nickname}</div>
-
+						<div id="contentBox" class="row md px-0 mx-3 h5">
+							<a href="/controller1/help/list/${board.id}"> ${board.content}
+							</a>
 						</div>
+
 						<!-- preview에 올릴 한장의 이미지 -->
 						<div class="row md px-0 mx-0 justify-content-center">
 							<div class="col-md-8 my-auto mx-0 d-flex justify-content-center">
-								<img src="http://blog.jinbo.net/attach/615/200937431.jpg"
-									id="image" alt="..." />
+								<a href="/controller1/help/list/${board.id}">
+									<img src="http://blog.jinbo.net/attach/615/200937431.jpg"
+										id="image" alt="..." />
+								</a>
 							</div>
 						</div>
 						<div class="row md px-0 mx-0 my-2">
@@ -138,6 +150,9 @@
 							</div>
 							<div class="col-md-2">
 								<i class="fa fa-comments fa-fw fa-2x m-r-3"></i> 15
+							</div>
+							<div class="col-md-2">
+								<div>조회수: ${board.views }</div>
 							</div>
 						</div>
 					</div>

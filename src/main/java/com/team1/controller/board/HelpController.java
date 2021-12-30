@@ -3,6 +3,7 @@ package com.team1.controller.board;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,16 +67,19 @@ public class HelpController {
 		HelpVO helpVO = service.get(id);
 		model.addAttribute("post", helpVO);
 		
+		if (service.upViews(id)) {
+			System.out.println("조회수 올라감");
+		}
+		
 		//화면 매칭 어떻게?
 		return "help/post";
 		
 	}
 
 	
-	@GetMapping("/list/modify")
-	public String get(@RequestParam("id") Integer id, Model model) {
+	@GetMapping({"/modify"})
+	public String get(@RequestParam("id") Integer id, Model model, HttpSession session) {
 		HelpVO board = service.get(id);
-		System.out.println(board);
 		model.addAttribute("board", board);
 		return "/help/modify";
 	}
@@ -103,7 +107,7 @@ public class HelpController {
 
 		rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
 
-		return "redirect:/help/list";
+		return "redirect:/help/list?location=";
 	}
 	
 	
@@ -114,8 +118,8 @@ public class HelpController {
 			rttr.addFlashAttribute("result", id + "번 게시글이 삭제되었습니다.");
 		}
 		
-		return "redirect:/help/list";
+		return "redirect:/help/list?location=";
 	}
-	
+
 	
 }

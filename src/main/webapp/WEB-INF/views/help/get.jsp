@@ -131,7 +131,7 @@ $(document).ready(function(){
 	//댓글 전송
 	$("#sendReply").click(function() {
 		const reply =$("#replyTextarea").val();
-		const memberId = '${sessionScope.loggedInMember.nickname}';
+		const memberId = '${sessionScope.loginUser.nickname}';
 		const boardId = '${board.id}';
 
 		const data = {
@@ -178,7 +178,8 @@ $(document).ready(function(){
 <title>해주세요 게시물</title>
 </head>
 <body>
-  <b:navBar></b:navBar>
+<b:header></b:header>
+  <b:innerNav></b:innerNav>
 
   <div class="container">
     <div class="row">
@@ -233,7 +234,7 @@ $(document).ready(function(){
 			<p style="margin-bottom: 0px;" class="replyCount">
 				<i class="far fa-comment-dots fa-lg cnt"></i>
 			</p>
-			<%-- <c:if test="${not empty sessionScope.loggedInMember }"> --%>
+			<c:if test="${not empty sessionScope.loginUser }">
 				<div class="row">
 					<div class="col">
 						<hr>
@@ -248,7 +249,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 				</div>
-			<%-- </c:if> --%>
+			</c:if>
 		</div>
     <!-- 댓글 컨데이너 -->
     <div class="container">
