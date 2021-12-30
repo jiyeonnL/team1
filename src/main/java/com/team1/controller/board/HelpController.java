@@ -66,6 +66,10 @@ public class HelpController {
 		HelpVO helpVO = service.get(id);
 		model.addAttribute("post", helpVO);
 		
+		if (service.upViews(id)) {
+			System.out.println("조회수 올라감");
+		}
+		
 		//화면 매칭 어떻게?
 		return "help/post";
 		
@@ -103,7 +107,7 @@ public class HelpController {
 
 		rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
 
-		return "redirect:/help/list";
+		return "redirect:/help/list?location=";
 	}
 	
 	
@@ -114,8 +118,8 @@ public class HelpController {
 			rttr.addFlashAttribute("result", id + "번 게시글이 삭제되었습니다.");
 		}
 		
-		return "redirect:/help/list";
+		return "redirect:/help/list?location=";
 	}
-	
+
 	
 }
