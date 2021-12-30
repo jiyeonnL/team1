@@ -15,8 +15,8 @@ public class UserService {
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper mapper;
 	
-	public UserVO read(String nickname) {
-		return mapper.select(nickname);
+	public UserVO read(String email) {
+		return mapper.select(email);
 	}
 
 	public boolean register(UserVO user) {
@@ -33,6 +33,12 @@ public class UserService {
 	
 	public boolean hasNickName(String nickname) {
 		UserVO user = mapper.selectByNickName(nickname);
+
+		return user != null;
+	}
+	
+	public boolean hasEmail(String email) {
+		UserVO user = mapper.select(email);
 
 		return user != null;
 	}

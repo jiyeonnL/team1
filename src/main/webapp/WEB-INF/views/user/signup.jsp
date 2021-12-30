@@ -97,17 +97,21 @@
 								<label for="input3">이메일</label>
 								<div class="input-group">
 									<input type="email" class="form-control" id="input3" required name="email" value="${user.email }">
+									<small class="form-text" id="emailCheckMessage"></small>
+									<div class="input-group-append">
+										<button class="btn btn-secondary" id="emailCheckButton" type="button">중복확인</button>
+									</div>
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label for="input5">지역 선택</label>
 								<select class="form-control" id="input5" required name="location" value="${user.location }">
-									<option>소식을 전해듣고 싶은 지역을 선택해주세요.</option>
-									<option>마포구</option>
-									<option>서초구</option>
-									<option>강남구</option>
-
+									<optgroup label="소식을 전해듣고 싶은 지역을 선택해주세요.">
+      									<option>강남구</option>
+     									<option>서초구</option>
+     									<option>마포구</option>
+   									</optgroup>
 								</select>
 							</div>
 							<div class="form-group">
@@ -154,16 +158,21 @@
 		$(document)
 				.ready(
 						function() {
-
+							
+							
+							// 중복체크, 변수선언
 							const pwInput = $("#input2");
 							const pwConfirmInput = $("#input7");
 							const submitButton = $("#submitButton1");
-
+	
+							let emailAble = false;
 							let nicknameAble = false;
 							let pwCheck = false;
-
+							
+							
+							// 이메일, 닉네임이 중복 안될경우 & pw체크까지 한 경우 서브밋 버튼 활성화
 							let enableSubmit = function() {
-								if (pwCheck && nicknameAble) {
+								if (emailAble && pwCheck && nicknameAble) {
 									submitButton.removeAttr("disabled");
 								} else {
 									submitButton.attr("disabled", true);
@@ -171,20 +180,20 @@
 							}
 
 							const appRoot = '${pageContext.request.contextPath}';
-
+							
+							// 닉네임 중복 확인 버튼
 							$("#nicknameCheckButton")
 									.click(
 											function() {
-												$("#nicknameCheckButton").attr(
-														"disabled", true);
+												
 
 												const nicknameValue = $(
 														"#input1").val().trim();
-
+												// 닉네임을 안적었을 경우 닉네임 입력하라는 문구 출력
 												if (nicknameValue === "") {
 													$("#nicknameCheckMessage")
 															.text(
-																	"아이디를 입력해주세요!")
+																	"닉네임을 입력해주세요!!")
 															.removeClass(
 																	"text-primary text-danger")
 															.addClass(
@@ -194,9 +203,10 @@
 																	"disabled");
 													return;
 												}
-
-												$
-														.ajax({
+												
+												// ajax 닉네임 중복 눌렀을경우 로직 (1. 사용 가능한 아이디  /  2. 중복되서 불가능한 아이디)
+												
+												$.ajax({
 															url : appRoot
 																	+ "/user/nicknamecheck",
 															data : {
@@ -205,30 +215,29 @@
 															success : function(
 																	data) {
 																switch (data) {
+																// 1. 사용 가능아이디
 																case "able":
-
-																	$(
-																			"#nicknameCheckMessage")
+														
+																	$("#nicknameCheckMessage")
 																			.text(
-																					"사용 가능한 아이디 입니다.")
+																					"사용 가능한 닉네임 입니다.")
 																			.removeClass(
 																					"text-danger text-warning")
 																			.addClass(
 																					"text-primary");
 
 																	$("#input1")
-																			.attr(
-																					"readonly",
-																					true);
+																			.attr("readonly", true);
 
 																	nicknameAble = true;
 																	break;
+																// 2. 중복일 경우
 																case "unable":
 
 																	$(
 																			"#nicknameCheckMessage")
 																			.text(
-																					"이미 존재하는 아이디 입니다.")
+																					"이미 존재하는 닉네임 입니다.")
 																			.removeClass(
 																					"text-warning text-primary")
 																			.addClass(
@@ -242,15 +251,86 @@
 																}
 															},
 															complete : function() {
-																enableSubmit();
-																$(
-																		"#nicknameCheckButton")
-																		.removeAttr(
-																				"disabled");
-															}
+											                      enableSubmit();
+											                      $("#nicknameButton").removeAttr("disabled");
+											                    }
 														});
 											});
+							$("#emailCheckButton")
+							.click(
+									function() {
+									
 
+										const emailValue = $(
+												"#input3").val().trim();
+										
+										// 이메일을 안적었을 경우 이메일 입력하라는 문구 출력
+										if (emailValue === "") {
+											$("#emailCheckMessage")
+													.text(
+															"email을 입력해주세요!!")
+													.removeClass(
+															"text-primary text-danger")
+													.addClass(
+															"text-warning");
+											$("#emailCheckButton")
+													.removeAttr(
+															"disabled");
+											return;
+										}
+										
+										// ajax 닉네임 중복 눌렀을경우 로직 (1. 사용 가능한 이메일  /  2. 중복되서 불가능한 이메일)
+									
+										$.ajax({
+													url : appRoot
+															+ "/user/emailcheck",
+													data : {
+														email : emailValue
+													},
+													success : function(data) {
+														switch (data) {
+														// 1. 사용 가능아이디
+														case "able":
+												
+															$("#emailCheckMessage")
+																	.text(
+																			"사용 가능한 이메일 입니다.")
+																	.removeClass(
+																			"text-danger text-warning")
+																	.addClass(
+																			"text-primary");
+
+															$("#input3")
+																	.attr("readonly", true);
+
+															emailAble = true;
+															break;
+														// 2. 중복일 경우
+														case "unable":
+
+															$("#emailCheckMessage")
+																	.text(
+																			"이미 존재하는 이메일 입니다.")
+																	.removeClass(
+																			"text-warning text-primary")
+																	.addClass(
+																			"text-danger");
+
+															emailAble = false;
+															break;
+
+														default:
+															break;
+														}
+													},
+													complete : function() {
+									                      enableSubmit();
+									                      $("#emailButton").removeAttr("disabled");
+									                    }
+
+												});
+									});
+							// 비밀번호 서로 일치하는지 확인 
 							const confirmFunction = function() {
 
 								const pwValue = pwInput.val();
@@ -264,7 +344,7 @@
 
 									pwCheck = false;
 								}
-
+								//일치 할 경우 서브밋 버튼 활성화
 								enableSubmit();
 							};
 
@@ -273,6 +353,7 @@
 							pwConfirmInput.keyup(confirmFunction);
 
 						});
+		//버튼 누를시 임시(기본) URL 전송
 		function myFunction() {
 			document.getElementById("input6").defaultValue = "http://localhost:8080/userprofile/info";
 		}
