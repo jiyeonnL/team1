@@ -16,6 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <style>
+
 #body {
 	height: auto;
 	/* height: calc(100vh-72px); */
@@ -52,6 +53,15 @@
 #alreadyHaveId {
 	margin-top: 20px;
 }
+.form-control1{
+width : 350px;
+/* position:relative;
+top:10px; */
+
+}
+.form-control2 {
+width:260px;
+}
 </style>
 </head>
 <body>
@@ -65,14 +75,14 @@
 			<b:innerNav></b:innerNav>
 			<div class="container mt-5">
 				<div class="row">
-					<div class="col-md-6 bg-secondary">여기에 로고나 장식용 그림같은거 넣기</div>
-					<div class="col-md-6  border border-5">
+					<div class="col-md-4 bg-secondary">여기에 로고나 장식용 그림같은거 넣기</div>
+					<div class="col-md-8  border border-5">
 						<form method="post">
 							<h3>회원가입 정보</h3>
 							<div class="form-group">
 								<label for="input1">아이디 및 별명</label>
 								<div class="input-group">
-									<input type="text" class="form-control" id="input1" required name="nickname" value="${user.nickname }">
+									<input type="text" class="form-control2" id="input1" required name="nickname" value="${user.nickname }">
 									<small class="form-text" id="nicknameCheckMessage"></small>
 									<div class="input-group-append">
 										<button class="btn btn-secondary" id="nicknameCheckButton" type="button">중복확인</button>
@@ -83,20 +93,20 @@
 							<div class="form-group">
 								<label for="input2">비밀번호</label>
 								<div class="input-group">
-									<input type="password" class="form-control" id="input2" required name="pw" value="${user.pw }">
+									<input type="password" class="form-control1" id="input2" required name="pw" value="${user.pw }">
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label for="input6">비밀번호 확인</label>
 								<br>
-								<input type="password" class="form-control" id="input7" required>
+								<input type="password" class="form-control1" id="input7" required>
 							</div>
 
 							<div class="form-group">
 								<label for="input3">이메일</label>
 								<div class="input-group">
-									<input type="email" class="form-control" id="input3" required name="email" value="${user.email }">
+									<input type="email" class="form-control2" id="input3" required name="email" value="${user.email }">
 									<small class="form-text" id="emailCheckMessage"></small>
 									<div class="input-group-append">
 										<button class="btn btn-secondary" id="emailCheckButton" type="button">중복확인</button>
@@ -105,8 +115,8 @@
 							</div>
 
 							<div class="form-group">
-								<label for="input5">지역 선택</label>
-								<select class="form-control" id="input5" required name="location" value="${user.location }">
+								<label for="input5">지역 선택</label><br>
+								<select class="form-control1" id="input5" required name="location" value="${user.location }">
 									<optgroup label="소식을 전해듣고 싶은 지역을 선택해주세요.">
       									<option>강남구</option>
      									<option>서초구</option>
@@ -117,14 +127,14 @@
 							<div class="form-group">
 								<label for="input6">Profile url </label>
 								<br>
-								<input type="url" class="form-control" id="input6" required name="profileurl" value="${user.profileurl }">
+								<input type="url" class="form-control1" id="input6" required name="profileurl" value="${user.profileurl }">
 								<div class= "input-group-append">
 								<button class="btn btn-outline-primary" onclick="myFunction()">기본 프로필로 설정</button>
 								</div>
 							</div>
 							<div class="form-group mt-3">
-								<label>프로필 사진</label>
-								<input type="file" id="Profile-pic" name="channel-img" class="form-control" />
+								<label>프로필 사진</label><br>
+								<input type="file" id="Profile-pic" name="channel-img" class="form-control1" />
 								<label for="Profile-pic" id=icon>
 									<i class="fa fa-camera" aria-hidden="true"></i>
 								</label>
@@ -134,7 +144,7 @@
 								<div class="input-group">
 									<%-- <input type="text" class="form-control" id="input4" required name="introduce" value="${user.introduce }"> --%>
 									<br>
-									<textarea class="form-control" required name="introduce" id="input4" cols="40" rows="5" value="${user.introduce }" placeholder="나만의 개성을 나타낼수 있는 자기소개를 적어보세요!(최대 500글자)"></textarea>
+									<textarea class="form-control1" required name="introduce" id="input4" cols="40" rows="5" value="${user.introduce }" placeholder="나만의 개성을 나타낼수 있는 자기소개를 적어보세요!(최대 500글자)"></textarea>
 								</div>
 								<!-- textarea로 바꿔서 여러줄로 나타낼 수 있음 -->
 							</div>
