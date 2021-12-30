@@ -13,20 +13,36 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
+<<<<<<< Updated upstream
 <title>Login!</title>
 </head>
 <body>
 <b:header></b:header>
 
+=======
+<title>Insert title here</title>
+</head>
+<body>
+<b:header></b:header>
+<!-- .container>.row>.col>h1{로그인} -->
+>>>>>>> Stashed changes
 <div class="container">
 	<div class="row">
 		<div class="col">
 			<h1>로그인</h1>
+<<<<<<< Updated upstream
           
             <form method="post">
             	<div class="login-group">
             		<label for="input1">아이디(이메일)</label>
             		<input type="email" class="form-control" name="email" required>
+=======
+            <!-- form>.form-group*2>label[for=input$]+input.form-control[name][required]^button.btn.btn-outline-primary{로그인} -->
+            <form method="post">
+            	<div class="login-group">
+            		<label for="input1">아이디</label>
+            		<input type="text" class="form-control" name="nickname" required>
+>>>>>>> Stashed changes
             	</div>
             	<div class="login-group">
             		<label for="input2">패스워드</label>

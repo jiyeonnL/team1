@@ -10,10 +10,16 @@
 	</insert>
 
 	<select id="select" resultType="com.team1.domain.user.UserVO">
+<<<<<<< Updated upstream
 
 	SELECT id, pw, email, location, signupday, nickname, introduce
 	FROM tb_user
 	WHERE email = #{email}
+=======
+	SELECT id, pw, email, location, signupday, nickname
+	FROM tb_user
+	WHERE nickname = #{nickname}
+>>>>>>> Stashed changes
 	</select>
 	
 	<update id="update">

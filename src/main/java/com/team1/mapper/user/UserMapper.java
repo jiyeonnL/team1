@@ -10,9 +10,13 @@ public interface UserMapper {
 	
 	public int delete(String id); // 회원 탈퇴
 
+<<<<<<< Updated upstream
 	public UserVO select(String email); // 아이디(email)로 회원 검색
 	
 //	public UserVO login(String email, String pw); // 로그인 로직 x -> controller로 해결
+=======
+	public UserVO select(String nickname); // 아이디(nickname)로 회원 검색
+>>>>>>> Stashed changes
 	
 	public UserVO selectByNickName(String nickname); // nickname으로 검색
 	
