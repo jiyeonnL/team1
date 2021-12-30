@@ -31,12 +31,16 @@ public class HelpReplyController {
 	
 	@GetMapping("/board/{boardId}")
 	public List<HelpReplyVO> list(@PathVariable Integer boardId, HttpSession session) {
-		UserVO loggedIn = (UserVO) session.getAttribute("loggedInMember");
+		System.out.println("정상적으로 옴");
+		UserVO loggedIn = (UserVO) session.getAttribute("loginUser");
 		List<HelpReplyVO> list = service.list(boardId);
+		System.out.println("loggedIn : "+loggedIn);
 		if(loggedIn != null) {
+			System.out.println("if문으로 들어옴");
 			for (HelpReplyVO reply : list) {
 				String writerId = reply.getNickname();
 				reply.setOwn(loggedIn.getNickname().equals(writerId)); // 로그인한 사람과 댓글 작성자가 같을 때 true
+				System.out.println(reply.getOwn());
 			}
 		}
 		return list;

@@ -35,12 +35,12 @@
 
     /* 현재 게시물의 댓글 목록 가져오는 함수 */
     const listReply = function() {
-    	console.log(appRoot);
       $("#replyListContainer").empty();
       $.ajax({
-        url : appRoot + "/preply/board/${post.id}",
+        url : appRoot + "/helpreply/board/${post.id}",
         success : function(list) {
           for (let i = 0; i < list.length; i++) {
+    	console.log(list);
             const replyMediaObject = $(`
             	    <div class="row md mx-4 mt-2">
                       <div class="col-md-1 px-1 py-0 my-0">
@@ -59,14 +59,79 @@
                       </div>
                     </div>
                     <div class="col-md-1 my-auto ">
-                      <button class="btn btn-block btn-primary">Edit</button>
+                      <button class="btn btn-block btn-primary"><i class='fas fa-edit'>Edit</i></button>
                     </div>
                   </div>
                   <div class="row md mx-4">
                     <div id = "reply-text" class="col-md-10 offset-md-1 my-auto h3 align-middle">
                       <div></div>
                     </div>
+                    <div class="input-group" style="display:none;">
+					<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary cancel-button"><i class="fas fa-ban"></i></button>
+							<button class="btn btn-outline-secondary" id="sendReply\${list[i].id}">
+								<i class="far fa-comment-dots fa-lg"></i>
+							</button>
+						</div>
+					</div>
                   </div>`);
+            
+			replyMediaObject.find("#sendReply" + list[i].id).click(function() {
+				const reply = replyMediaObject.find("#replyTextarea"+list[i].id).val();
+				const data =  {
+						reply : reply		
+				};
+				$.ajax({
+					url : appRoot + "/helpreply/" + list[i].id,
+					type : "put",
+					contentType : "application/json",
+					data : JSON.stringify(data),
+					complete : function() {
+						listReply();
+					}
+				});
+			});
+			
+			replyMediaObject.find(".reply-nickName").append(list[i].nickName);
+			replyMediaObject.find(".reply-body").text(list[i].reply);
+			replyMediaObject.find(".form-control").text(list[i].reply);
+			replyMediaObject.find(".cancel-button").click(function() {
+				replyMediaObject.find(".reply-body").show();
+				replyMediaObject.find(".input-group").hide();
+				replyMediaObject.find("#replyModify").show();
+				replyMediaObject.find("#replyDelete").show();
+			});
+			
+			
+			if (list[i].own) {
+				// 본인이 작성한 것만 수정버튼 추가
+				const modifyButton = $("<button id='replyModify' class='btn btn-outline-primary'><i class='fas fa-edit'></i></button>")
+	        	modifyButton.click(function() {
+	        		$(this).parent().parent().parent().parent().parent().parent().find('.reply-text').hide();// this는 클릭이벤트가 발생한 버튼
+	        		$(this).parent().parent().parent().parent().parent().parent().find('.input-group').show();
+	        		$(this).parent().find('#replyModify').hide();
+	        		$(this).parent().find('#replyDelete').hide();
+	        	});
+				replyMediaObject.find(".reply-text").prepend(modifyButton);
+				// 삭제버튼도 추가
+				const removeButton = $("<button id='replyDelete' class='btn btn-outline-danger'><i class='far fa-trash-alt'></i></button>");
+				const blank = $(" ");
+				removeButton.click(function(){
+					if (confirm("Sure you want to delete?")){
+						$.ajax({
+							url : appRoot +"/helpreply/"+list[i].id,
+							type : "delete",
+							complete : function(){
+								listReply();
+								listReplyCount();
+							}
+						})
+					}
+				})
+				replyMediaObject.find(".reply-text").prepend(removeButton);
+	        }
+            
             $("#replyListContainer").append(replyMediaObject);
             
             replyMediaObject.find("#reply-nickname").text(list[i].nickname);
@@ -205,7 +270,12 @@
 
 					<!-- 댓글 창 -->
 					<!-- 로그인 한 사용자에게만 보여야 한다. -->
+					
 					<div class="row md mx-4 my-3">
+					<p style="margin-bottom: 0px;" class="replyCount">
+				<i class="far fa-comment-dots fa-lg cnt"></i>
+			</p>
+			<c:if test="${not empty sessionScope.loginUser }">
 						<div class="col-md-10 mx-0">
 							<textarea class="form-control px-0" placeholder="댓글을 남겨보세요!"
 								id="exampleFormControlTextarea1"></textarea>
@@ -213,8 +283,9 @@
 						<div class="col-md-2 px-0">
 							<button
 								class="btn btn-block btn-primary d-flex align-items-stretch">
-								upload</button>
+								등록</button>
 						</div>
+						</c:if>
 					</div>
 					
 					<div id ="replyListContainer"></div>

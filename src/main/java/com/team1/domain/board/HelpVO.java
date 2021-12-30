@@ -18,6 +18,7 @@ public class HelpVO {
 	private LocalDateTime inserted;
 	private LocalDateTime updated;
 	private String nickname;
+	private String userprofile;
 	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
