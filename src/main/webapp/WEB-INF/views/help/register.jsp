@@ -26,34 +26,37 @@
         <form method="post">
         
           <div class="form-group">
-            <label for="input4">memberId</label>
-            <input type="text" class="form-control" id="input4" name="memberId">
+            <label for="input1">memberId</label>
+            <input type="text" class="form-control" id="input1" name="memberId">
           </div>
         
-         <!--  <div class="form-group">
-            <label for="input5">닉네임</label>
-            <input type="text" class="form-control" id="input5" name="nickname">
-          </div> -->
-        
-          <div class="form-group">
-            <label for="input6">지역</label>
-            <input type="text" class="form-control" id="input6" name="location">
+         <div class="form-group">
+            <label for="input2">닉네임</label>
+            <input type="text" class="form-control" id="input2" name="nickname" readonly>
           </div>
         
-        
+            <input type="text" name="location" value="location">
+
           <div class="form-group">
-            <label for="input1">제목</label>
-            <input type="text" class="form-control" id="input1" name="title">
+            <label for="input3">제목</label>
+            <input type="text" class="form-control" id="input3" name="title">
           </div>
           
           <div class="form-group">
-            <label for="input2">내용</label>
-            <textarea class="form-control" id="input2" name="content"></textarea>
+            <label for="input4">내용</label>
+            <textarea class="form-control" id="input4" name="content"></textarea>
           </div>
           
           <div class="form-group">
-            <label for="input3">태그</label>
-            <input type="text" class="form-control" id="input3" name="tag">
+            <label for="input6">태그</label>
+            <select class="form-control" id="input6" name="tag">
+            	<option value="none"  disabled selected>태그 선택</option>
+            	<option value="약국" >약국</option>
+            	<option value="전구">전구</option>
+            	<option value="편의점">편의점</option>
+            	<option value="짐옮기기">짐옯기기</option>
+            	<option value="기타">기타</option>
+            </select>
           </div>
 
           <button class="btn btn-outline-primary" type="submit">등록</button>

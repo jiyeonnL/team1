@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-<title>Insert title here</title>
+<title>게시물 수정</title>
 </head>
 <body>
   <b:navBar></b:navBar>
@@ -24,11 +24,6 @@
 
         <form id="modifyForm" method="post">
         <input type="hidden" name="id" value="${board.id }">
-        
-          <div class="form-group">
-            <label for="input4">지역</label>
-            <input type="text" class="form-control" value="${board.location }" id="input4" name="location">
-          </div>
         
           <div class="form-group">
             <label for="input1">제목</label>
@@ -42,7 +37,15 @@
           
           <div class="form-group">
             <label for="input3">태그</label>
-            <input type="text" class="form-control" value="${board.tag }" id="input3" name="tag" >
+            <select class="form-control" id="input3" name="tag">
+            <!--  수정 하고 있는 중  -->
+            	<option value="${board.tag }" selected>${board.tag }</option>
+            	<option value="약국" >약국</option>
+            	<option value="전구">전구</option>
+            	<option value="편의점">편의점</option>
+            	<option value="짐옮기기">짐옯기기</option>
+            	<option value="기타">기타</option>
+            </select>
           </div>
 
           <button id="modifySubmitButton" class="btn btn-outline-primary" type="submit">수정</button>
