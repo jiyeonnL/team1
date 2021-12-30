@@ -26,9 +26,9 @@
 				<li class="nav-item">
 					<select class="form-select" id="location">
 						<option value="" <c:if test="${location eq '' || empty location}">selected</c:if>>Region</option>
-						<option <c:if test="${location eq '강남'}">selected</c:if>>강남</option>
-						<option <c:if test="${location eq '마포'}">selected</c:if>>마포</option>
-						<option <c:if test="${location eq '서초'}">selected</c:if>>서초</option>
+						<option <c:if test="${location eq '강남구'}">selected</c:if>>강남구</option>
+						<option <c:if test="${location eq '마포구'}">selected</c:if>>마포구</option>
+						<option <c:if test="${location eq '서초구'}">selected</c:if>>서초구</option>
 					</select>
 				</li>
 

@@ -25,17 +25,17 @@
         
         <form method="post">
         
-          <div class="form-group">
-            <label for="input1">memberId</label>
-            <input type="text" class="form-control" id="input1" name="memberId">
-          </div>
+         <input type="hidden" class="form-control" id="input1" name="memberId" value="${sessionScope.loginUser.id }">
         
          <div class="form-group">
             <label for="input2">닉네임</label>
-            <input type="text" class="form-control" id="input2" name="nickname" readonly>
+            <input type="text" class="form-control" id="input2" name="nickname" value="${sessionScope.loginUser.nickname }" readonly>
           </div>
         
-            <input type="text" name="location" value="location">
+          <div class="form-group">
+            <label for="input5">지역</label>
+            <input type="text" class="form-control" name="location" value="${sessionScope.loginUser.location }"  id="input5" readonly>
+          </div>
 
           <div class="form-group">
             <label for="input3">제목</label>

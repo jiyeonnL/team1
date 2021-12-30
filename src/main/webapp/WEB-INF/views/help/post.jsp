@@ -249,15 +249,23 @@
 					<!-- footer -->
 					<div class="row md mx-4">
 						<div class="col-md-2">
-							<i class="fa fa-thumbs-up fa-fw fa-3x m-r-3"></i> ${post.up}
+							<a href=#>
+								<i class="fa fa-thumbs-up fa-fw fa-3x m-r-3"></i> 
+							</a>${post.up}
 						</div>
 						<div class="col-md-2">
 							<i class="fa fa-comments fa-fw fa-3x m-r-3"></i> 15
 						</div>
+						<div class="col-md-2">
+							<div><i class="fas fa-eye fa-fw fa-3x m-r-3"></i> ${post.views }</div>
+						</div>
+						
 						<div class="col-md-2 my-auto px-auto">
+							<c:if test="${sessionScope.loginUser.id eq post.memberId }">
 							<a href="modify?id=${post.id }" class="btn btn-outline-secondary">
             					수정/삭제
           					</a>
+          					</c:if>
 						</div>
 					</div>
 

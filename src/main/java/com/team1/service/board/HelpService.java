@@ -36,6 +36,14 @@ public class HelpService {
 	public boolean remove(Integer id) {
 		return mapper.delete(id) == 1;
 	}
+	
+	public boolean upViews(Integer id) {
+		return mapper.upViews(id) == 1;
+	}
+	
+	public boolean upUps(Integer id) {
+		return mapper.upViews(id) == 1;
+	}
 
 	public List<HelpVO> getListSearchByContent(String search){
 //			, Integer page, Integer numberPerPage, Integer numberPerPagination) { 검색 결과도 페이지 네이션 구현한다면 필요한 변수 (전에 아직 구현 못함)
