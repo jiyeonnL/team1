@@ -189,6 +189,11 @@
 						<div class="col-md-2">
 							<i class="fa fa-comments fa-fw fa-3x m-r-3"></i> 15
 						</div>
+						<div class="col-md-2 my-auto px-auto">
+							<a href="modify?id=${post.id }" class="btn btn-outline-secondary">
+            					수정/삭제
+          					</a>
+						</div>
 					</div>
 
 					<!-- footer 와 댓글창 구분 선-->

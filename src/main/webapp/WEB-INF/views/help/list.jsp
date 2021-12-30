@@ -92,8 +92,12 @@
 						<div class="col-md-2 my-auto px-auto">
 							<div id="tag">일반</div>
 						</div>
-						<div class="col-md-2 my-auto h5">
-							<div>${board.nickname}</div>
+						<div class="col-md-10 h4 my-auto ">
+							<div>
+								<a href="list/${board.id }">
+									${board.title}
+							 	</a>
+							 </div>
 						</div>
 						<div class="col-md-2 offset-md-6 my-auto h5">
 							<div>2days ago</div>
@@ -105,8 +109,15 @@
 							</div>
 						</div>
 
-						<div class="row md px-0 mx-3 h5">Lorem ipsum, dolor sit amet
-							consectetur adipisicing elit. 
+						<!-- body -->
+						<div class="row md ms-4 my-2 align-middle">
+							<!-- tag -->
+							<div class="col-md-2 my-auto px-auto">
+								<div id="tag">일반</div>
+							</div>
+							<!-- 텍스트 -->
+							<div class="col-md-2 my-auto h5">${board.nickname}</div>
+
 						</div>
 						<!-- preview에 올릴 한장의 이미지 -->
 						<div class="row md px-0 mx-0 justify-content-center">
@@ -123,7 +134,7 @@
 
 						<div class="row md mx-4">
 							<div class="col-md-2">
-								<i class="fa fa-thumbs-up fa-fw fa-2x m-r-3"></i> 15
+								<i class="fa fa-thumbs-up fa-fw fa-3x m-r-3"></i> ${board.up}
 							</div>
 							<div class="col-md-2">
 								<i class="fa fa-comments fa-fw fa-2x m-r-3"></i> 15
