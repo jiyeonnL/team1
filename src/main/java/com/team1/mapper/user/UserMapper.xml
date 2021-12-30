@@ -4,22 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.team1.mapper.user.UserMapper">
+	
 	<insert id="insert">
 	INSERT INTO tb_user (id, pw, email, location, nickname, introduce, profileurl)
 	VALUES (#{id}, #{pw}, #{email}, #{location}, #{nickname}, #{introduce}, #{profileurl})
 	</insert>
 
 	<select id="select" resultType="com.team1.domain.user.UserVO">
-<<<<<<< Updated upstream
-
 	SELECT id, pw, email, location, signupday, nickname, introduce
 	FROM tb_user
 	WHERE email = #{email}
-=======
-	SELECT id, pw, email, location, signupday, nickname
-	FROM tb_user
-	WHERE nickname = #{nickname}
->>>>>>> Stashed changes
 	</select>
 	
 	<update id="update">

@@ -15,13 +15,9 @@ public class UserService {
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper mapper;
 	
-<<<<<<< Updated upstream
+
 	public UserVO read(String email) {
 		return mapper.select(email);
-=======
-	public UserVO read(String nickname) {
-		return mapper.select(nickname);
->>>>>>> Stashed changes
 	}
 
 	public boolean register(UserVO user) {
@@ -49,3 +45,4 @@ public class UserService {
 	}
 
 }
+	
