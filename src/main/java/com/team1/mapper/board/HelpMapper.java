@@ -16,5 +16,8 @@ public interface HelpMapper {
 	public int update(HelpVO board);
 	
 	public String nickname(Integer id);
+
+	public List<HelpVO> getListSearchByContent(String search);
+
 	
 }

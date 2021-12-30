@@ -13,25 +13,25 @@ import com.team1.coverData.Cover;
 public class QuestionController {
 	
 	//life 페이지 (검색 쿼리 있는 버전)
-	@GetMapping(value = "/list", params = { "region", "query" })
-	public void life(@RequestParam(value = "region") String region, @RequestParam(value = "query") String query,
+	@GetMapping(value = "/list", params = { "location", "query" })
+	public void life(@RequestParam(value = "location") String location, @RequestParam(value = "query") String query,
 			Model model) {
 
 		Cover.setCover("question", model);
 		
 		model.addAttribute("tag", "question");
-		model.addAttribute("region", region);
+		model.addAttribute("location", location);
 		
 	}
 	
 	//life 페이지 (검색 쿼리 있는 버전)
-	@GetMapping(value = "/list", params = { "region"})
-	public void life(@RequestParam(value = "region") String region,Model model) {
+	@GetMapping(value = "/list", params = { "location"})
+	public void life(@RequestParam(value = "location") String location,Model model) {
 
 		Cover.setCover("question", model);
 
 		model.addAttribute("tag", "question");
-		model.addAttribute("region", region);
+		model.addAttribute("location", location);
 	}
 	
 

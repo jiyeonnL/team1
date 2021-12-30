@@ -40,5 +40,11 @@ public class HelpService {
 	public String getNick(Integer id) {
 		return mapper.nickname(id);
 	}
+
+	public List<HelpVO> getListSearchByContent(String search){
+//			, Integer page, Integer numberPerPage, Integer numberPerPagination) { 검색 결과도 페이지 네이션 구현한다면 필요한 변수 (전에 아직 구현 못함)
+//		return mapper.getListSearchByTitle(search, from, numberPerPage, numberPerPagination);
+		return mapper.getListSearchByContent(search);
+	}
 	
 }
