@@ -24,7 +24,7 @@
 		<div class="collapse navbar-collapse" id="navbarsExample03">
 			<ul class="navbar-nav me-auto mb-2 mb-sm-0">
 				<li class="nav-item">
-					<select class="form-select" id="region">
+					<select class="form-select" id="location">
 						<option value="" <c:if test="${location eq '' || empty location}">selected</c:if>>Region</option>
 						<option <c:if test="${location eq '강남'}">selected</c:if>>강남</option>
 						<option <c:if test="${location eq '마포'}">selected</c:if>>마포</option>
@@ -80,7 +80,12 @@
 						$("#icon")
 						.click(function() {
 							var query = $("#keyword").val();
-							console.log(query);
+							
+							//빈 문자열이면 return 시켜 실행되지 않게 한다.
+							if(query== "") {
+								return 
+							}
+							
 							location.href = "/controller1/"+tag+"/list?location="
 								+ loc +"&query="+query;
 						})
