@@ -61,21 +61,21 @@
               />
             </div>
             <div class="col-md-5 mx-3 my-auto align-self-center ">
-              <div class="h1">${user.nickname }</div>
-              <span class="h4 mt-3">Region</span>
-              <span class="h4 mt-3 ms-3">#UUID</span>
-              <div class="h4 mt-3">가입일 </div>
+              <div class="h1">${sessionScope.loginUser.nickname }</div>
+              <span class="h4 mt-3">${sessionScope.loginUser.location }</span>
+              <span class="h4 mt-3 ms-3">#${sessionScope.loginUser.id }</span>
+              <div class="h4 mt-3">${sessionScope.loginUser.signupday } </div>
             </div>
             <div class="col-md-2 offset-md-2 mx-auto my-auto ">
               <button type="button" class="btn btn-lg btn-primary">
-                Edit
+            	    회원정보 수정
               </button>
             </div>
           </div>
           <div class="row md mx-3 mt-4 mb-2">
             <div class="col-md-12 ">
               <div class="h3 mt-1">
-                안녕하세요! XX 사는 OOO입니다. 만나서 반갑습니다.
+               ${sessionScope.loginUser.introduce }
               </div>
             </div>
           </div>

@@ -12,7 +12,7 @@ public interface UserMapper {
 
 	public UserVO select(String email); // 아이디(email)로 회원 검색
 	
-//	public UserVO login(String email, String pw); // 로그인
+//	public UserVO login(String email, String pw); // 로그인 로직 x -> controller로 해결
 	
 	public UserVO selectByNickName(String nickname); // nickname으로 검색
 	

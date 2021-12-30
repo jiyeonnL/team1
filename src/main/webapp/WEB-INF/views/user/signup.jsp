@@ -154,7 +154,7 @@ width:260px;
 							<div class="form-group">
 								<p class="not-yet" id="alreadyHaveId">
 									이미 아이디를 가지고 계신가요?
-									<a href="#">로그인</a>
+									<a href="../user/login">로그인</a>
 								</p>
 							</div>
 						</form>
