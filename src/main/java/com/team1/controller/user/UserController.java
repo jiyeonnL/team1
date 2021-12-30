@@ -68,6 +68,14 @@ public class UserController {
 		return "redirect:/all/list";
 		
 	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/all/list";
+	}
+
+	
 	@GetMapping("/signup")
 	public void signup() {
 		

@@ -68,7 +68,10 @@
             </div>
             <div class="col-md-2 offset-md-2 mx-auto my-auto ">
               <button type="button" class="btn btn-lg btn-primary">
-            	    회원정보 수정
+            	    정보수정
+              </button>
+              <button type="button" class="btn btn-lg btn-danger">
+            	    회원탈퇴
               </button>
             </div>
           </div>

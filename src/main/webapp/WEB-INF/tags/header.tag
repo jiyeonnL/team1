@@ -48,7 +48,7 @@
 						aria-labelledby="dropdownMenuButton1">
 						
 						<li><a class="dropdown-item" href="../user/profile">Edit Profile</a></li>
-						<li><a class="dropdown-item" href="#">Logout</a></li>
+						<li><a class="dropdown-item" href="../user/logout">Logout</a></li>
 						<li><a class="dropdown-item" href="#">Something else here</a></li>
 					</ul>
 				</c:if>
