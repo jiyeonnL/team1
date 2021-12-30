@@ -10,7 +10,7 @@ public interface UserMapper {
 	
 	public int delete(String id); // 회원 탈퇴
 
-	public UserVO select(String id); // id로 회원 검색
+	public UserVO select(String nickname); // 아이디(nickname)로 회원 검색
 	
 	public UserVO login(String nickname, String pw); // 로그인
 	

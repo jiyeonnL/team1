@@ -53,7 +53,7 @@ public class UserController {
 		}
 		
 		session.setAttribute("loginUser",vo);
-		return "redirect:/board/main";
+		return "redirect:/all/list";
 		
 	}
 	@GetMapping("/signup")
@@ -72,6 +72,44 @@ public class UserController {
 		}else {
 			return "redirect:/user/signup";
 		}
+	}
+	
+	
+	@GetMapping("/profile")
+	public String info(HttpSession session) {
+
+		UserVO vo = (UserVO) session.getAttribute("loginUser");
+
+	
+		if (vo == null) {
+			return "redirect:/user/login";
+		}
+		
+		return null;
+	}
+	
+	@PostMapping("/profile")
+	public String info(UserVO user, HttpSession session, RedirectAttributes rttr) {
+
+		UserVO vo = (UserVO) session.getAttribute("loginUser");
+
+
+		if (vo == null) {
+			return "redirect:/user/login";
+		}
+		
+		
+		// 로그인된 상태
+		boolean ok = service.modify(user);
+		
+		if (ok) {
+			rttr.addFlashAttribute("result", "회원 정보가 변경되었습니다.");
+			session.setAttribute("loginUser", service.read(user.getNickname()));
+		} else {
+			rttr.addFlashAttribute("result", "회원 정보가 변경되지 않았습니다.");
+		}
+
+		return "redirect:/all/list";
 	}
 	
 }

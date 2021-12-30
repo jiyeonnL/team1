@@ -15,8 +15,8 @@ public class UserService {
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper mapper;
 	
-	public UserVO read(String id) {
-		return mapper.select(id);
+	public UserVO read(String nickname) {
+		return mapper.select(nickname);
 	}
 
 	public boolean register(UserVO user) {
