@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,9 +34,14 @@ public class HelpController {
 	private UserService userService;
 	
 	//help 페이지 (검색 쿼리 있는 버전)
-	//help 페이지
-	@GetMapping(value = "/list", params = { "region"})
-	public void help(@RequestParam(value = "region") String region,Model model) {
+	@GetMapping(value = "/list", params = { "location", "query" })
+	public void help(@RequestParam(value = "location") String location, @RequestParam(value = "query") String query,
+			Model model) {
+
+		Cover.setCover("help", model);
+		
+		model.addAttribute("tag", "help");
+		model.addAttribute("location", location);
 		
 		Cover.setCover("help", model);
 		List<HelpVO> list = service.getList();
@@ -45,14 +51,14 @@ public class HelpController {
 		model.addAttribute("region", region);
 	}
 	
-	@GetMapping(value = "/list", params = { "region", "query" })
-	public void help(@RequestParam(value = "region") String region, @RequestParam(value = "query") String query,
-			Model model) {
+	//help 페이지
+	@GetMapping(value = "/list", params = { "location"})
+	public void help(@RequestParam(value = "location") String location, Model model) {
 
 		Cover.setCover("help", model);
 		
 		model.addAttribute("tag", "help");
-		model.addAttribute("region", region);
+		model.addAttribute("location", location);
 		
 		List<HelpVO> listSearch = service.getListSearchByContent(query);
 //		PageInfoVO pageInfo = service.getPageInfo(page, numberPerPage, numberPerPagination);
@@ -64,29 +70,21 @@ public class HelpController {
 	}
 		
 	
-//	@PostMapping("/list")
-//	public void list2(@RequestParam(value = "page", defaultValue = "1") Integer page, Model model, @RequestParam(value = "search", defaultValue = "") String search) {
-//		System.out.println(search);
-//
-////		Integer numberPerPage = 10; // 한 페이지의 레코드의 수
-////		Integer numberPerPagination = 10; // 한 페이지네이션안의 갯수
-//		 
-//		List<HelpVO> listSearch = service.getListSearchByContent(search);
-////		PageInfoVO pageInfo = service.getPageInfo(page, numberPerPage, numberPerPagination);
-//		  
-//		System.out.println(listSearch);
-//		model.addAttribute("listSearch", listSearch);
-////		model.addAttribute("pageInfo2", pageInfo);
-//	}
-	
-//	@GetMapping("/list")
-//	public void list(Model model, HttpSession session) {
-//		List<HelpVO> list = service.getList();
-//		String id = "EasyMoneySniper";
-//		UserVO loggedmember = userService.read(id);
-//		session.setAttribute("loggedInMember", loggedmember); 로그인이 안돼서 수동으로 만들어준 로그인 정보 객체
-//		model.addAttribute("list", list);
-//	}
+	//게시물 상세 페이지, help/list/id 와 같은 형식으로 게시물의 id를 링크에서 가져온다.
+	@GetMapping(value = "/list/{id}")
+	public String post(@PathVariable Integer id, Model model) {
+		
+		//한개의 post를 가져온다.
+		
+		HelpVO helpVO = service.get(id);
+		
+		model.addAttribute("post", helpVO);
+		
+		//화면 매칭 어떻게?
+		return "help/post";
+		
+	}
+
 	
 	@GetMapping({"/get", "/modify"})
 	public void get(@RequestParam("id") Integer id, Model model, HttpSession session) {

@@ -25,10 +25,10 @@
 			<ul class="navbar-nav me-auto mb-2 mb-sm-0">
 				<li class="nav-item">
 					<select class="form-select" id="region">
-						<option value="" <c:if test="${region eq '' || empty region}">selected</c:if>>Region</option>
-						<option <c:if test="${region eq '강남'}">selected</c:if>>강남</option>
-						<option <c:if test="${region eq '역삼'}">selected</c:if>>역삼</option>
-						<option <c:if test="${region eq '신촌'}">selected</c:if>>신촌</option>
+						<option value="" <c:if test="${location eq '' || empty location}">selected</c:if>>Region</option>
+						<option <c:if test="${location eq '강남'}">selected</c:if>>강남</option>
+						<option <c:if test="${location eq '마포'}">selected</c:if>>마포</option>
+						<option <c:if test="${location eq '서초'}">selected</c:if>>서초</option>
 					</select>
 				</li>
 
@@ -73,7 +73,7 @@
 					function() {
 						
 						//현재의 tag 값과 region 값을 가져온다.
-						var region = "${region}";
+						var location = "${location}";
 						var tag    = "${tag}";
 						//console.log(region);
 						
@@ -85,20 +85,20 @@
 						.click(function() {
 							var query = $("#keyword").val();
 							console.log(query);
-							location.href = "/controller1/"+tag+"/list?region="
-								+ region +"&query="+query;
+							location.href = "/controller1/"+tag+"/list?location="
+								+ location +"&query="+query;
 						})
 
 						//model attribute에서 현재 어느 태그인지 검사하고 select의 현재 상태 변경시기키 (model 값을 스크립트 내부에서 사용해야 한다.)
 						$("#all")
 						.click(
 								function() {
-									var region = $(
-											"#region option:selected")
+									var location = $(
+											"#location option:selected")
 											.val();
 
-									location.href = "/controller1/all/list?region="
-											+ region;
+									location.href = "/controller1/all/list?location="
+											+ location;
 
 								});
 						
@@ -106,22 +106,22 @@
 						$("#news")
 								.click(
 										function() {
-											var region = $(
-													"#region option:selected")
+											var location = $(
+													"#location option:selected")
 													.val();
 
-											location.href = "/controller1/news/list?region="
-													+ region;
+											location.href = "/controller1/news/list?location="
+													+ location;
 
 										});
 
 						$("#question")
 								.click(
 										function() {
-											var region = $(
-													"#region option:selected")
+											var location = $(
+													"#location option:selected")
 													.val();
-											location.href = "/controller1/question/list?region="
+											location.href = "/controller1/question/list?location="
 													+ region;
 
 										});
@@ -129,11 +129,11 @@
 						$("#life")
 								.click(
 										function() {
-											var region = $(
-													"#region option:selected")
+											var location = $(
+													"#location option:selected")
 													.val();
-											location.href = "/controller1/life/list?region="
-													+ region;
+											location.href = "/controller1/life/list?location="
+													+ location;
 
 										});
 
@@ -141,11 +141,11 @@
 								.click(
 										function() {
 											var region = $(
-													"#region option:selected")
+													"#location option:selected")
 													.val();
 											console.log(region, "news");
-											location.href = "/controller1/help/list?region="
-													+ region;
+											location.href = "/controller1/help/list?location="
+													+ location;
 										});
 
 					})

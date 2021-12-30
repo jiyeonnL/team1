@@ -160,7 +160,7 @@
 			<c:forEach items="${list}" var="board">
 				<div id = "postBody">
 					<div class="container-fluid my-1">
-						<!-- 헤ㅓ -->
+						<!-- 헤더 -->
 						<div class="row md ms-4 px-2 align-middle">
 							<div class="col-md-1 px-1 py-0 my-0">
 								<img

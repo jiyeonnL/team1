@@ -24,7 +24,8 @@ public class Cover {
 	private static String header_qeustion 	= "동네질문";
 	private static String text_qeustion 	= "이웃들에게 물어보고 싶은게 있으신가요?";
 	
-
+	
+	//model에 커버 관련 데이터를 담는다. tag로  어떤 커버를 담을지 식별한다.
 	public static void setCover(String tag, Model model) {
 		//나중에 리팩토링 할것
 		
