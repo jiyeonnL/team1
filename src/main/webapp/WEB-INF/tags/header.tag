@@ -41,12 +41,13 @@
 					</span>
 					<span class="align-middle h3 dropdown-toggle"
 						id="dropdownMenuButton1" data-bs-toggle="dropdown"
-						aria-expanded="false"
-					>${sessionScope.loginUser.nickname }</span>
+						aria-expanded="false">
+						${sessionScope.loginUser.nickname }
+					</span>
 					<ul class="dropdown-menu dropdown-menu-end"
-						aria-labelledby="dropdownMenuButton1"
-					>
-						<li><a class="dropdown-item" href="#">Edit Profile</a></li>
+						aria-labelledby="dropdownMenuButton1">
+						
+						<li><a class="dropdown-item" href="../user/profile">Edit Profile</a></li>
 						<li><a class="dropdown-item" href="#">Logout</a></li>
 						<li><a class="dropdown-item" href="#">Something else here</a></li>
 					</ul>
@@ -59,7 +60,7 @@
 
 <script>
 	$("#login").click(function() {
-		$("#myModal").modal("show");
+		location.href="/controller1/user/login"
 	});
 	
 	$("#signup").click(function() {
