@@ -100,6 +100,7 @@ a:hover{
 		<div id="inner">
 			<b:innerNav></b:innerNav>
 			<b:cover></b:cover>
+			<a href="${pageContext.request.contextPath }/help/register">글쓰기</a>
 			<!-- 검색결과 리스트 -->
 			<!-- for 문 돌면서 list에 있는 요소(게시물)들 출력 -->
 			<c:forEach items="${list}" var="board">
@@ -149,6 +150,9 @@ a:hover{
 							</div>
 							<div class="col-md-2">
 								<i class="fa fa-comments fa-fw fa-2x m-r-3"></i> 15
+							</div>
+							<div class="col-md-2">
+								<div>조회수: ${board.views }</div>
 							</div>
 						</div>
 					</div>
