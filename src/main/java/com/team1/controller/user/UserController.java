@@ -34,14 +34,26 @@ public class UserController {
 		}
 	}
 	
+	@RequestMapping("/emailcheck")
+	@ResponseBody
+	public String emailcheck(String email) {
+		boolean has = service.hasEmail(email);
+		
+		if (has) {
+			return "unable";
+		} else {
+			return "able";
+		}
+	}
+	
 	@GetMapping("/login")
 	public void login() {
 		
 	}
 	
 	@PostMapping("/login")
-	public String login (String nickname, String pw, HttpSession session) {
-		UserVO vo = service.read(nickname);
+	public String login (String email, String pw, HttpSession session) {
+		UserVO vo = service.read(email);
 		
 		if(vo == null) {
 			return null;
@@ -68,7 +80,7 @@ public class UserController {
 		
 		if(ok) {
 			rttr.addFlashAttribute("ok", "가입완료");
-			return "redirect:/board/main";
+			return "redirect:/all/list";
 		}else {
 			return "redirect:/user/signup";
 		}
@@ -104,7 +116,7 @@ public class UserController {
 		
 		if (ok) {
 			rttr.addFlashAttribute("result", "회원 정보가 변경되었습니다.");
-			session.setAttribute("loginUser", service.read(user.getNickname()));
+			session.setAttribute("loginUser", service.read(user.getEmail()));
 		} else {
 			rttr.addFlashAttribute("result", "회원 정보가 변경되지 않았습니다.");
 		}

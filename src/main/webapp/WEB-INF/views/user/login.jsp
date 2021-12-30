@@ -25,8 +25,8 @@
           
             <form method="post">
             	<div class="login-group">
-            		<label for="input1">아이디</label>
-            		<input type="text" class="form-control" name="nickname" required>
+            		<label for="input1">아이디(이메일)</label>
+            		<input type="email" class="form-control" name="email" required>
             	</div>
             	<div class="login-group">
             		<label for="input2">패스워드</label>

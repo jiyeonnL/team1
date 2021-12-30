@@ -12,7 +12,7 @@
 	<select id="select" resultType="com.team1.domain.user.UserVO">
 	SELECT id, pw, email, location, signupday, nickname
 	FROM tb_user
-	WHERE nickname = #{nickname}
+	WHERE email = #{email}
 	</select>
 	
 	<update id="update">
@@ -31,12 +31,6 @@
 	WHERE id = #{id}
 	</delete>
 	
-	<select id="login" resultType="com.team1.domain.user.UserVO">
-	SELECT nickname, pw
-	FROM tb_user
-	WHERE nickname = #{nickname}
-	AND pw = #{pw}
-	</select>
 	
 	<select id="selectByNickName" resultType="com.team1.domain.user.UserVO">
 	SELECT id, pw, email, location, signupday, nickname, introduce
