@@ -64,7 +64,6 @@ public class HelpController {
 		//한개의 post를 가져온다.
 		
 		HelpVO helpVO = service.get(id);
-		
 		model.addAttribute("post", helpVO);
 		
 		//화면 매칭 어떻게?
@@ -73,17 +72,15 @@ public class HelpController {
 	}
 
 	
-	@GetMapping({"/get", "/modify"})
-	public void get(@RequestParam("id") Integer id, Model model) {
+	@GetMapping("/list/modify")
+	public String get(@RequestParam("id") Integer id, Model model) {
 		HelpVO board = service.get(id);
-		String nickname = service.getNick(id);
 		System.out.println(board);
-		System.out.println(nickname);
 		model.addAttribute("board", board);
-		model.addAttribute("nickname", nickname);
+		return "/help/modify";
 	}
 	
-	@PostMapping("/modify")
+	@PostMapping("/list/modify")
 	public String modify(HelpVO board, RedirectAttributes rttr) {
 		System.out.println("/modify로 잘 옴.");
 		System.out.println(board);
@@ -110,8 +107,8 @@ public class HelpController {
 	}
 	
 	
-	@PostMapping("/remove")
-	public String remove(@RequestParam("ID") Integer id, RedirectAttributes rttr) {
+	@PostMapping("/list/remove")
+	public String remove(@RequestParam("id") Integer id, RedirectAttributes rttr) {
 	
 		if (service.remove(id)) {
 			rttr.addFlashAttribute("result", id + "번 게시글이 삭제되었습니다.");

@@ -24,6 +24,7 @@
 	GROUP BY h.id
     ORDER BY h.id DESC
 </select>
+
   <select id="getList" resultType="com.team1.domain.board.HelpVO">
   	SELECT
 	p.id, p.memberId, p.location, p.up, p.views, p.tag, 
@@ -42,7 +43,6 @@
   	FROM tb_board_help p 
   	JOIN tb_user m 
   	ON m.id = p.memberId
-
 	WHERE p.id = #{id}
   </select>
   
@@ -69,11 +69,6 @@
 	DELETE FROM tb_board_help WHERE id = #{id}
   </delete>
   
-  <select id="nickname" resultType="String">
-    SELECT m.Nickname FROM tb_user m 
-    JOIN tb_board_help p ON m.id = p.memberId
-    WHERE p.id = #{id};
-  </select>
   
  
 </mapper>
