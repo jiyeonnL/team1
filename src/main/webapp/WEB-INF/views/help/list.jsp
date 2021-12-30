@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>해주세요</title>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -105,7 +105,11 @@
 								<div id="tag">일반</div>
 							</div>
 							<!-- 텍스트 -->
-							<div class="col-md-10 h4 my-auto ">${board.content}</div>
+							<div class="col-md-10 h4 my-auto ">
+								<a href="get?id=${board.id }">
+									${board.title}
+								</a>
+							</div>
 						</div>
 						<!-- 이미지 파트 -->
 						<div class="row md mx-3 mt-4 mb-2 justify-content-center">
