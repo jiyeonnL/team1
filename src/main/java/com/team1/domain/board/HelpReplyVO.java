@@ -11,7 +11,7 @@ public class HelpReplyVO {
 	private String nickname;
 	private String reply;
 	private LocalDateTime inserted;
-	private LocalDateTime ipdated;
+	private LocalDateTime updated;
 	
 	private Boolean own;
 }

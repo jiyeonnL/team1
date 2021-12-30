@@ -49,7 +49,7 @@
 					<button type="button" id="help" class="btn btn-info ms-1">해주세요</button>
 				</li>
 			</ul>
-			<form onsubmit="return false;">
+			<form method="get" onsubmit="return false;">
 				<input class="form-control" type="text" placeholder="Search" id="keyword"
 					aria-label="Search"
 				/>
