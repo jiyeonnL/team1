@@ -62,6 +62,9 @@ top:10px; */
 .form-control2 {
 width:260px;
 }
+.form-group1{
+width:350px;
+}
 </style>
 </head>
 <body>
@@ -132,12 +135,14 @@ width:260px;
 								<button class="btn btn-outline-primary" onclick="myFunction()">기본 프로필로 설정</button>
 								</div>
 							</div>
-							<div class="form-group mt-3">
+							<div class="form-group1">
 								<label>프로필 사진</label><br>
 								<input type="file" id="Profile-pic" name="channel-img" class="form-control1" />
+								<div class= "input-group-append">
 								<label for="Profile-pic" id=icon>
 									<i class="fa fa-camera" aria-hidden="true"></i>
 								</label>
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="input4">자기소개</label>
