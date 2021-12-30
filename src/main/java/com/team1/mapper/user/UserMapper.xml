@@ -10,9 +10,9 @@
 	</insert>
 
 	<select id="select" resultType="com.team1.domain.user.UserVO">
-	SELECT id, pw, email, address, signupday, nickname
+	SELECT id, pw, email, location, signupday, nickname
 	FROM tb_user
-	WHERE id = #{id}
+	WHERE nickname = #{nickname}
 	</select>
 	
 	<update id="update">
