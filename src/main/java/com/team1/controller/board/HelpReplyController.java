@@ -31,23 +31,24 @@ public class HelpReplyController {
 	
 	@GetMapping("/board/{boardId}")
 	public List<HelpReplyVO> list(@PathVariable Integer boardId, HttpSession session) {
-		System.out.println("정상적으로 옴");
 		UserVO loggedIn = (UserVO) session.getAttribute("loginUser");
 		List<HelpReplyVO> list = service.list(boardId);
-		System.out.println("loggedIn : "+loggedIn);
 		if(loggedIn != null) {
-			System.out.println("if문으로 들어옴");
 			for (HelpReplyVO reply : list) {
 				String writerId = reply.getNickname();
 				reply.setOwn(loggedIn.getNickname().equals(writerId)); // 로그인한 사람과 댓글 작성자가 같을 때 true
-				System.out.println(reply.getOwn());
 			}
 		}
 		return list;
 	}
 	
 	@PostMapping("/write")
-	public ResponseEntity<String> write(HelpReplyVO reply, @SessionAttribute(value="loggedInMember", required = false) UserVO logged) {
+	public ResponseEntity<String> write(HelpReplyVO reply, @SessionAttribute(value="loginuser", required = false) UserVO logged, HttpSession session) {
+		System.out.println("/write로 잘 넘어옴");
+		logged = (UserVO) session.getAttribute("loginUser");
+		System.out.println("로그인 닉넴 : "+logged.getNickname());
+		System.out.println("replyVO : "+reply);
+		System.out.println("로그인 게시물 닉넴 : "+reply.getNickname());
 		if (logged !=null && logged.getNickname().equals(reply.getNickname())) {
 		service.insert(reply);
 			return ResponseEntity.status(HttpStatus.OK).build();
@@ -58,8 +59,10 @@ public class HelpReplyController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<String>  modify(@PathVariable Integer id, @RequestBody HelpReplyVO  reply, @SessionAttribute(value="loggedInMember", required = false) UserVO logged) {
+	public ResponseEntity<String>  modify(@PathVariable Integer id, @RequestBody HelpReplyVO  reply, @SessionAttribute(value="loginuser", required = false) UserVO logged, HttpSession session) {
 		// 댓글 조회
+		logged = (UserVO) session.getAttribute("loginUser");
+		
 		HelpReplyVO old = service.readById(id);
 		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만 또는 관리자일 때
 		if ((logged !=null && logged.getNickname().equals(old.getNickname()))) { // 관리자 권한 ||logged.getAdminQuali()==1
@@ -74,7 +77,7 @@ public class HelpReplyController {
 		}
 	}
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> remove(@PathVariable Integer id, @SessionAttribute(value="loggedInMember", required = false) UserVO logged) {
+	public ResponseEntity<String> remove(@PathVariable Integer id, @SessionAttribute(value="loginuser", required = false) UserVO logged) {
 				
 		// 댓글 조회
 		HelpReplyVO old = service.readById(id);
