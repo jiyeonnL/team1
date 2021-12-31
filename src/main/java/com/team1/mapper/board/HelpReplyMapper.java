@@ -17,4 +17,6 @@ public interface HelpReplyMapper {
 
 	public Integer listReplyCount(Integer iD);
 
+	public HelpReplyVO readByNick(String nickname);
+
 }

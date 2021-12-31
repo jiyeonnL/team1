@@ -43,13 +43,9 @@ public class HelpReplyController {
 	}
 	
 	@PostMapping("/write")
-	public ResponseEntity<String> write(HelpReplyVO reply, @SessionAttribute(value="loginuser", required = false) UserVO logged, HttpSession session) {
-		System.out.println("/write로 잘 넘어옴");
-		logged = (UserVO) session.getAttribute("loginUser");
-		System.out.println("로그인 닉넴 : "+logged.getNickname());
-		System.out.println("replyVO : "+reply);
-		System.out.println("로그인 게시물 닉넴 : "+reply.getNickname());
-		if (logged !=null && logged.getNickname().equals(reply.getNickname())) {
+	public ResponseEntity<String> write(HelpReplyVO reply, @SessionAttribute(value="loginUser", required = false) UserVO logged, HttpSession session) {
+//		logged = (UserVO) session.getAttribute("loginUser");
+		if (logged !=null && logged.getId().equals(reply.getUid())) {
 		service.insert(reply);
 			return ResponseEntity.status(HttpStatus.OK).build();
 		} 
@@ -77,8 +73,10 @@ public class HelpReplyController {
 		}
 	}
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> remove(@PathVariable Integer id, @SessionAttribute(value="loginuser", required = false) UserVO logged) {
-				
+	public ResponseEntity<String> remove(@PathVariable Integer id, @SessionAttribute(value="loginuser", required = false) UserVO logged, HttpSession session) {
+		System.out.println("/delete로 잘 넘어옴");
+		logged = (UserVO) session.getAttribute("loginUser");
+		System.out.println("로그인 닉넴 : "+logged);
 		// 댓글 조회
 		HelpReplyVO old = service.readById(id);
 		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만 또는 관리자일 때
