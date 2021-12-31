@@ -39,7 +39,7 @@
             <label for="input3">태그</label>
             <select class="form-control" id="input3" name="tag">
             <!--  수정 하고 있는 중  -->
-            	<option value="약국"  <c:if test="${board.tag eq '약국'}">>selected</c:if>>약국</option>
+            	<option value="약국"  <c:if test="${board.tag eq '약국'}">selected</c:if>>약국</option>
             	<option value="전구" <c:if test="${board.tag  eq '전구'}">selected</c:if>>전구</option>
             	<option value="편의점" <c:if test="${board.tag  eq '편의점'}">selected</c:if>>편의점</option>
             	<option value="짐옮기기" <c:if test="${board.tag  eq '짐옯기기'}">selected</c:if>>짐옯기기</option>
