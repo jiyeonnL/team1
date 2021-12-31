@@ -22,15 +22,33 @@ public class UserController {
 	@Setter(onMethod_ = @Autowired)
 	private UserService service;
 	
-	@RequestMapping("/nicknamecheck")
+	@RequestMapping("/nicknamecheckForSignup")
 	@ResponseBody
-	public String nicknamecheck(String nickname) {
+	public String nicknamecheckForSignup(String nickname) {
 		boolean has = service.hasNickName(nickname);
 		
 		if (has) {
 			return "unable";
 		} else {
 			return "able";
+		}
+	}
+	
+	
+	@RequestMapping("/nicknamecheck")
+	@ResponseBody
+	public String nicknamecheck(String nickname, HttpSession session) {
+		boolean has = service.hasNickName(nickname);
+		UserVO vo = (UserVO) session.getAttribute("loginUser");
+		
+		if (has) {
+			if(nickname.equals(vo.getNickname())){
+				return "same"; // session에서 받아온(로그인된) 정보와 같은 닉네임일 경우
+			}else {
+				return "unable"; // 로그인된 아이디를 제외한 닉네임 중복 검출
+			}
+		} else {
+			return "able"; // 사용 가능 닉네임
 		}
 	}
 	
@@ -110,7 +128,7 @@ public class UserController {
 	
 	
 	@GetMapping("/infoModify")
-	public String info(HttpSession session) {
+	public String modify(HttpSession session) {
 
 		UserVO vo = (UserVO) session.getAttribute("loginUser");
 
@@ -123,7 +141,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/infoModify")
-	public String info(UserVO user, HttpSession session, RedirectAttributes rttr) {
+	public String modify(UserVO user, HttpSession session, RedirectAttributes rttr) {
 
 		UserVO vo = (UserVO) session.getAttribute("loginUser");
 

@@ -6,8 +6,10 @@
 <mapper namespace="com.team1.mapper.user.UserMapper">
 	
 	<insert id="insert">
+	
 	INSERT INTO tb_user (id, pw, email, location, nickname, introduce, profileurl)
 	VALUES (#{id}, #{pw}, #{email}, #{location}, #{nickname}, #{introduce}, #{profileurl})
+	
 	</insert>
 
 	<select id="select" resultType="com.team1.domain.user.UserVO">
@@ -18,10 +20,12 @@
 	
 	<update id="update">
 	UPDATE tb_user
-	SET pw = #{pw},
+	SET
+		pw = #{pw},
 		location = #{location},
 		nickname = #{nickname},
-		introduce = #{introduce}
+		introduce = #{introduce},
+		profileurl = #{profileurl}
 	WHERE
 		email = #{email}
 	</update>
