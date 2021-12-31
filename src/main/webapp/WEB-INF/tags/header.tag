@@ -15,18 +15,14 @@
 			<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"></a>
 
 			<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-				<li>
-					<a href="${pageContext.request.contextPath }/all/list" class="nav-link px-2 text-secondary text-white"> Home </a>
-				</li>
-				<li>
-					<a href="/" class="nav-link px-2 text-white"> Features </a>
-				</li>
-				<li>
-					<a href="/" class="nav-link px-2 text-white"> FAQs </a>
-				</li>
-				<li>
-					<a href="/" class="nav-link px-2 text-white"> About </a>
-				</li>
+
+				<li><a href="${pageContext.request.contextPath }/all/list" class="nav-link px-2 text-secondary text-white"> Home
+				</a></li>
+				<li><a href="/" class="nav-link px-2 text-white"> Features
+				</a></li>
+				<li><a href="/" class="nav-link px-2 text-white"> FAQs </a></li>
+				<li><a href="/" class="nav-link px-2 text-white"> About </a></li>
+
 			</ul>
 
 			<div class="text-end dropdown">
@@ -62,6 +58,7 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <script>
+
 	$(document).ready(function(){
 		$("#login").click(function() {
 			location.href="/controller1/user/login"

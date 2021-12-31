@@ -70,7 +70,7 @@
               <button type="button" id= "modify" class="btn btn-lg btn-primary">
             	    정보수정
               </button>
-              <button type="button" class="btn btn-lg btn-danger">
+              <button type="button" id= "remove" class="btn btn-lg btn-danger">
             	    회원탈퇴
               </button>
             </div>
@@ -93,6 +93,10 @@
 <script>
 	$("#modify").click(function() {
 		location.href="/controller1/user/infoModify"
+	});
+	
+	$("#remove").click(function() {
+		location.href="/controller1/user/remove"
 	});
 </script>
 </body>
