@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team1.coverData.Cover;
+import com.team1.domain.board.HelpReplyVO;
 import com.team1.domain.board.HelpVO;
+import com.team1.service.board.HelpReplyService;
 import com.team1.service.board.HelpService;
 
 import lombok.Setter;
@@ -27,6 +29,9 @@ public class HelpController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private HelpService service;
+	
+	@Setter(onMethod_ = @Autowired)
+	private HelpReplyService replyservice;
 	
 	//help 페이지 (검색 쿼리 있는 버전)
 	@GetMapping(value = "/list", params = { "location", "query" })
@@ -63,12 +68,12 @@ public class HelpController {
 	public String post(@PathVariable Integer id, Model model) {
 		
 		//한개의 post를 가져온다.
-		
 		HelpVO helpVO = service.get(id);
+		List<HelpReplyVO> reply = replyservice.list(id);
 		model.addAttribute("post", helpVO);
-		
+		model.addAttribute("reply", reply);
 		if (service.upViews(id)) {
-			System.out.println("조회수 올라감");
+			
 		}
 		
 		//화면 매칭 어떻게?
@@ -85,10 +90,7 @@ public class HelpController {
 	
 	@PostMapping("/modify")
 	public String modify(HelpVO board, RedirectAttributes rttr) {
-		System.out.println("/modify로 잘 옴.");
-		System.out.println(board);
 		if (service.modify(board)) {
-			System.out.println("수정됨");
 			rttr.addFlashAttribute("result", board.getId() + "번 게시글이 수정되었습니다.");
 		}
 		return "redirect:/help/list?location=";

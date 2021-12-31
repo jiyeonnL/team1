@@ -13,7 +13,8 @@
 	r.reply,
 	r.inserted,
 	r.updated,
-	u.nickname
+	u.nickname,
+	u.id uid
 FROM
 	tb_reply_help r
 JOIN
@@ -50,6 +51,12 @@ ORDER BY
 	SELECT id, boardId, nickname, reply, inserted, updated
 	FROM tb_reply_help
 	WHERE id = #{id}
+  </select>
+  
+  <select id="readByNick" resultType="com.team1.domain.board.HelpReplyVO">
+	SELECT id, boardId, nickname, reply, inserted, updated
+	FROM tb_reply_help
+	WHERE nickname = #{nickname}
   </select>
   
   <select id="listReplyCount" resultType="Integer">

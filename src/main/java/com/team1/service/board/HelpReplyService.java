@@ -50,5 +50,9 @@ public class HelpReplyService {
 		return mapper.listReplyCount(ID);
 	}
 
+	public HelpReplyVO readByNick(String nickname) {
+		return mapper.readByNick(nickname);
+	}
+
 	
 }

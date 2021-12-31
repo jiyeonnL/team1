@@ -30,40 +30,39 @@
         url : appRoot + "/helpreply/board/${post.id}",
         success : function(list) {
           	for (let i = 0; i < list.length; i++) {
+				const replyId = list[i].id;
 				const replyMediaObject = $(`
 						<div class="row md mx-4 mt-2">
-							<div class="col-md-1 px-1 py-0 my-0">
-								<img
-								id = "reply-profile"
-								src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"
-								class="img-thumbnail rounded-circle mx-auto d-block "
-								alt="..."
-								/>
-							</div>
+						<div class="col-md-1 px-1 py-0 my-0">
+							<img
+							id = "reply-profile"
+							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"
+							class="img-thumbnail rounded-circle mx-auto d-block "
+							alt="..."
+							/>
+						</div>
 						<div class="col-md-8 my-auto">
 						<div id ="reply-nickname" class="h4"></div>
 							<div>
 								<span id = "reply-time" class="h5 ms-3 mt-0 pt-0"></span>
 							</div>
 						</div>
-						<div class="col-md-1 my-auto">
+						<div class="col-md-1 my-auto reply-menu">
 						</div>
-					</div>
-					<div class="row md mx-4">
-						<div id = "reply-text" class="col-md-10 offset-md-1 my-auto h3 align-middle">
 						</div>
-						<div class="reply-menu">
+						<div class="row md mx-4">
+							<div id = "reply-text\${replyId}" class="col-md-10 offset-md-1 my-auto h3 align-middle reply-menu ">
+							</div>
 						</div>
-					</div>
-					<div class="input-group" style="display:none;">
-					<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
-						<div class="input-group-append">
-							<button class="btn btn-outline-secondary cancel-button"><i class="fas fa-ban"></i></button>
-							<button class="btn btn-outline-secondary" id="sendReply\${list[i].id}">
-								<i class="far fa-comment-dots fa-lg"></i>
-							</button>
-						</div>
-					</div>
+						<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
+						<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary cancel-button"><i class="fas fa-ban"></i></button>
+								<button class="btn btn-outline-secondary" id="sendReply\${list[i].id}">
+									<i class="far fa-comment-dots fa-lg"></i>
+								</button>
+							</div>
+			
 					`);
 				
 				replyMediaObject.find("#sendReply" + list[i].id).click(function() {
@@ -81,13 +80,13 @@
 						}
 					});
 				});
-				console.log(replyMediaObject);
 				replyMediaObject.find(".reply-nickName").append(list[i].nickName);
 				replyMediaObject.find(".reply-body").text(list[i].reply);
 				replyMediaObject.find(".form-control").text(list[i].reply);
 				replyMediaObject.find(".cancel-button").click(function() {
-					replyMediaObject.find(".reply-body").show();
-					replyMediaObject.find(".input-group").hide();
+					console.log(replyId);
+					replyMediaObject.find("#reply-text"+replyId).show();
+					$("#input-group" + replyId).hide();
 					replyMediaObject.find("#replyModify").show();
 					replyMediaObject.find("#replyDelete").show();
 				});
@@ -97,8 +96,8 @@
 					// 본인이 작성한 것만 수정버튼 추가
 					const modifyButton = $("<button id='replyModify' class='btn btn-outline-primary'><i class='fas fa-edit'></i></button>")
 					modifyButton.click(function() {
-						$(this).parent().parent().parent().find('.reply-text').hide();// this는 클릭이벤트가 발생한 버튼
-						$(this).parent().parent().parent().find('.input-group').show();
+						$(this).parent().parent().parent().find('#reply-text' + replyId).hide();// this는 클릭이벤트가 발생한 버튼
+						$(this).parent().parent().parent().find(`#input-group\${list[i].id}`).show();
 						$(this).parent().find('#replyModify').hide();
 						$(this).parent().find('#replyDelete').hide();
 					});
@@ -125,7 +124,7 @@
 				$("#replyListContainer").append(replyMediaObject);
 				
 				replyMediaObject.find("#reply-nickname").text(list[i].nickname);
-				replyMediaObject.find("#reply-text").text(list[i].reply);
+				replyMediaObject.find("#reply-text"+replyId).text(list[i].reply);
 				replyMediaObject.find("#reply-time").text(list[i].inserted);
 			}	
         }
@@ -135,13 +134,14 @@
 	//댓글 전송
 	$("#sendReply").click(function() {
 		const reply =$("#replyTextarea").val();
-		const memberId = '${sessionScope.loggedInMember.id}';
+		const memberId = '${sessionScope.loginUser.id}';
 		const boardId = '${post.id}';
-		console.log(memberId);
+		const nickname = '${sessionScope.loginUser.nickname}';
 		const data = {
 				reply : reply,
-				memberId : memberId,
-				boardId : boardId
+				uid : memberId,
+				boardId : boardId,
+				nickname : nickname
 		};
 		
 		$.ajax({
@@ -303,7 +303,8 @@
 						<hr>
 						<c:if test="${not empty sessionScope.loginUser }">
 							<div class="col-md-10 mx-0">
-								<textarea class="form-control px-0" placeholder="댓글을 남겨보세요!" id="exampleFormControlTextarea1"></textarea>
+								<textarea id="replyTextarea" class="form-control px-0" placeholder="댓글을 남겨보세요!"
+									id="exampleFormControlTextarea1"></textarea>
 							</div>
 							<div class="col-md-2 px-0">
 								<button id="sendReply" class="btn btn-block btn-primary d-flex align-items-stretch">등록</button>
@@ -317,7 +318,6 @@
 				</div>
 			</div>
 			<!-- 태그 -->
-
 		</div>
 	</div>
 </body>
