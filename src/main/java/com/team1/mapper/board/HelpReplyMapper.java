@@ -11,11 +11,13 @@ public interface HelpReplyMapper {
 	
 	public int update(HelpReplyVO reply);
 	
-	public int delete(Integer ID);
+	public int delete(Integer id);
 
-	public HelpReplyVO selectById(Integer ID);
+	public HelpReplyVO selectById(Integer id);
 
-	public Integer listReplyCount(Integer iD);
+	public Integer listReplyCount(Integer id);
+	
+	public int deleteByBoardId(Integer boardId);
 
 	public HelpReplyVO readByNick(String nickname);
 

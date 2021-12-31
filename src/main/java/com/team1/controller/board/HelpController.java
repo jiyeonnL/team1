@@ -90,6 +90,9 @@ public class HelpController {
 	
 	@PostMapping("/modify")
 	public String modify(HelpVO board, RedirectAttributes rttr) {
+
+		System.out.println("/modify로 잘 옴.");
+
 		if (service.modify(board)) {
 			rttr.addFlashAttribute("result", board.getId() + "번 게시글이 수정되었습니다.");
 		}
