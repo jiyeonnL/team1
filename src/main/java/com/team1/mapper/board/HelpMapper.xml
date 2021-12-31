@@ -74,11 +74,5 @@
   	SET views = views +1
   	WHERE id = #{id}
   </update>
-  
-    <update id="upUps">
-  	UPDATE tb_board_help 
-  	SET up = up +1
-  	WHERE id = #{id}
-  </update>
  
 </mapper>

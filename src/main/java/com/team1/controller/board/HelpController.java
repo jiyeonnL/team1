@@ -77,14 +77,13 @@ public class HelpController {
 	}
 
 	
-	@GetMapping({"/modify"})
-	public String get(@RequestParam("id") Integer id, Model model, HttpSession session) {
+	@GetMapping("/modify")
+	public void get(@RequestParam("id") Integer id, Model model, HttpSession session) {
 		HelpVO board = service.get(id);
 		model.addAttribute("board", board);
-		return "/help/modify";
 	}
 	
-	@PostMapping("/list/modify")
+	@PostMapping("/modify")
 	public String modify(HelpVO board, RedirectAttributes rttr) {
 		System.out.println("/modify로 잘 옴.");
 		System.out.println(board);
@@ -92,7 +91,7 @@ public class HelpController {
 			System.out.println("수정됨");
 			rttr.addFlashAttribute("result", board.getId() + "번 게시글이 수정되었습니다.");
 		}
-		return "redirect:/help/list";
+		return "redirect:/help/list?location=";
 	}
 	
 	@GetMapping("/register")
@@ -111,9 +110,10 @@ public class HelpController {
 	}
 	
 	
-	@PostMapping("/list/remove")
+	@PostMapping("/remove")
 	public String remove(@RequestParam("id") Integer id, RedirectAttributes rttr) {
 	
+		System.out.println("/remove로 잘 옴.");
 		if (service.remove(id)) {
 			rttr.addFlashAttribute("result", id + "번 게시글이 삭제되었습니다.");
 		}

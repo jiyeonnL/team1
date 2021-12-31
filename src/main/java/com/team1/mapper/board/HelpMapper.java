@@ -19,7 +19,4 @@ public interface HelpMapper {
 	
 	public int upViews(Integer id);
 	
-	public int upUps(Integer id);
-
-	
 }

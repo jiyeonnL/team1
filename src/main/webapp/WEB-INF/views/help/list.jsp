@@ -152,7 +152,7 @@ a:hover{
 								<i class="fa fa-comments fa-fw fa-2x m-r-3"></i> 15
 							</div>
 							<div class="col-md-2">
-								<div>조회수: ${board.views }</div>
+								<i class="fas fa-eye fa-fw fa-3x m-r-3"></i> ${board.views }
 							</div>
 						</div>
 					</div>
