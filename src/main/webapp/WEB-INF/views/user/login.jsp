@@ -15,7 +15,7 @@
 body {
 	background:
 		url(https://s20211227-dotori-team-project.s3.ap-northeast-2.amazonaws.com/board/background-g24f874160_1920.jpg);
-	background-size: cover;
+background-size: 100vw 100vh;
 }
 #loginText {
 	color: #3e4041;

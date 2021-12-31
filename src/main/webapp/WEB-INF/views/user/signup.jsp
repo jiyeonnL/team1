@@ -19,7 +19,7 @@
 body {
 	background:
 		url(https://s20211227-dotori-team-project.s3.ap-northeast-2.amazonaws.com/board/background-g24f874160_1920.jpg);
-	background-size: cover;
+	background-size: 100vw 100vh;
 }
 
 #body {
@@ -31,14 +31,13 @@ body {
 }
 
 #inner {
-	border: 2px solid yellowgreen;
-	width: 900px;
+	/* width: 900px; */
 	height: auto;
 	align-items: center;
 	background-color: #FFFFFF;
 	border-radius: 15px;
 	background-color: rgba(255, 255, 255, 0.5);
-	margin-top: auto;
+	margin-top: 50px;
 }
 
 .container mt-5{
@@ -103,6 +102,18 @@ width: 320px;
 #input3 {
 	background-color: rgba(255, 255, 255, 0.5);
 }
+.bg-secondary{
+	background-color: #FFFFFF;
+	background-color: rgba(255, 255, 255, 0.5);
+	}
+
+.border-bottom-left-radius {
+   border-bottom-left-radius: 15px;
+}
+
+.border-bottom-right-radius {
+   border-bottom-right-radius: 15px;
+}
 </style>
 </head>
 <body>
@@ -117,8 +128,8 @@ width: 320px;
 			<div class="container mt-5">
 				<!-- 입력 박스  -->
 				<div class="row">
-					<div class="col-md-4 bg-secondary">여기에 로고나 장식용 그림같은거 넣기</div>
-					<div class="col-md-8  border border-5">
+					<div class="col-md-4 border-bottom-left-radius">여기에 로고나 장식용 그림같은거 넣기</div>
+					<div class="col-md-8  border border-5 border-bottom-right-radius">
 						<form method="post">
 							<h3>회원가입 정보</h3>
 							<br>
