@@ -163,5 +163,37 @@ public class UserController {
 
 		return "redirect:/all/list";
 	}
+	@GetMapping("/remove")
+	public String remove(HttpSession session) {
+
+		UserVO vo = (UserVO) session.getAttribute("loginUser");
+
 	
+		if (vo == null) {
+			return "redirect:/user/login";
+		}
+		
+		return null;
+	}
+	
+	@PostMapping("/remove")
+	public String remove(String email, HttpSession session, RedirectAttributes rttr) {
+	
+		UserVO vo = (UserVO) session.getAttribute("loginUser");
+
+		// 로그아웃 상태
+		if (vo == null) {
+			return "redirect:/user/login";
+		}
+		
+		// 로그인된 상태
+		service.remove(email);
+		
+		session.invalidate();
+		
+		rttr.addFlashAttribute("result", "회원 탈퇴하였습니다");
+		
+		return "redirect:/all/list";
+		
+	}
 }

@@ -258,8 +258,7 @@ width: 320px;
 									.click(
 											function() {
 
-												const nicknameValue = $(
-														"#input1").val().trim();
+												const nicknameValue = $("#input1").val().trim();
 												// 닉네임을 안적었을 경우 닉네임 입력하라는 문구 출력
 												if (nicknameValue === "") {
 													$("#nicknameCheckMessage")

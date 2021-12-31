@@ -32,7 +32,7 @@
 	
 	<delete id="delete">
 	DELETE FROM tb_user
-	WHERE id = #{id}
+	WHERE email = #{email}
 	</delete>
 	
 	
