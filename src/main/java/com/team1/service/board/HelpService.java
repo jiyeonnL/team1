@@ -3,9 +3,11 @@ package com.team1.service.board;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.team1.domain.board.HelpVO;
 import com.team1.mapper.board.HelpMapper;
+import com.team1.mapper.board.HelpReplyMapper;
 
 import lombok.Setter;
 
@@ -14,8 +16,8 @@ public class HelpService {
 	@Setter(onMethod_ = @Autowired)
 	private HelpMapper mapper;
 	
-//	@Setter(onMethod_ = @Autowired)
-//	private PReplyMapper preplyMapper;
+	@Setter(onMethod_ = @Autowired)
+	private HelpReplyMapper helpReplyMapper;
 	
 	public List<HelpVO> getList() {
 		return mapper.getList();
@@ -33,7 +35,13 @@ public class HelpService {
 		return mapper.update(board) == 1;
 	}
 	
+	@Transactional
 	public boolean remove(Integer id) {
+		
+		//1. 게시물에 달린 댓글 지우기 
+		helpReplyMapper.deleteByBoardId(id);
+		
+		//2. 게시물 지우기 
 		return mapper.delete(id) == 1;
 	}
 	
