@@ -96,6 +96,20 @@ public class UserController {
 	
 	
 	@GetMapping("/profile")
+	public String profile(HttpSession session) {
+
+		UserVO vo = (UserVO) session.getAttribute("loginUser");
+
+	
+		if (vo == null) {
+			return "redirect:/user/login";
+		}
+		
+		return null;
+	}
+	
+	
+	@GetMapping("/infoModify")
 	public String info(HttpSession session) {
 
 		UserVO vo = (UserVO) session.getAttribute("loginUser");
@@ -108,7 +122,7 @@ public class UserController {
 		return null;
 	}
 	
-	@PostMapping("/profile")
+	@PostMapping("/infoModify")
 	public String info(UserVO user, HttpSession session, RedirectAttributes rttr) {
 
 		UserVO vo = (UserVO) session.getAttribute("loginUser");

@@ -17,7 +17,6 @@ body {
 		url(https://s20211227-dotori-team-project.s3.ap-northeast-2.amazonaws.com/board/background-g24f874160_1920.jpg);
 	background-size: cover;
 }
-
 #loginText {
 	color: #3e4041;
 }
@@ -95,6 +94,7 @@ p {
 					<a href="${pageContext.request.contextPath }/user/signup" id="goSignUp">sign up</a>
 				</form>
 			</div>
+
 		</div>
 	</div>
 

@@ -15,6 +15,7 @@ public class UserService {
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper mapper;
 	
+
 	public UserVO read(String email) {
 		return mapper.select(email);
 	}
@@ -44,3 +45,4 @@ public class UserService {
 	}
 
 }
+	
