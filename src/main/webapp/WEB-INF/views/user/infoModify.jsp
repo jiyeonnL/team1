@@ -63,8 +63,7 @@
 .input-groupIdEmail{
 width:260px;
 }
-#input2-1 , #input3, #input5, #input6, #input4,
-#Profile-pic{
+#input2-1 , #input3, #input5, #input6, #input4, #input7, #Profile-pic{
 width:320px;
 }
 
@@ -100,7 +99,9 @@ width:320px;
 						</div>
 						<small class="form-text" id="nicknameCheckMessage"></small>
 
-
+					<!--  email hidden -->
+					<input type="email" name="email" value="${sessionScope.loginUser.email }">
+					
 					</div>
 					<div class="form-group">
 						<label for="input2">비밀번호</label>
@@ -110,7 +111,7 @@ width:320px;
 					</div>
 
 					<div class="form-group">
-						<label for="input3">비밀번호 확인</label> <br> <input type="password" class="form-control" id="input3" required>
+						<label for="input7">비밀번호 확인</label> <br> <input type="password" class="form-control" id="input7" required>
 					</div>
 
 
@@ -169,7 +170,7 @@ width:320px;
 							
 							
 						
-							// 패스워드 확인, 닉네임과 이메일 중복확인이 완료되었을 때만 수정버튼 활성화
+							// 패스워드 확인과 닉네임 중복확인이 완료되었을 때만 수정버튼 활성화
 							
 							const enableSubmit = function() {
 								if (pwCheck && nicknameAble) {
@@ -223,6 +224,17 @@ width:320px;
 																	
 																	break;
 																	
+																case "same":
+																	// 같을 때
+																	$("#nicknameCheckMessage")
+																			.text("기존 닉네임입니다.")
+																			.removeClass("text-warning text-danger")
+																			.addClass("text-primary");
+
+																	nicknameAble = true;
+																	
+																	break;
+																	
 																default:
 																	break;
 																}
@@ -237,7 +249,7 @@ width:320px;
 							// 패스워드, 패스워드확인 인풋요소 값 일치할 때만 수정버튼 활성화
 							
 							const pwInput = $("#input2");
-							const pwConfirmInput = $("#input3");
+							const pwConfirmInput = $("#input7");
 							
 							const confirmFunction = function() {
 								const pwValue = pwInput.val();
@@ -263,8 +275,19 @@ width:320px;
 							pwInput.keyup(confirmFunction);
 							pwConfirmInput.keyup(confirmFunction);
 						});
-	</script>
-
+			
+		
+		</script>
+		
+		<script type="text/javascript">
+		$(document).ready(function() {
+			var result = "<c:out value= '${result}'/>";
+			if(result != ''){
+				alert(result);
+			}
+		})
+		</script>
+		
 </body>
 </html>
 
