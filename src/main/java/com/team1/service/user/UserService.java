@@ -34,13 +34,13 @@ public class UserService {
 	
 	public boolean hasNickName(String nickname) {
 		UserVO user = mapper.selectByNickName(nickname);
-
+ 
 		return user != null;
 	}
 	
 	public boolean hasEmail(String email) {
 		UserVO user = mapper.select(email);
-
+ 
 		return user != null;
 	}
 

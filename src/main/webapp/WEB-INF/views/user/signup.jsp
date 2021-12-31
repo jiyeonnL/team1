@@ -144,7 +144,7 @@ width: 320px;
 							</div>
 
 							<div class="form-group">
-								<label for="input6">비밀번호 확인</label>
+								<label for="input7">비밀번호 확인</label>
 								<br>
 								<input type="password" class="form-control" id="input7" required>
 							</div>
@@ -201,9 +201,9 @@ width: 320px;
 								<label for="exampleFormControlTextarea1">자기소개</label>
 								<textarea class="form-control" required name="introduce" id="input4" cols="40" rows="5" value="${user.introduce }" placeholder="나만의 개성을 나타낼수 있는 자기소개를 적어보세요!(최대 500글자)"></textarea>
 							</div>
+						<button class="btn btn-outline-dark btn-lg" id="submitButton1">가입</button>
 						</form>
 
-						<button class="btn btn-outline-dark btn-lg" id="submitButton1">가입</button>
 						<br>
 						<div class="form-group">
 							<p class="not-yet" id="alreadyHaveId">
@@ -219,9 +219,8 @@ width: 320px;
 	</div>
 
 	<script>
-		$(document)
-				.ready(
-						function() {
+		$(document).ready(
+			function() {
 
 							// 중복체크, 변수선언
 							const pwInput = $("#input2");
@@ -270,7 +269,7 @@ width: 320px;
 												$
 														.ajax({
 															url : appRoot
-																	+ "/user/nicknamecheck",
+																	+ "/user/nicknamecheckForSignup",
 															data : {
 																nickname : nicknameValue
 															},
@@ -361,8 +360,7 @@ width: 320px;
 																// 1. 사용 가능아이디
 																case "able":
 
-																	$(
-																			"#emailCheckMessage")
+																	$("#emailCheckMessage")
 																			.text(
 																					"사용 가능한 이메일 입니다.")
 																			.removeClass(
@@ -434,5 +432,6 @@ width: 320px;
 			document.getElementById("input6").defaultValue = "http://localhost:8080/userprofile/info";
 		}
 	</script>
+
 </body>
 </html>
