@@ -58,7 +58,7 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <script>
-<<<<<<< Updated upstream
+
 	$(document).ready(function(){
 		$("#login").click(function() {
 			location.href="/controller1/user/login"
@@ -68,16 +68,4 @@
 		});
 	});
 
-=======
-$(document).ready(
-		function() {
-	$("#login").click(function() {
-		location.href="/controller1/user/login"
-	});
-	
-	$("#signup").click(function() {
-		location.href="/controller1/user/signup"
-	});
-});
->>>>>>> Stashed changes
 </script>
