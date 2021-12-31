@@ -12,10 +12,12 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <style>
+/*노랑 배경색 : #ffe164
+  파랑 배경색 : #264d73
+  빨간 포인트색 :#f0615c   */
+
 body {
-	background:
-		url(https://s20211227-dotori-team-project.s3.ap-northeast-2.amazonaws.com/board/background-g24f874160_1920.jpg);
-background-size: 100vw 100vh;
+background-color: #ffe164;
 }
 #loginText {
 	color: #3e4041;
@@ -23,7 +25,7 @@ background-size: 100vw 100vh;
 
 #loginForm {
 	position: absolute;
-	width: 300px;
+	width: 400px;
 	height: 400px;
 	padding: 30px, 20px;
 	background-color: #FFFFFF;
@@ -37,10 +39,12 @@ background-size: 100vw 100vh;
 
 #inputEmail {
 	background-color: rgba(255, 255, 255, 0.5);
+	text-align: center;
 }
 
 #inputPw {
 	background-color: rgba(255, 255, 255, 0.5);
+	text-align: center;
 }
 
 #korean {
@@ -67,6 +71,7 @@ p {
 #goSignUp {
 	position: relative;
 	top: 30px;
+	color:#f0615c;
 }
 </style>
 <title>Login!</title>
@@ -83,6 +88,7 @@ p {
 					<div class="login-group">
 						<br>
 						<label for="input1" id="korean">아이디</label>
+						
 						<input id="inputEmail" type="email" class="form-control" name="email" required placeholder="childhood@naver.com">
 					</div>
 					<div class="login-group pw">
