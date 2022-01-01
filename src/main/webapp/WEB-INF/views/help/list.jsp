@@ -35,14 +35,12 @@
 }
 
 #inner {
-	border: 2px solid yellowgreen;
 	width: 900px;
 	height: 100%;
 }
 
 #postBody {
 	width: 100%;
-	border: 2px solid yellowgreen;
 	border-radius: 10px;
 	margin-top: 5px;
 }
@@ -51,14 +49,12 @@
 	font-size: 1.0rem;
 	text-align: center;
 	justify-content: center;
-	border: 3px solid yellowgreen;
 	border-radius: 5px;
 	width: 80%;
 }
 
 #line {
 	height: 2px;
-	background-color: yellowgreen;
 	width: 100%;
 }
 

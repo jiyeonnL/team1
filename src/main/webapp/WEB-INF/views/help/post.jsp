@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>${post.title} - ${post.nickname}</title>
 
 <!-- 게시물 상세보기 페이지 -->
 
@@ -32,36 +32,56 @@
           	for (let i = 0; i < list.length; i++) {
 				const replyId = list[i].id;
 				const replyMediaObject = $(`
-						<div class="row md mx-4 mt-2">
-						<div class="col-md-1 px-1 py-0 my-0">
-							<img
-							id = "reply-profile"
-							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"
-							class="img-thumbnail rounded-circle mx-auto d-block "
-							alt="..."
-							/>
-						</div>
-						<div class="col-md-8 my-auto">
-						<div id ="reply-nickname" class="h4"></div>
-							<div>
-								<span id = "reply-time" class="h5 ms-3 mt-0 pt-0"></span>
+						
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th id="userprofile">
+											<img	id = "reply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
+									</th>
+									<th>
+										<div id ="reply-nickname" class="h6"></div>
+									</th>
+									<th id="replymenu">
+											<div class="reply-menu"></div>
+									</th>
+									<th id="replytime">
+										<span id = "reply-time" class="h5 ms-3 mt-0 pt-0"></span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="4">
+									<div id = "reply-text\${replyId}" class="col h6">
 							</div>
-						</div>
-						<div class="col-md-1 my-auto reply-menu">
-						</div>
-						</div>
-						<div class="row md mx-4">
-							<div id = "reply-text\${replyId}" class="col-md-10 offset-md-1 my-auto h3 align-middle reply-menu ">
-							</div>
-						</div>
+									</div>
+						
 						<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
 						<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
 							<div class="input-group-append">
-								<button class="btn btn-outline-secondary cancel-button"><i class="fas fa-ban"></i></button>
-								<button class="btn btn-outline-secondary" id="sendReply\${list[i].id}">
+								<button class="btn btn-outline-danger cancel-button"><i class="fas fa-ban"></i></button>
+								<button class="btn btn-outline-primary" id="sendReply\${list[i].id}">
 									<i class="far fa-comment-dots fa-lg"></i>
 								</button>
 							</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						
+						
+						<div class="row md mx-4 mt-2">
+						
+						<div class="col-md-8 my-auto">
+						
+							
+						
+						</div>
+						<div class="row md mx-4">
+							
+						</div>
+						
 			
 					`);
 				
@@ -96,8 +116,8 @@
 					// 본인이 작성한 것만 수정버튼 추가
 					const modifyButton = $("<button id='replyModify' class='btn btn-outline-primary'><i class='fas fa-edit'></i></button>")
 					modifyButton.click(function() {
-						$(this).parent().parent().parent().find('#reply-text' + replyId).hide();// this는 클릭이벤트가 발생한 버튼
-						$(this).parent().parent().parent().find(`#input-group\${list[i].id}`).show();
+						$(this).parent().parent().parent().parent().parent().find('#reply-text' + replyId).hide();// this는 클릭이벤트가 발생한 버튼
+						$(this).parent().parent().parent().parent().parent().find(`#input-group\${list[i].id}`).show();
 						$(this).parent().find('#replyModify').hide();
 						$(this).parent().find('#replyDelete').hide();
 					});
@@ -213,6 +233,11 @@
 	background-color: yellowgreen;
 	width: 100%;
 }
+	
+#userprofile {
+	height: 60px;
+	width: 60px;
+}
 </style>
 </head>
 <body>
@@ -266,25 +291,47 @@
 					</div>
 
 					<!-- footer -->
-					<div class="row md mx-4">
+					<div class="row md mx-4 " >
 						<div class="col-md-2">
 							<i class="fa fa-thumbs-up fa-fw fa-3x m-r-3"></i> ${post.up}
 						</div>
 						
-<!-- 						<div class="col-md-2 replyCount">
-							<i class="fa fa-comments fa-fw fa-3x m-r-3 "></i>
-						</div> -->
-						
 						<div class="col-md-2">
  							<i class="fas fa-eye fa-fw fa-3x m-r-3"></i> ${post.views }
  						</div>
-					
-						<div class="col-md-2 my-auto px-auto">
+					</div>
+					<div class="row md mx-4 d-flex justify-content-between" >
+						<div class="col-md-2 my-auto px-auto ">
 							<c:if test="${sessionScope.loginUser.id eq post.memberId }">
 								<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }" class="btn btn-outline-secondary"> 수정/삭제 </a>
 							</c:if>
 						</div>
+						<div class="col-md-2 my-auto px-auto">
+							<a href="${pageContext.request.contextPath }/help/list?location=" class="btn btn-outline-secondary ">
+								<i class="fas fa-list"> 뒤로</i>
+							</a>
+						</div>
 					</div>
+					
+					<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
+					<c:if test="${empty fileName }">
+					<table class="table table-hover table-bordered">
+						<thead class="thead-dark">
+							<tr>
+								<th>Uploaded Images</th>
+							</tr>
+						</thead>
+						<c:forEach items="${fileNames }" var="fileName">
+							<tbody>
+								<tr>
+									<td>
+										<img class="img-fluid" src="${staticUrl }/${post.id }/${fileName }" alt="${fileName }">
+									</td>
+								</tr>
+							</tbody>
+						</c:forEach>
+					</table>
+					</c:if>
 
 					<!-- footer 와 댓글창 구분 선-->
 					<div class="row md mx-3 my-2">
@@ -307,7 +354,9 @@
 									id="exampleFormControlTextarea1"></textarea>
 							</div>
 							<div class="col-md-2 px-0">
-								<button id="sendReply" class="btn btn-block btn-primary d-flex align-items-stretch">등록</button>
+								<button id="sendReply" class="btn btn-block btn-primary d-flex align-items-stretch">
+									<i class="far fa-comment-dots fa-lg" style="color: white"></i>
+								</button>
 							</div>
 						</c:if>
 
