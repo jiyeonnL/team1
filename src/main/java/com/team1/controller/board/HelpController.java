@@ -1,9 +1,9 @@
 package com.team1.controller.board;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team1.coverData.Cover;
@@ -69,9 +70,11 @@ public class HelpController {
 		
 		//한개의 post를 가져온다.
 		HelpVO helpVO = service.get(id);
+		String[] fileNames = service.getNamesByBoardId(id);
 		List<HelpReplyVO> reply = replyservice.list(id);
 		model.addAttribute("post", helpVO);
 		model.addAttribute("reply", reply);
+		model.addAttribute("fileNames", fileNames);
 		if (service.upViews(id)) {
 			
 		}
@@ -81,37 +84,48 @@ public class HelpController {
 		
 	}
 
-	
 	@GetMapping("/modify")
-	public void get(@RequestParam("id") Integer id, Model model, HttpSession session) {
+	public void get(@RequestParam("id") Integer id, Model model) {
 		HelpVO board = service.get(id);
+		String[] fileNames = service.getNamesByBoardId(id);
+		System.out.println("fileName : "+fileNames);
 		model.addAttribute("board", board);
+		model.addAttribute("fileNames", fileNames);
 	}
 	
 	@PostMapping("/modify")
-	public String modify(HelpVO board, RedirectAttributes rttr) {
-
-		System.out.println("/modify로 잘 옴.");
-
-		if (service.modify(board)) {
-			rttr.addFlashAttribute("result", board.getId() + "번 게시글이 수정되었습니다.");
+	public String modify(HelpVO board, RedirectAttributes rttr, String[] removeFile,  MultipartFile[] files) {
+		System.out.println("removeFile :"+removeFile);
+		System.out.println("files :"+files);
+		try {
+			if (service.modify(board, removeFile, files)) {
+				rttr.addFlashAttribute("result", "No." + board.getId() + " Modify success");
+			}
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+			rttr.addFlashAttribute("result", "No." + board.getId() + " Modify error");
 		}
-		return "redirect:/help/list?location=";
+		return "redirect:/help/list/"+board.getId();
 	}
 	
 	@GetMapping("/register")
 	public void register() {
-		
+
 	}
 	
 	@PostMapping("/register")
-	public String register(HelpVO board, RedirectAttributes rttr, HttpServletRequest req) {
+	public String register(HelpVO board, RedirectAttributes rttr, MultipartFile[] files, HttpServletRequest req) {
+		try {
+			// 3.
+			service.register(board, files);
+			// 4. add attribute
+			rttr.addFlashAttribute("result", "No." + board.getId() + " board registered successfully");
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+			rttr.addFlashAttribute("result", "No." + board.getId() + " board had problem");
+		}
 
-		service.register(board);
-
-		rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
-
-		return "redirect:/help/list?location=";
+		return "redirect:/help/list/"+board.getId();
 	}
 	
 	
