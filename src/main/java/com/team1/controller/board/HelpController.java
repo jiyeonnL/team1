@@ -71,32 +71,27 @@ public class HelpController {
 		//한개의 post를 가져온다.
 		HelpVO helpVO = service.get(id);
 		String[] fileNames = service.getNamesByBoardId(id);
+		System.out.println("/list/id : "+fileNames);
 		List<HelpReplyVO> reply = replyservice.list(id);
 		model.addAttribute("post", helpVO);
 		model.addAttribute("reply", reply);
 		model.addAttribute("fileNames", fileNames);
-		if (service.upViews(id)) {
-			
-		}
+		service.upViews(id);
 		
 		//화면 매칭 어떻게?
 		return "help/post";
-		
 	}
 
 	@GetMapping("/modify")
 	public void get(@RequestParam("id") Integer id, Model model) {
 		HelpVO board = service.get(id);
 		String[] fileNames = service.getNamesByBoardId(id);
-		System.out.println("fileName : "+fileNames);
 		model.addAttribute("board", board);
 		model.addAttribute("fileNames", fileNames);
 	}
 	
 	@PostMapping("/modify")
 	public String modify(HelpVO board, RedirectAttributes rttr, String[] removeFile,  MultipartFile[] files) {
-		System.out.println("removeFile :"+removeFile);
-		System.out.println("files :"+files);
 		try {
 			if (service.modify(board, removeFile, files)) {
 				rttr.addFlashAttribute("result", "No." + board.getId() + " Modify success");

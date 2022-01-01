@@ -81,14 +81,12 @@ public class HelpService {
 	@Transactional
 	public void register(HelpVO board, MultipartFile[] files) throws IllegalStateException, IOException {
 		register(board);
-		System.out.println("register files : "+files);
 		// 2. s3에 파일 업로드
 		for (MultipartFile file : files) {
 			if (file != null && file.getSize() > 0) {
 				// 2.1 파일을 작성, FILE SYSTEM, s3
 				String key = "board/help-board/" + board.getId() + "/" + file.getOriginalFilename();
 				putObject(key, file.getSize(), file.getInputStream());
-
 				// insert into File table, DB
 				fileMapper.insert(board.getId(), file.getOriginalFilename());
 			}
@@ -119,11 +117,10 @@ public class HelpService {
 			if (file != null && file.getSize() > 0) {
 				// 1. write file to filesystem, s3
 				String key = "board/help-board/" + board.getId() + "/" + file.getOriginalFilename();
-
 				putObject(key, file.getSize(), file.getInputStream());
 				// 2. db 파일명 insert
-				fileMapper.insert(board.getId(), file.getOriginalFilename());
 				fileMapper.delete(board.getId(), file.getOriginalFilename());
+				fileMapper.insert(board.getId(), file.getOriginalFilename());
 			}
 		}
 		return false;

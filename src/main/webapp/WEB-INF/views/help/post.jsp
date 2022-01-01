@@ -314,13 +314,13 @@
 					</div>
 					
 					<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
-					<c:if test="${empty fileName }">
 					<table class="table table-hover table-bordered">
 						<thead class="thead-dark">
 							<tr>
 								<th>Uploaded Images</th>
 							</tr>
 						</thead>
+					<c:if test="${not empty fileNames }">
 						<c:forEach items="${fileNames }" var="fileName">
 							<tbody>
 								<tr>
@@ -330,8 +330,8 @@
 								</tr>
 							</tbody>
 						</c:forEach>
-					</table>
 					</c:if>
+					</table>
 
 					<!-- footer 와 댓글창 구분 선-->
 					<div class="row md mx-3 my-2">
