@@ -14,11 +14,12 @@
 <style>
 /*노랑 배경색 : #ffe164
   파랑 배경색 : #264d73
-  빨간 포인트색 :#f0615c   */
-
+  빨간 포인트색 : #f0615c
+  하늘색 배경색 : #eef2f6 */
 body {
-background-color: #ffe164;
+	background-color: #ffe164;
 }
+
 #loginText {
 	color: #3e4041;
 }
@@ -35,16 +36,22 @@ background-color: #ffe164;
 	transform: translate(-50%, -50%);
 	border-radius: 15px;
 	background-color: rgba(255, 255, 255, 0.5);
+	border: 4px solid;
+	border-color: #2f6091;
 }
 
 #inputEmail {
 	background-color: rgba(255, 255, 255, 0.5);
 	text-align: center;
+	border: 3px solid;
+	border-color: #2f6091;
 }
 
 #inputPw {
 	background-color: rgba(255, 255, 255, 0.5);
 	text-align: center;
+	border: 3px solid;
+	border-color: #2f6091;
 }
 
 #korean {
@@ -56,6 +63,8 @@ background-color: #ffe164;
 #loginButton {
 	position: relative;
 	top: 14px;
+	border: 3px solid;
+	border-color: #2f6091;
 }
 
 .pw {
@@ -70,8 +79,8 @@ p {
 
 #goSignUp {
 	position: relative;
-	top: 30px;
-	color:#f0615c;
+	top: 35px;
+	color: #f0615c;
 }
 </style>
 <title>Login!</title>
@@ -90,7 +99,7 @@ p {
 					<div class="login-group">
 						<br>
 						<label for="input1" id="korean">아이디</label>
-						
+
 						<input id="inputEmail" type="email" class="form-control" name="email" required placeholder="childhood@naver.com">
 					</div>
 					<div class="login-group pw">
@@ -99,7 +108,7 @@ p {
 					</div>
 					<button class="btn btn-outline-dark" id="loginButton">로그인</button>
 					<p>만약 계정이 없으시다면,</p>
-					<a href="${pageContext.request.contextPath }/user/signup" id="goSignUp">sign up</a>
+					<a href="${pageContext.request.contextPath }/user/signup" id="goSignUp">회원가입</a>
 				</form>
 			</div>
 

@@ -39,7 +39,6 @@
 }
 
 #inner {
-	border: 2px solid yellowgreen;
 	width: 900px;
 	height: 100%;
 }

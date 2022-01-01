@@ -5,6 +5,12 @@
 
 
 <style>
+#login{
+background-color: #ffe164;
+}
+#signup{
+background-color: #ffe164;
+}
 /*노랑 배경색 : #ffe164
   파랑 배경색 : #264d73
   빨간 포인트색 :#f0615c   */
@@ -28,8 +34,8 @@
 			<div class="text-end dropdown">
 				<!-- 로그인 하지 않은 상태인 경우 로그인, 회원가입 버튼을 띄운다 -->
 				<c:if test="${empty sessionScope.loginUser }">
-					<button type="button" id=login class="btn btn-info btn-outline-light me-2">Login</button>
-					<button type="button" id=signup class="btn btn-warning">Sign-up</button>
+					<button type="button" id=login class="btn btn-outline-dark">Login</button>
+					<button type="button" id=signup class="btn btn-outline-dark">Sign-up</button>
 				</c:if>
 				<!-- 로그인 한 상태인 경우 프로필을 띄운다. -->
 				<c:if test="${not empty sessionScope.loginUser }">
