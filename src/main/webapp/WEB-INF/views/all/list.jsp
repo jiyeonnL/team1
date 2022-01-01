@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>HomePage</title>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -36,10 +36,11 @@
 	width: 100%;
 	justify-content: center;
 	display: flex;
+	background-color: #eef2f6;
+	
 }
 
 #inner {
-	border: 2px solid yellowgreen;
 	width: 900px;
 	height: 100%;
 }

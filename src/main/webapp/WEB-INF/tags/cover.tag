@@ -1,10 +1,12 @@
 <%@ tag language="java" pageEncoding="EUC-KR"%>
 <style>
 
+
 #cover{
     object-fit: cover;
     width: 100%;
     height: 250px;
+    
 }
 </style>
 

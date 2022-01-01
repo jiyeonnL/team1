@@ -3,23 +3,36 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <style>
+#location, #all, #news, #question, #life, #help, #keyword, #icon {
+	border: 3px solid;
+	border-color: #2f6091;
+	border-radius: 4px;
+}
+
+#nav-color {
+	background-color: #ffe164;
+	border-radius: 6px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border: 3px solid;
+	border-color: #2f6091;
+}
+
 #icon {
 	float: right;
-	margin-top: -38px;
+	margin-top: -40px;
 	background-color: #f5f5f5;
 	padding: 7px 15px;
 	height: 38px;
-	border-bottom-right-radius: 4px;
-	border-top-right-radius: 4px;
-	border: 1px solid black;
 	position: relative;
 	z-index: 999;
+	border: 2px solid;
+	border-color: #2f6091;
+	border-radius: 4px;
 }
 </style>
 
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary sticky-top"
-	aria-label="Third navbar example"
->
+<nav class="navbar navbar-expand-sm navbar-dark sticky-top" aria-label="Third navbar example" id="nav-color">
 	<div class="container-fluid">
 		<div class="collapse navbar-collapse" id="navbarsExample03">
 			<ul class="navbar-nav me-auto mb-2 mb-sm-0">
@@ -34,28 +47,25 @@
 
 				<!-- 나중엘 radio 버튼으로 교체 -->
 				<li class="nav-item">
-					<button type="button" id="all" class="btn btn-info ms-1">전체보기</button>
+					<button type="button" id="all" class="btn btn-outline-dark ms-1">전체보기</button>
 				</li>
 				<li class="nav-item">
-					<button type="button" id="news" class="btn btn-info ms-1">동네소식</button>
+					<button type="button" id="news" class="btn btn-outline-dark ms-1">동네소식</button>
 				</li>
 				<li class="nav-item">
-					<button type="button" id="question" class="btn btn-info ms-1">동네질문</button>
+					<button type="button" id="question" class="btn btn-outline-dark ms-1">동네질문</button>
 				</li>
 				<li class="nav-item">
-					<button type="button" id="life" class="btn btn-info ms-1">일상생활</button>
+					<button type="button" id="life" class="btn btn-outline-dark ms-1">일상생활</button>
 				</li>
 				<li class="nav-item">
-					<button type="button" id="help" class="btn btn-info ms-1">해주세요</button>
+					<button type="button" id="help" class="btn btn-outline-dark ms-1">해주세요</button>
 				</li>
 			</ul>
 			<form method="get" onsubmit="return false;">
-				<input class="form-control" type="text" placeholder="Search" id="keyword"
-					aria-label="Search"
-				/>
-				<label id=icon> <i
-					class="fa fa-search" aria-hidden="true"
-				></i>
+				<input class="form-control" type="text" placeholder="Search" id="keyword" aria-label="Search" />
+				<label id=icon>
+					<i class="fa fa-search" aria-hidden="true"></i>
 				</label>
 			</form>
 		</div>

@@ -17,9 +17,7 @@
 
 <style>
 body {
-	background:
-		url(https://s20211227-dotori-team-project.s3.ap-northeast-2.amazonaws.com/board/background-g24f874160_1920.jpg);
-	background-size: 100vw 100vh;
+	background-color: #ffe164;
 }
 
 #body {
@@ -32,33 +30,33 @@ body {
 
 #inner {
 	/* width: 900px; */
+	text-align: center;
 	height: auto;
 	align-items: center;
 	background-color: #FFFFFF;
 	border-radius: 15px;
 	background-color: rgba(255, 255, 255, 0.5);
 	margin-top: 50px;
+	left: 50%;
+	border: 4px solid;
+	border-color: #2f6091;
 }
 
-.container mt-5{
-height:auto;
-
+.container mt-5 {
+	height: auto;
 }
 
-.row{
-border-radius:15px;
- }
+.row {
+	border-radius: 15px;
+}
 
 #icon {
-	float: right;
-	margin-top: -39px;
 	background-color: #f5f5f5;
 	padding: 7px 15px;
 	height: 40px;
 	border-bottom-right-radius: 4px;
 	border-top-right-radius: 4px;
 	border: 1px solid black;
-	position: relative;
 	z-index: 999;
 }
 
@@ -66,53 +64,76 @@ border-radius:15px;
 	margin-top: 6px;
 	margin-right: 2px;
 	margin-left: 2px;
+	border: 3px solid;
+	border-color: #2f6091;
 }
 
 #alreadyHaveId {
 	margin-top: 20px;
 }
 
-.input-groupIdEmail {
-	width: 260px;
+.input-group {
+	width: 320px;
+	margin: 0 auto;
 }
 
-#input1 {
-	background-color: rgba(255, 255, 255, 0.5);
+.input-groupIdEmail {
+	margin: 0 auto;
 }
 
 #input7, #input5, #input6, #input4, #Profile-pic {
 	width: 320px;
 	background-color: rgba(255, 255, 255, 0.5);
+	margin: 0 auto;
+	border: 3px solid;
+	border-color: #2f6091;
 }
 
-#input2-1{
-width: 320px;
+#input1 {
+	background-color: rgba(255, 255, 255, 0.5);
+	border: 3px solid;
+	border-color: #2f6091;
 }
 
 #input2 {
 	display: inline;
 	width: 230px;
 	background-color: rgba(255, 255, 255, 0.5);
+	border: 3px solid;
+	border-color: #2f6091;
 }
 
-.input-group {
+#input2-1 {
 	width: 320px;
 }
 
 #input3 {
 	background-color: rgba(255, 255, 255, 0.5);
+	margin: 0 auto;
+	border: 3px solid;
+	border-color: #2f6091;
 }
-.bg-secondary{
+
+#nicknameCheckButton, #emailCheckButton {
+	border: 3px solid;
+	border-color: #2f6091;
+}
+
+.bg-secondary {
 	background-color: #FFFFFF;
 	background-color: rgba(255, 255, 255, 0.5);
-	}
+}
 
 .border-bottom-left-radius {
-   border-bottom-left-radius: 15px;
+	border-bottom-left-radius: 15px;
 }
 
 .border-bottom-right-radius {
-   border-bottom-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+.place {
+	margin-top: 8px;
 }
 </style>
 </head>
@@ -128,110 +149,110 @@ width: 320px;
 			<div class="container mt-5">
 				<!-- 입력 박스  -->
 				<div class="row">
-					<div class="col-md-4 border-bottom-left-radius">여기에 로고나 장식용 그림같은거 넣기</div>
-					<div class="col-md-8  border border-5 border-bottom-right-radius">
-						<form method="post">
-							<h3>회원가입 정보</h3>
-							<br>
-							<div class="form-group">
-								<label for="input1">아이디 및 별명</label>
-								<%-- <input type="text" class="form-control input2" id="input1" required name="nickname" value="${user.nickname }">
+					<!-- <div class="col-md-4 border-bottom-left-radius">여기에 로고나 장식용 그림같은거 넣기</div> -->
+					<!-- <div class="col-md-8  border border-5 border-bottom-right-radius"> -->
+					<form method="post">
+						<h3>회원가입 정보</h3>
+						<br>
+						<div class="form-group">
+							<label for="input1">아이디 및 별명</label>
+							<%-- <input type="text" class="form-control input2" id="input1" required name="nickname" value="${user.nickname }">
 										<button class="btn btn-secondary" id="nicknameCheckButton" type="button">중복확인</button> --%>
-								<div class="input-group">
-									<input type="text" class="form-control" id="input1" required name="nickname" value="${user.nickname }">
-									<div class="input-group-append">
-										<button class="btn btn-outline-dark" id="nicknameCheckButton" type="button">중복확인</button>
-									</div>
-								</div>
-								<small class="form-text" id="nicknameCheckMessage"></small>
-
-
-							</div>
-							<div class="form-group">
-								<label for="input2">비밀번호</label>
-								<div class="input-group" id="input2-1">
-									<input type="password" class="form-control" id="input2" required name="pw" value="${user.pw }">
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="input7">비밀번호 확인</label>
-								<br>
-								<input type="password" class="form-control" id="input7" required>
-							</div>
-
-							<div class="form-group">
-								<label for="input3">이메일</label>
-								<div class="input-groupIdEmail">
-									<div class="input-group">
-										<input type="email" class="form-control" id="input3" required name="email" value="${user.email }">
-										<div class="input-group-append">
-											<button class="btn btn-outline-dark" id="emailCheckButton" type="button">중복확인</button>
-										</div>
-									</div>
-									<small class="form-text" id="emailCheckMessage"></small>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="input5">지역 선택</label>
-								<br>
-								<select class="form-control" id="input5" required name="location" value="${user.location }">
-									<optgroup label="소식을 전해듣고 싶은 지역을 선택해주세요.">
-										<option>강남구</option>
-										<option>서초구</option>
-										<option>마포구</option>
-									</optgroup>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="input6">Profile url </label>
-								<br>
-								<input type="url" class="form-control" id="input6" required name="profileurl" value="${user.profileurl }">
+							<div class="input-group">
+								<input type="text" class="form-control" id="input1" required name="nickname" value="${user.nickname }">
 								<div class="input-group-append">
-									<button class="btn btn-outline-dark" onclick="myFunction()">기본 프로필로 설정</button>
+									<button class="btn btn-outline-dark" id="nicknameCheckButton" type="button">중복확인</button>
 								</div>
 							</div>
-							<div class="form-group mt-3">
-								<label>프로필 사진</label>
-								<br>
-								<div class="position-relative">
-									<input type="file" id="Profile-pic" name="channel-img" class="form-control" />
-									<label for="Profile-pic" class="position-absolute" id="icon" style="left: 272px;">
-										<i class="fa fa-camera" aria-hidden="true"></i>
-									</label>
-								</div>
+							<small class="form-text" id="nicknameCheckMessage"></small>
 
-								<!-- <div class="input-group">
+						</div>
+						<div class="form-group place">
+							<label for="input2">비밀번호</label>
+							<div class="input-group" id="input2-1">
+								<input type="password" class="form-control" id="input2" required name="pw" value="${user.pw }">
+							</div>
+						</div>
+
+						<div class="form-group place">
+							<label for="input7">비밀번호 확인</label>
+							<br>
+							<input type="password" class="form-control" id="input7" required>
+						</div>
+
+						<div class="form-group place">
+							<label for="input3">이메일</label>
+							<div class="input-groupIdEmail">
+								<div class="input-group">
+									<input type="email" class="form-control" id="input3" required name="email" value="${user.email }">
+									<div class="input-group-append">
+										<button class="btn btn-outline-dark" id="emailCheckButton" type="button">중복확인</button>
+									</div>
+								</div>
+								<small class="form-text" id="emailCheckMessage"></small>
+							</div>
+						</div>
+
+						<div class="form-group place">
+							<label for="input5">지역 선택</label>
+							<br>
+							<select class="form-control" id="input5" required name="location" value="${user.location }">
+								<optgroup label="소식을 전해듣고 싶은 지역을 선택해주세요.">
+									<option>강남구</option>
+									<option>서초구</option>
+									<option>마포구</option>
+								</optgroup>
+							</select>
+						</div>
+						<div class="form-group place">
+							<label for="input6">Profile url </label>
+							<br>
+							<input type="url" class="form-control" id="input6" required name="profileurl" value="${user.profileurl }">
+							<div class="input-group-append">
+								<button class="btn btn-outline-dark" onclick="myFunction()">기본 프로필로 설정</button>
+							</div>
+						</div>
+						<div class="form-group mt-3">
+							<label>프로필 사진</label>
+							<br>
+							<div class="position-relative">
+								<input type="file" id="Profile-pic" name="channel-img" class="form-control" />
+								<!-- <label for="Profile-pic" id="icon" style="left: 10px;"> -->
+								<!-- <i class="fa fa-camera" aria-hidden="true"></i> -->
+								</label>
+							</div>
+
+							<!-- <div class="input-group">
 									<input type="file" id="Profile-pic" name="channel-img" class="form-conrol">
 									<div class="input-group-append"><label for="Profile-pic"><i class="fa fa-camera"></i></label></div>
 								</div> -->
-							</div>
-							<!-- textarea로 바꿔서 여러줄로 나타낼 수 있음 -->
-							<div class="form-group">
-								<label for="exampleFormControlTextarea1">자기소개</label>
-								<textarea class="form-control" required name="introduce" id="input4" cols="40" rows="5" value="${user.introduce }" placeholder="나만의 개성을 나타낼수 있는 자기소개를 적어보세요!(최대 500글자)"></textarea>
-							</div>
-						<button class="btn btn-outline-dark btn-lg" id="submitButton1">가입</button>
-						</form>
-
-						<br>
-						<div class="form-group">
-							<p class="not-yet" id="alreadyHaveId">
-								이미 아이디를 가지고 계신가요?
-								<a href="../user/login">로그인</a>
-							</p>
 						</div>
-						</form>
+						<!-- textarea로 바꿔서 여러줄로 나타낼 수 있음 -->
+						<div class="form-group place">
+							<label for="exampleFormControlTextarea1">자기소개</label>
+							<textarea class="form-control" required name="introduce" id="input4" cols="40" rows="5" value="${user.introduce }" placeholder="나만의 개성을 나타낼수 있는 &#13;&#10;자기소개를 적어보세요! (최대 500글자)"></textarea>
+						</div>
+						<button class="btn btn-outline-dark btn-lg place" id="submitButton1">가입</button>
+					</form>
+
+					<br>
+					<div class="form-group">
+						<p class="not-yet" id="alreadyHaveId">
+							이미 아이디를 가지고 계신가요?
+							<a href="../user/login">로그인</a>
+						</p>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	</div>
 
 	<script>
-		$(document).ready(
-			function() {
+		$(document)
+				.ready(
+						function() {
 
 							// 중복체크, 변수선언
 							const pwInput = $("#input2");
@@ -370,7 +391,8 @@ width: 320px;
 																// 1. 사용 가능아이디
 																case "able":
 
-																	$("#emailCheckMessage")
+																	$(
+																			"#emailCheckMessage")
 																			.text(
 																					"사용 가능한 이메일 입니다.")
 																			.removeClass(
