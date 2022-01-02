@@ -28,10 +28,13 @@
   <select id="getList" resultType="com.team1.domain.board.HelpVO">
   	SELECT
 	p.id, p.memberId, p.location, p.up, p.views, p.tag, 
-	p.title, p.content, p.inserted, p.updated, m.nickname
+	p.title, p.content, p.inserted, p.updated, m.nickname, COUNT(r.id) replyCount
   	FROM tb_board_help p 
   	JOIN tb_user m 
   	ON m.id = p.memberId
+  	LEFT JOIN tb_reply_help r
+  	ON p.id = r.boardId
+  	GROUP BY p.id
   	Order By p.id DESC
   </select>
   
@@ -73,5 +76,10 @@
   	SET views = views +1
   	WHERE id = #{id}
   </update>
- 
+		<select id="getFiles" resultType="com.team1.domain.board.HelpFileVO">
+		SELECT id, boardId, fileName, COUNT(boardId) countBoardId FROM tb_file_help GROUP BY boardId;
+	</select>
+	<select id="getFilesById" resultType="com.team1.domain.board.HelpFileVO">
+		SELECT id, boardId, fileName, COUNT(boardId) countBoardId FROM tb_file_help WHERE boardId=#{id} GROUP BY boardId;
+	</select>
 </mapper>

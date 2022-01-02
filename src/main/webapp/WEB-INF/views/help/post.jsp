@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="b" tagdir="/WEB-INF/tags/"%>
@@ -8,7 +7,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>${post.title} - ${post.nickname}</title>
+<title>${post.title}- ${post.nickname}</title>
 
 <!-- 게시물 상세보기 페이지 -->
 
@@ -69,20 +68,6 @@
 								</tr>
 							</tbody>
 						</table>
-						
-						
-						<div class="row md mx-4 mt-2">
-						
-						<div class="col-md-8 my-auto">
-						
-							
-						
-						</div>
-						<div class="row md mx-4">
-							
-						</div>
-						
-			
 					`);
 				
 				replyMediaObject.find("#sendReply" + list[i].id).click(function() {
@@ -233,7 +218,7 @@
 	background-color: yellowgreen;
 	width: 100%;
 }
-	
+
 #userprofile {
 	height: 60px;
 	width: 60px;
@@ -271,7 +256,7 @@
 					<div class="row md ms-4 my-2 align-middle">
 						<!-- tag -->
 						<div class="col-md-2 my-auto px-auto">
-							<div id="tag">${post.tag}</div>
+							<div id="tag">${post.tag }</div>
 						</div>
 						<!-- 텍스트 -->
 						<div class="col-md-10 h4 my-auto ">${post.content}</div>
@@ -279,7 +264,6 @@
 					<!-- 이미지 파트 -->
 					<div class="row md mx-3 mt-4 mb-2 justify-content-center">
 						<div class="col-md-8 my-auto align-self-center">
-							<img src="http://blog.jinbo.net/attach/615/200937431.jpg" class="img-fluid" alt="..." />
 						</div>
 					</div>
 
@@ -291,16 +275,18 @@
 					</div>
 
 					<!-- footer -->
-					<div class="row md mx-4 " >
+					<div class="row md mx-4 ">
 						<div class="col-md-2">
-							<i class="fa fa-thumbs-up fa-fw fa-3x m-r-3"></i> ${post.up}
+							<i class="fa fa-thumbs-up fa-fw fa-3x m-r-3"></i>
+							${post.up}
 						</div>
-						
+
 						<div class="col-md-2">
- 							<i class="fas fa-eye fa-fw fa-3x m-r-3"></i> ${post.views }
- 						</div>
+							<i class="fas fa-eye fa-fw fa-3x m-r-3"></i>
+							${post.views }
+						</div>
 					</div>
-					<div class="row md mx-4 d-flex justify-content-between" >
+					<div class="row md mx-4 d-flex justify-content-between">
 						<div class="col-md-2 my-auto px-auto ">
 							<c:if test="${sessionScope.loginUser.id eq post.memberId }">
 								<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }" class="btn btn-outline-secondary"> 수정/삭제 </a>
@@ -312,26 +298,26 @@
 							</a>
 						</div>
 					</div>
-					
+
 					<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
-					<c:if test="${empty fileName }">
 					<table class="table table-hover table-bordered">
 						<thead class="thead-dark">
 							<tr>
 								<th>Uploaded Images</th>
 							</tr>
 						</thead>
-						<c:forEach items="${fileNames }" var="fileName">
-							<tbody>
-								<tr>
-									<td>
-										<img class="img-fluid" src="${staticUrl }/${post.id }/${fileName }" alt="${fileName }">
-									</td>
-								</tr>
-							</tbody>
-						</c:forEach>
+						<c:if test="${not empty fileNames }">
+							<c:forEach items="${fileNames }" var="fileName">
+								<tbody>
+									<tr>
+										<td>
+											<img class="img-fluid" src="${staticUrl }/${post.id }/${fileName }" alt="${fileName }">
+										</td>
+									</tr>
+								</tbody>
+							</c:forEach>
+						</c:if>
 					</table>
-					</c:if>
 
 					<!-- footer 와 댓글창 구분 선-->
 					<div class="row md mx-3 my-2">
@@ -350,8 +336,7 @@
 						<hr>
 						<c:if test="${not empty sessionScope.loginUser }">
 							<div class="col-md-10 mx-0">
-								<textarea id="replyTextarea" class="form-control px-0" placeholder="댓글을 남겨보세요!"
-									id="exampleFormControlTextarea1"></textarea>
+								<textarea id="replyTextarea" class="form-control px-0" placeholder="댓글을 남겨보세요!" id="exampleFormControlTextarea1"></textarea>
 							</div>
 							<div class="col-md-2 px-0">
 								<button id="sendReply" class="btn btn-block btn-primary d-flex align-items-stretch">
@@ -367,6 +352,28 @@
 				</div>
 			</div>
 			<!-- 태그 -->
+
+			<!-- Result Modal -->
+			<c:if test="${not empty result }">
+				<div class="modal" tabindex="-1" id="modal1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Process Result</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p>${result }</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </body>

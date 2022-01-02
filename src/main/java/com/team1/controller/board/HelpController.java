@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team1.coverData.Cover;
+import com.team1.domain.board.HelpFileVO;
 import com.team1.domain.board.HelpReplyVO;
 import com.team1.domain.board.HelpVO;
 import com.team1.domain.user.UserVO;
@@ -62,8 +63,17 @@ public class HelpController {
 		model.addAttribute("location", location);
 		
 		List<HelpVO> list = service.getList();
-
+		List<HelpFileVO> fileNames = service.getFiles();
 		model.addAttribute("list", list);
+		model.addAttribute("fileNames", fileNames);
+		System.out.println("File Names : "+fileNames);
+	}
+	
+	@GetMapping("/list/thumbs/{id}")
+	public List<HelpFileVO> thumbs(@PathVariable Integer id) {
+		System.out.println("썸네일 작업");
+		List<HelpFileVO> thumbs = service.getFilesById(id);
+		return thumbs;
 	}
 	
 	//게시물 상세 페이지, help/list/id 와 같은 형식으로 게시물의 id를 링크에서 가져온다.
@@ -78,13 +88,11 @@ public class HelpController {
 		model.addAttribute("reply", reply);
 		model.addAttribute("fileNames", fileNames);
 
-		if (service.upViews(id)) {
-			
-		}
+		service.upViews(id);
+
 		
 		//화면 매칭 어떻게?
 		return "help/post";
-		
 	}
 
 	@GetMapping("/modify")
@@ -101,7 +109,6 @@ public class HelpController {
 		
 		HelpVO board = service.get(id);
 		String[] fileNames = service.getNamesByBoardId(id);
-		System.out.println("fileName : "+fileNames);
 		model.addAttribute("board", board);
 		model.addAttribute("fileNames", fileNames);
 
@@ -110,8 +117,6 @@ public class HelpController {
 	
 	@PostMapping("/modify")
 	public String modify(HelpVO board, RedirectAttributes rttr, String[] removeFile,  MultipartFile[] files) {
-		System.out.println("removeFile :"+removeFile);
-		System.out.println("files :"+files);
 		try {
 			if (service.modify(board, removeFile, files)) {
 				rttr.addFlashAttribute("result", "No." + board.getId() + " Modify success");

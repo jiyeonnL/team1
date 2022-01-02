@@ -66,7 +66,9 @@
 				    	</div>
 
 					<button class="btn btn-outline-primary" type="submit">등록</button>
-					<a href="${pageContext.request.contextPath }/help/list?location=" class="btn btn-outline-secondary "><i class="fas fa-list"> 뒤로</i></a>
+					<a href="${pageContext.request.contextPath }/help/list?location=" class="btn btn-outline-secondary ">
+						<i class="fas fa-list"> 뒤로</i>
+					</a>
 				</form>
 
 			</div>
