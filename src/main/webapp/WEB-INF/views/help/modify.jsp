@@ -64,7 +64,7 @@
 										</td>
 										<td>
 											<div class="col">
-												<img class="img-fluid" src="${staticUrl }/${board.id }/${fileName }" alt="${fileName }">
+												<img class="img-fluid" src="${staticUrl }help-board/${board.id }/${fileName }" alt="${fileName }">
 											</div>
 										</td>
 									</tr>

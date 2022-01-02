@@ -69,12 +69,11 @@ public class HelpController {
 		System.out.println("File Names : "+fileNames);
 	}
 	
-	@GetMapping("/list/thumbs/{id}")
-	public List<HelpFileVO> thumbs(@PathVariable Integer id) {
-		System.out.println("썸네일 작업");
-		List<HelpFileVO> thumbs = service.getFilesById(id);
-		return thumbs;
-	}
+	/* 필요없긴 한데 혹시 몰라 일단 남겨둠
+	 * @GetMapping("/list/thumbs/{id}") public List<HelpFileVO> thumbs(@PathVariable
+	 * Integer id) { System.out.println("썸네일 작업"); List<HelpFileVO> thumbs =
+	 * service.getFilesById(id); return thumbs; }
+	 */
 	
 	//게시물 상세 페이지, help/list/id 와 같은 형식으로 게시물의 id를 링크에서 가져온다.
 	@GetMapping(value = "/list/{id}")
