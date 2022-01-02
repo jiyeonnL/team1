@@ -311,7 +311,7 @@
 								<tbody>
 									<tr>
 										<td>
-											<img class="img-fluid" src="${staticUrl }/${post.id }/${fileName }" alt="${fileName }">
+											<img class="img-fluid" src="${staticUrl }help-board/${post.id }/${fileName }" alt="${fileName }">
 										</td>
 									</tr>
 								</tbody>
