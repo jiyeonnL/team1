@@ -77,9 +77,9 @@
   	WHERE id = #{id}
   </update>
 		<select id="getFiles" resultType="com.team1.domain.board.HelpFileVO">
-		SELECT id, boardId, fileName, COUNT(boardId) countBoardId FROM tb_file_help GROUP BY boardId;
+		SELECT id, postId, fileName, COUNT(postId) countpostId FROM tb_file_help GROUP BY postId;
 	</select>
 	<select id="getFilesById" resultType="com.team1.domain.board.HelpFileVO">
-		SELECT id, boardId, fileName, COUNT(boardId) countBoardId FROM tb_file_help WHERE boardId=#{id} GROUP BY boardId;
+		SELECT id, postId, fileName, COUNT(postId) countpostId FROM tb_file_help WHERE postId=#{id} GROUP BY postId;
 	</select>
 </mapper>

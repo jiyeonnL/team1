@@ -5,10 +5,10 @@
 
 <mapper namespace="com.team1.mapper.board.HelpFileMapper">
 	<delete id="deleteByBoardId">
-		DELETE FROM tb_file_help WHERE boardId = #{boardId}
+		DELETE FROM tb_file_help WHERE postId = #{boardId}
 	</delete>
 	<delete id="delete">
-		DELETE FROM tb_file_help WHERE boardId = #{boardId} AND fileName = #{fileName}
+		DELETE FROM tb_file_help WHERE postId = #{boardId} AND fileName = #{fileName}
 	</delete>
 	
 	<insert id="insert">
@@ -16,7 +16,7 @@
 	</insert>
 	
 	<select id="selectNamesByBoardId" resultType="string">
-		SELECT fileName FROM tb_file_help WHERE boardId =#{boardId}
+		SELECT fileName FROM tb_file_help WHERE postId =#{boardId}
 	</select>
 	
 </mapper>
