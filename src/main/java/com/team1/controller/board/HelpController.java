@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import com.team1.coverData.Cover;
 import com.team1.domain.board.HelpFileVO;
 import com.team1.domain.board.HelpReplyVO;
 import com.team1.domain.board.HelpVO;
+import com.team1.domain.user.UserVO;
 import com.team1.service.board.HelpReplyService;
 import com.team1.service.board.HelpService;
 
@@ -85,18 +87,32 @@ public class HelpController {
 		model.addAttribute("post", helpVO);
 		model.addAttribute("reply", reply);
 		model.addAttribute("fileNames", fileNames);
+
 		service.upViews(id);
+
 		
 		//화면 매칭 어떻게?
 		return "help/post";
 	}
 
 	@GetMapping("/modify")
-	public void get(@RequestParam("id") Integer id, Model model) {
+
+	public String get(@RequestParam("id") Integer id, Model model, HttpSession session) {
+		
+		UserVO uvo = (UserVO) session.getAttribute("loginUser");
+		HelpVO hvo = (HelpVO) service.get(id);
+		
+		if(uvo.getId() != hvo.getMemberId()){
+			System.out.println("작성자가 아니면 수정할 수 없습니다.");
+			return "redirect:/all/list";
+		}
+		
 		HelpVO board = service.get(id);
 		String[] fileNames = service.getNamesByBoardId(id);
 		model.addAttribute("board", board);
 		model.addAttribute("fileNames", fileNames);
+
+		return null;
 	}
 	
 	@PostMapping("/modify")

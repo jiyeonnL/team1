@@ -23,9 +23,10 @@
 			<div class="col">
 				<h1>게시물 작성</h1>
 
-				<form method="post" enctype="multipart/form-data">
 
-					<input type="hidden" class="form-control" id="input1" name="memberId" value="${sessionScope.loginUser.id }">
+			<form method="post" enctype="multipart/form-data">
+				
+				<input type="hidden" class="form-control" id="input1" name="memberId" value="${sessionScope.loginUser.id }">
 
 					<div class="form-group">
 						<label for="input2">닉네임</label>
@@ -37,32 +38,32 @@
 						<input type="text" class="form-control" name="location" value="${sessionScope.loginUser.location }" id="input5" readonly>
 					</div>
 
-					<div class="form-group">
-						<label for="input3">제목</label>
-						<input type="text" class="form-control" id="input3" name="title">
-					</div>
-
-					<div class="form-group">
-						<label for="input4">내용</label>
-						<textarea class="form-control" id="input4" name="content"></textarea>
-					</div>
-
-					<div class="form-group">
-						<label for="input6">태그</label>
-						<select class="form-control" id="input6" name="tag">
-							<option value="none" disabled selected>태그 선택</option>
-							<option value="약국">약국</option>
-							<option value="전구">전구</option>
-							<option value="편의점">편의점</option>
-							<option value="짐옮기기">짐옯기기</option>
-							<option value="기타">기타</option>
-						</select>
-					</div>
+          			<div class="form-group">
+            			<label for="input3">제목</label>
+           				<input type="text" class="form-control" id="input3" name="title">
+          			</div>
+          
+         			 <div class="form-group">
+           				 <label for="input4">내용</label>
+          				 <textarea class="form-control" id="input4" name="content"></textarea>
+          			</div>
+          
+  		 		    <div class="form-group">
+           				 <label for="input6">태그</label>
+           				 <select class="form-control" id="input6" name="tag">
+          				  	<option value="기타" selected>태그 선택</option>
+          				  	<option value="사다주세요">사다주세요</option>
+           				 	<option value="맡아주세요">맡아주세요</option>
+           				 	<option value="빌려주세요">빌려주세요</option>
+           				 	<option value="옮겨주세요">옮겨주세요</option>
+           				 	<option value="기타">기타</option>
+          				</select>
+         			  </div>
 
 					<div class="form-group">
 						<label for="input7">Image</label>
 						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" multiple>
-					</div>
+				    	</div>
 
 					<button class="btn btn-outline-primary" type="submit">등록</button>
 					<a href="${pageContext.request.contextPath }/help/list?location=" class="btn btn-outline-secondary ">
