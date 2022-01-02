@@ -103,7 +103,7 @@ a:hover{
 				<div class="container-fluid my-1 border border-3 border-secondary">
 					<div class="row md mx-3 my-2">
 						<div class="col-md-2 my-auto px-auto">
-							<div id="tag">일반</div>
+							<div id="tag">${board.tag}</div>
 						</div>
 						<div class="col-md-6 my-auto h5">
 							<div>
