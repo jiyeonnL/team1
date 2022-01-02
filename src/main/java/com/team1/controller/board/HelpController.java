@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team1.coverData.Cover;
+import com.team1.domain.board.HelpFileVO;
 import com.team1.domain.board.HelpReplyVO;
 import com.team1.domain.board.HelpVO;
 import com.team1.service.board.HelpReplyService;
@@ -60,8 +61,17 @@ public class HelpController {
 		model.addAttribute("location", location);
 		
 		List<HelpVO> list = service.getList();
-
+		List<HelpFileVO> fileNames = service.getFiles();
 		model.addAttribute("list", list);
+		model.addAttribute("fileNames", fileNames);
+		System.out.println("File Names : "+fileNames);
+	}
+	
+	@GetMapping("/list/thumbs/{id}")
+	public List<HelpFileVO> thumbs(@PathVariable Integer id) {
+		System.out.println("썸네일 작업");
+		List<HelpFileVO> thumbs = service.getFilesById(id);
+		return thumbs;
 	}
 	
 	//게시물 상세 페이지, help/list/id 와 같은 형식으로 게시물의 id를 링크에서 가져온다.
@@ -71,7 +81,6 @@ public class HelpController {
 		//한개의 post를 가져온다.
 		HelpVO helpVO = service.get(id);
 		String[] fileNames = service.getNamesByBoardId(id);
-		System.out.println("/list/id : "+fileNames);
 		List<HelpReplyVO> reply = replyservice.list(id);
 		model.addAttribute("post", helpVO);
 		model.addAttribute("reply", reply);

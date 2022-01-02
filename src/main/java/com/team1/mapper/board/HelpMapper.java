@@ -1,6 +1,8 @@
 package com.team1.mapper.board;
 
 import java.util.List;
+
+import com.team1.domain.board.HelpFileVO;
 import com.team1.domain.board.HelpVO;
 
 public interface HelpMapper {
@@ -18,5 +20,9 @@ public interface HelpMapper {
 	public List<HelpVO> getListSearchByContent(String search);
 	
 	public int upViews(Integer id);
+
+	public List<HelpFileVO> getFiles();
+
+	public List<HelpFileVO> getFilesById(Integer id);
 	
 }

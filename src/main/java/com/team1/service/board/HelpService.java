@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.team1.domain.board.HelpFileVO;
 import com.team1.domain.board.HelpVO;
 import com.team1.mapper.board.HelpFileMapper;
 import com.team1.mapper.board.HelpMapper;
@@ -175,6 +176,14 @@ public class HelpService {
 //			, Integer page, Integer numberPerPage, Integer numberPerPagination) { 검색 결과도 페이지 네이션 구현한다면 필요한 변수 (전에 아직 구현 못함)
 //		return mapper.getListSearchByTitle(search, from, numberPerPage, numberPerPagination);
 		return mapper.getListSearchByContent(search);
+	}
+
+	public List<HelpFileVO> getFiles() {
+		return mapper.getFiles();
+	}
+
+	public List<HelpFileVO> getFilesById(Integer id) {
+		return  mapper.getFilesById(id);
 	}
 
 }

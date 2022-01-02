@@ -18,4 +18,5 @@
 	<select id="selectNamesByBoardId" resultType="string">
 		SELECT fileName FROM tb_file_help WHERE boardId =#{boardId}
 	</select>
+	
 </mapper>

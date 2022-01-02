@@ -20,6 +20,8 @@ public class HelpVO {
 	private String nickname;
 	private String userprofile;
 	
+	private Integer replyCount;
+	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 	}
