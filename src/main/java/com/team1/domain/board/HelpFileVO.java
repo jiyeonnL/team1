@@ -5,8 +5,10 @@ import lombok.Data;
 @Data
 public class HelpFileVO {
 	private Integer id;
-	private Integer boardId;
+	private Integer postId;
 	private String fileName;
+	private String url;
+	private Integer isThumbnail;
 	
-	private Integer countBoardId;
+	private Integer countPostId;
 }

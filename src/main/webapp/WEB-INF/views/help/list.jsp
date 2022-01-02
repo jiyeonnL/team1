@@ -115,7 +115,7 @@ a:hover {
 
 								<c:if test="${not empty fileNames }">
 									<c:forEach items="${fileNames }" var="fileName" varStatus="vs">
-										<c:if test="${fileName.boardId eq board.id }">
+										<c:if test="${fileName.postId eq board.id }">
 											<img src="${staticUrl }/${board.id }/${fileName.fileName }" class="d-block w-100" alt="${fileName.fileName }">
 										</c:if>
 									</c:forEach>
