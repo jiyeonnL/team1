@@ -44,5 +44,6 @@
   <filter-mapping>
     <filter-name>CheckLogInFilter</filter-name>
     <url-pattern>/help/register</url-pattern>
+    <url-pattern>/help/modify</url-pattern>
   </filter-mapping>
 </web-app>

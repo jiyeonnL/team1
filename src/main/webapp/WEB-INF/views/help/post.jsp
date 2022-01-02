@@ -271,7 +271,7 @@
 					<div class="row md ms-4 my-2 align-middle">
 						<!-- tag -->
 						<div class="col-md-2 my-auto px-auto">
-							<div id="tag">일반</div>
+							<div id="tag">${post.tag}</div>
 						</div>
 						<!-- 텍스트 -->
 						<div class="col-md-10 h4 my-auto ">${post.content}</div>

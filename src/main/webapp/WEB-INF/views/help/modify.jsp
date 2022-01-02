@@ -22,30 +22,29 @@
 			<div class="col">
 				<h1>게시물 수정</h1>
 
-				<form id="modifyForm" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="id" value="${board.id }">
-
-					<div class="form-group">
-						<label for="input1">제목</label>
-						<input type="text" class="form-control" value="${board.title }" id="input1" name="title">
-					</div>
-
-					<div class="form-group">
-						<label for="input2">내용</label>
-						<textarea class="form-control" id="input2" name="content">${board.content }</textarea>
-					</div>
-
-					<div class="form-group">
-						<label for="input3">태그</label>
-						<select class="form-control" id="input3" name="tag">
-							<!--  수정 하고 있는 중  -->
-							<option value="약국" <c:if test="${board.tag eq '약국'}">selected</c:if>>약국</option>
-							<option value="전구" <c:if test="${board.tag  eq '전구'}">selected</c:if>>전구</option>
-							<option value="편의점" <c:if test="${board.tag  eq '편의점'}">selected</c:if>>편의점</option>
-							<option value="짐옮기기" <c:if test="${board.tag  eq '짐옯기기'}">selected</c:if>>짐옯기기</option>
-							<option value="기타" <c:if test="${board.tag  eq '기타'}">selected</c:if>>기타</option>
-						</select>
-					</div>
+	<form id="modifyForm" method="post" enctype="multipart/form-data">
+		  <input type="hidden" name="id" value="${board.id }">
+        
+          <div class="form-group">
+            <label for="input1">제목</label>
+            <input type="text" class="form-control" value="${board.title }" id="input1" name="title">
+          </div>
+          
+          <div class="form-group">
+            <label for="input2">내용</label>
+            <textarea class="form-control" id="input2" name="content">${board.content }</textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="input3">태그</label>
+            <select class="form-control" id="input3" name="tag">
+            	<option value="사다주세요"  <c:if test="${board.tag eq '사다주세요'}">selected</c:if>>사다주세요</option>
+            	<option value="맡아주세요" <c:if test="${board.tag  eq '맡아주세요'}">selected</c:if>>맡아주세요</option>
+            	<option value="빌려주세요" <c:if test="${board.tag  eq '빌려주세요'}">selected</c:if>>빌려주세요</option>
+            	<option value="옮겨주세요" <c:if test="${board.tag  eq '옮겨주세요'}">selected</c:if>>옮겨주세요</option>
+            	<option value="기타" <c:if test="${board.tag  eq '기타'}">selected</c:if>>기타</option>
+            </select>
+          </div>
 
 						<table class="table table-hover table-bordered">
 							<thead class="thead-dark">
