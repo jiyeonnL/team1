@@ -42,7 +42,7 @@ color:black;
 				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 			</div>
 			<div class="modal-body">
-				<form method="post">
+				<form action="../user/login" method="post">
 					<div class="mb-3">
 						<label class="form-label">Email</label> 
 						<input type="text" class="form-control" id="email" name="email"
@@ -72,4 +72,8 @@ color:black;
 		</div>
 	</div>
 </div>
-
+<script>
+	$("#submit").click(function() {
+		
+	});
+</script>
