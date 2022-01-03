@@ -10,12 +10,15 @@
 <meta charset="EUC-KR">
 <title>회원가입</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <style>
+*{
+	font-family: 'Jua', sans-serif;}
 body {
 	background-color: #ffe164;
 }
@@ -28,6 +31,8 @@ body {
 	display: flex;
 }
 
+label{
+margin-bottom:0;}
 #inner {
 	/* width: 900px; */
 	text-align: center;
@@ -42,12 +47,23 @@ body {
 	border-color: #2f6091;
 }
 
+#nicknameCheckMessage {
+	color: #f0615c
+}
+
 .container mt-5 {
 	height: auto;
 }
 
+.signUpMain {
+	margin-bottom: 8px;
+
+}
+
 .row {
 	border-radius: 15px;
+	margin-left: 30px;
+	margin-right: 30px;
 }
 
 #icon {
@@ -66,6 +82,8 @@ body {
 	margin-left: 2px;
 	border: 3px solid;
 	border-color: #2f6091;
+	color:white;
+	background-color: #2f6091;
 }
 
 #alreadyHaveId {
@@ -81,7 +99,7 @@ body {
 	margin: 0 auto;
 }
 
-#input7, #input5, #input6, #input4, #Profile-pic {
+#input7, #input5, #input6, #input4 {
 	width: 320px;
 	background-color: rgba(255, 255, 255, 0.5);
 	margin: 0 auto;
@@ -117,6 +135,8 @@ body {
 #nicknameCheckButton, #emailCheckButton {
 	border: 3px solid;
 	border-color: #2f6091;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 .bg-secondary {
@@ -135,25 +155,22 @@ body {
 .place {
 	margin-top: 8px;
 }
+.nickNameRed{
+color:#f0615c}
 </style>
 </head>
 <body>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-		
-	</script>
-
 	<b:header></b:header>
 	<div id="body">
 		<div id="inner">
 			<%-- <b:innerNav></b:innerNav> --%>
-			<div class="container mt-5">
+			<div class="container mt-4">
 				<!-- 입력 박스  -->
 				<div class="row">
 					<!-- <div class="col-md-4 border-bottom-left-radius">여기에 로고나 장식용 그림같은거 넣기</div> -->
 					<!-- <div class="col-md-8  border border-5 border-bottom-right-radius"> -->
 					<form method="post">
-						<h3>회원가입 정보</h3>
-						<br>
+						<h3 class="signUpMain">회원가입 정보</h3>
 						<div class="form-group">
 							<label for="input1">아이디 및 별명</label>
 							<%-- <input type="text" class="form-control input2" id="input1" required name="nickname" value="${user.nickname }">
@@ -233,20 +250,17 @@ body {
 							<textarea class="form-control" required name="introduce" id="input4" cols="40" rows="5" value="${user.introduce }" placeholder="나만의 개성을 나타낼수 있는 &#13;&#10;자기소개를 적어보세요! (최대 500글자)"></textarea>
 						</div>
 						<button class="btn btn-outline-dark btn-lg place" id="submitButton1">가입</button>
-					</form>
-
-					<br>
-					<div class="form-group">
-						<p class="not-yet" id="alreadyHaveId">
-							이미 아이디를 가지고 계신가요?
-							<a href="../user/login">로그인</a>
-						</p>
-					</div>
+						<br>
+						<div class="form-group">
+							<p class="not-yet" id="alreadyHaveId">
+								이미 아이디를 가지고 계신가요?
+								<a href="../user/login">로그인</a>
+							</p>
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 
 	<script>
@@ -279,7 +293,8 @@ body {
 									.click(
 											function() {
 
-												const nicknameValue = $("#input1").val().trim();
+												const nicknameValue = $(
+														"#input1").val().trim();
 												// 닉네임을 안적었을 경우 닉네임 입력하라는 문구 출력
 												if (nicknameValue === "") {
 													$("#nicknameCheckMessage")
@@ -288,7 +303,7 @@ body {
 															.removeClass(
 																	"text-primary text-danger")
 															.addClass(
-																	"text-warning");
+																	"nickNameRed");
 													$("#nicknameCheckButton")
 															.removeAttr(
 																	"disabled");
@@ -315,7 +330,7 @@ body {
 																			.text(
 																					"사용 가능한 닉네임 입니다.")
 																			.removeClass(
-																					"text-danger text-warning")
+																					"text-danger nickNameRed")
 																			.addClass(
 																					"text-primary");
 
@@ -336,7 +351,7 @@ body {
 																			.removeClass(
 																					"text-warning text-primary")
 																			.addClass(
-																					"text-danger");
+																					"nickNameRed");
 
 																	nicknameAble = false;
 																	break;
@@ -369,7 +384,7 @@ body {
 															.removeClass(
 																	"text-primary text-danger")
 															.addClass(
-																	"text-warning");
+																	"nickNameRed");
 													$("#emailCheckButton")
 															.removeAttr(
 																	"disabled");
@@ -396,7 +411,7 @@ body {
 																			.text(
 																					"사용 가능한 이메일 입니다.")
 																			.removeClass(
-																					"text-danger text-warning")
+																					"text-danger nickNameRed")
 																			.addClass(
 																					"text-primary");
 
@@ -415,7 +430,7 @@ body {
 																			.text(
 																					"이미 존재하는 이메일 입니다.")
 																			.removeClass(
-																					"text-warning text-primary")
+																					"nickNameRed text-primary")
 																			.addClass(
 																					"text-danger");
 
