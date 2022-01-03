@@ -92,7 +92,7 @@ a:hover {
 						</div>
 						<div class="col-md-6 my-auto h5">
 							<div>
-								<a href="/controller1/help/list/${board.id}"> ${board.title} </a>
+								<a href="/controller1/help/list/${board.id}"><c:out value="${board.title}"/> </a>
 							</div>
 						</div>
 						<div class="col-md-2 offset-md-2 my-auto h5">
@@ -105,7 +105,7 @@ a:hover {
 							</div>
 						</div>
 						<div id="contentBox" class="row md px-0 mx-3 h5">
-							<a href="/controller1/help/list/${board.id}"> ${board.content} </a>
+							<a href="/controller1/help/list/${board.id}"><c:out value="${board.content}"/></a>
 						</div>
 
 						<!-- preview에 올릴 한장의 이미지 -->

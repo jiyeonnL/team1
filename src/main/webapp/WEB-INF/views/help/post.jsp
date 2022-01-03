@@ -242,7 +242,7 @@
 							<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 						</div>
 						<div class="col-md-3 bg-warning my-auto h2 align-middle">${post.nickname}</div>
-						<div class="col-md-2 bg-info my-auto h5 offset-md-6 px-2">${post.inserted}</div>
+						<div class="col-md-2 bg-info my-auto h5 offset-md-6 px-2">${post.inserted}<c:if test="${post.inserted ne post.updated}">(수정됨)</c:if></div>
 					</div>
 
 					<!-- 헤더랑 body 구분 선 -->
@@ -254,12 +254,20 @@
 
 					<!-- body -->
 					<div class="row md ms-4 my-2 align-middle">
+					
 						<!-- tag -->
 						<div class="col-md-2 my-auto px-auto">
 							<div id="tag">${post.tag }</div>
 						</div>
-						<!-- 텍스트 -->
-						<div class="col-md-10 h4 my-auto ">${post.content}</div>
+						<!-- 제목  -->
+						<div class="col-md-10 h4 my-auto "><c:out value="${post.title}"/></div>
+						<div class="row md mx-3 my-2">
+							<div id="line"></div>
+						</div>
+						<!-- 내용  -->
+						<div class="col-md-10 h4 my-auto "><c:out value="${post.content}"/></div>
+						
+					</div>
 					</div>
 					<!-- 이미지 파트 -->
 					<div class="row md mx-3 mt-4 mb-2 justify-content-center">
