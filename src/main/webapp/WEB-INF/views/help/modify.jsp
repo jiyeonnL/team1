@@ -53,18 +53,18 @@
 								<th>이미지</th>
 							</tr>
 						</thead>
-						<c:if test="${not empty fileNames }">
-							<c:forEach items="${fileNames }" var="fileName">
+						<c:if test="${not empty board.fileList }">
+							<c:forEach items="${ board.fileList }" var="file">
 								<tbody>
 									<tr>
 										<td>
 											<div class="col d-flex justify-content-center align-items-center">
-												<input class="check" type="checkbox" name="removeFile" value="${fileName }">
+												<input class="check" type="checkbox" name="removeFile" value="${file.fileName }">
 											</div>
 										</td>
 										<td>
 											<div class="col">
-												<img class="img-fluid" src="${staticUrl }help-board/${board.id }/${fileName }" alt="${fileName }">
+												<img class="img-fluid" src="${file.url}" alt="${file.url }">
 											</div>
 										</td>
 									</tr>

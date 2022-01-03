@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="b" tagdir="/WEB-INF/tags/"%>
@@ -7,18 +8,30 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>${post.title}- ${post.nickname}</title>
+<title>${post.title}-${post.nickname}</title>
 
 <!-- 게시물 상세보기 페이지 -->
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+	integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 <script>
   $(document).ready(function() {
+	  
+
     /* contextPath */
     const appRoot = '${pageContext.request.contextPath}';
 
@@ -184,6 +197,17 @@
 });
 </script>
 <style>
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+a:hover {
+	text-decoration: none;
+	color: inherit;
+}
+
 #body {
 	height: 150vh;
 	/* height: calc(100vh-72px); */
@@ -226,7 +250,10 @@
 </style>
 </head>
 <body>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous">
 		
 	</script>
 
@@ -239,9 +266,15 @@
 					<!-- 헤더 -->
 					<div class="row md ms-4 px-2 align-middle">
 						<div class="col-md-1 px-1 py-0 my-0">
-							<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+							<img
+								src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"
+								class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 						</div>
-						<div class="col-md-3 bg-warning my-auto h2 align-middle">${post.nickname}</div>
+
+						<div class="col-md-3 bg-warning my-auto h2 align-middle">
+							<a href="/controller1/user/profile/${post.nickname}">${post.nickname}
+							</a>
+						</div>
 						<div class="col-md-2 bg-info my-auto h5 offset-md-6 px-2">${post.inserted}</div>
 					</div>
 
@@ -263,8 +296,7 @@
 					</div>
 					<!-- 이미지 파트 -->
 					<div class="row md mx-3 mt-4 mb-2 justify-content-center">
-						<div class="col-md-8 my-auto align-self-center">
-						</div>
+						<div class="col-md-8 my-auto align-self-center"></div>
 					</div>
 
 					<!-- body랑 footer 구분 선 -->
@@ -277,24 +309,25 @@
 					<!-- footer -->
 					<div class="row md mx-4 ">
 						<div class="col-md-2">
-							<i class="fa fa-thumbs-up fa-fw fa-3x m-r-3"></i>
-							${post.up}
+							<i class="fa fa-thumbs-up fa-fw fa-3x m-r-3"></i> ${post.up}
 						</div>
 
 						<div class="col-md-2">
-							<i class="fas fa-eye fa-fw fa-3x m-r-3"></i>
-							${post.views }
+							<i class="fas fa-eye fa-fw fa-3x m-r-3"></i> ${post.views }
 						</div>
 					</div>
 					<div class="row md mx-4 d-flex justify-content-between">
 						<div class="col-md-2 my-auto px-auto ">
 							<c:if test="${sessionScope.loginUser.id eq post.memberId }">
-								<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }" class="btn btn-outline-secondary"> 수정/삭제 </a>
+								<a
+									href="${pageContext.request.contextPath }/help/modify?id=${post.id }"
+									class="btn btn-outline-secondary"> 수정/삭제 </a>
 							</c:if>
 						</div>
 						<div class="col-md-2 my-auto px-auto">
-							<a href="${pageContext.request.contextPath }/help/list?location=" class="btn btn-outline-secondary ">
-								<i class="fas fa-list"> 뒤로</i>
+							<a href="${pageContext.request.contextPath }/help/list?location="
+								class="btn btn-outline-secondary "> <i class="fas fa-list">
+									뒤로</i>
 							</a>
 						</div>
 					</div>
@@ -306,13 +339,12 @@
 								<th>Uploaded Images</th>
 							</tr>
 						</thead>
-						<c:if test="${not empty fileNames }">
-							<c:forEach items="${fileNames }" var="fileName">
+						<c:if test="${not empty post.fileList }">
+							<c:forEach items="${post.fileList }" var="file" varStatus="vs">
 								<tbody>
 									<tr>
-										<td>
-											<img class="img-fluid" src="${staticUrl }help-board/${post.id }/${fileName }" alt="${fileName }">
-										</td>
+										<td><img class="img-fluid" src="${file.url}"
+											alt="${file.url}"></td>
 									</tr>
 								</tbody>
 							</c:forEach>
@@ -336,10 +368,12 @@
 						<hr>
 						<c:if test="${not empty sessionScope.loginUser }">
 							<div class="col-md-10 mx-0">
-								<textarea id="replyTextarea" class="form-control px-0" placeholder="댓글을 남겨보세요!" id="exampleFormControlTextarea1"></textarea>
+								<textarea id="replyTextarea" class="form-control px-0"
+									placeholder="댓글을 남겨보세요!" id="exampleFormControlTextarea1"></textarea>
 							</div>
 							<div class="col-md-2 px-0">
-								<button id="sendReply" class="btn btn-block btn-primary d-flex align-items-stretch">
+								<button id="sendReply"
+									class="btn btn-block btn-primary d-flex align-items-stretch">
 									<i class="far fa-comment-dots fa-lg" style="color: white"></i>
 								</button>
 							</div>
@@ -360,7 +394,8 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title">Process Result</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
@@ -368,7 +403,8 @@
 								<p>${result }</p>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>

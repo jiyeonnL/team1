@@ -108,15 +108,16 @@ a:hover {
 							<a href="/controller1/help/list/${board.id}"> ${board.content} </a>
 						</div>
 
-						<!-- preview에 올릴 한장의 이미지 -->
+						<!-- preview에 올릴 한장의 이미지, 썸네일 한장만 표시한다. -->
 						<div class="row md px-0 mx-0 justify-content-center">
 							<div class="col-md-8 my-auto mx-0 d-flex justify-content-center">
 								<a id="thumbnail" href="/controller1/help/list/${board.id}"> 
-
-								<c:if test="${not empty fileNames }">
-									<c:forEach items="${fileNames }" var="fileName" varStatus="vs">
-										<c:if test="${fileName.postId eq board.id }">
-											<img src="${staticUrl }help-board/${board.id }/${fileName.fileName }" class="d-block w-100" alt="${fileName.fileName }">
+								
+								<!-- postVO가 가진 file List 중 썸네일로 지정된 이미지만 띄운다. -->
+								<c:if test="${not empty board.fileList }">
+									<c:forEach items="${board.fileList }" var="file" varStatus="vs">
+										<c:if test="${file.isThumbnail eq 1 }">
+											<img src="${file.url}" class="d-block w-100" alt="${file.url}">
 										</c:if>
 									</c:forEach>
 								</c:if>

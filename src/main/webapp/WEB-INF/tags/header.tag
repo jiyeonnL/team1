@@ -46,7 +46,7 @@ background-color: #ffe164;
 					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 
 						<li>
-							<a class="dropdown-item" href="../user/profile">Edit Profile</a>
+							<a class="dropdown-item" href="../user/profile/${sessionScope.loginUser.nickname}">Edit Profile</a>
 						</li>
 						<li>
 							<a class="dropdown-item" href="../user/logout">Logout</a>

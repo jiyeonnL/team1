@@ -1,6 +1,5 @@
 package com.team1.controller.board;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,14 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team1.coverData.Cover;
 import com.team1.domain.board.HelpFileVO;
 import com.team1.domain.board.HelpReplyVO;
 import com.team1.domain.board.HelpVO;
-import com.team1.domain.user.UserVO;
 import com.team1.service.board.HelpReplyService;
 import com.team1.service.board.HelpService;
 
@@ -37,6 +34,8 @@ public class HelpController {
 	@Setter(onMethod_ = @Autowired)
 	private HelpReplyService replyservice;
 	
+
+	
 	//help 페이지 (검색 쿼리 있는 버전)
 	@GetMapping(value = "/list", params = { "location", "query" })
 	public void help(@RequestParam(value = "location") String location, @RequestParam(value = "query") String query,
@@ -48,7 +47,6 @@ public class HelpController {
 		model.addAttribute("location", location);
 		
 		List<HelpVO> list = service.getListSearchByContent(query);
-
 		model.addAttribute("list", list);
 		
 	}
@@ -63,17 +61,9 @@ public class HelpController {
 		model.addAttribute("location", location);
 		
 		List<HelpVO> list = service.getList();
-		List<HelpFileVO> fileNames = service.getFiles();
+			
 		model.addAttribute("list", list);
-		model.addAttribute("fileNames", fileNames);
-		System.out.println("File Names : "+fileNames);
 	}
-	
-	/* 필요없긴 한데 혹시 몰라 일단 남겨둠
-	 * @GetMapping("/list/thumbs/{id}") public List<HelpFileVO> thumbs(@PathVariable
-	 * Integer id) { System.out.println("썸네일 작업"); List<HelpFileVO> thumbs =
-	 * service.getFilesById(id); return thumbs; }
-	 */
 	
 	//게시물 상세 페이지, help/list/id 와 같은 형식으로 게시물의 id를 링크에서 가져온다.
 	@GetMapping(value = "/list/{id}")
@@ -81,70 +71,49 @@ public class HelpController {
 		
 		//한개의 post를 가져온다.
 		HelpVO helpVO = service.get(id);
-		String[] fileNames = service.getNamesByBoardId(id);
+		System.out.println(helpVO);
 		List<HelpReplyVO> reply = replyservice.list(id);
 		model.addAttribute("post", helpVO);
 		model.addAttribute("reply", reply);
-		model.addAttribute("fileNames", fileNames);
-
-		service.upViews(id);
-
-		
-		//화면 매칭 어떻게?
-		return "help/post";
-	}
-
-	@GetMapping("/modify")
-
-	public String get(@RequestParam("id") Integer id, Model model, HttpSession session) {
-		
-		UserVO uvo = (UserVO) session.getAttribute("loginUser");
-		HelpVO hvo = (HelpVO) service.get(id);
-		
-		if(uvo.getId() != hvo.getMemberId()){
-			System.out.println("작성자가 아니면 수정할 수 없습니다.");
-			return "redirect:/all/list";
+		if (service.upViews(id)) {
+			
 		}
 		
-		HelpVO board = service.get(id);
-		String[] fileNames = service.getNamesByBoardId(id);
-		model.addAttribute("board", board);
-		model.addAttribute("fileNames", fileNames);
+		return "help/post";
+		
+	}
 
-		return null;
+	
+	@GetMapping("/modify")
+	public void get(@RequestParam("id") Integer id, Model model, HttpSession session) {
+		HelpVO board = service.get(id);
+		model.addAttribute("board", board);
 	}
 	
 	@PostMapping("/modify")
-	public String modify(HelpVO board, RedirectAttributes rttr, String[] removeFile,  MultipartFile[] files) {
-		try {
-			if (service.modify(board, removeFile, files)) {
-				rttr.addFlashAttribute("result", "No." + board.getId() + " Modify success");
-			}
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-			rttr.addFlashAttribute("result", "No." + board.getId() + " Modify error");
+	public String modify(HelpVO board, RedirectAttributes rttr) {
+
+		System.out.println("/modify로 잘 옴.");
+
+		if (service.modify(board)) {
+			rttr.addFlashAttribute("result", board.getId() + "번 게시글이 수정되었습니다.");
 		}
-		return "redirect:/help/list/"+board.getId();
+		return "redirect:/help/list?location=";
 	}
 	
 	@GetMapping("/register")
 	public void register() {
-
+		
 	}
 	
 	@PostMapping("/register")
-	public String register(HelpVO board, RedirectAttributes rttr, MultipartFile[] files, HttpServletRequest req) {
-		try {
-			// 3.
-			service.register(board, files);
-			// 4. add attribute
-			rttr.addFlashAttribute("result", "No." + board.getId() + " board registered successfully");
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-			rttr.addFlashAttribute("result", "No." + board.getId() + " board had problem");
-		}
+	public String register(HelpVO board, RedirectAttributes rttr, HttpServletRequest req) {
 
-		return "redirect:/help/list/"+board.getId();
+		service.register(board);
+
+		rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
+
+		return "redirect:/help/list?location=";
 	}
 	
 	

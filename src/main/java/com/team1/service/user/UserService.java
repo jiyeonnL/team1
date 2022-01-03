@@ -19,6 +19,10 @@ public class UserService {
 	public UserVO read(String email) {
 		return mapper.select(email);
 	}
+	
+	public UserVO readByNickName(String nickname) {
+		return mapper.selectByNickName(nickname);
+	}
 
 	public boolean register(UserVO user) {
 		return mapper.insert(user) == 1;

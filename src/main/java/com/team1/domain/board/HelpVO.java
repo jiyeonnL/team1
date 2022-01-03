@@ -2,6 +2,9 @@ package com.team1.domain.board;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import com.team1.domain.user.UserVO;
 
 import lombok.Data;
 
@@ -20,6 +23,10 @@ public class HelpVO {
 	private String nickname;
 	private String userprofile;
 	
+	//해당 post가 가지고 있는 파일 리스트
+	List<HelpFileVO> fileList;
+
+		
 	private Integer replyCount;
 	
 	public String getInserted() {
