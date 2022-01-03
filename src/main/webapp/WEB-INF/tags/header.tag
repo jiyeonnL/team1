@@ -66,9 +66,19 @@ background-color: #ffe164;
 <script>
 
 	$(document).ready(function(){
+		const main = $(location).attr('href'); 
+		
+		if(main === 'http://localhost:8080/controller1/all/list'){
+			
 		$("#login").click(function() {
 			location.href="/controller1/user/login"
 		});
+		
+		}else{
+			$("#login").click(function() {
+				$('#myModal').modal('show');
+			});
+		};
 		$("#signup").click(function() {
 			location.href="/controller1/user/signup"
 		});
