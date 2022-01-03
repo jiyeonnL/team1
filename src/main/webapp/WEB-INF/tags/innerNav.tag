@@ -7,6 +7,7 @@
 	border: 3px solid;
 	border-color: #2f6091;
 	border-radius: 4px;
+	font-size:large;
 }
 
 #nav-color {
@@ -20,16 +21,18 @@
 
 #icon {
 	float: right;
-	margin-top: -40px;
+	margin-top: -45px;
 	background-color: #f5f5f5;
-	padding: 7px 15px;
-	height: 38px;
+	padding: 10px 12px;
+	height: 45px;
 	position: relative;
 	z-index: 999;
-	border: 2px solid;
 	border-color: #2f6091;
 	border-radius: 4px;
 }
+
+
+
 </style>
 
 <nav class="navbar navbar-expand-sm navbar-dark sticky-top" aria-label="Third navbar example" id="nav-color">

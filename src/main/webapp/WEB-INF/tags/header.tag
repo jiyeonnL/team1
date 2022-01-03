@@ -8,14 +8,19 @@
 *{
 	font-family: 'Jua', sans-serif;
 }
-#login{
+#login, #signup{
 background-color: #ffe164;
-}
-#signup{
-background-color: #ffe164;
+font-size: x-large;
 }
 .me-lg-auto{
 margin-right:auto;}
+
+.header-size{
+font-size: x-large;
+}
+#icon-header{
+color:white;}
+
 /*노랑 배경색 : #ffe164
   파랑 배경색 : #264d73
   빨간 포인트색 :#f0615c   */
@@ -29,14 +34,18 @@ margin-right:auto;}
 		<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 			<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"></a>
 
-			<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+			<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 header-size">
 
-				<li><a href="${pageContext.request.contextPath }/all/list" class="nav-link px-2 text-secondary text-white"> Home
+				<li><a href="${pageContext.request.contextPath }/all/list" class="nav-link px-2 text-secondary text-white"> 
+				<i class="fas fa-home" id="icon-header"></i> Home 
 				</a></li>
-				<li><a href="/" class="nav-link px-2 text-white"> Features
+				<li><a href="/" class="nav-link px-2 text-white"> 
+				<i class="far fa-file-alt" id="icon-header"></i> Features 
 				</a></li>
-				<li><a href="/" class="nav-link px-2 text-white"> FAQs </a></li>
-				<li><a href="/" class="nav-link px-2 text-white"> About </a></li>
+				<li><a href="/" class="nav-link px-2 text-white"> 
+				<i class="fas fa-question-circle" id="icon-header"></i> FAQs </a></li>
+				<li><a href="/" class="nav-link px-2 text-white"> 
+				<i class="fas fa-user-edit" id="icon-header"></i> About </a></li>
 
 			</ul>
 
