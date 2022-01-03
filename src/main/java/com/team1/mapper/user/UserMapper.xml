@@ -13,9 +13,15 @@
 	</insert>
 
 	<select id="select" resultType="com.team1.domain.user.UserVO">
-	SELECT id, pw, email, location, signupday, nickname, introduce
+	SELECT id, pw, email, location, signupday, nickname, introduce, withdrawal
 	FROM tb_user
 	WHERE email = #{email}
+	</select>
+	
+	<select id="readWithdrwal" resultType="com.team1.domain.user.UserVO">
+	SELECT nickname, withdrawal
+	FROM tb_user
+	WHERE nickname = #{nickname}
 	</select>
 	
 	<update id="update">
@@ -30,10 +36,13 @@
 		email = #{email}
 	</update>
 	
-	<delete id="delete">
-	DELETE FROM tb_user
-	WHERE email = #{email}
-	</delete>
+	<update id="updateRemove">
+	UPDATE tb_user
+	SET
+		withdrawal = 'O'
+	WHERE
+		email = #{email}
+	</update>
 	
 	
 	<select id="selectByNickName" resultType="com.team1.domain.user.UserVO">
