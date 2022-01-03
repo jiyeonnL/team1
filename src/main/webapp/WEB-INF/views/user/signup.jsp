@@ -221,29 +221,8 @@ color:#f0615c}
 								</optgroup>
 							</select>
 						</div>
-						<div class="form-group place">
-							<label for="input6">Profile url </label>
-							<br>
-							<input type="url" class="form-control" id="input6" required name="profileurl" value="${user.profileurl }">
-							<div class="input-group-append">
-								<button class="btn btn-outline-dark" onclick="myFunction()">기본 프로필로 설정</button>
-							</div>
-						</div>
-						<div class="form-group mt-3">
-							<label>프로필 사진</label>
-							<br>
-							<div class="position-relative">
-								<input type="file" id="Profile-pic" name="channel-img" class="form-control" />
-								<!-- <label for="Profile-pic" id="icon" style="left: 10px;"> -->
-								<!-- <i class="fa fa-camera" aria-hidden="true"></i> -->
-								</label>
-							</div>
-
-							<!-- <div class="input-group">
-									<input type="file" id="Profile-pic" name="channel-img" class="form-conrol">
-									<div class="input-group-append"><label for="Profile-pic"><i class="fa fa-camera"></i></label></div>
-								</div> -->
-						</div>
+						
+						
 						<!-- textarea로 바꿔서 여러줄로 나타낼 수 있음 -->
 						<div class="form-group place">
 							<label for="exampleFormControlTextarea1">자기소개</label>
@@ -325,10 +304,8 @@ color:#f0615c}
 																// 1. 사용 가능아이디
 																case "able":
 
-																	$(
-																			"#nicknameCheckMessage")
-																			.text(
-																					"사용 가능한 닉네임 입니다.")
+																	$("#nicknameCheckMessage")
+																			.text("사용 가능한 닉네임 입니다.")
 																			.removeClass(
 																					"text-danger nickNameRed")
 																			.addClass(
@@ -476,7 +453,7 @@ color:#f0615c}
 						});
 		//버튼 누를시 임시(기본) URL 전송
 		function myFunction() {
-			document.getElementById("input6").defaultValue = "http://localhost:8080/userprofile/info";
+			document.getElementById("input6").defaultValue = "https://s20211227-dotori-team-project.s3.ap-northeast-2.amazonaws.com/board/user.png";
 		}
 	</script>
 

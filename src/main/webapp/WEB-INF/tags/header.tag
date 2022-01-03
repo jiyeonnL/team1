@@ -86,12 +86,14 @@ color:white;}
 	$(document).ready(function(){
 		const main = $(location).attr('href'); 
 		
-		if(main === 'http://localhost:8080/controller1/all/list'){
+		if(main === 'http://localhost:8080/controller1/all/list'
+				|| main === 'http://localhost:8080/controller1/user/signup' 
+				|| main === 'http://localhost:8080/controller1/user/login'){
 			
-		$("#login").click(function() {
-			location.href="/controller1/user/login"
-		});
-		
+			$("#login").click(function() {
+				location.href="/controller1/user/login"
+			});
+	
 		}else{
 			$("#login").click(function() {
 				$('#myModal').modal('show');
