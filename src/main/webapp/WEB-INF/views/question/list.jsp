@@ -40,7 +40,6 @@
 }
 
 #inner {
-	width: 900px;
 	height: 100%;
 }
 </style>
