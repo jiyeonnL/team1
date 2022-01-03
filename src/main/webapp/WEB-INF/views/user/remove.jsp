@@ -15,73 +15,51 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="user/remove" method="post" id="deleteForm" name="deleteForm">
+	<form method="post" id="removeForm">
                        <input type="hidden" id="email" name="email" value="${sessionScope.loginUser.email }">
     <div class="col-sm-8 col-sm-offset-2">
         <div class="panel panel-default panel-margin-10">
             <div class="panel-body panel-body-content text-center">
                 <p class="lead">${sessionScope.loginUser.nickname }님 탈퇴하려면 비밀번호를 입력해주세요.</p>
+                <!--  email hidden -->
+					<input type="email" name="email" value="${sessionScope.loginUser.email }">
                 <div class="form-group">
                     <input type="password" id = "pw" required name="pw" class="form-control form-control-inline text-center" placeholder="비밀번호" />
                 </div>
-                <div class="form-group">
-                    <input type="password" id="pwcheck"   class="form-control form-control-inline text-center" placeholder="비밀번호 확인" />
-                </div>
+               
                 <button type="button" id="remove" name="remove" class="btn btn-primary">회원탈퇴</button> <a href="../user/profile" class="btn btn-default">취소</a>
             </div>
         </div>
     </div>
     </form>
+    <div>
+		<c:if test="${msg == false}">
+			비밀번호가 맞지 않습니다.
+		</c:if>
+	</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-<script type="text/javascript">
-		$(document).ready(function(){
+<script>
+	$(document).ready(function(){
+	
+
+		$("#remove").click(function(e) {
+			if($("#pw").val()==""){
+				alert("비밀번호를 입력해주세요.");
+				$("#pw").focus();
+				return false;
+			}	
 			
-			const appRoot = '${pageContext.request.contextPath}';
-			
-			$("#remove").on("click", function(){
-				
-				const pwValue = $("#pw").val().trim();
-				const pwcheckValue = $("#pwcheck").val().trim();
-				
-				
-				if(pwValue === ""){
-					alert("비밀번호를 입력해주세요");
-					$("#pw").focus();
-					
-					return false;
-				}
-				
-				if(pwcheckValue === ""){
-					alert("비밀번호 확인을 입력해주세요");
-					$("#pwcheck").focus();
-					
-					return false;
-				}
-				
-				if (pwValue != pwcheckValue) {
-					alert("비밀번호가 일치하지 않습니다.");
-					$("#pw").focus();
-					 
-					return false;
-					}
-				
-				$.ajax({
-					url : appRoot + "/user/remove",
-					
-					data : 
-						email = email,
-					success: function(data){
-						
-							if(confirm("탈퇴하시겠습니까?")){
-								$("#deleteForm").submit();
-							}
-							
-						}
-					});
-				})
-			});
-	</script>
+			if(confirm("정말 탈퇴 하시겠어요?? ㅜㅜ")){
+                removeForm.submit();
+              }
+		});
+	
+	})
+	
+
+             
+</script>
 
 </body>
 </html>

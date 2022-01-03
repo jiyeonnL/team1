@@ -15,6 +15,6 @@ public class UserVO {
 	private LocalDate signupday; 
 	private String profileurl; 
 	private String introduce; 
-
+	private String withdrawal;
 	
 }

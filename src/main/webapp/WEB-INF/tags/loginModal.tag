@@ -42,11 +42,11 @@ color:black;
 				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 			</div>
 			<div class="modal-body">
-				<form method="post">
+				<form action="../user/login" method="post">
 					<div class="mb-3">
-						<label class="form-label">ID</label> 
-						<input type="text" class="form-control" id="nickname" name="id"
-							placeholder="Username" /> <label id="m_label" for="Profile-pic">
+						<label class="form-label">Email</label> 
+						<input type="text" class="form-control" id="email" name="email"
+							placeholder="Email" /> <label id="m_label" for="Profile-pic">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</label>
 					</div>
@@ -59,8 +59,7 @@ color:black;
 					</div>
 					<div class="mb-3 form-check">
 						<input type="checkbox" class="form-check-input" id="rememberMe" />
-						<label class="form-check-label" for="rememberMe">Remember
-							me</label>
+						<label class="form-check-label" for="rememberMe">Remember me</label>
 					</div>
 					<div class="modal-footer d-block">
 						<p class="float-start">
@@ -73,4 +72,8 @@ color:black;
 		</div>
 	</div>
 </div>
-
+<script>
+	$("#submit").click(function() {
+		
+	});
+</script>

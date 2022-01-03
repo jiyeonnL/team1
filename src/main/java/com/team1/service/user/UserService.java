@@ -19,9 +19,9 @@ public class UserService {
 	public UserVO read(String email) {
 		return mapper.select(email);
 	}
-	
-	public UserVO readByNickName(String nickname) {
-		return mapper.selectByNickName(nickname);
+
+	public UserVO readWithdrwal(String nickname) {
+		return mapper.readWithdrwal(nickname);
 	}
 
 	public boolean register(UserVO user) {
@@ -32,10 +32,10 @@ public class UserService {
 		return mapper.update(user) == 1;
 	}
 	
-	public boolean remove(String id) {
-		return mapper.delete(id) == 1;
+	public boolean remove(String email) {
+		return mapper.updateRemove(email) == 1;
 	}
-	
+	 
 	public boolean hasNickName(String nickname) {
 		UserVO user = mapper.selectByNickName(nickname);
  
