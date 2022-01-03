@@ -6,7 +6,7 @@
 
 <style>
 *{
-
+	font-family: 'Jua', sans-serif;
 }
 #login{
 background-color: #ffe164;
@@ -20,6 +20,10 @@ margin-right:auto;}
   파랑 배경색 : #264d73
   빨간 포인트색 :#f0615c   */
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
 <header class="p-3 text-white" style="background-color: #264d73;">
 	<div class="container">
 		<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
