@@ -26,9 +26,15 @@ public class UserController {
 	@ResponseBody
 	public String nicknamecheckForSignup(String nickname) {
 		boolean has = service.hasNickName(nickname);
+		UserVO userWithd = service.readWithdrwal(nickname);
 		
 		if (has) {
-			return "unable";
+			if(userWithd.getWithdrawal().equals("X")) {
+				return "unable";
+				
+			}else {
+				return "able";
+			}
 		} else {
 			return "able";
 		}
@@ -39,13 +45,21 @@ public class UserController {
 	@ResponseBody
 	public String nicknamecheck(String nickname, HttpSession session) {
 		boolean has = service.hasNickName(nickname);
+		UserVO userWithd = service.readWithdrwal(nickname);
+		
 		UserVO vo = (UserVO) session.getAttribute("loginUser");
 		
-		if (has) {
-			if(nickname.equals(vo.getNickname())){
-				return "same"; // session에서 받아온(로그인된) 정보와 같은 닉네임일 경우
+		if (has) { // 검색했는데 있는 아이디임
+			if(userWithd.getWithdrawal().equals("X")) { // 근데 탈퇴한 계정이 아님 (아직 미구현..)
+				
+				if(nickname.equals(vo.getNickname())){
+					return "same"; // session에서 받아온(로그인된) 정보와 같은 닉네임일 경우
+				}else {
+					return "unable"; // 로그인된 아이디를 제외한 닉네임 중복 검출
+				}
+				
 			}else {
-				return "unable"; // 로그인된 아이디를 제외한 닉네임 중복 검출
+				return "able";
 			}
 		} else {
 			return "able"; // 사용 가능 닉네임
@@ -79,6 +93,9 @@ public class UserController {
 		boolean correctPassword = pw.equals(vo.getPw());
 		
 		if(!correctPassword) {
+			return null;
+		}
+		if(vo.getWithdrawal().equals("O")) {
 			return null;
 		}
 		
@@ -177,23 +194,24 @@ public class UserController {
 	}
 	
 	@PostMapping("/remove")
-	public String remove(String email, HttpSession session, RedirectAttributes rttr) {
+	public String remove(String email, String pw, HttpSession session, RedirectAttributes rttr) {
+	
 	
 		UserVO vo = (UserVO) session.getAttribute("loginUser");
-
-		// 로그아웃 상태
+		
 		if (vo == null) {
 			return "redirect:/user/login";
 		}
 		
-		// 로그인된 상태
-		service.remove(email);
+		String sessionPw = vo.getPw();
+				
 		
-		session.invalidate();
-		
-		rttr.addFlashAttribute("result", "회원 탈퇴하였습니다");
-		
-		return "redirect:/all/list";
-		
-	}
+		if(!(sessionPw.equals(pw))) {
+				rttr.addFlashAttribute("msg", false);
+				return "redirect:/user/remove";
+			}
+				service.remove(vo.getEmail());
+				session.invalidate();
+				return "redirect:/user/login";
+			}
 }
