@@ -15,6 +15,6 @@
 		src= "${coverImg}" 
 		alt="aaaa"
 	></img>
-	<div class="h2 ms-5 mt-4 mb-2">${coverHeader}</div>
-	<div class="h5 ms-5 mt-4 pb-2">${coverText}</div>
+	<div class="h2 ml-5 mt-4 mb-2">${coverHeader}</div>
+	<div class="h5 ml-5 mt-4 pb-2">${coverText}</div>
 </div>
