@@ -18,7 +18,6 @@
 <meta charset="EUC-KR">
 <title>회원가입</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -76,10 +75,7 @@ width:320px;
 }
 </style>
 </head>
-<body>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-		
-	</script>
+
 <body>
 	<b:header></b:header>
 	<div class="container">
@@ -89,8 +85,6 @@ width:320px;
 					<h3>회원가입 정보</h3>
 					<div class="form-group">
 						<label for="input1">아이디 및 별명</label>
-						<%-- <input type="text" class="form-control input2" id="input1" required name="nickname" value="${user.nickname }">
-										<button class="btn btn-secondary" id="nicknameCheckButton" type="button">중복확인</button> --%>
 						<div class="input-group">
 							<input type="text" class="form-control" id="input1" required name="nickname" value="${sessionScope.loginUser.nickname }">
 							<div class="input-group-append">
@@ -100,7 +94,7 @@ width:320px;
 						<small class="form-text" id="nicknameCheckMessage"></small>
 
 					<!--  email hidden -->
-					<input type="email" name="email" value="${sessionScope.loginUser.email }">
+					<input type="email" style="display:none" name="email" value="${sessionScope.loginUser.email }">
 					
 					</div>
 					<div class="form-group">
@@ -126,22 +120,8 @@ width:320px;
 					</div>
 					<div class="form-group">
 						<label for="input6">Profile url </label> <br> <input type="url" class="form-control" id="input6" required name="profileurl" value="${sessionScope.loginUser.profileurl }">
-						<div class="input-group-append">
-							<button class="btn btn-outline-primary" onclick="myFunction()">기본 프로필로 설정</button>
-						</div>
 					</div>
-					<div class="form-group mt-3">
-						<label>프로필 사진</label> <br>
-						<div class="position-relative">
-							<input type="file" id="Profile-pic" name="channel-img" class="form-control" /> <label for="Profile-pic" class="position-absolute" id="icon" style="left: 272px;"> <i class="fa fa-camera" aria-hidden="true"></i>
-							</label>
-						</div>
-
-						<!-- <div class="input-group">
-									<input type="file" id="Profile-pic" name="channel-img" class="form-conrol">
-									<div class="input-group-append"><label for="Profile-pic"><i class="fa fa-camera"></i></label></div>
-								</div> -->
-					</div>
+					
 					<!-- textarea로 바꿔서 여러줄로 나타낼 수 있음 -->
 					<div class="form-group">
 						<label for="exampleFormControlTextarea1">자기소개</label>
@@ -279,14 +259,6 @@ width:320px;
 		
 		</script>
 		
-		<script type="text/javascript">
-		$(document).ready(function() {
-			var result = "<c:out value= '${result}'/>";
-			if(result != ''){
-				alert(result);
-			}
-		})
-		</script>
 		
 </body>
 </html>
