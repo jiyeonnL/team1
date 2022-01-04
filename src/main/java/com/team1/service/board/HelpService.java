@@ -98,7 +98,7 @@ public class HelpService {
 		}
 	}
 
-	public String[] getNamesByBoardId(Integer id) {
+	public List<HelpFileVO> getNamesByBoardId(Integer id) {
 		return fileMapper.selectNamesByBoardId(id);
 	}
 
@@ -146,7 +146,7 @@ public class HelpService {
 	public boolean modify(HelpVO board) {
 		return mapper.update(board) == 1;
 	}
-
+	
 	@Transactional
 	public boolean remove(Integer id) {
 
@@ -167,6 +167,8 @@ public class HelpService {
 		// 3. 게시물 지우기
 		return mapper.delete(id) == 1;
 	}
+	
+	
 
 	public boolean upViews(Integer id) {
 		return mapper.upViews(id) == 1;

@@ -15,8 +15,8 @@
 		INSERT INTO tb_file_help (postId, fileName, url, isThumbnail) VALUES (#{boardId}, #{fileName}, 'http://example.com', 0)
 	</insert>
 	
-	<select id="selectNamesByBoardId" resultType="string">
-		SELECT fileName FROM tb_file_help WHERE postId =#{boardId}
+	<select id="selectNamesByBoardId" resultType="com.team1.domain.board.HelpFileVO">
+		SELECT id, postId, fileName, url, isThumbnail FROM tb_file_help WHERE postId =#{boardId}
 	</select>
 	
 </mapper>

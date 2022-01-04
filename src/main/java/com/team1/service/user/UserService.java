@@ -19,6 +19,7 @@ public class UserService {
 	public UserVO read(String email) {
 		return mapper.select(email);
 	}
+
 	public UserVO readWithdrwal(String nickname) {
 		return mapper.readWithdrwal(nickname);
 	}
