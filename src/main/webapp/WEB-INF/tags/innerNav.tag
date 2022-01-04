@@ -48,14 +48,16 @@ a.goTop {
 	<div class="container-fluid">
 		<div class="collapse navbar-collapse" id="navbarsExample03">
 			<ul class="navbar-nav me-auto mb-2 mb-sm-0">
-				<li class="nav-item"><select class="custom-select"
-					id="location" style="height: 100%">
-						<option value=""
-							<c:if test="${location eq '' || empty location}">selected</c:if>>Region</option>
+				<li class="nav-item">
+				<form method="get">
+				<select class="custom-select" id="location" style="height: 100%" name="location" onchange="this.form.submit()">
+						<option value="" <c:if test="${location eq '' || empty location}">selected</c:if>>Region</option>
 						<option <c:if test="${location eq '강남구'}">selected</c:if>>강남구</option>
 						<option <c:if test="${location eq '마포구'}">selected</c:if>>마포구</option>
 						<option <c:if test="${location eq '서초구'}">selected</c:if>>서초구</option>
-				</select></li>
+				</select>
+				</form>
+				</li>
 
 				<!-- 나중엘 radio 버튼으로 교체 -->
 				<li class="nav-item">
