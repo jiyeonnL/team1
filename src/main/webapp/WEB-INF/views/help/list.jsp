@@ -93,18 +93,20 @@ a:hover {
 			<!-- 검색결과 리스트 -->
 			<!-- for 문 돌면서 list에 있는 요소(게시물)들 출력 -->
 			<c:forEach items="${list}" var="board">
+			<c:if test="${location eq board.location || location eq '' || empty location }">
 				<div class="container-fluid my-1 border border-3 border-secondary">
 					<div class="row md mx-3 my-2">
 						<div class="col-md-2 my-auto px-auto">
 							<div id="tag">${board.tag }</div>
 						</div>
-						<div class="col-md-6 my-auto h5">
+						<div class="col-md-5 my-auto h5">
 							<div>
 								<a href="/controller1/help/list/${board.id}" id="title"><c:out
 										value="${board.title}" /> </a>
 							</div>
 						</div>
-						<div class="col-md-2 offset-md-2 my-auto h5">
+						<div class="col-md-3 offset-md-2 my-auto h5">
+							<div>${board.nickname }</div>
 							<div>${board.inserted}</div>
 						</div>
 					</div>
@@ -167,6 +169,7 @@ a:hover {
 						</div>
 					</div>
 				</div>
+				</c:if>
 			</c:forEach>
 		</div>
 	</div>
