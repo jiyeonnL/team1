@@ -155,10 +155,11 @@ public class HelpService {
 
 		// 2. 파일 지우기 , s3
 		// file system에서 삭제
-		String[] files = fileMapper.selectNamesByBoardId(id);
+		// 정성결 - 조금 수정 했어요 혹시 오류나면 좀 봐주세요 ㅠㅠ
+		List<HelpFileVO> files = fileMapper.selectNamesByBoardId(id);
 		if (files != null) {
-			for (String file : files) {
-				String key = "board/help-board/" + id + "/" + file;
+			for (HelpFileVO file : files) {
+				String key = "board/help-board/" + id + "/" + file.getFileName();
 				deleteObject(key);
 			}
 		}

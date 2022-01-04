@@ -31,6 +31,8 @@
 	border-color: #2f6091;
 	border-radius: 4px;
 	margin-bottom: 0px;
+	diplay: felx;
+	align-item: center;
 }
 
 a.goTop {
