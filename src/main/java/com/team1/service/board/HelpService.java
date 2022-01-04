@@ -146,7 +146,7 @@ public class HelpService {
 	public boolean modify(HelpVO board) {
 		return mapper.update(board) == 1;
 	}
-	/*
+	
 	@Transactional
 	public boolean remove(Integer id) {
 
@@ -168,7 +168,7 @@ public class HelpService {
 		return mapper.delete(id) == 1;
 	}
 	
-	*/
+	
 
 	public boolean upViews(Integer id) {
 		return mapper.upViews(id) == 1;

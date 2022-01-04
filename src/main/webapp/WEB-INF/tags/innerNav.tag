@@ -22,14 +22,15 @@
 
 #icon {
 	float: right;
-	margin-top: -45px;
+	margin-top: -41px;
 	background-color: #f5f5f5;
 	padding: 10px 12px;
-	height: 45px;
+	height: 41px;
 	position: relative;
 	z-index: 990;
 	border-color: #2f6091;
 	border-radius: 4px;
+	margin-bottom: 0px;
 }
 
 a.goTop {
@@ -72,7 +73,7 @@ a.goTop {
 				</li>
 			</ul>
 
-			<form method="get" onsubmit="return false;">
+			<form class="ml-auto" method="get" onsubmit="return false;">
 				<input class="form-control" type="text" placeholder="검색어를 입력하세요"
 					id="keyword" aria-label="Search" /> <label id=icon> <i
 					class="fa fa-search" aria-hidden="true"></i>

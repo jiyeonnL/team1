@@ -84,18 +84,18 @@ public class HelpController {
 
 		if(uvo !=null) {
 			HelpVO helpVO = service.get(id, uvo.getId());
-			String[] fileNames = service.getNamesByBoardId(id);
+			//String[] fileNames = service.getNamesByBoardId(id);
 			List<HelpReplyVO> reply = replyservice.list(id);
 			model.addAttribute("post", helpVO);
 			model.addAttribute("reply", reply);
-			model.addAttribute("fileNames", fileNames);
+			//model.addAttribute("fileNames", fileNames);
 		} else {
 			HelpVO helpVO = service.get(id, 0);
-			String[] fileNames = service.getNamesByBoardId(id);
+			//String[] fileNames = service.getNamesByBoardId(id);
 			List<HelpReplyVO> reply = replyservice.list(id);
 			model.addAttribute("post", helpVO);
 			model.addAttribute("reply", reply);
-			model.addAttribute("fileNames", fileNames);
+			//model.addAttribute("fileNames", fileNames);
 		}
 
 		service.upViews(id);
@@ -117,8 +117,10 @@ public class HelpController {
 		}
 		
 		HelpVO board = service.get(id, uvo.getId());
-		String[] fileNames = service.getNamesByBoardId(id);
+		//String[] fileNames = service.getNamesByBoardId(id);
 		model.addAttribute("board", board);
+		
+		return "help/modify";
 	}
 	
 	@PostMapping("/modify")

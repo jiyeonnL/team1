@@ -167,10 +167,11 @@ a:hover {
 						</div>
 					</div>
 				</div>
+			</c:forEach>
 		</div>
-		</c:forEach>
-		<!-- 태그 -->
 	</div>
+	<!-- 태그 -->
+
 
 	<!-- Result Modal -->
 	<c:if test="${not empty result }">
