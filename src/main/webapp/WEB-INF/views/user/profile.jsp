@@ -37,16 +37,24 @@
 }
 
 #inner {
-	border: 2px solid yellowgreen;
 	width: 900px;
 	height: 100%;
 }
 
-#line {
-	height: 2px;
-	background-color: yellowgreen;
-	width: 100%;
+
+#profile-modify{
+background-color:#264d73;
+color:white;
+font-size:large;
+
 }
+#profile-remove{
+background-color:#f0615c;
+color:white;
+font-size:large;
+margin-top:5px;
+}
+
 </style>
 </head>
 <body>
@@ -71,10 +79,10 @@
 					<c:if
 						test="${not empty sessionScope.loginUser && sessionScope.loginUser.id eq user.id}">
 
-						<div class="col-md-2 offset-md-2 mx-auto my-auto ">
-							<button type="button" id="modify" class="btn btn-lg btn-primary">
+						<div class="col-md-3 offset-md-2 mx-auto my-auto ">
+							<button type="button" id="profile-modify" class="btn btn-lg">
 								정보수정</button>
-							<button type="button" id="remove" class="btn btn-lg btn-danger">
+							<button type="button" id="profile-remove" class="btn btn-lg ">
 								회원탈퇴</button>
 						</div>
 
@@ -127,11 +135,11 @@
 		</div>
 	</div>
 	<script>
-		$("#modify").click(function() {
+		$("#profile-modify").click(function() {
 			location.href = "/controller1/user/infoModify"
 		});
 
-		$("#remove").click(function() {
+		$("#profile-remove").click(function() {
 			location.href = "/controller1/user/remove"
 		});
 	</script>

@@ -5,7 +5,9 @@
 
 
 <style>
-
+body{
+background-color:#eef2f6;
+}
 .container{
 font-family: 'Jua', sans-serif;
 }
@@ -50,7 +52,7 @@ font-size:x-large;
 
 			<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 header-size">
 
-				<li><a href="${pageContext.request.contextPath }/all/list" class="nav-link px-2 text-secondary text-white"> 
+				<li><a href="${pageContext.request.contextPath }/all/list" class="nav-link px-2 text-white"> 
 				<i class="fas fa-home" id="icon-header"></i> 홈 
 				</a></li>
 				<li><a href="/" class="nav-link px-2 text-white"> 
