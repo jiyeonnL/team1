@@ -39,6 +39,7 @@ a.goTop {
 	position: fixed;
 	right: 50px;
 	bottom: 30px;
+	
 }
 </style>
 
