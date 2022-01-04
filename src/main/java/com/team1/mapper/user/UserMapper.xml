@@ -58,4 +58,14 @@
 	WHERE withdrawal = 'X'AND email = #{email}
 	GROUP BY email
 	</select>
+	
+	<select id="selectUserBoardHelp" resultType="com.team1.domain.user.UserVO">
+	SELECT u.id, h.memberId, h.tag, h.title, h.inserted 
+	FROM tb_user u JOIN tb_board_help h
+    ON u.id = h.memberId
+    WHERE u.id = #{u.id}
+    ORDER BY h.inserted DESC;
+	</select>
+	
+	
 </mapper>

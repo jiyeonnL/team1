@@ -83,7 +83,8 @@
 				</div>
 				<div class="row md mx-3 mt-4 mb-2">
 					<div class="col-md-12 ">
-						<div class="h3 mt-1">${user.introduce }</div>
+						<div class="h3 mt-1">
+						<pre>${user.introduce }</pre></div>
 					</div>
 				</div>
 				<div class="row md mx-3 mt-4 mb-2 bg-info">
@@ -91,6 +92,37 @@
 						<div id="line"></div>
 					</div>
 				</div>
+		  <!--  <div class="container">
+   					<div class="row">
+      					<div class="col">
+       						<h1>내가 쓴 글 - 해주세요</h1>
+       						<table class="table">
+          					<thead>
+            				<tr>
+              					<th>Tag(태그)</th>
+              					<th>제목</th>
+              					<th>작성 일자</th>
+            				</tr>
+          					</thead>
+          					<tbody>
+            					<c:forEach items="${list }" var="list">
+              					<tr>
+                				<td>
+                  					${list.tag }
+                				</td>
+                				<td>
+                  					${list.title }
+                				</td>
+               					<td>
+                  					${list.inserted }
+                				</td>
+              
+            					</c:forEach>
+          					</tbody>
+        				</table>
+     				 </div>
+    			</div>
+  				</div>-->
 			</div>
 		</div>
 	</div>

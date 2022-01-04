@@ -1,5 +1,8 @@
 package com.team1.mapper.user;
 
+import java.util.List;
+
+import com.team1.domain.board.HelpVO;
 import com.team1.domain.user.UserVO;
 
 public interface UserMapper {
@@ -17,5 +20,6 @@ public interface UserMapper {
 	public UserVO selectByEmail(String email); // email로 검색
 	
 	public UserVO readWithdrwal(String nickname); // id로 회원 탈퇴 여부 확인하기
-
+	
+	public List<HelpVO> selectUserBoardHelp(Integer id);
 }
