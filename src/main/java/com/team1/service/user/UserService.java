@@ -42,7 +42,7 @@ public class UserService {
 	}
 	
 	public boolean hasEmail(String email) {
-		UserVO user = mapper.select(email);
+		UserVO user = mapper.selectByEmail(email);
  
 		return user != null;
 	}

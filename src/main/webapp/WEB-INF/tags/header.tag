@@ -21,6 +21,10 @@ font-size: x-large;
 #icon-header{
 color:white;}
 
+#dropdown{
+z-index:999;
+}
+
 /*노랑 배경색 : #ffe164
   파랑 배경색 : #264d73
   빨간 포인트색 :#f0615c   */
@@ -61,7 +65,7 @@ color:white;}
 						<img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="50" height="50" class="rounded-circle me-3" alt="error" />
 					</span>
 					<span class="align-middle h3 dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> ${sessionScope.loginUser.nickname } </span>
-					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+					<ul id="dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 
 						<li>
 							<a class="dropdown-item" href="../user/profile">Edit Profile</a>
@@ -86,12 +90,14 @@ color:white;}
 	$(document).ready(function(){
 		const main = $(location).attr('href'); 
 		
-		if(main === 'http://localhost:8080/controller1/all/list'){
+		if(main === 'http://localhost:8080/controller1/all/list'
+				|| main === 'http://localhost:8080/controller1/user/signup' 
+				|| main === 'http://localhost:8080/controller1/user/login'){
 			
-		$("#login").click(function() {
-			location.href="/controller1/user/login"
-		});
-		
+			$("#login").click(function() {
+				location.href="/controller1/user/login"
+			});
+	
 		}else{
 			$("#login").click(function() {
 				$('#myModal').modal('show');
