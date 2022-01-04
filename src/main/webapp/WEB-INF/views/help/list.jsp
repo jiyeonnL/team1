@@ -132,7 +132,12 @@ a:hover {
 
 						<div class="row md mx-4">
 							<div class="col-md-2">
+								<c:if test="${board.upposession !=null}">
 								<i class="fa fa-thumbs-up fa-fw fa-3x m-r-3"></i>
+								</c:if>
+								<c:if test="${empty board.upposession }">
+								<i class="far fa-thumbs-up fa-fw fa-3x m-r-3"></i>
+								</c:if>
 								${board.up}
 							</div>
 							<div class="col-md-2">

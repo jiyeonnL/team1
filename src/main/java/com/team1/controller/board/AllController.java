@@ -14,7 +14,7 @@ public class AllController {
 	
 	//태그 식별 없이 모든 게시물을 최신순으로 가져온다.
 	
-	@GetMapping(value = "list")
+	@GetMapping(value = "/list")
 	public void main(Model model) {
 
 		Cover.setCover("all", model);
