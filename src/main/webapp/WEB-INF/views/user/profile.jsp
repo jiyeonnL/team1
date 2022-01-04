@@ -54,8 +54,7 @@
                 <div class="container-fluid my-1">
           <div class="row md mx-3 mt-4 mb-2">
             <div class="col-md-3 my-auto align-self-center ">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"
+              <img src="${sessionScope.loginUser.profileurl }"
                 class="img-thumbnail rounded-circle mx-auto d-block "
                 alt="..."
               />
@@ -90,9 +89,11 @@
         </div>
         </div>
       </div>
+      
 <script>
 	$("#modify").click(function() {
 		location.href="/controller1/user/infoModify"
+		
 	});
 	
 	$("#remove").click(function() {
