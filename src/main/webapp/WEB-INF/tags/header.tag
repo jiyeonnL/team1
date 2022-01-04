@@ -77,10 +77,10 @@ font-size:x-large;
 					<ul id="dropdown" class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton1">
 
 						<li>
-							<a class="dropdown-item" href="../user/profile/${sessionScope.loginUser.nickname}">프로필 수정</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath }/user/profile/${sessionScope.loginUser.nickname}">프로필 수정</a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="../user/logout">로그아웃</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath }/user/logout">로그아웃</a>
 						</li>
 						<li>
 							<a class="dropdown-item" href="#">아직 미정</a>

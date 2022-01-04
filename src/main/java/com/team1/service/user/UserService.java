@@ -1,8 +1,11 @@
 package com.team1.service.user;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team1.domain.board.HelpVO;
 import com.team1.domain.user.UserVO;
 import com.team1.mapper.user.UserMapper;
 
@@ -51,6 +54,9 @@ public class UserService {
  
 		return user != null;
 	}
-
+	
+	public List<HelpVO> UserBoardHelpList(Integer id) {
+		return mapper.selectUserBoardHelp(id);
+	}
 }
 	
