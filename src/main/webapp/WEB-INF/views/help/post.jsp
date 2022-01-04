@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>${post.title}- ${post.nickname}</title>
+<title>${post.title}-${post.nickname}</title>
 
 <!-- 게시물 상세보기 페이지 -->
 
@@ -21,6 +21,89 @@
   $(document).ready(function() {
     /* contextPath */
     const appRoot = '${pageContext.request.contextPath}';
+	
+	const upview = function() {
+		$("#upview").empty();
+		$.ajax({
+			url : appRoot + "/helpup/",
+			success : function() {
+				const upviewMediaObject = $(`
+						<c:if test="${empty sessionScope.loginUser}">
+							<div id="upinsnl" class="col-md-2">
+								<i id="upiconnl" class="far fa-heart "></i> 
+							</div>
+						</c:if>
+						<c:if test="${empty post.upposession&&not empty sessionScope.loginUser}">
+							<div id="upins" class="col-md-2">
+								<i id="upicon" class="far fa-heart "></i> 
+							</div>
+							<div id="updel" class="col-md-2" style="display:none;">
+								<i id="downicon" class="fas fa-heart "></i> 
+							</div>
+						</c:if>
+						<c:if test="${not empty post.upposession}">
+							<div id="upins" class="col-md-2" style="display:none;">
+								<i id="upicon" class="far fa-heart "></i> 
+							</div>
+							<div id="updel" class="col-md-2">
+								<i id="downicon" class="fas fa-heart "></i> 
+							</div>
+						</c:if>
+
+				`);
+				$("#upview").append(upviewMediaObject);
+				upviewMediaObject.find("#upiconnl").html(' ${post.up}');
+				upviewMediaObject.find("#upicon").html(' ${post.up}');
+				upviewMediaObject.find("#downicon").html(' ${post.up}');
+				
+				/* 좋아요 갯수 1 증가*/
+				const upPost = function() {
+					$("#upins").click(function() {
+						console.log("업버튼 클릭됨.");
+						$.ajax({
+			        	url : appRoot + "/helpup/${post.id}",
+						type : "put",
+						success : function(cnt) {
+							console.log("업 +1됨");
+
+							$("#upview").find("#updel").html("<i id='downicon' class='fas fa-heart'></i> "+cnt);
+						},
+						complete : function() {
+							$("#upview").find("#upins").hide();
+							$("#upview").find("#updel").show();
+							console.log("컴플리트까지 옴")
+						}
+						});
+					});
+				}
+				upPost();
+				/* 좋아요 갯수 1 감소*/
+				const downPost = function() {
+					$("#updel").click(function() {
+						console.log("업버튼 다시 클릭됨.");
+						$.ajax({
+			        	url : appRoot + "/helpup/${post.id}",
+						type : "delete",
+						success : function(cnt) {
+								console.log("업 -1됨");
+								$("#upview").find("#upins").html("<i id='upicon' class='far fa-heart'></i> "+cnt);
+						},
+						complete : function() {
+							$("#upview").find("#updel").hide();
+							$("#upview").find("#upins").show();
+							console.log("델리트 컴플리트까지 옴")
+						}
+						});
+					});
+				}
+				downPost();
+			}
+		});
+	}
+	upview();
+
+	
+	
 
     /* 현재 게시물의 댓글 목록 가져오는 함수 */
     const listReply = function() {
@@ -242,7 +325,8 @@
 							<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 						</div>
 						<div class="col-md-3 bg-warning my-auto h2 align-middle">${post.nickname}</div>
-						<div class="col-md-2 bg-info my-auto h5 offset-md-6 px-2">${post.inserted}<c:if test="${post.inserted ne post.updated}">(수정됨)</c:if></div>
+						<div class="col-md-2 bg-info my-auto h5 offset-md-6 px-2">${post.inserted}<c:if test="${post.inserted ne post.updated}">(수정됨)</c:if>
+						</div>
 					</div>
 
 					<!-- 헤더랑 body 구분 선 -->
@@ -254,135 +338,136 @@
 
 					<!-- body -->
 					<div class="row md ms-4 my-2 align-middle">
-					
+
 						<!-- tag -->
 						<div class="col-md-2 my-auto px-auto">
 							<div id="tag">${post.tag }</div>
 						</div>
 						<!-- 제목  -->
-						<div class="col-md-10 h4 my-auto "><c:out value="${post.title}"/></div>
+						<div class="col-md-10 h4 my-auto ">
+							<c:out value="${post.title}" />
+						</div>
 						<div class="row md mx-3 my-2">
 							<div id="line"></div>
 						</div>
 						<!-- 내용  -->
-						<div class="col-md-10 h4 my-auto "><c:out value="${post.content}"/></div>
-						
-					</div>
-					</div>
-					<!-- 이미지 파트 -->
-					<div class="row md mx-3 mt-4 mb-2 justify-content-center">
-						<div class="col-md-8 my-auto align-self-center">
-						</div>
-					</div>
-
-					<!-- body랑 footer 구분 선 -->
-					<div class="row md mx-3 my-2">
-						<div class="col-md-12 ">
-							<div id="line"></div>
-						</div>
-					</div>
-
-					<!-- footer -->
-					<div class="row md mx-4 ">
-						<div class="col-md-2">
-							<i class="fa fa-thumbs-up fa-fw fa-3x m-r-3"></i>
-							${post.up}
+						<div class="col-md-10 h4 my-auto ">
+							<c:out value="${post.content}" />
 						</div>
 
-						<div class="col-md-2">
-							<i class="fas fa-eye fa-fw fa-3x m-r-3"></i>
-							${post.views }
-						</div>
 					</div>
-					<div class="row md mx-4 d-flex justify-content-between">
-						<div class="col-md-2 my-auto px-auto ">
-							<c:if test="${sessionScope.loginUser.id eq post.memberId }">
-								<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }" class="btn btn-outline-secondary"> 수정/삭제 </a>
-							</c:if>
-						</div>
-						<div class="col-md-2 my-auto px-auto">
-							<a href="${pageContext.request.contextPath }/help/list?location=" class="btn btn-outline-secondary ">
-								<i class="fas fa-list"> 뒤로</i>
-							</a>
-						</div>
-					</div>
+				</div>
+				<!-- 이미지 파트 -->
+				<div class="row md mx-3 mt-4 mb-2 justify-content-center">
+					<div class="col-md-8 my-auto align-self-center"></div>
+				</div>
 
-					<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
-					<table class="table table-hover table-bordered">
-						<thead class="thead-dark">
-							<tr>
-								<th>Uploaded Images</th>
-							</tr>
-						</thead>
-						<c:if test="${not empty fileNames }">
-							<c:forEach items="${fileNames }" var="fileName">
-								<tbody>
-									<tr>
-										<td>
-											<img class="img-fluid" src="${staticUrl }help-board/${post.id }/${fileName }" alt="${fileName }">
-										</td>
-									</tr>
-								</tbody>
-							</c:forEach>
+				<!-- body랑 footer 구분 선 -->
+				<div class="row md mx-3 my-2">
+					<div class="col-md-12 ">
+						<div id="line"></div>
+					</div>
+				</div>
+
+				<!-- footer -->
+				<div id="upview" class="row md mx-4 ">
+					<!-- 좋아요 -->
+					
+
+				</div>
+					<div class="col-md-2">
+						<i class="fas fa-eye fa-fw fa-3x m-r-3"></i>
+						${post.views }
+					</div>
+				<div class="row md mx-4 d-flex justify-content-between">
+					<div class="col-md-2 my-auto px-auto ">
+						<c:if test="${sessionScope.loginUser.id eq post.memberId }">
+							<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }" class="btn btn-outline-secondary"> 수정/삭제 </a>
 						</c:if>
-					</table>
+					</div>
+					<div class="col-md-2 my-auto px-auto">
+						<a href="${pageContext.request.contextPath }/help/list?location=" class="btn btn-outline-secondary ">
+							<i class="fas fa-list"> 뒤로</i>
+						</a>
+					</div>
+				</div>
 
-					<!-- footer 와 댓글창 구분 선-->
-					<div class="row md mx-3 my-2">
-						<div class="col-md-12 ">
-							<div id="line"></div>
+				<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
+				<table class="table table-hover table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<th>Uploaded Images</th>
+						</tr>
+					</thead>
+					<c:if test="${not empty fileNames }">
+						<c:forEach items="${fileNames }" var="fileName">
+							<tbody>
+								<tr>
+									<td>
+										<img class="img-fluid" src="${staticUrl }help-board/${post.id }/${fileName }" alt="${fileName }">
+									</td>
+								</tr>
+							</tbody>
+						</c:forEach>
+					</c:if>
+				</table>
+
+				<!-- footer 와 댓글창 구분 선-->
+				<div class="row md mx-3 my-2">
+					<div class="col-md-12 ">
+						<div id="line"></div>
+					</div>
+				</div>
+
+				<!-- 댓글 창 -->
+				<!-- 로그인 한 사용자에게만 보여야 한다. -->
+
+				<div class="row md mx-4 my-3">
+					<p style="margin-bottom: 0px;" class="replyCount">
+						<i class="far fa-comment-dots fa-lg cnt"></i>
+					</p>
+					<hr>
+					<c:if test="${not empty sessionScope.loginUser }">
+						<div class="col-md-10 mx-0">
+							<textarea id="replyTextarea" class="form-control px-0" placeholder="댓글을 남겨보세요!" id="exampleFormControlTextarea1"></textarea>
+						</div>
+						<div class="col-md-2 px-0">
+							<button id="sendReply" class="btn btn-block btn-primary d-flex align-items-stretch">
+								<i class="far fa-comment-dots fa-lg" style="color: white"></i>
+							</button>
+						</div>
+					</c:if>
+
+					<br>
+					<hr>
+				</div>
+				<div id="replyListContainer"></div>
+			</div>
+		</div>
+		<!-- 태그 -->
+
+		<!-- Result Modal -->
+		<c:if test="${not empty result }">
+			<div class="modal" tabindex="-1" id="modal1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Process Result</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>${result }</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						</div>
 					</div>
-
-					<!-- 댓글 창 -->
-					<!-- 로그인 한 사용자에게만 보여야 한다. -->
-
-					<div class="row md mx-4 my-3">
-						<p style="margin-bottom: 0px;" class="replyCount">
-							<i class="far fa-comment-dots fa-lg cnt"></i>
-						</p>
-						<hr>
-						<c:if test="${not empty sessionScope.loginUser }">
-							<div class="col-md-10 mx-0">
-								<textarea id="replyTextarea" class="form-control px-0" placeholder="댓글을 남겨보세요!" id="exampleFormControlTextarea1"></textarea>
-							</div>
-							<div class="col-md-2 px-0">
-								<button id="sendReply" class="btn btn-block btn-primary d-flex align-items-stretch">
-									<i class="far fa-comment-dots fa-lg" style="color: white"></i>
-								</button>
-							</div>
-						</c:if>
-
-						<br>
-						<hr>
-					</div>
-					<div id="replyListContainer"></div>
 				</div>
 			</div>
-			<!-- 태그 -->
-
-			<!-- Result Modal -->
-			<c:if test="${not empty result }">
-				<div class="modal" tabindex="-1" id="modal1">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title">Process Result</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<p>${result }</p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</c:if>
-		</div>
+		</c:if>
 	</div>
+
 </body>
 </html>
