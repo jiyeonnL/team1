@@ -73,11 +73,11 @@ font-size:x-large;
 					<span>
 						<img src="${sessionScope.loginUser.profileurl }" width="50" height="50" class="rounded-circle me-3" alt="error" />
 					</span>
-					<span class="align-middle h3 dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> ${sessionScope.loginUser.nickname } </span>
-					<ul id="dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+					<span class="align-middle h3 dropdown-toggle" id="dropdownMenuButton1" data-toggle="dropdown" data-display="static" aria-expanded="false"> ${sessionScope.loginUser.nickname } </span>
+					<ul id="dropdown" class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton1">
 
 						<li>
-							<a class="dropdown-item" href="../user/profile">프로필 수정</a>
+							<a class="dropdown-item" href="../user/profile/${sessionScope.loginUser.nickname}">프로필 수정</a>
 						</li>
 						<li>
 							<a class="dropdown-item" href="../user/logout">로그아웃</a>
