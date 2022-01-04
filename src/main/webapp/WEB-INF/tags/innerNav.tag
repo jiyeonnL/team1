@@ -62,7 +62,7 @@ a.goTop {
 				</li>
 
 				<!-- 나중엘 radio 버튼으로 교체 -->
-				<li class="nav-item">
+				<li class="nav-item" >
 					<button type="button" id="all" class="btn btn-outline-dark ml-1">전체보기</button>
 				</li>
 				<li class="nav-item">

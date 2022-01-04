@@ -1,6 +1,9 @@
 <%@ tag language="java" pageEncoding="EUC-KR"%>
 <style>
-
+.under-cover-img{
+background-color:#264d73;
+color:white;
+position:relative;}
 
 #cover{
     object-fit: cover;
@@ -8,12 +11,15 @@
     height: 250px;
 
 }
+
 #cover-head-font, #cover-font{
   font-family: 'Jua', sans-serif;
 }
+
+
 </style>
 
-<div class="bg-secondary">
+<div class="under-cover-img">
 	<img id="cover"
 		src= "${coverImg}" 
 		alt="aaaa"
