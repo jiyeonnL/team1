@@ -34,7 +34,7 @@
 		<result property="views" column="views"/>		
 		<result property="title" column="title"/>
 		<result property="nickname" column="nickname" />
-		<result property="content" column="memberId" />
+		<result property="content" column="content" />
 		<result property="inserted" column="inserted" />
 		<result property="updated" column="updated" />
 		<result property="replyCount" column="replyCount" />
@@ -63,7 +63,7 @@
   </select>
   
 
-  <select id="read" resultType="com.team1.domain.board.HelpVO">
+  <select id="read" resultMap="helpResult">
   	SELECT
 	p.id, p.memberId, p.location, (SELECT count(postId) FROM tb_board_help_up WHERE postId = p.id) up, p.views, p.tag, 
 	p.title, p.content, p.inserted, p.updated, m.nickname, COUNT(r.id) replyCount, (SELECT hu.userId FROM tb_board_help_up hu WHERE hu.userId = #{loginId} AND hu.postId=p.id) upposession
