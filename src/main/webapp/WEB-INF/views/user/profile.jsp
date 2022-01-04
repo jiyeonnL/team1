@@ -108,14 +108,6 @@
 		});
 	</script>
 
-	<script>
-		$("#modify").click(function() {
-			location.href = "/controller1/user/infoModify"
-		});
 
-		$("#remove").click(function() {
-			location.href = "/controller1/user/remove"
-		});
-	</script>
 </body>
 </html>

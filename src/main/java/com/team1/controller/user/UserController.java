@@ -28,15 +28,13 @@ public class UserController {
 	@ResponseBody
 	public String nicknamecheckForSignup(String nickname) {
 		boolean has = service.hasNickName(nickname);
-		UserVO userWithd = service.readWithdrwal(nickname);
+		
 		
 		if (has) {
-			if(userWithd.getWithdrawal().equals("X")) {
+			
 				return "unable";
 				
-			}else {
-				return "able";
-			}
+			
 		} else {
 			return "able";
 		}
@@ -52,7 +50,7 @@ public class UserController {
 		UserVO vo = (UserVO) session.getAttribute("loginUser");
 		
 		if (has) { // 검색했는데 있는 아이디임
-			if(userWithd.getWithdrawal().equals("X")) { // 근데 탈퇴한 계정이 아님 (아직 미구현..)
+			if(userWithd.getWithdrawal().equals("X")) { // 근데 탈퇴한 계정이 아님
 				
 				if(nickname.equals(vo.getNickname())){
 					return "same"; // session에서 받아온(로그인된) 정보와 같은 닉네임일 경우
@@ -95,9 +93,6 @@ public class UserController {
 		boolean correctPassword = pw.equals(vo.getPw());
 		
 		if(!correctPassword) {
-			return null;
-		}
-		if(vo.getWithdrawal().equals("O")) {
 			return null;
 		}
 		

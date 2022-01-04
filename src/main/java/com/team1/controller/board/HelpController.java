@@ -19,6 +19,7 @@ import com.team1.coverData.Cover;
 import com.team1.domain.board.HelpFileVO;
 import com.team1.domain.board.HelpReplyVO;
 import com.team1.domain.board.HelpVO;
+import com.team1.domain.user.UserVO;
 import com.team1.service.board.HelpReplyService;
 import com.team1.service.board.HelpService;
 
@@ -53,31 +54,51 @@ public class HelpController {
 	
 	//help 페이지
 	@GetMapping(value = "/list", params = { "location"})
-	public void help(@RequestParam(value = "location") String location, Model model) {
+	public void help(@RequestParam(value = "location") String location, Model model, HttpSession session) {
 
 		Cover.setCover("help", model);
 		
 		model.addAttribute("tag", "help");
 		model.addAttribute("location", location);
 		
-		List<HelpVO> list = service.getList();
-			
-		model.addAttribute("list", list);
+		UserVO uvo = (UserVO) session.getAttribute("loginUser");
+		if(uvo != null) {
+			List<HelpVO> list = service.getList(uvo.getId());
+			List<HelpFileVO> fileNames = service.getFiles();
+			model.addAttribute("list", list);
+			model.addAttribute("fileNames", fileNames);
+		} else {
+			List<HelpVO> list = service.getList(0);
+			List<HelpFileVO> fileNames = service.getFiles();
+			model.addAttribute("list", list);
+			model.addAttribute("fileNames", fileNames);
+		}
+		
 	}
 	
 	//게시물 상세 페이지, help/list/id 와 같은 형식으로 게시물의 id를 링크에서 가져온다.
 	@GetMapping(value = "/list/{id}")
-	public String post(@PathVariable Integer id, Model model) {
-		
+	public String post(@PathVariable Integer id, Model model, HttpSession session) {
+		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 		//한개의 post를 가져온다.
-		HelpVO helpVO = service.get(id);
-		System.out.println(helpVO);
-		List<HelpReplyVO> reply = replyservice.list(id);
-		model.addAttribute("post", helpVO);
-		model.addAttribute("reply", reply);
-		if (service.upViews(id)) {
-			
+
+		if(uvo !=null) {
+			HelpVO helpVO = service.get(id, uvo.getId());
+			String[] fileNames = service.getNamesByBoardId(id);
+			List<HelpReplyVO> reply = replyservice.list(id);
+			model.addAttribute("post", helpVO);
+			model.addAttribute("reply", reply);
+			model.addAttribute("fileNames", fileNames);
+		} else {
+			HelpVO helpVO = service.get(id, 0);
+			String[] fileNames = service.getNamesByBoardId(id);
+			List<HelpReplyVO> reply = replyservice.list(id);
+			model.addAttribute("post", helpVO);
+			model.addAttribute("reply", reply);
+			model.addAttribute("fileNames", fileNames);
 		}
+
+		service.upViews(id);
 		
 		return "help/post";
 		
@@ -85,8 +106,18 @@ public class HelpController {
 
 	
 	@GetMapping("/modify")
-	public void get(@RequestParam("id") Integer id, Model model, HttpSession session) {
-		HelpVO board = service.get(id);
+	public String get(@RequestParam("id") Integer id, Model model, HttpSession session) {
+		
+		UserVO uvo = (UserVO) session.getAttribute("loginUser");
+		HelpVO hvo = (HelpVO) service.get(id, uvo.getId());
+		
+		if(uvo.getId() != hvo.getMemberId()){
+			System.out.println("작성자가 아니면 수정할 수 없습니다.");
+			return "redirect:/all/list";
+		}
+		
+		HelpVO board = service.get(id, uvo.getId());
+		String[] fileNames = service.getNamesByBoardId(id);
 		model.addAttribute("board", board);
 	}
 	

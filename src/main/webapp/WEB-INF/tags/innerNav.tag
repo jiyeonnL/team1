@@ -17,6 +17,7 @@
 	margin-bottom: 20px;
 	border: 3px solid;
 	border-color: #2f6091;
+	z-index:980;
 }
 
 #icon {
@@ -26,11 +27,16 @@
 	padding: 10px 12px;
 	height: 45px;
 	position: relative;
-	z-index: 999;
+	z-index: 990;
 	border-color: #2f6091;
 	border-radius: 4px;
 }
 
+a.goTop{
+	position: fixed;
+	right: 50px;
+	bottom: 30px;
+}
 
 
 </style>
@@ -163,3 +169,5 @@
 
 					})
 </script>
+
+<a class="goTop" href="#top"><i class="fas fa-chevron-up a-fw fa-3x m-r-3"></i></a>

@@ -17,6 +17,7 @@ import com.team1.domain.board.HelpVO;
 import com.team1.mapper.board.HelpFileMapper;
 import com.team1.mapper.board.HelpMapper;
 import com.team1.mapper.board.HelpReplyMapper;
+import com.team1.mapper.board.HelpUpMapper;
 
 import lombok.Setter;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -38,6 +39,9 @@ public class HelpService {
 
 	@Setter(onMethod_ = @Autowired)
 	private HelpFileMapper fileMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private HelpUpMapper upMapper;
 
 	@Value("${aws.accessKeyId}")
 	private String accessKeyId;
@@ -127,12 +131,12 @@ public class HelpService {
 		return false;
 	}
 
-	public List<HelpVO> getList() {
-		return mapper.getList();
+	public List<HelpVO> getList(Integer id) {
+		return mapper.getList(id);
 	}
 
-	public HelpVO get(Integer id) {
-		return mapper.read(id);
+	public HelpVO get(Integer id, Integer loginId) {
+		return mapper.read(id, loginId);
 	}
 
 	public boolean register(HelpVO board) {
@@ -170,9 +174,9 @@ public class HelpService {
 		return mapper.upViews(id) == 1;
 	}
 
-	public boolean upUps(Integer id) {
-		return mapper.upViews(id) == 1;
-	}
+//	public boolean upUps(Integer id) {
+//		return mapper.upUps(id) == 1;
+//	}
 
 	public List<HelpVO> getListSearchByContent(String search) {
 //			, Integer page, Integer numberPerPage, Integer numberPerPagination) { 검색 결과도 페이지 네이션 구현한다면 필요한 변수 (전에 아직 구현 못함)

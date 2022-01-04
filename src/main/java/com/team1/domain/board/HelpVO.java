@@ -29,6 +29,8 @@ public class HelpVO {
 		
 	private Integer replyCount;
 	
+	private Integer upposession;
+	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 	}
