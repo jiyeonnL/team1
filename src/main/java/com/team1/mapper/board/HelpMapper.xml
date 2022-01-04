@@ -34,7 +34,7 @@
 		<result property="views" column="views"/>		
 		<result property="title" column="title"/>
 		<result property="nickname" column="nickname" />
-		<result property="content" column="memberId" />
+		<result property="content" column="content" />
 		<result property="inserted" column="inserted" />
 		<result property="updated" column="updated" />
 		<result property="replyCount" column="replyCount" />
