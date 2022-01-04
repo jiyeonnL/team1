@@ -58,8 +58,7 @@
 			<div class="container-fluid my-1">
 				<div class="row md mx-3 mt-4 mb-2">
 					<div class="col-md-3 my-auto align-self-center ">
-						<img
-							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"
+						<img src="${sessionScope.loginUser.profileurl }"
 							class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 					</div>
 					<div class="col-md-5 mx-3 my-auto align-self-center ">
@@ -84,6 +83,7 @@
 				<div class="row md mx-3 mt-4 mb-2">
 					<div class="col-md-12 ">
 						<div class="h3 mt-1">
+						<h5>인사글: </h5>
 						<pre>${user.introduce }</pre></div>
 					</div>
 				</div>
@@ -92,10 +92,10 @@
 						<div id="line"></div>
 					</div>
 				</div>
-		  <!--  <div class="container">
+		 		<div class="container">
    					<div class="row">
       					<div class="col">
-       						<h1>내가 쓴 글 - 해주세요</h1>
+       						<h3>내가 쓴 글 - 해주세요</h3>
        						<table class="table">
           					<thead>
             				<tr>
@@ -122,7 +122,7 @@
         				</table>
      				 </div>
     			</div>
-  				</div>-->
+  				</div>
 			</div>
 		</div>
 	</div>

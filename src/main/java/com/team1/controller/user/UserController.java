@@ -148,10 +148,10 @@ public class UserController {
 		
 		UserVO vo = service.readByNickName(nickname);
 		
-//		List<HelpVO> list = service.UserBoardHelpList(vo.getId());
+		List<HelpVO> list = service.UserBoardHelpList(vo.getId());
 		
 		model.addAttribute("user", vo);
-//		model.addAttribute("list", list);
+		model.addAttribute("list", list);
 		
 		return "user/profile";
 	}
