@@ -64,9 +64,11 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	width: 95%;
 }
 
 a {
+	width: 100%;
 	word-break: break-all;
 	display: block;
 	white-space: nowrap;
@@ -116,7 +118,8 @@ a:hover {
 							<div id="line"></div>
 						</div>
 					</div>
-
+					
+					<!-- 여기가 컨텐츠 표현 부분입니다. a 태그로 내용을 표시합니다. -->
 					<div id="contentBox" class="row md px-0 mx-3 h5">
 						<a href="/controller1/help/list/${board.id}"><c:out
 								value="${board.content}" /></a>
