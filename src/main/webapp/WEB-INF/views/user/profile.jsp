@@ -77,7 +77,7 @@
           <div class="row md mx-3 mt-4 mb-2">
             <div class="col-md-12 ">
               <div class="h3 mt-1">
-               ${sessionScope.loginUser.introduce }
+              	<pre>${sessionScope.loginUser.introduce }</pre>
               </div>
             </div>
           </div>
