@@ -156,10 +156,10 @@ a:hover {
 					<div class="row md mx-4">
 						<div class="col-md-2">
 							<c:if test="${board.upposession !=null}">
-								<i class="fa fa-thumbs-up fa-fw fa-3x m-r-3"></i>
+								<i class="fa fa-thumbs-up fa-fw fa-2x m-r-3"></i>
 							</c:if>
 							<c:if test="${empty board.upposession }">
-								<i class="far fa-thumbs-up fa-fw fa-3x m-r-3"></i>
+								<i class="far fa-thumbs-up fa-fw fa-2x m-r-3"></i>
 							</c:if>
 							${board.up}
 						</div>
@@ -168,7 +168,7 @@ a:hover {
 							${board.replyCount }
 						</div>
 						<div class="col-md-2">
-							<i class="fas fa-eye fa-fw fa-3x m-r-3"></i> ${board.views }
+							<i class="fas fa-eye fa-fw fa-2x m-r-3"></i> ${board.views }
 						</div>
 					</div>
 				</div>
