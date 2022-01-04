@@ -15,6 +15,10 @@ public class UserService {
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper mapper;
 	
+	
+	public UserVO readByNickName (String nickName) {
+		return mapper.selectByNickName(nickName);
+	}
 
 	public UserVO read(String email) {
 		return mapper.select(email);
