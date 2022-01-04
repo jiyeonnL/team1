@@ -426,13 +426,12 @@ a:hover {
 							<th>Uploaded Images</th>
 						</tr>
 					</thead>
-					<c:if test="${not empty fileNames }">
-						<c:forEach items="${fileNames }" var="fileName">
+					<c:if test="${not empty post.fileList }">
+						<c:forEach items="${post.fileList }" var="file" varStatus="vs">
 							<tbody>
 								<tr>
-									<td><img class="img-fluid"
-										src="${staticUrl }help-board/${post.id }/${fileName }"
-										alt="${fileName }"></td>
+									<td><img class="img-fluid" src="${file.url}"
+										alt="${file.fileName}"></td>
 								</tr>
 							</tbody>
 						</c:forEach>
