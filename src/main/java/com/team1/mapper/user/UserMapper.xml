@@ -59,7 +59,7 @@
 	GROUP BY email
 	</select>
 	
-	<select id="selectUserBoardHelp" resultType="com.team1.domain.user.UserVO">
+	<select id="selectUserBoardHelp" resultType="com.team1.domain.board.HelpVO">
 	SELECT u.id, h.memberId, h.tag, h.title, h.inserted 
 	FROM tb_user u JOIN tb_board_help h
     ON u.id = h.memberId

@@ -75,7 +75,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 			</div>
 			<div class="modal-body " id="modal-body">
-				<form action="../user/login" method="post">
+				<form action="${pageContext.request.contextPath }/user/login" method="post">
 					<div class="mb-3">
 						<label class="form-label">이메일</label>
 						<input type="text" class="form-control" id="modal-email" name="email" placeholder="Email" />
