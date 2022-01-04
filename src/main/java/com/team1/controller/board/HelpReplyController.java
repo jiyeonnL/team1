@@ -45,7 +45,8 @@ public class HelpReplyController {
 	@PostMapping("/write")
 	public ResponseEntity<String> write(HelpReplyVO reply, @SessionAttribute(value="loginUser", required = false) UserVO logged, HttpSession session) {
 //		logged = (UserVO) session.getAttribute("loginUser");
-		if (logged !=null && logged.getId().equals(reply.getUid())) {
+		System.out.println("log withdrawal: "+logged.getWithdrawal());
+		if (logged !=null && logged.getId().equals(reply.getUid())&& (logged.getWithdrawal().equals("X"))) {
 		service.insert(reply);
 			return ResponseEntity.status(HttpStatus.OK).build();
 		} 
@@ -61,7 +62,7 @@ public class HelpReplyController {
 		
 		HelpReplyVO old = service.readById(id);
 		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만 또는 관리자일 때
-		if ((logged !=null && logged.getNickname().equals(old.getNickname()))) { // 관리자 권한 ||logged.getAdminQuali()==1
+		if ((logged !=null && logged.getNickname().equals(old.getNickname()))&& (logged.getWithdrawal().equals("X"))) { // 관리자 권한 ||logged.getAdminQuali()==1
 			// 업데이트
 			old.setReply(reply.getReply());
 			service.update(old);
@@ -80,7 +81,7 @@ public class HelpReplyController {
 		// 댓글 조회
 		HelpReplyVO old = service.readById(id);
 		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만 또는 관리자일 때
-		if ((logged !=null && logged.getNickname().equals(old.getNickname()))) {
+		if ((logged !=null && logged.getNickname().equals(old.getNickname()))&& (logged.getWithdrawal().equals("X"))) {
 			// 삭제
 			service.delete(id);
 			

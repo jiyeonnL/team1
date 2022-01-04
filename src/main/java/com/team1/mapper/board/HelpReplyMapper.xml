@@ -22,7 +22,8 @@ JOIN
 ON
 	r.nickname = u.nickname
 WHERE
-	r.boardId = #{id}
+	r.boardId = #{id} AND 
+	u.withdrawal = 'X'
 ORDER BY
 	r.id DESC;
   </select>

@@ -57,6 +57,10 @@
 	integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
 	crossorigin="anonymous"></script>
 
-
+	<script>
+		$(document).ready(function(){
+			$("#news").attr("class", "btn btn-outline ml-1 active");
+		});
+	</script>
 </body>
 </html>

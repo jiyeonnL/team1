@@ -12,39 +12,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+
 <title>게시물 수정</title>
 </head>
 <body>
+	<b:header></b:header>
 	<div class="container">
 		<div class="row">
 			<div class="col">
+				<b:innerNav></b:innerNav>
 				<h1>게시물 수정</h1>
 
-	<form id="modifyForm" method="post" enctype="multipart/form-data">
-		  <input type="hidden" name="id" value="${board.id }">
-        
-          <div class="form-group">
-            <label for="input1">제목</label>
-            <input type="text" class="form-control" value="${board.title }" id="input1" name="title">
-          </div>
-          
-          <div class="form-group">
-            <label for="input2">내용</label>
-            <textarea class="form-control" id="input2" name="content">${board.content }</textarea>
-          </div>
-          
-          <div class="form-group">
-            <label for="input3">태그</label>
-            <select class="form-control" id="input3" name="tag">
-            	<option value="사다주세요"  <c:if test="${board.tag eq '사다주세요'}">selected</c:if>>사다주세요</option>
-            	<option value="맡아주세요" <c:if test="${board.tag  eq '맡아주세요'}">selected</c:if>>맡아주세요</option>
-            	<option value="빌려주세요" <c:if test="${board.tag  eq '빌려주세요'}">selected</c:if>>빌려주세요</option>
-            	<option value="옮겨주세요" <c:if test="${board.tag  eq '옮겨주세요'}">selected</c:if>>옮겨주세요</option>
-            	<option value="기타" <c:if test="${board.tag  eq '기타'}">selected</c:if>>기타</option>
-            </select>
-          </div>
+				<form id="modifyForm" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="id" value="${board.id }">
+
+					<div class="form-group">
+						<label for="input1">제목</label>
+						<input type="text" class="form-control" value="${board.title }" id="input1" name="title">
+					</div>
+
+					<div class="form-group">
+						<label for="input2">내용</label>
+						<textarea class="form-control" id="input2" name="content">${board.content }</textarea>
+					</div>
+
+					<div class="form-group">
+						<label for="input3">태그</label>
+						<select class="form-control" id="input3" name="tag">
+							<option value="사다주세요" <c:if test="${board.tag eq '사다주세요'}">selected</c:if>>사다주세요</option>
+							<option value="맡아주세요" <c:if test="${board.tag  eq '맡아주세요'}">selected</c:if>>맡아주세요</option>
+							<option value="빌려주세요" <c:if test="${board.tag  eq '빌려주세요'}">selected</c:if>>빌려주세요</option>
+							<option value="옮겨주세요" <c:if test="${board.tag  eq '옮겨주세요'}">selected</c:if>>옮겨주세요</option>
+							<option value="기타" <c:if test="${board.tag  eq '기타'}">selected</c:if>>기타</option>
+						</select>
+					</div>
 
 					<table class="table table-hover table-bordered">
 						<thead class="thead-dark">
@@ -80,9 +83,7 @@
 				</form>
 
 				<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit">수정</button>
-				<button id="" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmModal1">
-					<i class="fas fa-trash"> 삭제</i>
-				</button>
+				<button id="" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmModal1"><i class="fas fa-trash"> 삭제</i></button>
 				<a href="${pageContext.request.contextPath }/help/list/${board.id }" class="btn btn-outline-secondary">취소</a>
 			</div>
 		</div>
@@ -145,6 +146,9 @@
 				$("#modal1").modal('show');
 				history.replaceState({}, null);
 			}
+			$(document).ready(function(){
+				$("#help").attr("class", "btn btn-outline ml-1 active");
+			});
 		});
 	</script>
 

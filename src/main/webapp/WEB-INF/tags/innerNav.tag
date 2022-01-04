@@ -22,7 +22,7 @@ font-family: 'Jua', sans-serif;
 
 }
 
-#icon {
+#icon{
 	float: right;
 	margin-top: -41px;
 	background-color: #f5f5f5;
@@ -41,7 +41,10 @@ a.goTop {
 	position: fixed;
 	right: 50px;
 	bottom: 30px;
-	
+}
+.active{
+	background-color: #264d73;
+	color : white;
 }
 </style>
 
@@ -62,20 +65,19 @@ a.goTop {
 				</li>
 
 				<!-- 나중엘 radio 버튼으로 교체 -->
-				<li class="nav-item" >
+				<li id="nav-all" class="nav-item" >
 					<button type="button" id="all" class="btn btn-outline-dark ml-1">전체보기</button>
 				</li>
-				<li class="nav-item">
+				<li id="nav-news" class="nav-item">
 					<button type="button" id="news" class="btn btn-outline-dark ml-1">동네소식</button>
 				</li>
-				<li class="nav-item">
-					<button type="button" id="question"
-						class="btn btn-outline-dark ml-1">동네질문</button>
+				<li id="nav-question" class="nav-item">
+					<button type="button" id="question"	class="btn btn-outline-dark ml-1">동네질문</button>
 				</li>
-				<li class="nav-item">
+				<li id="nav-life" class="nav-item">
 					<button type="button" id="life" class="btn btn-outline-dark ml-1">일상생활</button>
 				</li>
-				<li class="nav-item">
+				<li id="nav-help" class="nav-item">
 					<button type="button" id="help" class="btn btn-outline-dark ml-1">해주세요</button>
 				</li>
 			</ul>
@@ -92,91 +94,55 @@ a.goTop {
 
 
 <script>
-	$(document)
-			.ready(
-					function() {
-						
-						//현재의 tag 값과 region 값을 가져온다.
-						var loc = "${location}";
-						var tag    = "${tag}";
-						//console.log(region);
-						
-						//현재 model의 값으로 select 박스의 값 세팅 (나중에 )
-						//$("#region").val(region).attr("selected", "selected");
-						
-						//검색 아이콘 누르면 call되는 함수 (현재 입력창에 있는 값을 받아서 넘긴다. 현재 select 상태와 버튼 눌려진 상태를 포함한다.) 
-						$("#icon")
-						.click(function() {
-							var query = $("#keyword").val();
-							
-							//빈 문자열이면 return 시켜 실행되지 않게 한다.
-							if(query== "") {
-								return 
-							}
-							
-							location.href = "/controller1/"+tag+"/list?location="
-								+ loc +"&query="+query;
-						})
+	$(document).ready(function() {
+		//현재의 tag 값과 region 값을 가져온다.
+		var loc = "${location}";
+		var tag    = "${tag}";
+		//console.log(region);
+		
+		//현재 model의 값으로 select 박스의 값 세팅 (나중에 )
+		//$("#region").val(region).attr("selected", "selected");
+		
+		//검색 아이콘 누르면 call되는 함수 (현재 입력창에 있는 값을 받아서 넘긴다. 현재 select 상태와 버튼 눌려진 상태를 포함한다.) 
+		$("#icon")	.click(function() {
+			var query = $("#keyword").val();
+			
+			//빈 문자열이면 return 시켜 실행되지 않게 한다.
+			if(query== "") {
+				return 
+			}
+				location.href = "/controller1/"+tag+"/list?location="
+				+ loc +"&query="+query;
+		})
 
-						//model attribute에서 현재 어느 태그인지 검사하고 select의 현재 상태 변경시기키 (model 값을 스크립트 내부에서 사용해야 한다.)
-						$("#all")
-						.click(
-								function() {
-									var loc = $(
-											"#location option:selected")
-											.val();
+		//model attribute에서 현재 어느 태그인지 검사하고 select의 현재 상태 변경시기키 (model 값을 스크립트 내부에서 사용해야 한다.)
+		$("#all").click(function() {
+			var loc = $("#location option:selected").val();
+			location.href = "/controller1/all/list?location="+ loc;
+		});
+		
+		//탭에 있는 버튼들 누르면 해당 링크로 이동한다. 현재 select 상태를 함께 포함해 컨트롤러에 get 요청 날린다.
+		$("#news").click(function() {
+			var loc = $("#location option:selected").val();
+			location.href = "/controller1/news/list?location="+ loc;
+		});
 
-									location.href = "/controller1/all/list?location="
-											+ loc;
+		$("#question").click(function() {
+			var loc = $("#location option:selected").val();
+			location.href = "/controller1/question/list?location="+ loc;
+		});
 
-								});
-						
-						//탭에 있는 버튼들 누르면 해당 링크로 이동한다. 현재 select 상태를 함께 포함해 컨트롤러에 get 요청 날린다.
-						$("#news")
-								.click(
-										function() {
-											var loc = $(
-													"#location option:selected")
-													.val();
+		$("#life").click(function() {
+			var loc = $("#location option:selected").val();
+			location.href = "/controller1/life/list?location="+ loc;
+		});
 
-											location.href = "/controller1/news/list?location="
-													+ loc;
+		$("#help")	.click(function() {
+			var loc = $("#location option:selected").val();
+			location.href = "/controller1/help/list?location="+ loc;
+		});
 
-										});
-
-						$("#question")
-								.click(
-										function() {
-											var loc = $(
-													"#location option:selected")
-													.val();
-											location.href = "/controller1/question/list?location="
-													+ loc;
-
-										});
-
-						$("#life")
-								.click(
-										function() {
-											var loc = $(
-													"#location option:selected")
-													.val();
-											location.href = "/controller1/life/list?location="
-													+ loc;
-
-										});
-
-						$("#help")
-								.click(
-										function() {
-											var loc = $(
-													"#location option:selected")
-													.val();
-											location.href = "/controller1/help/list?location="
-													+ loc;
-										});
-
-					})
+	})
 </script>
 
 <a class="goTop" href="#top"><i
