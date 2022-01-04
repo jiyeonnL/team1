@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title> 
+<title>Insert title here</title>
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
@@ -107,7 +107,6 @@
 			location.href = "/controller1/user/remove"
 		});
 	</script>
-
 
 </body>
 </html>
