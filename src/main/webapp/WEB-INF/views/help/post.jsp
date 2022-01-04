@@ -300,14 +300,14 @@ a:hover {
 }
 
 #inner {
-	border: 2px solid yellowgreen;
+	border: 2px;
 	width: 900px;
 	height: 100%;
 }
 
 #postBody {
 	width: 100%;
-	border: 2px solid yellowgreen;
+	border: 3px solid #264d73;
 	border-radius: 10px;
 	margin-top: 5px;
 }
@@ -316,13 +316,13 @@ a:hover {
 	font-size: 1.5rem;
 	text-align: center;
 	justify-content: center;
-	border: 3px solid yellowgreen;
+	border: 3px solid #264d73;
 	border-radius: 5px;
 }
 
 #line {
 	height: 2px;
-	background-color: yellowgreen;
+	background-color: #264d73;
 	width: 100%;
 }
 
