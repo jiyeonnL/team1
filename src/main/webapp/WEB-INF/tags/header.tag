@@ -6,23 +6,32 @@
 
 <style>
 *{
-	font-family: 'Jua', sans-serif;
+font-family: 'Jua', sans-serif;
 }
 #login, #signup{
 background-color: #ffe164;
 font-size: x-large;
 }
 .me-lg-auto{
-margin-right:auto;}
+margin-right:auto;
+}
 
 .header-size{
 font-size: x-large;
 }
 #icon-header{
-color:white;}
+color:white;
+}
 
 #dropdown{
 z-index:999;
+}
+
+#dropdownMenuButton1{
+color:white;
+}
+#dropdown-item{
+font-size:x-large;
 }
 
 /*노랑 배경색 : #ffe164
@@ -41,23 +50,23 @@ z-index:999;
 			<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 header-size">
 
 				<li><a href="${pageContext.request.contextPath }/all/list" class="nav-link px-2 text-secondary text-white"> 
-				<i class="fas fa-home" id="icon-header"></i> Home 
+				<i class="fas fa-home" id="icon-header"></i> 홈 
 				</a></li>
 				<li><a href="/" class="nav-link px-2 text-white"> 
-				<i class="far fa-file-alt" id="icon-header"></i> Features 
+				<i class="far fa-file-alt" id="icon-header"></i> 미정 
 				</a></li>
 				<li><a href="/" class="nav-link px-2 text-white"> 
-				<i class="fas fa-question-circle" id="icon-header"></i> FAQs </a></li>
+				<i class="fas fa-question-circle" id="icon-header"></i> 자주묻는 질문 </a></li>
 				<li><a href="/" class="nav-link px-2 text-white"> 
-				<i class="fas fa-user-edit" id="icon-header"></i> About </a></li>
+				<i class="fas fa-user-edit" id="icon-header"></i> 제작자 </a></li>
 
 			</ul>
 
 			<div class="text-end dropdown">
 				<!-- 로그인 하지 않은 상태인 경우 로그인, 회원가입 버튼을 띄운다 -->
 				<c:if test="${empty sessionScope.loginUser }">
-					<button type="button" id=login class="btn btn-outline-dark">Login</button>
-					<button type="button" id=signup class="btn btn-outline-dark">Sign up</button>
+					<button type="button" id=login class="btn btn-outline-dark">로그인</button>
+					<button type="button" id=signup class="btn btn-outline-dark">회원가입</button>
 				</c:if>
 				<!-- 로그인 한 상태인 경우 프로필을 띄운다. -->
 				<c:if test="${not empty sessionScope.loginUser }">
@@ -68,13 +77,13 @@ z-index:999;
 					<ul id="dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 
 						<li>
-							<a class="dropdown-item" href="../user/profile">Edit Profile</a>
+							<a class="dropdown-item" href="../user/profile">프로필 수정</a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="../user/logout">Logout</a>
+							<a class="dropdown-item" href="../user/logout">로그아웃</a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="#">Something else here</a>
+							<a class="dropdown-item" href="#">아직 미정</a>
 						</li>
 					</ul>
 				</c:if>

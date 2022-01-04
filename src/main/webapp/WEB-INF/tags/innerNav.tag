@@ -72,7 +72,7 @@ a.goTop{
 				</li>
 			</ul>
 			<form method="get" onsubmit="return false;">
-				<input class="form-control" type="text" placeholder="Search" id="keyword" aria-label="Search" />
+				<input class="form-control" type="text" placeholder="검색어를 입력하세요" id="keyword" aria-label="Search" />
 				<label id=icon>
 					<i class="fa fa-search" aria-hidden="true"></i>
 				</label>
