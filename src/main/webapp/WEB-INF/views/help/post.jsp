@@ -31,8 +31,6 @@
 
 <script>
   $(document).ready(function() {
-	  
-
     /* contextPath */
     const appRoot = '${pageContext.request.contextPath}';
 	
@@ -43,32 +41,32 @@
 			success : function() {
 				const upviewMediaObject = $(`
 						<c:if test="${empty sessionScope.loginUser}">
-							<div id="upinsnl" class="col-md-2">
-								<i id="upiconnl" class="far fa-heart "></i> 
-							</div>
+							<button id="upinsnl" class="btn btn-outline-primary">
+								<i id="upiconnl" class="far fa-heart fa-fw fa-3x m-r-3"> </i>
+							</button>
 						</c:if>
 						<c:if test="${empty post.upposession&&not empty sessionScope.loginUser}">
-							<div id="upins" class="col-md-2">
-								<i id="upicon" class="far fa-heart "></i> 
-							</div>
-							<div id="updel" class="col-md-2" style="display:none;">
-								<i id="downicon" class="fas fa-heart "></i> 
-							</div>
+							<button id="upins" class="btn btn-outline-primary">
+								<i id="upicon" class="far fa-heart fa-fw fa-3x m-r-3"> </i> 
+							</button>
+							<button id="updel" class="btn btn-outline-primary" style="display:none;">
+								<i id="downicon" class="fas fa-heart fa-fw fa-3x m-r-3"> </i> 
+							</button>
 						</c:if>
 						<c:if test="${not empty post.upposession}">
-							<div id="upins" class="col-md-2" style="display:none;">
-								<i id="upicon" class="far fa-heart "></i> 
-							</div>
-							<div id="updel" class="col-md-2">
-								<i id="downicon" class="fas fa-heart "></i> 
-							</div>
+							<button id="upins" class="btn btn-outline-primary" style="display:none;">
+								<i id="upicon" class="far fa-heart fa-fw fa-3x m-r-3"> </i> 
+							</button>
+							<button id="updel" class="btn btn-outline-primary">
+								<i id="downicon" class="fas fa-heart fa-fw fa-3x m-r-3"> </i> 
+							</button>
 						</c:if>
 
 				`);
 				$("#upview").append(upviewMediaObject);
-				upviewMediaObject.find("#upiconnl").html(' ${post.up}');
-				upviewMediaObject.find("#upicon").html(' ${post.up}');
-				upviewMediaObject.find("#downicon").html(' ${post.up}');
+				upviewMediaObject.find("#upiconnl").append(' ${post.up}');
+				upviewMediaObject.find("#upicon").append(' ${post.up}');
+				upviewMediaObject.find("#downicon").append(' ${post.up}');
 				
 				/* 좋아요 갯수 1 증가*/
 				const upPost = function() {
@@ -80,7 +78,8 @@
 						success : function(cnt) {
 							console.log("업 +1됨");
 
-							$("#upview").find("#updel").html("<i id='downicon' class='fas fa-heart'></i> "+cnt);
+							$("#upview").find("#updel").html("<i id='downicon' class='fas fa-heart fa-fw fa-3x m-r-3'> </i> ");
+							$("#upview").find("#downicon").append(cnt);
 						},
 						complete : function() {
 							$("#upview").find("#upins").hide();
@@ -100,7 +99,8 @@
 						type : "delete",
 						success : function(cnt) {
 								console.log("업 -1됨");
-								$("#upview").find("#upins").html("<i id='upicon' class='far fa-heart'></i> "+cnt);
+								$("#upview").find("#upins").html("<i id='upicon' class='far fa-heart fa-fw fa-3x m-r-3'> </i> ");
+								$("#upview").find("#upicon").append(cnt);
 						},
 						complete : function() {
 							$("#upview").find("#updel").hide();
@@ -110,11 +110,16 @@
 						});
 					});
 				}
-				downPost();
+				downPost();	
+				$("#upinsnl").click(function() {
+					alert("로그인 후 이용해 주세요!");
+				});
 			}
 		});
 	}
 	upview();
+
+
 
 	
 	
@@ -330,6 +335,7 @@ a:hover {
 	height: 60px;
 	width: 60px;
 }
+
 </style>
 </head>
 <body>
@@ -347,8 +353,9 @@ a:hover {
 								src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"
 								class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 						</div>
-						<div class="col-md-3 bg-warning my-auto h2 align-middle">${post.nickname}</div>
-						<div class="col-md-2 bg-info my-auto h5 offset-md-6 px-2">${post.inserted}<c:if
+						<div class="col-md-4 bg-warning my-auto h2 align-middle">${post.nickname}</div>
+						
+						<div class="col-md-5 bg-info my-auto h4 offset-md-2 px-3"><i class="fas fa-eye "></i> ${post.views } || <i class="far fa-calendar-alt"></i> ${post.inserted}<c:if
 								test="${post.inserted ne post.updated}">(수정됨)</c:if>
 						</div>
 					</div>
@@ -394,14 +401,12 @@ a:hover {
 				</div>
 
 				<!-- footer -->
-				<div class="row md mx-4 ">
-					<div class="col-md-2">
-						<i class="fa fa-thumbs-up fa-fw fa-3x m-r-3"></i> ${post.up}
+				<div class="row md mx-4 d-flex justify-content-center">
+					<div id="upview"  class="col-md-4 d-flex justify-content-center">
+						<!-- 좋아요 아이콘 -->
 					</div>
 
-					<div class="col-md-2">
-						<i class="fas fa-eye fa-fw fa-3x m-r-3"></i> ${post.views }
-					</div>
+					
 				</div>
 				<div class="row md mx-4 d-flex justify-content-between">
 					<div class="col-md-2 my-auto px-auto ">
