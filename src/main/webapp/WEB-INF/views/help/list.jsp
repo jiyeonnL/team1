@@ -26,6 +26,11 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <style>
+
+#help-font{
+font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
 #body {
 	/* height: calc(100vh-72px); */
 	width: 100%;
@@ -91,12 +96,12 @@ a:hover {
 		<div id="inner">
 			<b:innerNav></b:innerNav>
 			<b:cover></b:cover>
-			<a href="${pageContext.request.contextPath }/help/register">글쓰기</a>
+			<a href="${pageContext.request.contextPath }/help/register" id="help-font">글쓰기</a>
 			<!-- 검색결과 리스트 -->
 			<!-- for 문 돌면서 list에 있는 요소(게시물)들 출력 -->
 			<c:forEach items="${list}" var="board">
 			<c:if test="${location eq board.location || location eq '' || empty location }">
-				<div class="container-fluid my-1 border border-3 border-secondary">
+				<div class="container-fluid my-1 border border-3 border-secondary" id="list-font">
 					<div class="row md mx-3 my-2">
 						<div class="col-md-2 my-auto px-auto">
 							<div id="tag">${board.tag }</div>

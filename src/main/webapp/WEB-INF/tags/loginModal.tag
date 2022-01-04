@@ -10,6 +10,7 @@
 .back-ground {
 	background-color: #ffe164;
 	border: 0px;
+	  font-family: 'Jua', sans-serif;
 }
 
 .header-color {

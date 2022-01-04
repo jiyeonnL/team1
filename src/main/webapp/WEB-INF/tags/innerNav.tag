@@ -18,6 +18,8 @@
 	border: 3px solid;
 	border-color: #2f6091;
 	z-index: 980;
+font-family: 'Jua', sans-serif;
+
 }
 
 #icon {
