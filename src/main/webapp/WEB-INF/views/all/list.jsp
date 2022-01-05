@@ -53,7 +53,51 @@
 
 		</div>
 	</div>
-
+	
+		<!-- result 처리 모달 -->
+		<c:if test="${not empty result }">
+    				<div class="modal" tabindex="-1" id="modal1">
+     					<div class="modal-dialog">
+       					<div class="modal-content">
+          				<div class="modal-header">
+            				<h5 class="modal-title">어서오세요!</h5>
+            				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              				<span aria-hidden="true">&times;</span>
+            				</button>
+          				</div>
+          				<div class="modal-body">
+            				<p>${result }</p>
+          				</div>
+          				<div class="modal-footer">
+            			<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+          				</div>
+        				</div>
+      					</div>
+    				</div>
+  					</c:if>
+  					
+  		<c:if test="${not empty modify }">
+    				<div class="modal" tabindex="-1" id="modal1">
+     					<div class="modal-dialog">
+       					<div class="modal-content">
+          				<div class="modal-header">
+            				<h5 class="modal-title">정보 수정 완료</h5>
+            				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              				<span aria-hidden="true">&times;</span>
+            				</button>
+          				</div>
+          				<div class="modal-body">
+            				<p>${modify }</p>
+          				</div>
+          				<div class="modal-footer">
+            			<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+          				</div>
+        				</div>
+      					</div>
+    				</div>
+  					</c:if>	
+  					
+	
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
@@ -62,7 +106,8 @@
 	<script>
 	$(document).ready(function(){
 		$("#all").attr("class", "btn btn-outline ml-1 active");
+		  $("#modal1").modal('show');
 	});
-</script>
+	</script>
 </body>
 </html>
