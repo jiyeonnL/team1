@@ -119,7 +119,7 @@ width: 20%;
 
 		var i = 0;
 
-		for (var image of event.target.files) {
+		for (const image of event.target.files) {
 			console.log(image.name);
 			var reader = new FileReader();
 			reader.readAsDataURL(image);

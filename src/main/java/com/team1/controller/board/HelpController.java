@@ -30,41 +30,42 @@ import lombok.Setter;
 @Controller
 @RequestMapping("/help")
 public class HelpController {
-	
+
 	@Setter(onMethod_ = @Autowired)
 	private HelpService service;
-	
+
 	@Setter(onMethod_ = @Autowired)
 	private HelpReplyService replyservice;
-	
 
-	
-	//help 페이지 (검색 쿼리 있는 버전)
+	// help 페이지 (검색 쿼리 있는 버전)
 	@GetMapping(value = "/list", params = { "location", "query" })
-	public void help(@RequestParam(value = "location") String location, @RequestParam(value = "query") String query,
-			Model model) {
+	public void help(
+			@RequestParam(value = "location") String location, 
+			@RequestParam(value = "query") String query,
+			Model model
+			) {
 
 		Cover.setCover("help", model);
-		
+
 		model.addAttribute("tag", "help");
 		model.addAttribute("location", location);
-		
+
 		List<HelpVO> list = service.getListSearchByContent(query);
 		model.addAttribute("list", list);
-		
+
 	}
-	
-	//help 페이지
-	@GetMapping(value = "/list", params = { "location"})
+
+	// help 페이지
+	@GetMapping(value = "/list", params = { "location" })
 	public void help(@RequestParam(value = "location") String location, Model model, HttpSession session) {
 
 		Cover.setCover("help", model);
-		
+
 		model.addAttribute("tag", "help");
 		model.addAttribute("location", location);
-		
+
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
-		if(uvo != null) {
+		if (uvo != null) {
 			List<HelpVO> list = service.getList(uvo.getId());
 			List<HelpFileVO> fileNames = service.getFiles();
 			model.addAttribute("list", list);
@@ -75,97 +76,99 @@ public class HelpController {
 			model.addAttribute("list", list);
 			model.addAttribute("fileNames", fileNames);
 		}
-		
+
 	}
-	
-	//게시물 상세 페이지, help/list/id 와 같은 형식으로 게시물의 id를 링크에서 가져온다.
+
+	// 게시물 상세 페이지, help/list/id 와 같은 형식으로 게시물의 id를 링크에서 가져온다.
 	@GetMapping(value = "/list/{id}")
 	public String post(@PathVariable Integer id, Model model, HttpSession session) {
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
-		//한개의 post를 가져온다.
+		// 한개의 post를 가져온다.
 
-		if(uvo !=null) {
+		if (uvo != null) {
 			HelpVO helpVO = service.get(id, uvo.getId());
-			//String[] fileNames = service.getNamesByBoardId(id);
+			// String[] fileNames = service.getNamesByBoardId(id);
 			List<HelpReplyVO> reply = replyservice.list(id);
 			model.addAttribute("post", helpVO);
 			model.addAttribute("reply", reply);
-			//model.addAttribute("fileNames", fileNames);
+			// model.addAttribute("fileNames", fileNames);
 		} else {
 			HelpVO helpVO = service.get(id, 0);
-			//String[] fileNames = service.getNamesByBoardId(id);
+			// String[] fileNames = service.getNamesByBoardId(id);
 			List<HelpReplyVO> reply = replyservice.list(id);
 			model.addAttribute("post", helpVO);
 			model.addAttribute("reply", reply);
-			//model.addAttribute("fileNames", fileNames);
+			// model.addAttribute("fileNames", fileNames);
 		}
 
 		service.upViews(id);
-		
+
 		return "help/post";
-		
+
 	}
 
-	
 	@GetMapping("/modify")
 	public String get(@RequestParam("id") Integer id, Model model, HttpSession session) {
-		
+
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 		HelpVO hvo = (HelpVO) service.get(id, uvo.getId());
-		
-		if(uvo.getId() != hvo.getMemberId()){
+
+		if (uvo.getId() != hvo.getMemberId()) {
 			System.out.println("작성자가 아니면 수정할 수 없습니다.");
 			return "redirect:/all/list";
 		}
-		
+
 		HelpVO board = service.get(id, uvo.getId());
-		//String[] fileNames = service.getNamesByBoardId(id);
+		// String[] fileNames = service.getNamesByBoardId(id);
 		model.addAttribute("board", board);
-		
+
 		return "help/modify";
 	}
-	
+
 	@PostMapping("/modify")
-	public String modify(HelpVO board, RedirectAttributes rttr) {
+	public String modify(HelpVO board, String[] removeFile, MultipartFile[] files, String thumbNail,
+			RedirectAttributes rttr) {
 
 		System.out.println("/modify로 잘 옴.");
 
-		if (service.modify(board)) {
-			rttr.addFlashAttribute("result", board.getId() + "번 게시글이 수정되었습니다.");
+		try {
+			if (service.modify(board, removeFile, files)) {
+				rttr.addFlashAttribute("result", board.getId() + "번 게시글이 수정되었습니다.");
+			}
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "redirect:/help/list?location=";
 	}
-	
+
 	@GetMapping("/register")
 	public void register() {
-		
+
 	}
-	
-	//helpVO와 이미지 파일, 썸네일로 지정된 파일명을 받아온다(thumbNail).
+
+	// helpVO와 이미지 파일, 썸네일로 지정된 파일명을 받아온다(thumbNail).
 	@PostMapping("/register")
-	public String register(HelpVO board, MultipartFile[] files, String thumbNail, RedirectAttributes rttr, HttpServletRequest req) throws IllegalStateException, IOException {
+	public String register(HelpVO board, MultipartFile[] files, String thumbNail, RedirectAttributes rttr,
+			HttpServletRequest req) throws IllegalStateException, IOException {
 
 		service.register(board, files, thumbNail);
-		
-	
-		
+
 		System.out.println(thumbNail);
 		rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
 
 		return "redirect:/help/list?location=";
 	}
-	
-	
+
 	@PostMapping("/remove")
 	public String remove(@RequestParam("id") Integer id, RedirectAttributes rttr) {
-	
+
 		System.out.println("/remove로 잘 옴.");
 		if (service.remove(id)) {
 			rttr.addFlashAttribute("result", id + "번 게시글이 삭제되었습니다.");
 		}
-		
+
 		return "redirect:/help/list?location=";
 	}
 
-	
 }

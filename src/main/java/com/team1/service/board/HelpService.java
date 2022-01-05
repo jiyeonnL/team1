@@ -52,11 +52,15 @@ public class HelpService {
 
 	@Value("${aws.bucketName}")
 	private String bucketName;
-
+	
+	@Value("${aws.staticUrl}")
+	private String staticUrl;
+	
 	private Region region = Region.AP_NORTHEAST_2;
 	private S3Client s3;
 	
 	@PostConstruct
+	
 	public void init() {
 		// spring bean이 만들어 진 후 최초로 실행되는 코드 작성
 
@@ -129,7 +133,8 @@ public class HelpService {
 	public List<HelpFileVO> getNamesByBoardId(Integer id) {
 		return fileMapper.selectNamesByBoardId(id);
 	}
-
+	
+	//삭제할 파일명은 url로 넘어온다.
 	@Transactional
 	public boolean modify(HelpVO board, String[] removeFile, MultipartFile[] files)
 			throws IllegalStateException, IOException {
@@ -139,18 +144,32 @@ public class HelpService {
 		if (removeFile != null) {
 			for (String removeFileName : removeFile) {
 				// file system, s3에서 삭제
-				String key = "board/help-board/" + board.getId() + "/" + removeFileName;
+				//String key = "board/help-board/" + board.getId() + "/" + removeFileName;
+				String key = removeFileName.substring(staticUrl.length());
+				System.out.println(removeFileName);
+				System.out.println(key);
 				deleteObject(key);
 				// db table에서 삭제
-				fileMapper.delete(board.getId(), removeFileName);
+				fileMapper.deleteByUrl(removeFileName);
 			}
 		}
-
+		
+		
+		//프로필 url 변경
 		for (MultipartFile file : files) {
 			if (file != null && file.getSize() > 0) {
 				// 1. write file to filesystem, s3
+				
+				HelpFileVO helpFileVO = new HelpFileVO();
 				String key = "board/help-board/" + board.getId() + "/" + file.getOriginalFilename();
 				putObject(key, file.getSize(), file.getInputStream());
+				String url = "https://" + bucketName + ".s3." + region.toString() +".amazonaws.com/" +key;
+				helpFileVO.setFileName(file.getOriginalFilename());
+				helpFileVO.setUrl(url);
+				helpFileVO.setPostId(board.getId());
+				helpFileVO.setIsThumbnail(0);
+				
+				fileMapper.insert(helpFileVO);
 				// 2. db 파일명 insert
 				//fileMapper.delete(board.getId(), file.getOriginalFilename());
 				//fileMapper.insert(board.getId(), file.getOriginalFilename());
