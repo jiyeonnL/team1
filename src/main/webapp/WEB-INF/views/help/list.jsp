@@ -27,7 +27,12 @@
 
 <style>
 
-#help-font{
+#help-body-font{
+background-color: #ffe164;
+font-family: 'Jua', sans-serif;
+font-size:25px;
+}
+#list-font{
 font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
@@ -97,7 +102,7 @@ a:hover {
 		<div id="inner">
 			<b:innerNav></b:innerNav>
 			<b:cover></b:cover>
-			<a href="${pageContext.request.contextPath }/help/register" id="help-font" class="btn btn-success">글쓰기</a>
+			<a href="${pageContext.request.contextPath }/help/register" id="help-body-font" class="btn">글쓰기</a>
 			<!-- 검색결과 리스트 -->
 			<!-- for 문 돌면서 list에 있는 요소(게시물)들 출력 -->
 			<c:forEach items="${list}" var="board">

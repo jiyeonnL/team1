@@ -33,7 +33,6 @@
 	width: 100%;
 	justify-content: center;
 	display: flex;
-	background-color: #eef2f6;
 }
 
 #inner {

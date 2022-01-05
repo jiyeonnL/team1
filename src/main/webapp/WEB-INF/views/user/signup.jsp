@@ -19,13 +19,19 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 
 <style>
-*{
-	font-family: 'Jua', sans-serif;}
+/*노랑 배경색 : #ffe164
+  파랑 배경색 : #264d73
+  빨간 포인트색 : #f0615c
+  하늘색 배경색 : #eef2f6 */
+* {
+	font-family: 'Jua', sans-serif;
+}
+
 body {
 	background-color: #ffe164;
 }
 
-#body {
+#sign-up-body {
 	height: auto;
 	/* height: calc(100vh-72px); */
 	width: 100%;
@@ -33,8 +39,10 @@ body {
 	display: flex;
 }
 
-label{
-margin-bottom:0;}
+label {
+	margin-bottom: 0;
+}
+
 #inner {
 	/* width: 900px; */
 	text-align: center;
@@ -59,7 +67,6 @@ margin-bottom:0;}
 
 .signUpMain {
 	margin-bottom: 8px;
-
 }
 
 .row {
@@ -84,7 +91,7 @@ margin-bottom:0;}
 	margin-left: 2px;
 	border: 3px solid;
 	border-color: #2f6091;
-	color:white;
+	color: white;
 	background-color: #2f6091;
 }
 
@@ -157,13 +164,15 @@ margin-bottom:0;}
 .place {
 	margin-top: 8px;
 }
-.nickNameRed{
-color:#f0615c}
+
+.nickNameRed {
+	color: #f0615c
+}
 </style>
 </head>
 <body>
 	<b:header></b:header>
-	<div id="body">
+	<div id="sign-up-body">
 		<div id="inner">
 			<%-- <b:innerNav></b:innerNav> --%>
 			<div class="container mt-4">
@@ -223,8 +232,8 @@ color:#f0615c}
 								</optgroup>
 							</select>
 						</div>
-						
-						
+
+
 						<!-- textarea로 바꿔서 여러줄로 나타낼 수 있음 -->
 						<div class="form-group place">
 							<label for="exampleFormControlTextarea1">자기소개</label>
@@ -271,34 +280,45 @@ color:#f0615c}
 
 							// 닉네임 중복 확인 버튼
 							$("#nicknameCheckButton")
-									.click(function() {
+									.click(
+											function() {
 
-												const nicknameValue = $("#input1").val().trim();
+												const nicknameValue = $(
+														"#input1").val().trim();
 												// 닉네임을 안적었을 경우 닉네임 입력하라는 문구 출력
 												if (nicknameValue === "") {
 													$("#nicknameCheckMessage")
-															.text("닉네임을 입력해주세요!!")
-															.removeClass("text-primary text-danger")
-															.addClass("nickNameRed");
-													$("#nicknameCheckButton").removeAttr("disabled");
+															.text(
+																	"닉네임을 입력해주세요!!")
+															.removeClass(
+																	"text-primary text-danger")
+															.addClass(
+																	"nickNameRed");
+													$("#nicknameCheckButton")
+															.removeAttr(
+																	"disabled");
 													return;
 												}
 
 												// ajax 닉네임 중복 눌렀을경우 로직 (1. 사용 가능한 아이디  /  2. 중복되서 불가능한 아이디)
 
-												$.ajax({
+												$
+														.ajax({
 															url : appRoot
 																	+ "/user/nicknamecheckForSignup",
 															data : {
 																nickname : nicknameValue
 															},
-															success : function(data) {
+															success : function(
+																	data) {
 																switch (data) {
 																// 1. 사용 가능아이디
 																case "able":
 
-																	$("#nicknameCheckMessage")
-																			.text("사용 가능한 닉네임 입니다.")
+																	$(
+																			"#nicknameCheckMessage")
+																			.text(
+																					"사용 가능한 닉네임 입니다.")
 																			.removeClass(
 																					"text-danger nickNameRed")
 																			.addClass(
@@ -309,10 +329,14 @@ color:#f0615c}
 																// 2. 중복일 경우
 																case "unable":
 
-																	$("#nicknameCheckMessage")
-																			.text("이미 존재하는 닉네임 입니다.")
-																			.removeClass("text-warning text-primary")
-																			.addClass("nickNameRed");
+																	$(
+																			"#nicknameCheckMessage")
+																			.text(
+																					"이미 존재하는 닉네임 입니다.")
+																			.removeClass(
+																					"text-warning text-primary")
+																			.addClass(
+																					"nickNameRed");
 
 																	nicknameAble = false;
 																	break;
@@ -323,12 +347,16 @@ color:#f0615c}
 															},
 															complete : function() {
 																enableSubmit();
-																$("#nicknameButton").removeAttr("disabled");
+																$(
+																		"#nicknameButton")
+																		.removeAttr(
+																				"disabled");
 															}
 														});
 											});
 							$("#emailCheckButton")
-									.click(function() {
+									.click(
+											function() {
 
 												const emailValue = $("#input3")
 														.val().trim();
@@ -336,11 +364,16 @@ color:#f0615c}
 												// 이메일을 안적었을 경우 이메일 입력하라는 문구 출력
 												if (emailValue === "") {
 													$("#emailCheckMessage")
-															.text("email을 입력해주세요!!")
-															.removeClass("text-primary text-danger")
-															.addClass("nickNameRed");
-													
-													$("#emailCheckButton").removeAttr("disabled");
+															.text(
+																	"email을 입력해주세요!!")
+															.removeClass(
+																	"text-primary text-danger")
+															.addClass(
+																	"nickNameRed");
+
+													$("#emailCheckButton")
+															.removeAttr(
+																	"disabled");
 													return;
 												}
 
@@ -359,23 +392,29 @@ color:#f0615c}
 																// 1. 사용 가능아이디
 																case "able":
 
-																	$("#emailCheckMessage")
-																			.text("사용 가능한 이메일 입니다.")
-																			.removeClass("text-danger nickNameRed")
-																			.addClass("text-primary");
-
-																
+																	$(
+																			"#emailCheckMessage")
+																			.text(
+																					"사용 가능한 이메일 입니다.")
+																			.removeClass(
+																					"text-danger nickNameRed")
+																			.addClass(
+																					"text-primary");
 
 																	emailAble = true;
 																	break;
-																	
+
 																// 2. 중복일 경우
 																case "unable":
 
-																	$("#emailCheckMessage")
-																			.text("이미 존재하는 이메일 입니다.")
-																			.removeClass("nickNameRed text-primary")
-																			.addClass("text-danger");
+																	$(
+																			"#emailCheckMessage")
+																			.text(
+																					"이미 존재하는 이메일 입니다.")
+																			.removeClass(
+																					"nickNameRed text-primary")
+																			.addClass(
+																					"text-danger");
 
 																	emailAble = false;
 																	break;
@@ -386,7 +425,10 @@ color:#f0615c}
 															},
 															complete : function() {
 																enableSubmit();
-																$("#emailButton").removeAttr("disabled");
+																$(
+																		"#emailButton")
+																		.removeAttr(
+																				"disabled");
 															}
 
 														});
@@ -415,7 +457,6 @@ color:#f0615c}
 							pwConfirmInput.keyup(confirmFunction);
 
 						});
-		
 	</script>
 
 </body>

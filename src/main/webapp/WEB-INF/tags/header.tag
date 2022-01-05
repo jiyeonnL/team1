@@ -5,9 +5,7 @@
 
 
 <style>
-body{
-background-color:#eef2f6;
-}
+
 .container{
 font-family: 'Jua', sans-serif;
 }
