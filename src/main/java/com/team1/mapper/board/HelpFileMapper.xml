@@ -8,15 +8,24 @@
 		DELETE FROM tb_file_help WHERE postId = #{boardId}
 	</delete>
 	<delete id="delete">
-		DELETE FROM tb_file_help WHERE postId = #{boardId} AND fileName = #{fileName}
+		DELETE FROM tb_file_help WHERE postId = #{boardId}
+		AND fileName = #{fileName}
 	</delete>
-	
-	<insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-		INSERT INTO tb_file_help (postId, fileName, url, isThumbnail) VALUES (#{postId}, #{fileName}, #{url}, #{isThumbnail})
+
+	<delete id="deleteByUrl">
+		DELETE FROM tb_file_help WHERE url = #{url}
+	</delete>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id"
+		keyColumn="id">
+		INSERT INTO tb_file_help (postId, fileName, url,
+		isThumbnail) VALUES (#{postId}, #{fileName}, #{url}, #{isThumbnail})
 	</insert>
-	
-	<select id="selectNamesByBoardId" resultType="com.team1.domain.board.HelpFileVO">
-		SELECT id, postId, fileName, url, isThumbnail FROM tb_file_help WHERE postId =#{boardId}
+
+	<select id="selectNamesByBoardId"
+		resultType="com.team1.domain.board.HelpFileVO">
+		SELECT id, postId, fileName, url, isThumbnail FROM
+		tb_file_help WHERE postId =#{boardId}
 	</select>
-	
+
 </mapper>

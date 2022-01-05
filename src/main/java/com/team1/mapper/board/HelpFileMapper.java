@@ -8,6 +8,7 @@ import com.team1.domain.board.HelpFileVO;
 
 
 public interface HelpFileMapper {
+	
 	int insert(HelpFileVO fileVO);
 	
 	//List<String> selectNamesByBoardId(Integer boardId);
@@ -15,6 +16,8 @@ public interface HelpFileMapper {
 	List<HelpFileVO> selectNamesByBoardId(Integer boardId);
 
 	void delete(@Param("boardId") Integer boardId, @Param("fileName") String fileName);
-
+	
+	void deleteByUrl(@Param("url") String url);
+	
 	void deleteByBoardId(Integer boardId);
 }

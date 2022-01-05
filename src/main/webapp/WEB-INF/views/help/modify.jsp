@@ -89,7 +89,7 @@ width: 20%;
 									<tr>
 										<td>
 											<div class="col d-flex justify-content-center align-items-center">
-												<input class="check" type="checkbox" name="removeFile" value="${file.fileName }">
+												<input class="check" type="checkbox" name="removeFile" value="${file.url}">
 											</div>
 										</td>
 										<td>
