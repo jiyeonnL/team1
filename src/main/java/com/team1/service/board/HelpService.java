@@ -206,6 +206,7 @@ public class HelpService {
 		List<HelpFileVO> files = fileMapper.selectNamesByBoardId(id);
 		if (files != null) {
 			for (HelpFileVO file : files) {
+				//s3에서 지운다.
 				String key = "board/help-board/" + id + "/" + file.getFileName();
 				deleteObject(key);
 			}
@@ -230,6 +231,10 @@ public class HelpService {
 //			, Integer page, Integer numberPerPage, Integer numberPerPagination) { 검색 결과도 페이지 네이션 구현한다면 필요한 변수 (전에 아직 구현 못함)
 //		return mapper.getListSearchByTitle(search, from, numberPerPage, numberPerPagination);
 		return mapper.getListSearchByContent(search);
+	}
+	
+	public List<HelpVO> getListByConditions(String location, String tag, String query) {
+		return mapper.getListByConditions(location, tag, query, 1);
 	}
 
 	public List<HelpFileVO> getFiles() {
