@@ -10,5 +10,4 @@ public class HelpFileVO {
 	private String url;
 	private Integer isThumbnail;
 	
-	private Integer countPostId;
 }
