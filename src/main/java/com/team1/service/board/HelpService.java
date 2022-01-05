@@ -28,6 +28,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
 @Service
 public class HelpService {
@@ -81,20 +82,47 @@ public class HelpService {
 		PutObjectRequest putObjectRequest = PutObjectRequest.builder().bucket(bucketName).key(key).acl(ObjectCannedACL.PUBLIC_READ).build();
 		RequestBody requestBody = RequestBody.fromInputStream(source, size);
 		s3.putObject(putObjectRequest, requestBody);
+		
 	}
 
 	@Transactional
-	public void register(HelpVO board, MultipartFile[] files) throws IllegalStateException, IOException {
+	public void register(HelpVO board, MultipartFile[] files, String thumNail) throws IllegalStateException, IOException {
+		System.out.println(thumNail);
 		register(board);
-		// 2. s3에 파일 업로드
-		for (MultipartFile file : files) {
+		
+		//이미지들에 대하여 처리
+		for (int i = 0; i<files.length; i++) {
+			
+			HelpFileVO fileVO = new HelpFileVO();
+			
+			MultipartFile file = files[i];
+			
+			//썸네일 지정이 되지 않았으면 처음 이미지를 썸네일로 지정한다.
+			if(i==0 && thumNail == null) {
+				
+				fileVO.setIsThumbnail(1);
+			//파일명과 썸네일의 문자열이 일치하면 썸네일로 지정
+			} else if (file.getOriginalFilename().equals(thumNail)){
+				
+				fileVO.setIsThumbnail(1);
+			} else {
+				fileVO.setIsThumbnail(0);
+			}
+			
+			fileVO.setFileName(file.getOriginalFilename());
+			fileVO.setPostId(board.getId());
+	
+			
 			if (file != null && file.getSize() > 0) {
 				// 2.1 파일을 작성, FILE SYSTEM, s3
 				String key = "board/help-board/" + board.getId() + "/" + file.getOriginalFilename();
 				putObject(key, file.getSize(), file.getInputStream());
+				String url = "https://" + bucketName + ".s3." + region.toString() +".amazonaws.com/" +key;
+				fileVO.setUrl(url);
 				// insert into File table, DB
-				fileMapper.insert(board.getId(), file.getOriginalFilename());
+				fileMapper.insert(fileVO);
 			}
+			
 		}
 	}
 
@@ -124,8 +152,8 @@ public class HelpService {
 				String key = "board/help-board/" + board.getId() + "/" + file.getOriginalFilename();
 				putObject(key, file.getSize(), file.getInputStream());
 				// 2. db 파일명 insert
-				fileMapper.delete(board.getId(), file.getOriginalFilename());
-				fileMapper.insert(board.getId(), file.getOriginalFilename());
+				//fileMapper.delete(board.getId(), file.getOriginalFilename());
+				//fileMapper.insert(board.getId(), file.getOriginalFilename());
 			}
 		}
 		return false;

@@ -8,7 +8,7 @@ import com.team1.domain.board.HelpFileVO;
 
 
 public interface HelpFileMapper {
-	int insert(@Param("boardId") Integer boardId, @Param("fileName") String fileName);
+	int insert(HelpFileVO fileVO);
 	
 	//List<String> selectNamesByBoardId(Integer boardId);
 	

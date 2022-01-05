@@ -1,5 +1,6 @@
 package com.team1.controller.board;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -140,10 +141,14 @@ public class HelpController {
 		
 	}
 	
+	//helpVO와 이미지 파일, 썸네일로 지정된 파일명을 받아온다(thumbNail).
 	@PostMapping("/register")
-	public String register(HelpVO board, MultipartFile[] multipartFile, String thumbNail, RedirectAttributes rttr, HttpServletRequest req) {
+	public String register(HelpVO board, MultipartFile[] files, String thumbNail, RedirectAttributes rttr, HttpServletRequest req) throws IllegalStateException, IOException {
 
-		service.register(board);
+		service.register(board, files, thumbNail);
+		
+	
+		
 		System.out.println(thumbNail);
 		rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
 
