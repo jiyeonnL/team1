@@ -15,12 +15,39 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 
+<style>
+.form-group{
+font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+#body {
+	/* height: calc(100vh-72px); */
+	width: 100%;
+	justify-content: center;
+	display: flex;
+}
+
+#inner {
+	width: 900px;
+	height: 100%;
+}
+
+#input2{
+height:150px;
+}
+
+#input3{
+width: 20%;
+}
+
+</style>
+
 <title>게시물 수정</title>
 </head>
 <body>
 	<b:header></b:header>
-	<div class="container">
-		<div class="row">
+	<div class="container" id="body">
+		<div class="row" id="inner">
 			<div class="col">
 				<b:innerNav></b:innerNav>
 				<h1>게시물 수정</h1>
