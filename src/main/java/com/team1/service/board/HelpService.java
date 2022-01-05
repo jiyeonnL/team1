@@ -197,8 +197,10 @@ public class HelpService {
 	@Transactional
 	public boolean remove(Integer id) {
 
-		// 1. 게시물에 달린 댓글 지우기
+		// 1.1 게시물에 달린 댓글 지우기
 		helpReplyMapper.deleteByBoardId(id);
+		// 1.2 좋아요 지우기
+		upMapper.upDeleteByBoardId(id);
 
 		// 2. 파일 지우기 , s3
 		// file system에서 삭제

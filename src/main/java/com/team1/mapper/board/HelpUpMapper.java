@@ -14,4 +14,6 @@ public interface HelpUpMapper {
 
 	public Integer getCount(@Param("id") Integer id);
 
+	public void upDeleteByBoardId(@Param("postId") Integer id);
+
 }

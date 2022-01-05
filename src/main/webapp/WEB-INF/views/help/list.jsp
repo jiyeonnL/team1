@@ -105,9 +105,10 @@ a:hover {
 			<a href="${pageContext.request.contextPath }/help/register" id="help-body-font" class="btn">글쓰기</a>
 			<!-- 검색결과 리스트 -->
 			<!-- for 문 돌면서 list에 있는 요소(게시물)들 출력 -->
-			<c:forEach items="${list}" var="board">
+			<article>
+			<c:forEach items="${list}" var="board"  varStatus="vs">
 			<c:if test="${location eq board.location || location eq '' || empty location }">
-				<div class="container-fluid my-1 border border-3 border-secondary" id="list-font">
+				<div class="container-fluid my-1 border border-3 border-secondary" id="list-font-${vs.index }" style="display : ${vs.index < 5 ? '' : 'none' }">
 					<div class="row md mx-3 my-2">
 						<div class="col-md-2 my-auto px-auto">
 							<div id="tag">${board.tag }</div>
@@ -185,10 +186,13 @@ a:hover {
 				</div>
 				</c:if>
 			</c:forEach>
+			</article>
 		</div>
 	</div>
 	<!-- 태그 -->
+	
 
+   
 
 	<!-- Result Modal -->
 	<c:if test="${not empty result }">
@@ -214,37 +218,31 @@ a:hover {
 		</div>
 	</c:if>
 
-	<!-- 	<script>
-	$(document).ready(function(){
-		/*context path*/
-		const appRoot = '${pageContext.request.contextPath}';
-		/* 현재 게시물의 댓글 목록 불러오는 함수*/
-		const listThumbs = function() {
-			$("#thumbnail").empty();
-			$.ajax({
-				url : appRoot + "/help/list/thumb",
-				success : function (thumbs) {
-					console.log(url);
-					for (let i = 0; i<thumbs.length; i++){
-						const thumbMediaObject = $(`
-							<c:forEach items="${thumbs }" var="fileName" varStatus="vs">
-								<c:if test="${fileName.boardId eq board.id }">
-									<div class="carousel-item-active">
-										<img src="${staticUrl }/${board.id }/${fileName.fileName }" class="d-block w-100" alt="${fileName.fileName }">
-									</div>
-								</c:if>
-							</c:forEach>
-						`);
-						}
-					}
-				})
-			}
-		listThumbs(); // 페이지 로딩 후 댓글 리스트 가져오는 함수 한 번 실행
-		});
-</script> -->
 <script>
 	$(document).ready(function(){
 		$("#help").attr("class", "btn btn-outline ml-1 active");
+			var count = 5;
+		$(window).scroll(function() { 
+			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+				for(i=0; i<5;i++){
+					$("#inner").find("#list-font-"+count).removeAttr("style", "none");
+					count++;
+				};				
+			} 
+		});
+/* 		var count = 0;
+		//스크롤 바닥 감지
+		window.onscroll = function(e) {
+		    //추가되는 임시 콘텐츠
+		    //window height + window scrollY 값이 document height보다 클 경우,
+		    if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+		    	//실행할 로직 (콘텐츠 추가)
+		        count++;
+		        var addContent = '<div class="block"><p>'+ count +'번째로 추가된 콘텐츠</p></div>';
+		        //article에 추가되는 콘텐츠를 append
+		        $('article').append(addContent);
+		    }
+		}; */
 	});
 </script>
 
