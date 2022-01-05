@@ -81,25 +81,35 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/login")
-	public void login() {
-		
-	}
+//	@GetMapping("/login")
+//	public void login() {
+//		
+//	}
 	
-	@PostMapping("/login")
-	public String login (String email, String pw, HttpSession session) {
+	@RequestMapping("/login")
+	public String login (String email, String pw, HttpSession session, RedirectAttributes rttr, Model model) {
 		UserVO vo = service.read(email);
 		
-		if(vo == null) {
+		if(vo == null || vo.getWithdrawal() == "O") {
+			
+			if (email != null) {
+				model.addAttribute("result", "존재하지 않은 아이디입니다.");
+			}
 			return null;
 		}
+		
 		boolean correctPassword = pw.equals(vo.getPw());
 		
 		if(!correctPassword) {
+			
+			model.addAttribute("result", "비밀번호를 다시 확인해주세요.");
+			
 			return null;
 		}
 		
 		session.setAttribute("loginUser",vo);
+		rttr.addFlashAttribute("result", vo.getNickname() + "님 환영합니다.");
+		
 		return "redirect:/all/list";
 		
 	}
@@ -120,9 +130,9 @@ public class UserController {
 	public String signup(UserVO user, RedirectAttributes rttr) {
 		
 		boolean ok = service.register(user);
-		
+		String message = "가입완료 되었습니다!!";
 		if(ok) {
-			rttr.addFlashAttribute("ok", "가입완료");
+			rttr.addFlashAttribute("ok", message);
 			return "redirect:/all/list";
 		}else {
 			return "redirect:/user/signup";
@@ -184,11 +194,11 @@ public class UserController {
 		// 로그인된 상태
 		boolean ok = service.modify(user);
 		
-		if (ok) {
-			rttr.addFlashAttribute("result", "회원 정보가 변경되었습니다.");
+		if (!ok) {
+			rttr.addFlashAttribute("modify", "회원 정보가 변경되었습니다. 로그아웃 후에 이용해주세요!");
 			session.setAttribute("loginUser", service.read(user.getEmail()));
 		} else {
-			rttr.addFlashAttribute("result", "회원 정보가 변경되지 않았습니다.");
+			
 		}
 
 		return "redirect:/all/list";

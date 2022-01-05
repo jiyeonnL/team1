@@ -116,13 +116,15 @@ p {
 					<button class="btn btn-outline-dark" id="loginButton">로그인</button>
 					<p>만약 계정이 없으시다면,</p>
 					<a href="${pageContext.request.contextPath }/user/signup" id="goSignUp">회원가입</a>
+					
+					
 				</form>
 			</div>
-
 		</div>
 	</div>
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	</script>
-	
+	<c:if test="${not empty result }">
+          <div class="alert alert-warning">${result }</div>
+    </c:if> 			
+
 </body>
 </html>
