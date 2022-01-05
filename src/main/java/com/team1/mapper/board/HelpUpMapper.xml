@@ -21,6 +21,11 @@
   	WHERE postId = #{postId} AND userId = #{userId}
   </delete>
   
+  <delete id="upDeleteByBoardId">
+  	DELETE FROM tb_board_help_up
+  	WHERE postId = #{postId}
+  </delete>
+  
   <insert id="upInsertUser" useGeneratedKeys="true" >
   	INSERT INTO tb_board_help_up (postId, userId) VALUES (#{postId}, #{userId})
   </insert>
