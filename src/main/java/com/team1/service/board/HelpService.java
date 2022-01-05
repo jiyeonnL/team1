@@ -145,7 +145,8 @@ public class HelpService {
 			for (String removeFileName : removeFile) {
 				// file system, s3에서 삭제
 				//String key = "board/help-board/" + board.getId() + "/" + removeFileName;
-				String key = removeFileName.split(staticUrl)[0];
+				String key = removeFileName.substring(staticUrl.length());
+				System.out.println(removeFileName);
 				System.out.println(key);
 				deleteObject(key);
 				// db table에서 삭제
