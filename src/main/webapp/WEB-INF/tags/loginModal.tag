@@ -73,7 +73,7 @@
 
 			<div class="modal-header header-color">
 				<h5 class="modal-title" id="exampleModalLabel">로그인하기</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				<button type="button" id="close" class="btn-close" data-bs-dismiss="modal">X</button>
 			</div>
 			<div class="modal-body " id="modal-body">
 				<form action="${pageContext.request.contextPath }/user/login" method="post">
@@ -107,8 +107,8 @@
 		</div>
 	</div>
 </div>
-<script>
-	$("#submit").click(function() {
-
+<script src="//code.jquery.com/jquery-1.11.0.min.js">
+	$("#close").click(function() {
+		$("#myModal").modal("hide");
 	});
 </script>

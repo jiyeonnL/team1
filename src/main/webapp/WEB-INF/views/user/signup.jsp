@@ -254,9 +254,7 @@ label {
 	</div>
 
 	<script>
-		$(document)
-				.ready(
-						function() {
+		$(document).ready(function() {
 
 							// 중복체크, 변수선언
 							const pwInput = $("#input2");
@@ -446,7 +444,7 @@ label {
 								} else {
 
 									pwCheck = false;
-									alert('비밀번호가 일치하는지 다시 확인해주세요!!')
+									
 								}
 								//일치 할 경우 서브밋 버튼 활성화
 								enableSubmit();
@@ -457,7 +455,7 @@ label {
 							pwConfirmInput.keyup(confirmFunction);
 
 						});
-	</script>
 
+	</script>
 </body>
 </html>
