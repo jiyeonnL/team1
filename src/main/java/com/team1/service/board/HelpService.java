@@ -233,8 +233,8 @@ public class HelpService {
 		return mapper.getListSearchByContent(search);
 	}
 	
-	public List<HelpVO> getListByConditions(String location, String tag, String query) {
-		return mapper.getListByConditions(location, tag, query, 1);
+	public List<HelpVO> getListByConditions(String location, String tag, String query, Integer id) {
+		return mapper.getListByConditions(location, tag, query, id);
 	}
 
 	public List<HelpFileVO> getFiles() {

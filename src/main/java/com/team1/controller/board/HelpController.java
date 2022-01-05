@@ -39,14 +39,10 @@ public class HelpController {
 
 	// help 페이지 (검색 쿼리 있는 버전)
 	@GetMapping(value = "/list")
-	public void help(
-			@RequestParam(value = "location", required = false) String location, 
+	public void help(@RequestParam(value = "location", required = false) String location,
 			@RequestParam(value = "query", required = false) String query,
-			@RequestParam(value = "tag", required = false) String tag,
-			Model model
-			) 
-	{
-		
+			@RequestParam(value = "tag", required = false) String tag, HttpSession session, Model model) {
+
 		System.out.println(tag);
 		System.out.println(query);
 		System.out.println(location);
@@ -56,8 +52,28 @@ public class HelpController {
 		model.addAttribute("tag", "help");
 		model.addAttribute("location", location);
 
-		List<HelpVO> list = service.getListByConditions(location, tag, query);
-		model.addAttribute("list", list);
+		UserVO uvo = (UserVO) session.getAttribute("loginUser");
+//		if (uvo != null) {
+//			List<HelpVO> list = service.getList(uvo.getId());
+//			List<HelpFileVO> fileNames = service.getFiles();
+//			model.addAttribute("list", list);
+//			model.addAttribute("fileNames", fileNames);
+//		} else {
+//			List<HelpVO> list = service.getList(0);
+//			List<HelpFileVO> fileNames = service.getFiles();
+//			model.addAttribute("list", list);
+//			model.addAttribute("fileNames", fileNames);
+//		}
+		
+		
+		if (uvo != null) {
+			List<HelpVO> list = service.getListByConditions(location, tag, query, uvo.getId());
+			model.addAttribute("list", list);
+		} else {
+			List<HelpVO> list = service.getListByConditions(location, tag, query, 0);
+			model.addAttribute("list", list);
+		}
+
 
 	}
 

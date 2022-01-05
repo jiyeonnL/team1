@@ -123,19 +123,23 @@
 		LEFT JOIN tb_reply_help r
 		ON p.id = r.boardId
 
-		WHERE
-		 '1' = '1'
+	<where>
 		<if test="query != null">
 			AND p.content like concat('%',#{query},'%' )
 		</if>
-		
+
 		<if test="location != null">
-			AND	p.location = #{location}
+			AND p.location = #{location}
 		</if>
-		
-		<if test = "tag != null">
+
+		<if test="tag != null">
 			AND p.tag = #{tag}
 		</if>
+	</where>
+
+		GROUP BY p.id
+		Order By p.id
+		DESC;
 
 	</select>
 

@@ -21,7 +21,7 @@ public interface HelpMapper {
 
 	public List<HelpVO> getListSearchByContent(String search);
 	
-	public List<HelpVO> getListByConditions(@Param("location") String location, @Param("tag") String tag, @Param("query") String query, @Param("loginId")Integer loginId);
+	public List<HelpVO> getListByConditions(@Param("location") String location, @Param("tag") String tag, @Param("query") String query, @Param("loginId") Integer loginId);
 	
 	public int upViews(Integer id);
 
