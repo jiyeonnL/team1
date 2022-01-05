@@ -14,12 +14,40 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
+<style>
+
+#body {
+	/* height: calc(100vh-72px); */
+	width: 100%;
+	justify-content: center;
+	display: flex;
+}
+
+#inner {
+	width: 900px;
+	height: 100%;
+}
+
+.form-group{
+font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+#input4{
+height:150px;
+}
+
+#input6{
+width: 20%;
+}
+
+</style>
+
 <title>게시물 작성</title>
 </head>
 <body>
 <b:header></b:header>
-	<div class="container">
-		<div class="row">
+	<div class="container" id="body">
+		<div class="row" id="inner">
 			<div class="col">
 			<b:innerNav></b:innerNav>
 				<h1>게시물 작성</h1>
@@ -70,7 +98,7 @@
 					<div id="image_container" class="d-flex"></div>
 
 					<button class="btn btn-outline-primary" type="submit">등록</button>
-					<a href="${pageContext.request.contextPath }/help/list?location=" class="btn btn-outline-secondary ">취소</a>
+					<a href="${pageContext.request.contextPath }/help/list?location=" class="btn btn-outline-danger">취소</a>
 				</form>
 
 			</div>

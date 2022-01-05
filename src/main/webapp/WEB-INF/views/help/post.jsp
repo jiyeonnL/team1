@@ -386,7 +386,7 @@ a:hover {
 						</div>
 						<!-- 내용  -->
 						<div class="col-md-10 h4 my-auto ">
-							<c:out value="${post.content}" />
+							<pre><c:out value="${post.content}" /></pre>
 						</div>
 
 					</div>
