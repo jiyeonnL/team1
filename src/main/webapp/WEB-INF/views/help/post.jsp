@@ -135,7 +135,7 @@
 				const replyMediaObject = $(`
 						
 						<table class="table table-bordered">
-							<thead>
+							<thead class="thead-light">
 								<tr>
 									<th id="userprofile">
 											<img	id = "reply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
@@ -335,6 +335,9 @@ a:hover {
 	height: 60px;
 	width: 60px;
 }
+#buttonmenu{
+	margin-bottom: 10px;
+}
 
 </style>
 </head>
@@ -408,19 +411,14 @@ a:hover {
 
 					
 				</div>
-				<div class="row md mx-4 d-flex justify-content-between">
+				<div id="buttonmenu" class="row md mx-4 d-flex justify-content-between">
 					<div class="col-md-2 my-auto px-auto ">
 						<c:if test="${sessionScope.loginUser.id eq post.memberId }">
-							<a
-								href="${pageContext.request.contextPath }/help/modify?id=${post.id }"
-								class="btn btn-outline-secondary"> 수정/삭제 </a>
+							<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }"	class="btn btn-outline-secondary"> 수정/삭제 </a>
 						</c:if>
 					</div>
 					<div class="col-md-2 my-auto px-auto">
-						<a href="${pageContext.request.contextPath }/help/list?location="
-							class="btn btn-outline-secondary "> <i class="fas fa-list">
-								뒤로</i>
-						</a>
+						<a href="${pageContext.request.contextPath }/help/list?location="	class="btn btn-outline-secondary"><i class="fas fa-list"> 뒤로</i></a>
 					</div>
 				</div>
 
@@ -510,7 +508,11 @@ a:hover {
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
 		crossorigin="anonymous"></script>
-
+<script>
+	$(document).ready(function(){
+		$("#help").attr("class", "btn btn-outline ml-1 active");
+	});
+</script>
 
 </body>
 </html>

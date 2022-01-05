@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import com.team1.domain.user.UserVO;
-
 import lombok.Data;
 
 @Data

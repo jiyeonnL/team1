@@ -17,9 +17,9 @@
 
 
 <link rel="stylesheet"
-	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-	crossorigin="anonymous" />
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+	integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
@@ -87,6 +87,7 @@ a:hover {
 	text-decoration: none;
 	color: inherit;
 }
+
 </style>
 </head>
 <body>
@@ -96,7 +97,7 @@ a:hover {
 		<div id="inner">
 			<b:innerNav></b:innerNav>
 			<b:cover></b:cover>
-			<a href="${pageContext.request.contextPath }/help/register" id="help-font">글쓰기</a>
+			<a href="${pageContext.request.contextPath }/help/register" id="help-font" class="btn btn-success">글쓰기</a>
 			<!-- 검색결과 리스트 -->
 			<!-- for 문 돌면서 list에 있는 요소(게시물)들 출력 -->
 			<c:forEach items="${list}" var="board">
@@ -236,11 +237,11 @@ a:hover {
 		listThumbs(); // 페이지 로딩 후 댓글 리스트 가져오는 함수 한 번 실행
 		});
 </script> -->
-	<!-- <script>
+<script>
 	$(document).ready(function(){
-		$(".carousel-item").attr("class", "active");
+		$("#help").attr("class", "btn btn-outline ml-1 active");
 	});
-</script> -->
+</script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
