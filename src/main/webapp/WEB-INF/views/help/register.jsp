@@ -63,8 +63,11 @@
 
 					<div class="form-group">
 						<label for="input7">Image</label>
-						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" multiple>
+						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" onchange=setThumbnail(event) multiple>
 				    	</div>
+				    	
+				    						<!-- 이미지들 미리보기 컨테이너 -->
+					<div id="image_container" class="d-flex"></div>
 
 					<button class="btn btn-outline-primary" type="submit">등록</button>
 					<a href="${pageContext.request.contextPath }/help/list?location=" class="btn btn-outline-secondary ">취소</a>
@@ -80,6 +83,50 @@
 	$(document).ready(function(){
 		$("#help").attr("class", "btn btn-outline ml-1 active");
 	});
-	</script>
+	
+	function setThumbnail(event) {
+		console.log("set");
+		/* 현재 미리보기는 모두 지워야 한다. */
+		$("#image_container").empty();
+
+		var i = 0;
+
+		for (var image of event.target.files) {
+			console.log(image.name);
+			var reader = new FileReader();
+			reader.readAsDataURL(image);
+			reader.onload = function (event) {
+
+				const replyMediaObject = $(`
+                	<span id = "\${event.timeStamp}" style="height: 200px; width: 200px; position:relative;">
+						<input 
+							type="radio" 
+							id="thumbNailChoice"
+						 	name="thumbNail" 
+							value="\${image.name}"
+							style = "position: absolute; z-index:100; opacity:1; top: 10px; left: 10px;"
+						>
+						 
+						<button 
+							type="button" 
+							class="close" 
+							style = "position: absolute; z-index:100; opacity:1; top: 10px; right: 10px;" 
+							aria-label="Close"
+							onclick = "deletePicture(\${event.timeStamp})"
+						>
+								<span aria-hidden="true">&times;</span>
+						</button>
+						<img src= "\${event.target.result}" class="img-thumbnail d-block" style="height: 100%; width: 100%" atl="aaaa"/>	
+					</span>
+                	
+                `);
+
+				$("#image_container").append(replyMediaObject);
+			};
+
+			i++;
+		}
+	}
+</script>
 </body>
 </html>

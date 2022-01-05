@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team1.coverData.Cover;
@@ -140,10 +141,10 @@ public class HelpController {
 	}
 	
 	@PostMapping("/register")
-	public String register(HelpVO board, RedirectAttributes rttr, HttpServletRequest req) {
+	public String register(HelpVO board, MultipartFile[] multipartFile, String thumbNail, RedirectAttributes rttr, HttpServletRequest req) {
 
 		service.register(board);
-
+		System.out.println(thumbNail);
 		rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
 
 		return "redirect:/help/list?location=";
