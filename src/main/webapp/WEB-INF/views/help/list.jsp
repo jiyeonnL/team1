@@ -26,14 +26,20 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <style>
-
-#help-body-font{
-background-color: #ffe164;
-font-family: 'Jua', sans-serif;
-font-size:25px;
+#help-body-font {
+	background-color: #ffe164;
+	font-family: 'Jua', sans-serif;
+	font-size: 25px;
+	margin-top:10px;
 }
-#list-font{
-font-family: 'IBM Plex Sans KR', sans-serif;
+
+#list-font {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+	background-color: #eef2f6;
+}
+
+.list-background-color {
+	background-color: #eef2f6;
 }
 
 #body {
@@ -60,6 +66,9 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 	justify-content: center;
 	border-radius: 5px;
 	width: 80%;
+	border: solid;
+	border-color: #f0615c;
+	background-color: white;
 }
 
 #image {
@@ -88,11 +97,38 @@ a {
 	color: inherit;
 }
 
+a#title {
+	/* border-bottom: solid; */
+	font-weight: bold;
+}
+
+#contentBox {
+	border-top-color: #808080;
+}
+
 a:hover {
 	text-decoration: none;
 	color: inherit;
 }
 
+.제목아래보더 {
+	border-bottom: solid;
+	border-bottom-width: 3px;
+}
+
+#게시글-작성시간 {
+	font-size: medium;
+}
+
+.댓글위의바 {
+	border-top: solid;
+	border-top-color: #cccccc;
+}
+
+.댓글창부분 {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
 </style>
 </head>
 <body>
@@ -107,85 +143,86 @@ a:hover {
 			<!-- for 문 돌면서 list에 있는 요소(게시물)들 출력 -->
 			<article>
 			<c:forEach items="${list}" var="board"  varStatus="vs">
-			<c:if test="${location eq board.location || location eq '' || empty location }">
-				<div class="container-fluid my-1 border border-3 border-secondary" id="list-font-${vs.index }" style="display : ${vs.index < 5 ? '' : 'none' }">
-					<div class="row md mx-3 my-2">
-						<div class="col-md-2 my-auto px-auto">
-							<div id="tag">${board.tag }</div>
-						</div>
-						<div class="col-md-5 my-auto h5">
-							<div>
-								<a href="/controller1/help/list/${board.id}" id="title"><c:out
-										value="${board.title}" /> </a>
+					<c:if test="${location eq board.location || location eq '' || empty location }">
+						<div class="container-fluid my-4 border border-3 border-secondary list-background-color" id="list-font-${vs.index }" style="display : ${vs.index < 5 ? '' : 'none' }">
+							<div class="row md mx-3 my-2 제목아래보더" >
+								<div class="col-md-2 my-auto px-auto">
+									<div id="tag">${board.tag }</div>
+								</div>
+								<div class="col-md-5 my-auto h5">
+									<div>
+										<a href="/controller1/help/list/${board.id}" id="title">
+											<c:out value="${board.title}" />
+										</a>
+									</div>
+								</div>
+								<div class="col-md-3 offset-md-2 my-auto h5">
+									<div>${board.nickname }</div>
+									<div id="게시글-작성시간">${board.inserted}</div>
+								</div>
+							</div>
+
+							<div class="row md px-0 mx-0 my-2">
+								<div class="col-md-12 ">
+									<div id="line"></div>
+								</div>
+							</div>
+
+							<!-- 여기가 컨텐츠 표현 부분입니다. a 태그로 내용을 표시합니다. -->
+							<div id="contentBox" class="row md px-0 mx-3 h5">
+								<a href="/controller1/help/list/${board.id}">
+									<c:out value="${board.content}" />
+								</a>
+							</div>
+
+							<!-- preview에 올릴 한장의 이미지, 썸네일 한장만 표시한다. -->
+							<div class="row md px-0 mx-0 justify-content-center">
+								<div class="col-md-8 my-auto mx-0 d-flex justify-content-center">
+									<a id="thumbnail" href="/controller1/help/list/${board.id}">
+
+										<!-- postVO가 가진 file List 중 썸네일로 지정된 이미지만 띄운다. -->
+										<c:if test="${not empty board.fileList }">
+											<c:forEach items="${board.fileList }" var="file" varStatus="vs">
+												<c:if test="${file.isThumbnail eq 1 }">
+													<img src="${file.url}" class="d-block w-100" alt="${file.url}">
+
+												</c:if>
+											</c:forEach>
+										</c:if>
+
+									</a>
+								</div>
+							</div>
+
+							<div class="row my-2">
+								<div class="col-md-12 게시물-아랫선" style="height: 2px; width: 100%">
+									<div id="line"></div>
+								</div>
+							</div>
+
+
+							<div class="row md mx-3 댓글위의바">
+								<div class="col-md-2 댓글창부분">
+									<c:if test="${board.upposession !=null}">
+										<i class="fa fa-thumbs-up fa-fw fa-2x m-r-3"></i>
+									</c:if>
+									<c:if test="${empty board.upposession }">
+										<i class="far fa-thumbs-up fa-fw fa-2x m-r-3"></i>
+									</c:if>
+									${board.up}
+								</div>
+								<div class="col-md-2 댓글창부분">
+									<i class="fa fa-comments fa-fw fa-2x m-r-3"></i>
+									${board.replyCount }
+								</div>
+								<div class="col-md-2 댓글창부분">
+									<i class="fas fa-eye fa-fw fa-2x m-r-3"></i>
+									${board.views }
+								</div>
 							</div>
 						</div>
-						<div class="col-md-3 offset-md-2 my-auto h5">
-							<div>${board.nickname }</div>
-							<div>${board.inserted}</div>
-						</div>
-					</div>
-
-					<div class="row md px-0 mx-0 my-2">
-						<div class="col-md-12 ">
-							<div id="line"></div>
-						</div>
-					</div>
-					
-					<!-- 여기가 컨텐츠 표현 부분입니다. a 태그로 내용을 표시합니다. -->
-					<div id="contentBox" class="row md px-0 mx-3 h5">
-						<a href="/controller1/help/list/${board.id}"><c:out
-								value="${board.content}" /></a>
-					</div>
-
-					<!-- preview에 올릴 한장의 이미지, 썸네일 한장만 표시한다. -->
-					<div class="row md px-0 mx-0 justify-content-center">
-						<div class="col-md-8 my-auto mx-0 d-flex justify-content-center">
-							<a id="thumbnail" href="/controller1/help/list/${board.id}">
-
-								<!-- postVO가 가진 file List 중 썸네일로 지정된 이미지만 띄운다. --> <c:if
-									test="${not empty board.fileList }">
-									<c:forEach items="${board.fileList }" var="file" varStatus="vs">
-										<c:if test="${file.isThumbnail eq 1 }">
-											<img src="${file.url}" class="d-block w-100"
-												alt="${file.url}">
-
-										</c:if>
-									</c:forEach>
-								</c:if>
-
-							</a>
-						</div>
-					</div>
-
-					<div class="row my-2">
-						<div class="col-md-12 bg-secondary"
-							style="height: 2px; width: 100%">
-							<div id="line"></div>
-						</div>
-					</div>
-
-
-					<div class="row md mx-4">
-						<div class="col-md-2">
-							<c:if test="${board.upposession !=null}">
-								<i class="fa fa-thumbs-up fa-fw fa-2x m-r-3"></i>
-							</c:if>
-							<c:if test="${empty board.upposession }">
-								<i class="far fa-thumbs-up fa-fw fa-2x m-r-3"></i>
-							</c:if>
-							${board.up}
-						</div>
-						<div class="col-md-2">
-							<i class="fa fa-comments fa-fw fa-2x m-r-3"></i>
-							${board.replyCount }
-						</div>
-						<div class="col-md-2">
-							<i class="fas fa-eye fa-fw fa-2x m-r-3"></i> ${board.views }
-						</div>
-					</div>
-				</div>
-				</c:if>
-			</c:forEach>
+					</c:if>
+				</c:forEach>
 			</article>
 		</div>
 	</div>

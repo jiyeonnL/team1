@@ -20,9 +20,7 @@
   파랑 배경색 : #264d73
   빨간 포인트색 : #f0615c
   하늘색 배경색 : #eef2f6 */
-/* body {
-	background-color: #ffe164;
-} */
+
 
 * {
 	font-family: 'Jua', sans-serif;

@@ -15,7 +15,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
 <style>
-
+/*노랑 배경색 : #ffe164
+  파랑 배경색 : #264d73
+  빨간 포인트색 : #f0615c
+  하늘색 배경색 : #eef2f6 */
 #body {
 	/* height: calc(100vh-72px); */
 	width: 100%;
@@ -27,19 +30,29 @@
 	width: 900px;
 	height: 100%;
 }
+.패딩정리{
+padding-right:0px;
+padding-left:0px;}
 
-.form-group{
-font-family: 'IBM Plex Sans KR', sans-serif;
+.form-group {
+	font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
-#input4{
-height:150px;
+#input4 {
+	height: 150px;
 }
 
-#input6{
-width: 20%;
+#input6 {
+	width: 20%;
 }
 
+.btn-register {
+	color: #f0615c;
+}
+
+.btn-cancel {
+	color: #264d73;
+}
 </style>
 
 <title>게시물 작성</title>
@@ -48,7 +61,7 @@ width: 20%;
 <b:header></b:header>
 	<div class="container" id="body">
 		<div class="row" id="inner">
-			<div class="col">
+			<div class="col 패딩정리">
 			<b:innerNav></b:innerNav>
 				<h1>게시물 작성</h1>
 
@@ -97,8 +110,8 @@ width: 20%;
 				    						<!-- 이미지들 미리보기 컨테이너 -->
 					<div id="image_container" class="d-flex"></div>
 
-					<button class="btn btn-outline-primary" type="submit">등록</button>
-					<a href="${pageContext.request.contextPath }/help/list?location=" class="btn btn-outline-danger">취소</a>
+					<button class="btn-register" type="submit">등록</button>
+					<a href="${pageContext.request.contextPath }/help/list?location=" class="btn-cancel">취소</a>
 				</form>
 
 			</div>
