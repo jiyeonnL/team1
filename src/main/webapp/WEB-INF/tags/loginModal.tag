@@ -107,7 +107,8 @@
 		</div>
 	</div>
 </div>
-<script src="//code.jquery.com/jquery-1.11.0.min.js">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
 	$("#close").click(function() {
 		$("#myModal").modal("hide");
 	});
