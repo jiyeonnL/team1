@@ -158,7 +158,7 @@ public class HelpController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "redirect:/help/list?location=";
+		return "redirect:/help/list";
 	}
 
 	@GetMapping("/register")
@@ -176,7 +176,7 @@ public class HelpController {
 		System.out.println(thumbNail);
 		rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
 
-		return "redirect:/help/list?location=";
+		return "redirect:/help/list";
 	}
 
 	@PostMapping("/remove")
@@ -187,7 +187,7 @@ public class HelpController {
 			rttr.addFlashAttribute("result", id + "번 게시글이 삭제되었습니다.");
 		}
 
-		return "redirect:/help/list?location=";
+		return "redirect:/help/list";
 	}
 
 }
