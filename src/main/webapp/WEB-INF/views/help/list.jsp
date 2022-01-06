@@ -106,94 +106,94 @@ a:hover {
 			<a href="${pageContext.request.contextPath }/help/register" id="help-body-font" class="btn">글쓰기</a>
 			<!-- 검색결과 리스트 -->
 			<!-- for 문 돌면서 list에 있는 요소(게시물)들 출력 -->
-			<article>
-			<c:forEach items="${list}" var="board"  varStatus="vs">
-			<c:if test="${location eq board.location || location eq '' || empty location }">
-				<div class="container-fluid my-1 border border-3 border-secondary" id="list-font-${vs.index }" style="display : ${vs.index < 5 ? '' : 'none' }">
-					<div class="row md mx-3 my-2">
-						<div class="col-md-2 my-auto px-auto">
-							<div id="tag">${board.tag }</div>
-						</div>
-						<div class="col-md-5 my-auto h5">
-							<div>
-								<a href="/controller1/help/list/${board.id}" id="title"><c:out
-										value="${board.title}" /> </a>
+			<c:forEach items="${list}" var="board" varStatus="vs">
+				<c:if test="${location eq board.location || location eq '' || empty location }">
+					<div class="container-fluid my-1 border border-3 border-secondary" id="list-font-${vs.index }" style="display : ${vs.index < 5 ? '' : 'none' }">
+						<div class="row md mx-3 my-2">
+							<div class="col-md-2 my-auto px-auto">
+								<div id="tag">${board.tag }</div>
+							</div>
+							<div class="col-md-5 my-auto h5">
+								<div>
+									<a href="/controller1/help/list/${board.id}" id="title">
+										<c:out value="${board.title}" />
+									</a>
+								</div>
+							</div>
+							<div class="col-md-3 offset-md-2 my-auto h5">
+								<div>${board.nickname }</div>
+								<div>${board.inserted}</div>
 							</div>
 						</div>
-						<div class="col-md-3 offset-md-2 my-auto h5">
-							<div>${board.nickname }</div>
-							<div>${board.inserted}</div>
+
+						<div class="row md px-0 mx-0 my-2">
+							<div class="col-md-12 ">
+								<div id="line"></div>
+							</div>
 						</div>
-					</div>
 
-					<div class="row md px-0 mx-0 my-2">
-						<div class="col-md-12 ">
-							<div id="line"></div>
-						</div>
-					</div>
-					
-					<!-- 여기가 컨텐츠 표현 부분입니다. a 태그로 내용을 표시합니다. -->
-					<div id="contentBox" class="row md px-0 mx-3 h5">
-						<a href="/controller1/help/list/${board.id}"><c:out
-								value="${board.content}" /></a>
-					</div>
-
-					<!-- preview에 올릴 한장의 이미지, 썸네일 한장만 표시한다. -->
-					<div class="row md px-0 mx-0 justify-content-center">
-						<div class="col-md-8 my-auto mx-0 d-flex justify-content-center">
-							<a id="thumbnail" href="/controller1/help/list/${board.id}">
-
-								<!-- postVO가 가진 file List 중 썸네일로 지정된 이미지만 띄운다. --> <c:if
-									test="${not empty board.fileList }">
-									<c:forEach items="${board.fileList }" var="file" varStatus="vs">
-										<c:if test="${file.isThumbnail eq 1 }">
-											<img src="${file.url}" class="d-block w-100"
-												alt="${file.url}">
-
-										</c:if>
-									</c:forEach>
-								</c:if>
-
+						<!-- 여기가 컨텐츠 표현 부분입니다. a 태그로 내용을 표시합니다. -->
+						<div id="contentBox" class="row md px-0 mx-3 h5">
+							<a href="/controller1/help/list/${board.id}">
+								<c:out value="${board.content}" />
 							</a>
 						</div>
-					</div>
 
-					<div class="row my-2">
-						<div class="col-md-12 bg-secondary"
-							style="height: 2px; width: 100%">
-							<div id="line"></div>
+						<!-- preview에 올릴 한장의 이미지, 썸네일 한장만 표시한다. -->
+						<div class="row md px-0 mx-0 justify-content-center">
+							<div class="col-md-8 my-auto mx-0 d-flex justify-content-center">
+								<a id="thumbnail" href="/controller1/help/list/${board.id}">
+
+									<!-- postVO가 가진 file List 중 썸네일로 지정된 이미지만 띄운다. -->
+									<c:if test="${not empty board.fileList }">
+										<c:forEach items="${board.fileList }" var="file" varStatus="vs">
+											<c:if test="${file.isThumbnail eq 1 }">
+												<img src="${file.url}" class="d-block w-100" alt="${file.url}">
+
+											</c:if>
+										</c:forEach>
+									</c:if>
+
+								</a>
+							</div>
 						</div>
-					</div>
+
+						<div class="row my-2">
+							<div class="col-md-12 bg-secondary" style="height: 2px; width: 100%">
+								<div id="line"></div>
+							</div>
+						</div>
 
 
-					<div class="row md mx-4">
-						<div class="col-md-2">
-							<c:if test="${board.upposession !=null}">
-								<i class="fa fa-thumbs-up fa-fw fa-2x m-r-3"></i>
-							</c:if>
-							<c:if test="${empty board.upposession }">
-								<i class="far fa-thumbs-up fa-fw fa-2x m-r-3"></i>
-							</c:if>
-							${board.up}
-						</div>
-						<div class="col-md-2">
-							<i class="fa fa-comments fa-fw fa-2x m-r-3"></i>
-							${board.replyCount }
-						</div>
-						<div class="col-md-2">
-							<i class="fas fa-eye fa-fw fa-2x m-r-3"></i> ${board.views }
+						<div class="row md mx-4">
+							<div class="col-md-2">
+								<c:if test="${board.upposession !=null}">
+									<i class="fa fa-thumbs-up fa-fw fa-2x m-r-3"></i>
+								</c:if>
+								<c:if test="${empty board.upposession }">
+									<i class="far fa-thumbs-up fa-fw fa-2x m-r-3"></i>
+								</c:if>
+								${board.up}
+							</div>
+							<div class="col-md-2">
+								<i class="fa fa-comments fa-fw fa-2x m-r-3"></i>
+								${board.replyCount }
+							</div>
+							<div class="col-md-2">
+								<i class="fas fa-eye fa-fw fa-2x m-r-3"></i>
+								${board.views }
+							</div>
 						</div>
 					</div>
-				</div>
 				</c:if>
 			</c:forEach>
-			</article>
+		<b:copyright></b:copyright>
 		</div>
 	</div>
 	<!-- 태그 -->
 	
 
-   
+
 
 	<!-- Result Modal -->
 	<c:if test="${not empty result }">
@@ -202,8 +202,7 @@ a:hover {
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">Process Result</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
@@ -211,15 +210,14 @@ a:hover {
 						<p>${result }</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</c:if>
 
-<script>
+	<script>
 	$(document).ready(function(){
 		$("#help").attr("class", "btn btn-outline ml-1 active");
 			var count = 5;
@@ -247,9 +245,6 @@ a:hover {
 	});
 </script>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 </body>
 </html>
