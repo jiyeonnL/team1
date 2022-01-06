@@ -21,6 +21,7 @@
 	font-family: 'Jua', sans-serif;
 	font-size: 25px;
 	margin-top: 10px;
+	border-radius:7px;
 }
 
 #list-font {
@@ -30,6 +31,10 @@
 
 .list-background-color {
 	background-color: #eef2f6;
+	border: 2px solid #264d73;
+	border-radius: 10px;
+	
+	
 }
 
 #body {
@@ -57,8 +62,9 @@
 	border-radius: 5px;
 	width: 80%;
 	border: solid;
-	border-color: #f0615c;
+	border-color: #9999ff;
 	background-color: white;
+	margin-bottom: 5px;
 }
 
 #image {
@@ -74,6 +80,11 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	width: 95%;
+}
+
+#내용 {
+	padding-left: 154px;
+	padding-right: 154px;
 }
 
 a {
@@ -100,14 +111,25 @@ a:hover {
 	text-decoration: none;
 	color: inherit;
 }
+.태그테두리{
+padding-left:0px;
+padding-right:0px;}
 
 .제목아래보더 {
+	padding-top:8px;
+	padding-bottom:3px;
 	border-bottom: solid;
 	border-bottom-width: 3px;
 }
+.닉네임위치{
+    padding-left: 23px;
+    }
 
 #게시글-작성시간 {
 	font-size: medium;
+	text-align: right;
+	padding-top: 12px;
+	font-weight: bold;
 }
 
 .댓글위의바 {
@@ -118,6 +140,9 @@ a:hover {
 .댓글창부분 {
 	margin-top: 8px;
 	margin-bottom: 8px;
+}
+.fa-2x{
+font-size:1.5em;
 }
 </style>
 </head>
@@ -133,9 +158,9 @@ a:hover {
 			<!-- for 문 돌면서 list에 있는 요소(게시물)들 출력 -->
 			<c:forEach items="${list}" var="board" varStatus="vs">
 				<c:if test="${location eq board.location || location eq '' || empty location }">
-					<div class="container-fluid my-4 border border-3 border-secondary list-background-color" id="list-font-${vs.index }" style="display : ${vs.index < 5 ? '' : 'none' }">
+					<div class="container-fluid my-4 list-background-color" id="list-font-${vs.index }" style="display : ${vs.index < 5 ? '' : 'none' }">
 						<div class="row md mx-3 my-2 제목아래보더">
-							<div class="col-md-2 my-auto px-auto">
+							<div class="col-md-2 my-auto px-auto 태그테두리">
 								<div id="tag">${board.tag }</div>
 							</div>
 							<div class="col-md-5 my-auto h5">
@@ -146,8 +171,7 @@ a:hover {
 								</div>
 							</div>
 							<div class="col-md-3 offset-md-2 my-auto h5">
-								<div>${board.nickname }</div>
-								<div id="게시글-작성시간">${board.inserted}</div>
+								<div class="닉네임위치">${board.nickname }</div>
 							</div>
 						</div>
 
@@ -159,7 +183,7 @@ a:hover {
 
 						<!-- 여기가 컨텐츠 표현 부분입니다. a 태그로 내용을 표시합니다. -->
 						<div id="contentBox" class="row md px-0 mx-3 h5">
-							<a href="/controller1/help/list/${board.id}">
+							<a href="/controller1/help/list/${board.id}" id="내용">
 								<c:out value="${board.content}" />
 							</a>
 						</div>
@@ -198,15 +222,18 @@ a:hover {
 								<c:if test="${empty board.upposession }">
 									<i class="far fa-thumbs-up fa-fw fa-2x m-r-3"></i>
 								</c:if>
-								${board.up}
+								<span class="fa-2x"> ${board.up} </span>
 							</div>
 							<div class="col-md-2 댓글창부분">
 								<i class="fa fa-comments fa-fw fa-2x m-r-3"></i>
-								${board.replyCount }
+								<span class="fa-2x"> ${board.replyCount } </span>
 							</div>
 							<div class="col-md-2 댓글창부분">
 								<i class="fas fa-eye fa-fw fa-2x m-r-3"></i>
-								${board.views }
+								<span class="fa-2x"> ${board.views } </span>
+							</div>
+							<div class="col-md-6 ">
+								<div id="게시글-작성시간">${board.inserted}</div>
 							</div>
 						</div>
 					</div>

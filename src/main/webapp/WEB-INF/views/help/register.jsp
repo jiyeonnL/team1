@@ -32,7 +32,8 @@
 }
 .패딩정리{
 padding-right:0px;
-padding-left:0px;}
+padding-left:0px;
+}
 
 .form-group {
 	font-family: 'IBM Plex Sans KR', sans-serif;
