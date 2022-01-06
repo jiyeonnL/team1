@@ -26,9 +26,6 @@
 					<button type="button" id="other" class="btn btn-outline-dark ml-1">기타</button>
 				</li>
 			</ul>
-
-
-
 		</div>
 	</div>
 </nav>
@@ -38,31 +35,36 @@
 
 		location.href = "/controller1/help/list?" + getLocation();
 
-	})
-
-	$("#buy").click(function() {
-
-		location.href = "/controller1/help/list?tag=사다주세요" + getLocation();
 
 	})
 
-	$("#buy").click(function() {
+	$("#buy").click(
+			function() {
+				window.location.href = "/controller1/help/list?tag=사다주세요"
+						+ getLocation();
 
-		location.href = "/controller1/help/list?tag=사다주세요" + getLocation();
+			})
 
-	})
+	$("#care").click(
+			function() {
 
-	$("#care").click(function() {
+				window.location.href = "/controller1/help/list?tag=맡아주세요"
+						+ getLocation();
 
-		location.href = "/controller1/help/list?tag=맡아주세요" + getLocation();
+			})
 
-	})
+	$("#move").click(
+			function() {
 
-	$("#move").click(function() {
+				window.location.href = "/controller1/help/list?tag=옮겨주세요"
+						+ getLocation();
 
-		location.href = "/controller1/help/list?tag=옮겨주세요" + getLocation();
+			})
 
-	})
+	function getLocation() {
+
+		var location = "${location}";
+		console.log(location);
 
 	$("#other").click(function() {
 
@@ -70,6 +72,11 @@
 
 	})
 	function getLocation() {
+		if (location == "") {
+			return "";
+		} else {
+			return "&location=" + location;
+		}
 
 		var location = "${location}";
 
@@ -79,16 +86,20 @@
 			return "&location=" + location;
 		}
 
+
 		//현재의 위치
 		/*
 		const regex = /(location=.*)(?=&|$)/;
+		const regex = /(location=.*)(?=&|\$)/;
 		var location = link.match(regex);
 		console.log(location);
-		if(location == null && location[0] == "") {
+		if (location == null) {
 			return ""
 		} else {
-			return "&"+location[0];
+			console.log(location[0]);
+			return "&location=" + location[0];
 		}
 		 */
 	}
+}
 </script>

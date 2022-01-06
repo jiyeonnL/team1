@@ -131,9 +131,14 @@ function locationChange() {
 	const regex = /(location=.*)(?=&|$)/i;
 	//빈 문자열이면 현재의 위치를 없애버린다.
 	if(location == "") {
-		const regex = /(location=.*)(?=&|$)/i;
-		window.location.href = link.replace(regex , "");
+		
+		const regex1 = /(&location=.*)(?=&|$)/i;
+		const regex2 = /(\?location=.*)(?=&|$)/i;
+		link = link.replace(regex1, "");
+		link = link.replace(regex2, "");
+		window.location.href = link;
 		return
+	
 	} else {
 		if(link.includes('?')) {
 				
