@@ -42,23 +42,23 @@
 				const upviewMediaObject = $(`
 						<c:if test="${empty sessionScope.loginUser}">
 							<button id="upinsnl" class="btn btn-outline-primary">
-								<i id="upiconnl" class="far fa-heart fa-fw fa-3x m-r-3"> </i>
+								<i id="upiconnl" class="far fa-heart fa-fw fa-2x m-r-3"> </i>
 							</button>
 						</c:if>
 						<c:if test="${empty post.upposession&&not empty sessionScope.loginUser}">
 							<button id="upins" class="btn btn-outline-primary">
-								<i id="upicon" class="far fa-heart fa-fw fa-3x m-r-3"> </i> 
+								<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
 							</button>
 							<button id="updel" class="btn btn-outline-primary" style="display:none;">
-								<i id="downicon" class="fas fa-heart fa-fw fa-3x m-r-3"> </i> 
+								<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
 							</button>
 						</c:if>
 						<c:if test="${not empty post.upposession}">
 							<button id="upins" class="btn btn-outline-primary" style="display:none;">
-								<i id="upicon" class="far fa-heart fa-fw fa-3x m-r-3"> </i> 
+								<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
 							</button>
 							<button id="updel" class="btn btn-outline-primary">
-								<i id="downicon" class="fas fa-heart fa-fw fa-3x m-r-3"> </i> 
+								<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
 							</button>
 						</c:if>
 
@@ -78,7 +78,7 @@
 						success : function(cnt) {
 							console.log("업 +1됨");
 
-							$("#upview").find("#updel").html("<i id='downicon' class='fas fa-heart fa-fw fa-3x m-r-3'> </i> ");
+							$("#upview").find("#updel").html("<i id='downicon' class='fas fa-heart fa-fw fa-2x m-r-3'> </i> ");
 							$("#upview").find("#downicon").append(cnt);
 						},
 						complete : function() {
@@ -99,7 +99,7 @@
 						type : "delete",
 						success : function(cnt) {
 								console.log("업 -1됨");
-								$("#upview").find("#upins").html("<i id='upicon' class='far fa-heart fa-fw fa-3x m-r-3'> </i> ");
+								$("#upview").find("#upins").html("<i id='upicon' class='far fa-heart fa-fw fa-2x m-r-3'> </i> ");
 								$("#upview").find("#upicon").append(cnt);
 						},
 						complete : function() {
@@ -418,7 +418,7 @@ a:hover {
 						</c:if>
 					</div>
 					<div class="col-md-2 my-auto px-auto">
-						<a href="${pageContext.request.contextPath }/help/list?location="	class="btn btn-outline-secondary"><i class="fas fa-list"> 뒤로</i></a>
+						<a href="${pageContext.request.contextPath }/help/list"	class="btn btn-outline-secondary"><i class="fas fa-list"> 뒤로</i></a>
 					</div>
 				</div>
 
