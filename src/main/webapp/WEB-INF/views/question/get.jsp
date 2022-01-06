@@ -310,7 +310,24 @@ a:hover {
 						<a href="${pageContext.request.contextPath }/question/list?location="	class="btn btn-outline-secondary"><i class="fas fa-list"> 뒤로</i></a>
 					</div>
 				</div>
-
+				
+					<table class="table table-hover table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<th>Uploaded Images</th>
+						</tr>
+					</thead>
+					<c:if test="${not empty post.fileList }">
+						<c:forEach items="${post.fileList }" var="file" varStatus="vs">
+							<tbody>
+								<tr>
+									<td><img class="img-fluid" src="${file.url}"
+										alt="${file.fileName}"></td>
+								</tr>
+							</tbody>
+						</c:forEach>
+					</c:if>
+				</table>
 				<!-- footer 와 댓글창 구분 선-->
 				<div class="row md mx-3 my-2">
 					<div class="col-md-12 ">

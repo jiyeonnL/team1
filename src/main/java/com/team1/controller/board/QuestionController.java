@@ -19,8 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team1.coverData.Cover;
-import com.team1.domain.board.HelpReplyVO;
-import com.team1.domain.board.HelpVO;
 import com.team1.domain.board.QuestionPageInfoVO;
 import com.team1.domain.board.QuestionVO;
 import com.team1.domain.user.UserVO;
@@ -78,17 +76,16 @@ public class QuestionController {
 	}
 
 	@PostMapping("/register")
-	public String register(QuestionVO board, RedirectAttributes rttr) {
+	public String register(QuestionVO board, MultipartFile[] files, RedirectAttributes rttr) 
+			throws IllegalStateException, IOException {
 
 			// 3. business logic
-			boolean ok = service.register(board);
+			service.register(board, files);
 			// 4. add attribute
 			
-			if(ok) {
-				rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
-			}
-
-			rttr.addFlashAttribute("result", "게시물 등록 중 오류가 발생하였습니다.");
+			
+			rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
+			
 	
 
 		// 5. forward / redirect

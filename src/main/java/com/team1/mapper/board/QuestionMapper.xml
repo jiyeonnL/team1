@@ -56,7 +56,7 @@
 	LIMIT #{from}, #{items}
 	</select>
 	
- 	<insert id="insert">
+ 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 	INSERT INTO
 	tb_board_question (memberId, location, tag, title, content)
 	VALUES
@@ -67,7 +67,6 @@
   	
 	<select id="read" resultType="com.team1.domain.board.QuestionVO">
 	SELECT 
-	
    		q.id,
    		q.title,
     	q.content,

@@ -90,8 +90,14 @@ text-align: left;
                 <td>${board.tag }</td>
                 <td id="boardid">
                   <a href="get/${board.id }">
-                    <c:out value="${board.title }" />
+                	<c:if test="${not empty board.fileList }">
+                    <c:out value="${board.title }"/><i class="bi bi-image"></i>
+                	</c:if>
+                	<c:if test="${empty board.fileList }">
+                    <c:out value="${board.title }"/>
+                	</c:if>
                   </a>
+                </td>
                 <td>
                	  <a href="../user/profile/${board.nickname }">
                 	<c:out value="${board.nickname }" />
