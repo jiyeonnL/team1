@@ -61,22 +61,15 @@
 
 			})
 
-	function getLocation() {
-
-		var location = "${location}";
-		console.log(location);
 
 	$("#other").click(function() {
 
 		location.href = "/controller1/help/list?tag=기타" + getLocation();
 
 	})
+	
 	function getLocation() {
-		if (location == "") {
-			return "";
-		} else {
-			return "&location=" + location;
-		}
+
 
 		var location = "${location}";
 
@@ -100,6 +93,6 @@
 			return "&location=" + location[0];
 		}
 		 */
-	}
+	
 }
 </script>
