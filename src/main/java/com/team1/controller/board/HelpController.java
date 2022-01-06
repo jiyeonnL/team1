@@ -37,7 +37,6 @@ public class HelpController {
 	@Setter(onMethod_ = @Autowired)
 	private HelpReplyService replyservice;
 
-	// help 페이지 (검색 쿼리 있는 버전)
 	@GetMapping(value = "/list")
 	public void help(@RequestParam(value = "location", required = false) String location,
 			@RequestParam(value = "query", required = false) String query,
@@ -49,7 +48,7 @@ public class HelpController {
 
 		Cover.setCover("help", model);
 
-		model.addAttribute("tag", "help");
+		//model.addAttribute("tag", "help");
 		model.addAttribute("location", location);
 
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
