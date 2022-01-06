@@ -42,14 +42,12 @@ public class HelpController {
 			@RequestParam(value = "query", required = false) String query,
 			@RequestParam(value = "tag", required = false) String tag, HttpSession session, Model model) {
 
-		System.out.println(tag);
-		System.out.println(query);
-		System.out.println(location);
 
 		Cover.setCover("help", model);
-
+		System.out.println(tag);
 		//model.addAttribute("tag", "help");
 		model.addAttribute("location", location);
+		model.addAttribute("tag", tag);
 
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 //		if (uvo != null) {

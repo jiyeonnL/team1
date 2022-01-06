@@ -9,7 +9,8 @@
 			<ul class="navbar-nav me-auto mb-2 mb-sm-0">
 				<!-- 나중엘 radio 버튼으로 교체 -->
 				<li id="nav-all" class="nav-item">
-					<button type="button" id="hlepAll" class="btn btn-outline-dark ml-1">전체보기</button>
+					<button type="button" id="hlepAll"
+						class="btn btn-outline-dark ml-1">전체보기</button>
 				</li>
 
 				<li id="nav-all" class="nav-item">
@@ -35,8 +36,7 @@
 <script>
 	$("#hlepAll").click(function() {
 
-		
-		location.href = "/controller1/help/list?"+ getLocation();
+		location.href = "/controller1/help/list?" + getLocation();
 
 	})
 
@@ -64,11 +64,23 @@
 
 	})
 
+	$("#other").click(function() {
+
+		location.href = "/controller1/help/list?tag=기타" + getLocation();
+
+	})
 	function getLocation() {
 
-		var link = window.location.href;
+		var location = "${location}";
+
+		if (location == "") {
+			return "";
+		} else {
+			return "&location=" + location;
+		}
 
 		//현재의 위치
+		/*
 		const regex = /(location=.*)(?=&|$)/;
 		var location = link.match(regex);
 		console.log(location);
@@ -77,5 +89,6 @@
 		} else {
 			return "&"+location[0];
 		}
+		 */
 	}
 </script>

@@ -102,7 +102,31 @@ a.goTop {
 <script>
 function locationChange() {
 	
+	//현재 위치
 	var location = $("#location option:selected").val();
+	//현재 태그
+	console.log(location);
+	
+	if(location == "") {
+		console.log("empty");
+		location  = "?";
+	} else {
+		location = "?location="+location;
+	}
+	
+	var tag = "${tag}"
+	
+	console.log(tag);
+	
+	if(tag == null || tag == "") {
+		
+		tag = "";
+	} else {
+		tag = "&tag="+tag;
+	}
+	
+	window.location.href = "/controller1/help/list"+location+tag;
+	/*
 	var link = window.location.href;
 	const regex = /(location=.*)(?=&|$)/i;
 	//빈 문자열이면 현재의 위치를 없애버린다.
@@ -111,7 +135,6 @@ function locationChange() {
 		window.location.href = link.replace(regex , "");
 		return
 	} else {
-	//아닐 경우 현재의 위치를 대체하거나 추가
 		if(link.includes('?')) {
 				
 			if(link.includes("location")) {
@@ -130,7 +153,7 @@ function locationChange() {
 
 		
 	}
-
+	*/
 }
 
 	$(document).ready(function() {
@@ -203,17 +226,10 @@ function locationChange() {
 
 		$("#help")	.click(function() {
 			var loc = $("#location option:selected").val();
-			var url = window.location.href;
 			
-					
-			//location이 없으면 (""이면)
-			console.log(loc === "");
+			location.href = "/controller1/help/list"
 			
-			if(loc === "") {
-				location.href = "/controller1/help/list"
-			} else {
-				location.href = "/controller1/help/list?location="+loc;
-			}
+
 			
 		});
 
