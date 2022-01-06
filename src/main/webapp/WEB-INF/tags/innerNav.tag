@@ -40,6 +40,9 @@ a.goTop {
 	position: fixed;
 	right: 50px;
 	bottom: 30px;
+	color:#264d73;
+	z-index:999;
+	width:8.5%;
 }
 
 .active {
@@ -217,5 +220,5 @@ function locationChange() {
 	})
 </script>
 
-<a class="goTop" href="#top"><i
-	class="fas fa-chevron-up a-fw fa-3x m-r-3"></i></a>
+<a class="goTop" href="#top">
+<i class="fas fa-arrow-up a-fw fa-3x m-r-3 go-to-the-top"></i></a>

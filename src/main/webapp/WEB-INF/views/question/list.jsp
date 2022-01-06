@@ -40,12 +40,21 @@
 	width: 900px;
 	height: 100%;
 }
+#question-body-font{
+background-color: #ffe164;
+font-family: 'Jua', sans-serif;
+font-size:25px;
+}
+table{
+text-align: center;
+}
+#boardid{
+text-align: left;
+}
 </style>
 </head>
 <body>
 
-		
-	</script>
 
 	<b:header></b:header>
 	<div id="body">
@@ -53,10 +62,89 @@
 			<b:innerNav></b:innerNav>
 			<b:cover></b:cover>		
 			<!-- 태그 -->
-
+	
+	<div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>게시물 목록</h1>
+        <!-- table.table>thead>tr>th*4^^tbody -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                <i class="fab fa-slack-hash"></i>
+              </th>
+              <th>tag</th>
+              <th>제목</th>
+              <th>
+                <i class="fas fa-user"></i>
+              </th>
+              <th>작성일</th>
+            
+            </tr>
+          </thead>
+          <tbody>
+            <c:forEach items="${list }" var="board">
+              <tr>
+                <td>${board.id }</td>
+                <td>${board.tag }</td>
+                <td id="boardid">
+                  <a href="get/${board.id }">
+                    <c:out value="${board.title }" />
+                  </a>
+                <td>
+               	  <a href="../user/profile/${board.nickname }">
+                	<c:out value="${board.nickname }" />
+                  </a>
+                </td>
+                <td>${board.inserted }</td>
+                
+              </tr>
+            </c:forEach>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <a href="${pageContext.request.contextPath }/question/register" id="question-body-font" class="btn">글쓰기</a>
 		</div>
 	</div>
+	
+	  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <c:if test="${pageInfo.hasPrevButton }">
+        <c:url value="/question/list" var="pageLink">
+          <c:param name="page" value="${pageInfo.leftPageNumber - 1 }"></c:param>
+        </c:url>
+        <li class="page-item">
+          <a class="page-link" href="${pageLink }" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      </c:if>
 
+      <c:forEach begin="${pageInfo.leftPageNumber}" end="${pageInfo.rightPageNumber }" var="pageNumber">
+        <c:url value="/question/list" var="pageLink">
+          <c:param name="page" value="${pageNumber }"></c:param>
+          <c:param name="location" value="${location }"></c:param>
+        </c:url>
+        <li class="page-item ${pageInfo.currentPage == pageNumber ? 'active' : '' }">
+          <a class="page-link" href="${pageLink }">${pageNumber }</a>
+        </li>
+      </c:forEach>
+
+      <c:if test="${pageInfo.hasNextButton }">
+        <c:url value="/question/list" var="pageLink">
+          <c:param name="page" value="${pageInfo.rightPageNumber + 1 }"></c:param>
+        </c:url>
+        <li class="page-item">
+          <a class="page-link" href="${pageLink }" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </c:if>
+    </ul>
+  </nav>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"

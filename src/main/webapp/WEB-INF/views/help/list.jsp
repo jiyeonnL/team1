@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="b" tagdir="/WEB-INF/tags/"%>
@@ -10,30 +9,27 @@
 <meta charset="EUC-KR">
 <title>해주세요</title>
 
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-	integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-	integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <style>
-
-#help-body-font{
-background-color: #ffe164;
-font-family: 'Jua', sans-serif;
-font-size:25px;
+#help-body-font {
+	background-color: #ffe164;
+	font-family: 'Jua', sans-serif;
+	font-size: 25px;
+	margin-top: 10px;
 }
-#list-font{
-font-family: 'IBM Plex Sans KR', sans-serif;
+
+#list-font {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+	background-color: #eef2f6;
+}
+
+.list-background-color {
+	background-color: #eef2f6;
 }
 
 #body {
@@ -60,6 +56,9 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 	justify-content: center;
 	border-radius: 5px;
 	width: 80%;
+	border: solid;
+	border-color: #f0615c;
+	background-color: white;
 }
 
 #image {
@@ -88,11 +87,38 @@ a {
 	color: inherit;
 }
 
+a#title {
+	/* border-bottom: solid; */
+	font-weight: bold;
+}
+
+#contentBox {
+	border-top-color: #808080;
+}
+
 a:hover {
 	text-decoration: none;
 	color: inherit;
 }
 
+.제목아래보더 {
+	border-bottom: solid;
+	border-bottom-width: 3px;
+}
+
+#게시글-작성시간 {
+	font-size: medium;
+}
+
+.댓글위의바 {
+	border-top: solid;
+	border-top-color: #cccccc;
+}
+
+.댓글창부분 {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
 </style>
 </head>
 <body>
@@ -108,8 +134,8 @@ a:hover {
 			<!-- for 문 돌면서 list에 있는 요소(게시물)들 출력 -->
 			<c:forEach items="${list}" var="board" varStatus="vs">
 				<c:if test="${location eq board.location || location eq '' || empty location }">
-					<div class="container-fluid my-1 border border-3 border-secondary" id="list-font-${vs.index }" style="display : ${vs.index < 5 ? '' : 'none' }">
-						<div class="row md mx-3 my-2">
+					<div class="container-fluid my-4 border border-3 border-secondary list-background-color" id="list-font-${vs.index }" style="display : ${vs.index < 5 ? '' : 'none' }">
+						<div class="row md mx-3 my-2 제목아래보더">
 							<div class="col-md-2 my-auto px-auto">
 								<div id="tag">${board.tag }</div>
 							</div>
@@ -122,7 +148,7 @@ a:hover {
 							</div>
 							<div class="col-md-3 offset-md-2 my-auto h5">
 								<div>${board.nickname }</div>
-								<div>${board.inserted}</div>
+								<div id="게시글-작성시간">${board.inserted}</div>
 							</div>
 						</div>
 
@@ -159,14 +185,14 @@ a:hover {
 						</div>
 
 						<div class="row my-2">
-							<div class="col-md-12 bg-secondary" style="height: 2px; width: 100%">
+							<div class="col-md-12 게시물-아랫선" style="height: 2px; width: 100%">
 								<div id="line"></div>
 							</div>
 						</div>
 
 
-						<div class="row md mx-4">
-							<div class="col-md-2">
+						<div class="row md mx-3 댓글위의바">
+							<div class="col-md-2 댓글창부분">
 								<c:if test="${board.upposession !=null}">
 									<i class="fa fa-thumbs-up fa-fw fa-2x m-r-3"></i>
 								</c:if>
@@ -175,11 +201,11 @@ a:hover {
 								</c:if>
 								${board.up}
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-2 댓글창부분">
 								<i class="fa fa-comments fa-fw fa-2x m-r-3"></i>
 								${board.replyCount }
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-2 댓글창부분">
 								<i class="fas fa-eye fa-fw fa-2x m-r-3"></i>
 								${board.views }
 							</div>
@@ -187,11 +213,11 @@ a:hover {
 					</div>
 				</c:if>
 			</c:forEach>
-		<b:copyright></b:copyright>
+			<b:copyright></b:copyright>
 		</div>
 	</div>
 	<!-- 태그 -->
-	
+
 
 
 
@@ -218,32 +244,38 @@ a:hover {
 	</c:if>
 
 	<script>
-	$(document).ready(function(){
-		$("#help").attr("class", "btn btn-outline ml-1 active");
-			var count = 5;
-		$(window).scroll(function() { 
-			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-				for(i=0; i<5;i++){
-					$("#inner").find("#list-font-"+count).removeAttr("style", "none");
-					count++;
-				};				
-			} 
-		});
-/* 		var count = 0;
-		//스크롤 바닥 감지
-		window.onscroll = function(e) {
-		    //추가되는 임시 콘텐츠
-		    //window height + window scrollY 값이 document height보다 클 경우,
-		    if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-		    	//실행할 로직 (콘텐츠 추가)
-		        count++;
-		        var addContent = '<div class="block"><p>'+ count +'번째로 추가된 콘텐츠</p></div>';
-		        //article에 추가되는 콘텐츠를 append
-		        $('article').append(addContent);
-		    }
-		}; */
-	});
-</script>
+		$(document).ready(
+				function() {
+					$("#help").attr("class", "btn btn-outline ml-1 active");
+					var count = 5;
+					$(window).scroll(
+							function() {
+								if ($(window).scrollTop() == $(document)
+										.height()
+										- $(window).height()) {
+									for (i = 0; i < 5; i++) {
+										$("#inner").find("#list-font-" + count)
+												.removeAttr("style", "none");
+										count++;
+									}
+									;
+								}
+							});
+					/* 		var count = 0;
+					 //스크롤 바닥 감지
+					 window.onscroll = function(e) {
+					 //추가되는 임시 콘텐츠
+					 //window height + window scrollY 값이 document height보다 클 경우,
+					 if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+					 //실행할 로직 (콘텐츠 추가)
+					 count++;
+					 var addContent = '<div class="block"><p>'+ count +'번째로 추가된 콘텐츠</p></div>';
+					 //article에 추가되는 콘텐츠를 append
+					 $('article').append(addContent);
+					 }
+					 }; */
+				});
+	</script>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 </body>
