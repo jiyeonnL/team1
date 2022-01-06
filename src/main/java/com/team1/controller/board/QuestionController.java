@@ -44,14 +44,17 @@ public class QuestionController {
 		Cover.setCover("question", model);
 		Integer numberPerPage = 10;
 
-		List<QuestionVO> list = service.getListPage(page, numberPerPage);
-		QuestionPageInfoVO pageInfo = service.getPageInfo(page, numberPerPage);
+		List<QuestionVO> list = service.getListPage(page, numberPerPage, location, tag, query);
+		QuestionPageInfoVO pageInfo = service.getPageInfo(page, numberPerPage, location, tag, query);
 
-		model.addAttribute("tag", "question");
+		model.addAttribute("tag", tag);
 		model.addAttribute("location", location);
-
+		model.addAttribute("boardType", "question");
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageInfo);
+		
+		
 
 	}
 

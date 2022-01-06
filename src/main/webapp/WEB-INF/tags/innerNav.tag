@@ -102,10 +102,39 @@ a.goTop {
 <script>
 function locationChange() {
 	
+
+	
+	
 	//현재 위치
 	var location = $("#location option:selected").val();
+	var board = "${boardType}"
+	var tag = "${tag}"
 	//현재 태그
-	console.log(location);
+	
+	//question 게시판 전용
+	if(board == "question") {
+		
+		console.log(location);
+		
+		if(location == "") {
+			console.log("empty");
+			location  = "";
+		} else {
+			
+			console.log("question borad location, not empty");
+			location = "&location="+location;
+		}
+		
+		if(tag == null || tag == "") {
+			
+			tag = "";
+		} else {
+			tag = "&tag="+tag;
+		}
+		
+		window.location.href = "/controller1/question/list?page=1"+location+tag;
+		return 
+	}
 	
 	if(location == "") {
 		console.log("empty");
@@ -113,8 +142,6 @@ function locationChange() {
 	} else {
 		location = "?location="+location;
 	}
-	
-	var tag = "${tag}"
 	
 	console.log(tag);
 	
@@ -125,7 +152,7 @@ function locationChange() {
 		tag = "&tag="+tag;
 	}
 	
-	window.location.href = "/controller1/help/list"+location+tag;
+	window.location.href = "/controller1/"+board+"/list"+location+tag;
 	/*
 	var link = window.location.href;
 	const regex = /(location=.*)(?=&|$)/i;
@@ -221,7 +248,7 @@ function locationChange() {
 
 		$("#question").click(function() {
 			var loc = $("#location option:selected").val();
-			location.href = "/controller1/question/list";
+			location.href = "/controller1/question/list?page=1";
 		});
 
 		$("#life").click(function() {

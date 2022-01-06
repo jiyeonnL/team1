@@ -60,6 +60,7 @@ text-align: left;
 	<div id="body">
 		<div id="inner">
 			<b:innerNav></b:innerNav>
+			<b:tagNavQuestion></b:tagNavQuestion>
 			<b:cover></b:cover>		
 			<!-- 태그 -->
 	
@@ -117,7 +118,7 @@ text-align: left;
           <c:param name="page" value="${pageInfo.leftPageNumber - 1 }"></c:param>
         </c:url>
         <li class="page-item">
-          <a class="page-link" href="${pageLink }" aria-label="Previous">
+          <a class="page-link" href="#" onclick="getlink(${pageInfo.leftPageNumber - 1}" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
@@ -128,17 +129,18 @@ text-align: left;
           <c:param name="page" value="${pageNumber }"></c:param>
           <c:param name="location" value="${location }"></c:param>
         </c:url>
+        
         <li class="page-item ${pageInfo.currentPage == pageNumber ? 'active' : '' }">
-          <a class="page-link" href="${pageLink }">${pageNumber }</a>
+          <a class="page-link" href="#" onclick="getlink(${pageNumber})">${pageNumber}</a>
         </li>
       </c:forEach>
 
       <c:if test="${pageInfo.hasNextButton }">
         <c:url value="/question/list" var="pageLink">
-          <c:param name="page" value="${pageInfo.rightPageNumber + 1 }"></c:param>
+          <c:param name="page" value="${pageInfo.rightPageNumber + 1 } " ></c:param>
         </c:url>
         <li class="page-item">
-          <a class="page-link" href="${pageLink }" aria-label="Next">
+          <a class="page-link" href="#" onclick="getlink(${pageInfo.rightPageNumber + 1})" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
@@ -154,6 +156,27 @@ text-align: left;
 		$(document).ready(function(){
 			$("#question").attr("class", "btn btn-outline ml-1 active");
 		});
+		
+		function getlink(pageNum) {
+			
+			var tag = "${tag}";
+			var location = "${location}";
+			
+			if(location == "") {
+				location  = "";
+			} else {
+				location = "&location="+location;
+			}
+			
+			if(tag == null || tag == "") {
+				
+				tag = "";
+			} else {
+				tag = "&tag="+tag;
+			}
+			
+			window.location.href = "/controller1/question/list?page=" + pageNum + location + tag;
+		}
 </script>
 </body>
 </html>
