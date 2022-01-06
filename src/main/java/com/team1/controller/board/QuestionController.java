@@ -1,5 +1,7 @@
 package com.team1.controller.board;
 
+import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -29,67 +31,49 @@ import lombok.Setter;
 @Controller
 @RequestMapping("/question")
 public class QuestionController {
-	
-	@Setter(onMethod_ =@Autowired)
+
+	@Setter(onMethod_ = @Autowired)
 	private QuestionService service;
-	
-	//question 페이지 (검색 쿼리 있는 버전)
-	@GetMapping(value = "/list", params = { "location", "query" })
-	public void list(@RequestParam(value = "location") String location, 
-					@RequestParam(value = "query") String query,
-					@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
+
+	@GetMapping(value = "/list")
+	public void list(@RequestParam(value = "location", required = false) String location,
+			@RequestParam(value = "query", required = false) String query,
+			@RequestParam(value = "tag", required = false) String tag,
+			@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
 
 		Cover.setCover("question", model);
 		Integer numberPerPage = 10;
-		
+
 		List<QuestionVO> list = service.getListPage(page, numberPerPage);
 		QuestionPageInfoVO pageInfo = service.getPageInfo(page, numberPerPage);
-		
+
 		model.addAttribute("tag", "question");
 		model.addAttribute("location", location);
-		
+
 		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageInfo);
-		
+
 	}
+
 	
-	//question 페이지 
-	@GetMapping(value = "/list")
-	public void life(@RequestParam(value = "location") String location,
-					@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
-		
-		
-		Cover.setCover("question", model);
-		Integer numberPerPage = 10;
-		
-		List<QuestionVO> list = service.getListPage(page, numberPerPage);
-		QuestionPageInfoVO pageInfo = service.getPageInfo(page, numberPerPage);
-		
-		model.addAttribute("tag", "question");
-		model.addAttribute("location", location);
-		
-		model.addAttribute("list", list);
-		model.addAttribute("pageInfo", pageInfo);
-		
-	}
+
 	@GetMapping(value = "/get/{id}")
 	public String get(@PathVariable Integer id, Model model) {
 		QuestionVO qvo = service.get(id);
 
 		model.addAttribute("post", qvo);
-		
+
 		return "question/get";
 	}
-	
+
 	@GetMapping("/register")
 	public String register(HttpSession session) {
 		UserVO vo = (UserVO) session.getAttribute("loginUser");
 
-		
 		if (vo == null) {
 			return "redirect:/user/login";
 		}
-		
+
 		return null;
 	}
 

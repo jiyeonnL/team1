@@ -152,6 +152,7 @@ font-size:1.5em;
 	<div id="body">
 		<div id="inner">
 			<b:innerNav></b:innerNav>
+			<b:tagNavHelp></b:tagNavHelp>
 			<b:cover></b:cover>
 			<a href="${pageContext.request.contextPath }/help/register" id="help-body-font" class="btn">글쓰기</a>
 			<!-- 검색결과 리스트 -->

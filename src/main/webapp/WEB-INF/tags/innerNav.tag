@@ -57,25 +57,28 @@ a.goTop {
 		<div class="collapse navbar-collapse" id="navbarsExample03">
 			<ul class="navbar-nav me-auto mb-2 mb-sm-0">
 				<li class="nav-item">
-				<form method="get">
-				<select class="custom-select" id="location" style="height: 100%" name="location" onchange="this.form.submit()">
-						<option value="" <c:if test="${location eq '' || empty location}">selected</c:if>>Region</option>
-						<option <c:if test="${location eq '강남구'}">selected</c:if>>강남구</option>
-						<option <c:if test="${location eq '마포구'}">selected</c:if>>마포구</option>
-						<option <c:if test="${location eq '서초구'}">selected</c:if>>서초구</option>
-				</select>
-				</form>
+					<form method="get">
+						<select class="custom-select" id="location" style="height: 100%"
+							name="location" onchange="locationChange()">
+							<option value=""
+								<c:if test="${location eq '' || empty location}">selected</c:if>>Region</option>
+							<option <c:if test="${location eq '강남구'}">selected</c:if>>강남구</option>
+							<option <c:if test="${location eq '마포구'}">selected</c:if>>마포구</option>
+							<option <c:if test="${location eq '서초구'}">selected</c:if>>서초구</option>
+						</select>
+					</form>
 				</li>
 
 				<!-- 나중엘 radio 버튼으로 교체 -->
-				<li id="nav-all" class="nav-item" >
+				<li id="nav-all" class="nav-item">
 					<button type="button" id="all" class="btn btn-outline-dark ml-1">전체보기</button>
 				</li>
 				<li id="nav-news" class="nav-item">
 					<button type="button" id="news" class="btn btn-outline-dark ml-1">동네소식</button>
 				</li>
 				<li id="nav-question" class="nav-item">
-					<button type="button" id="question"	class="btn btn-outline-dark ml-1">동네질문</button>
+					<button type="button" id="question"
+						class="btn btn-outline-dark ml-1">동네질문</button>
 				</li>
 				<li id="nav-life" class="nav-item">
 					<button type="button" id="life" class="btn btn-outline-dark ml-1">일상생활</button>
@@ -97,6 +100,67 @@ a.goTop {
 
 
 <script>
+function locationChange() {
+	
+	//현재 위치
+	var location = $("#location option:selected").val();
+	//현재 태그
+	console.log(location);
+	
+	if(location == "") {
+		console.log("empty");
+		location  = "?";
+	} else {
+		location = "?location="+location;
+	}
+	
+	var tag = "${tag}"
+	
+	console.log(tag);
+	
+	if(tag == null || tag == "") {
+		
+		tag = "";
+	} else {
+		tag = "&tag="+tag;
+	}
+	
+	window.location.href = "/controller1/help/list"+location+tag;
+	/*
+	var link = window.location.href;
+	const regex = /(location=.*)(?=&|$)/i;
+	//빈 문자열이면 현재의 위치를 없애버린다.
+	if(location == "") {
+		
+		const regex1 = /(&location=.*)(?=&|$)/i;
+		const regex2 = /(\?location=.*)(?=&|$)/i;
+		link = link.replace(regex1, "");
+		link = link.replace(regex2, "");
+		window.location.href = link;
+		return
+	
+	} else {
+		if(link.includes('?')) {
+				
+			if(link.includes("location")) {
+				
+				window.location.href = link.replace(regex , "location="+location);
+			} else {
+				window.location.href = link + "&location=" + location;
+			}
+			
+			
+		} else {
+			
+			window.location.href = link + "?location=" + location;
+		}
+		
+
+		
+	}
+	*/
+}
+
 	$(document).ready(function() {
 		//현재의 tag 값과 region 값을 가져온다.
 		var loc = "${location}";
@@ -114,35 +178,64 @@ a.goTop {
 			if(query== "") {
 				return 
 			}
-				location.href = "/controller1/"+tag+"/list?location="
-				+ loc +"&query="+query;
+			
+			//&이 포함되면 안된다...
+			if(query.includes('&')) {
+				alert('&은 검색 문자열에 포함할 수 없습니다!')
+				return 
+			}
+			
+			var link = window.location.href;
+			
+			
+			if(link.includes('query')) {
+				const regex = /(query=.*)(?=&|$)/i;
+				console.log(link.replace(regex, "query=" + query))
+				location.href = link.replace(regex , "query=" + query)
+				
+			} else {
+				
+				if(link.includes('?')) {
+					location.href = link + "&query="+query;
+
+				} else {
+					location.href = link + "?query="+query;
+				}
+				
+			}
 		})
+		
+		
 
 		//model attribute에서 현재 어느 태그인지 검사하고 select의 현재 상태 변경시기키 (model 값을 스크립트 내부에서 사용해야 한다.)
 		$("#all").click(function() {
 			var loc = $("#location option:selected").val();
-			location.href = "/controller1/all/list?location="+ loc;
+			location.href = "/controller1/all/list";
 		});
 		
 		//탭에 있는 버튼들 누르면 해당 링크로 이동한다. 현재 select 상태를 함께 포함해 컨트롤러에 get 요청 날린다.
 		$("#news").click(function() {
 			var loc = $("#location option:selected").val();
-			location.href = "/controller1/news/list?location="+ loc;
+			location.href = "/controller1/news/list";
 		});
 
 		$("#question").click(function() {
 			var loc = $("#location option:selected").val();
-			location.href = "/controller1/question/list?location="+ loc;
+			location.href = "/controller1/question/list";
 		});
 
 		$("#life").click(function() {
 			var loc = $("#location option:selected").val();
-			location.href = "/controller1/life/list?location="+ loc;
+			location.href = "/controller1/life/list";
 		});
 
 		$("#help")	.click(function() {
 			var loc = $("#location option:selected").val();
-			location.href = "/controller1/help/list?location="+ loc;
+			
+			location.href = "/controller1/help/list"
+			
+
+			
 		});
 
 	})

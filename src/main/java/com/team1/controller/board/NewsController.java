@@ -1,5 +1,7 @@
 package com.team1.controller.board;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +15,10 @@ import com.team1.coverData.Cover;
 public class NewsController {
 
 	
-	//life 페이지 (검색 쿼리 있는 버전)
-	@GetMapping(value = "/list", params = { "location", "query" })
-	public void life(@RequestParam(value = "location") String location, @RequestParam(value = "query") String query,
-			Model model) {
+	@GetMapping(value = "/list")
+	public void help(@RequestParam(value = "location", required = false) String location,
+			@RequestParam(value = "query", required = false) String query,
+			@RequestParam(value = "tag", required = false) String tag, HttpSession session, Model model) {
 
 		Cover.setCover("news", model);
 		
@@ -25,14 +27,6 @@ public class NewsController {
 		
 	}
 	
-	//life 페이지 (검색 쿼리 있는 버전)
-	@GetMapping(value = "/list", params = { "location"})
-	public void life(@RequestParam(value = "location") String location,Model model) {
 
-		Cover.setCover("news", model);
-
-		model.addAttribute("tag", "news");
-		model.addAttribute("location", location);
-	}
 	
 }

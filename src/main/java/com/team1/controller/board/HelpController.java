@@ -37,47 +37,66 @@ public class HelpController {
 	@Setter(onMethod_ = @Autowired)
 	private HelpReplyService replyservice;
 
-	// help 페이지 (검색 쿼리 있는 버전)
-	@GetMapping(value = "/list", params = { "location", "query" })
-	public void help(
-			@RequestParam(value = "location") String location, 
-			@RequestParam(value = "query") String query,
-			Model model
-			) {
+	@GetMapping(value = "/list")
+	public void help(@RequestParam(value = "location", required = false) String location,
+			@RequestParam(value = "query", required = false) String query,
+			@RequestParam(value = "tag", required = false) String tag, HttpSession session, Model model) {
+
 
 		Cover.setCover("help", model);
-
-		model.addAttribute("tag", "help");
+		System.out.println(tag);
+		//model.addAttribute("tag", "help");
 		model.addAttribute("location", location);
-
-		List<HelpVO> list = service.getListSearchByContent(query);
-		model.addAttribute("list", list);
-
-	}
-
-	// help 페이지
-	@GetMapping(value = "/list", params = { "location" })
-	public void help(@RequestParam(value = "location") String location, Model model, HttpSession session) {
-
-		Cover.setCover("help", model);
-
-		model.addAttribute("tag", "help");
-		model.addAttribute("location", location);
+		model.addAttribute("tag", tag);
 
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
+//		if (uvo != null) {
+//			List<HelpVO> list = service.getList(uvo.getId());
+//			List<HelpFileVO> fileNames = service.getFiles();
+//			model.addAttribute("list", list);
+//			model.addAttribute("fileNames", fileNames);
+//		} else {
+//			List<HelpVO> list = service.getList(0);
+//			List<HelpFileVO> fileNames = service.getFiles();
+//			model.addAttribute("list", list);
+//			model.addAttribute("fileNames", fileNames);
+//		}
+		
+		
 		if (uvo != null) {
-			List<HelpVO> list = service.getList(uvo.getId());
-			List<HelpFileVO> fileNames = service.getFiles();
+			List<HelpVO> list = service.getListByConditions(location, tag, query, uvo.getId());
 			model.addAttribute("list", list);
-			model.addAttribute("fileNames", fileNames);
 		} else {
-			List<HelpVO> list = service.getList(0);
-			List<HelpFileVO> fileNames = service.getFiles();
+			List<HelpVO> list = service.getListByConditions(location, tag, query, 0);
 			model.addAttribute("list", list);
-			model.addAttribute("fileNames", fileNames);
 		}
 
+
 	}
+
+//	// help 페이지
+//	@GetMapping(value = "/list", params = { "location" })
+//	public void help(@RequestParam(value = "location") String location, Model model, HttpSession session) {
+//
+//		Cover.setCover("help", model);
+//
+//		model.addAttribute("tag", "help");
+//		model.addAttribute("location", location);
+//
+//		UserVO uvo = (UserVO) session.getAttribute("loginUser");
+//		if (uvo != null) {
+//			List<HelpVO> list = service.getList(uvo.getId());
+//			List<HelpFileVO> fileNames = service.getFiles();
+//			model.addAttribute("list", list);
+//			model.addAttribute("fileNames", fileNames);
+//		} else {
+//			List<HelpVO> list = service.getList(0);
+//			List<HelpFileVO> fileNames = service.getFiles();
+//			model.addAttribute("list", list);
+//			model.addAttribute("fileNames", fileNames);
+//		}
+//
+//	}
 
 	// 게시물 상세 페이지, help/list/id 와 같은 형식으로 게시물의 id를 링크에서 가져온다.
 	@GetMapping(value = "/list/{id}")
