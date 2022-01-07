@@ -108,8 +108,9 @@ width: 20%;
 						<input type="file" class="form-control-file" id="input4" name="files" accept="image/*" multiple>
 					</div>
 				</form>
-
-				<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit">수정</button>
+				<c:if test="${sessionScope.loginUser.nickname eq board.nickname }">
+					<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit">수정</button>
+				</c:if>
 				<button id="" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmModal1"><i class="fas fa-trash"> 삭제</i></button>
 				<a href="${pageContext.request.contextPath }/help/list/${board.id }" class="btn btn-outline-secondary">취소</a>
 			</div>

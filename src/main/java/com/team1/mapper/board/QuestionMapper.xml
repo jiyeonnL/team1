@@ -37,7 +37,9 @@
 		q.location,
 		q.title,
 		q.inserted,
-		q.updated
+		q.updated,
+		q.notice,
+		datediff(now(), q.inserted) newMark
 		FROM
 		tb_user u
 		JOIN
@@ -46,7 +48,7 @@
 		u.id = q.memberId
 		LEFT
 		JOIN tb_reply_question r
-		
+		ON q.id=r.boardId
 		GROUP BY q.id
 		ORDER BY q.id DESC
 	</select>
@@ -63,7 +65,9 @@
 		q.location,
 		q.title,
 		q.inserted,
-		q.updated
+		q.updated,
+		q.notice,
+		datediff(now(), q.inserted) newMark
 		FROM
 		tb_user u
 		JOIN
@@ -84,21 +88,47 @@
 				AND q.tag = #{tag}
 			</if>
 		</where>
-
 		GROUP BY q.id
 		ORDER BY q.id DESC
 		LIMIT #{from}, #{items}
+	</select>
+	
+	<select id="getListPageByNotice"
+		resultType="com.team1.domain.board.QuestionVO">
+		SELECT
+		q.id,
+		u.id,
+		u.nickname,
+		q.memberId,
+		q.tag,
+		q.content,
+		q.location,
+		q.title,
+		q.inserted,
+		q.updated,
+		q.notice,
+		datediff(now(), q.inserted) newMark
+		FROM
+		tb_user u
+		JOIN
+		tb_board_question q
+		ON
+		u.id = q.memberId
+
+		WHERE q.notice = 1
+		GROUP BY q.id
+		ORDER BY q.id DESC
 	</select>
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id"
 		keyColumn="id">
 		INSERT INTO
 		tb_board_question (memberId, location,
-		tag, title, content)
+		tag, title, content, notice)
 		VALUES
 		(#{memberId}, #{location},
 		#{tag}, #{title},
-		#{content})
+		#{content}, #{notice})
 	</insert>
 
 	<update id="update">
@@ -107,7 +137,8 @@
 		tag = #{tag},
 		title = #{title},
 		content = #{content},
-		updated = NOW()
+		updated = NOW(),
+		notice = #{notice}
 		WHERE id = #{id}
 	</update>
 
@@ -136,6 +167,7 @@
 		q.inserted,
 		q.location,
 		q.updated,
+		q.notice,
 		u.nickname
 		FROM
 		tb_board_question q

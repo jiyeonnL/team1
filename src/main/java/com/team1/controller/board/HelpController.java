@@ -44,7 +44,6 @@ public class HelpController {
 
 
 		Cover.setCover("help", model);
-		System.out.println(tag);
 		//model.addAttribute("tag", "help");
 		//게시판 정보 넘겨준다.
 		model.addAttribute("location", location);
@@ -72,7 +71,6 @@ public class HelpController {
 			List<HelpVO> list = service.getListByConditions(location, tag, query, 0);
 			model.addAttribute("list", list);
 		}
-
 
 	}
 
@@ -105,7 +103,6 @@ public class HelpController {
 	public String post(@PathVariable Integer id, Model model, HttpSession session) {
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 		// 한개의 post를 가져온다.
-
 		if (uvo != null) {
 			HelpVO helpVO = service.get(id, uvo.getId());
 			// String[] fileNames = service.getNamesByBoardId(id);
@@ -134,11 +131,17 @@ public class HelpController {
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 		HelpVO hvo = (HelpVO) service.get(id, uvo.getId());
 
-		if (uvo.getId() != hvo.getMemberId()) {
+		if(uvo.getAdminQuali() == 1) { // 관리자가 글 수정하거나 지울 수 있음
+			HelpVO board = service.get(id, uvo.getId());
+			// String[] fileNames = service.getNamesByBoardId(id);
+			model.addAttribute("board", board);
+			
+			return "help/modify";
+		} else if (uvo.getId() != hvo.getMemberId()) {
 			System.out.println("작성자가 아니면 수정할 수 없습니다.");
 			return "redirect:/all/list";
 		}
-
+		
 		HelpVO board = service.get(id, uvo.getId());
 		// String[] fileNames = service.getNamesByBoardId(id);
 		model.addAttribute("board", board);
@@ -180,7 +183,7 @@ public class HelpController {
 
 		return "redirect:/help/list";
 	}
-
+	
 	@PostMapping("/remove")
 	public String remove(@RequestParam("id") Integer id, RedirectAttributes rttr) {
 

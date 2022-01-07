@@ -30,5 +30,7 @@ public interface QuestionMapper {
 	public List<QuestionFileVO> getFilesById(Integer id);
 	
 	public int upViews(Integer id);
+
+	public List<QuestionVO> getListPageByNotice();
 	
 }

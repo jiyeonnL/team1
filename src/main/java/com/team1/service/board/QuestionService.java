@@ -250,4 +250,8 @@ public class QuestionService {
 	public List<QuestionFileVO> getNamesByBoardId(Integer id) {
 		return fileMapper.selectNamesByBoardId(id);
 	}
+
+	public List<QuestionVO> getListPageByNotice() {
+		return mapper.getListPageByNotice();
+	}
 }

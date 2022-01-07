@@ -45,6 +45,9 @@ public class QuestionController {
 		Cover.setCover("question", model);
 		Integer numberPerPage = 10;
 
+		//공지사항만 가져오는 service
+		List<QuestionVO> listNotice = service.getListPageByNotice();
+		//모든 리스트 가져오는 service
 		List<QuestionVO> list = service.getListPage(page, numberPerPage, location, tag, query);
 		QuestionPageInfoVO pageInfo = service.getPageInfo(page, numberPerPage, location, tag, query);
 
@@ -52,11 +55,10 @@ public class QuestionController {
 		model.addAttribute("location", location);
 		model.addAttribute("boardType", "question");
 		
+		model.addAttribute("listNotice", listNotice);
 		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageInfo);
 		
-		
-
 	}
 
 	

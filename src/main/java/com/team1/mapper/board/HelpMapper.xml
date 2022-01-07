@@ -65,7 +65,8 @@
 		(SELECT hu.userId FROM
 		tb_board_help_up hu WHERE hu.userId =
 		#{loginId} AND hu.postId=p.id)
-		upposession
+		upposession,
+		datediff(now(), p.inserted) newMark
 		FROM tb_board_help p
 		JOIN tb_user m
 		ON m.id = p.memberId
@@ -114,7 +115,8 @@
 		hu.userId FROM tb_board_help_up hu WHERE hu.userId =
 		#{loginId}
 		AND
-		hu.postId=p.id) upposession
+		hu.postId=p.id) upposession,
+		datediff(now(), p.inserted) newMark
 		FROM tb_board_help p
 		JOIN tb_user m
 		ON

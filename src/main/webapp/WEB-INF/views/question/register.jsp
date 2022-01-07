@@ -71,7 +71,19 @@ width: 20%;
             			<label for="input3">제목</label>
            				<input type="text" class="form-control" id="input3" name="title">
           			</div>
-          
+          			
+          			<c:if test="${sessionScope.loginUser.adminQuali eq 1 }">
+						<br>
+						<div>
+							<input type="checkbox" name="notice" id="input8" value="1">
+							Notice
+							<hr>
+						</div>
+					</c:if>
+					<div style="visibility: hidden">
+						<input type="hidden" name="notice" id="input9" value="0">
+					</div>
+          			
          			 <div class="form-group">
            				 <label for="input4">내용</label>
           				 <textarea class="form-control" id="input4" name="content"></textarea>
@@ -84,6 +96,9 @@ width: 20%;
           				  	<option value="질문" selected>질문</option>
           				  	<option value="건의사항">건의사항</option>
            				 	<option value="신고합니다!">신고합니다!</option>
+           				 	<c:if test="${sessionScope.loginUser.adminQuali eq 1 }">
+           				 		<option value="공지사항">공지사항</option>
+           				 	</c:if>
            				 	</optgroup>
           				</select>
          			  </div>

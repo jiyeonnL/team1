@@ -20,6 +20,12 @@ public class QuestionVO {
 	private LocalDateTime updated;
 	private String nickname;
 	
+	// 새로운 글 표시 해줄 기준 (오늘 - 작성일 < 지정한 일수) 지정한 일 수는 jsp 제목 부분 c:if 에서 직접 설정
+	private Integer newMark;
+	
+	// 공지 글로 리스트의 최 상단에 위치하게 구분할 파라미터 0: 일반글 1: 공지글
+	private Integer notice;
+	
 	List<QuestionFileVO> fileList;
 	
 	public String getInserted() {
