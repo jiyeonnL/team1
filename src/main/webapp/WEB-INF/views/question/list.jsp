@@ -66,7 +66,7 @@ text-align: left;
 	<div class="container">
     <div class="row">
       <div class="col">
-        <h1>게시물 목록</h1>
+        <h1>동네 질문</h1>
         <!-- table.table>thead>tr>th*4^^tbody -->
         <table class="table">
           <thead>
