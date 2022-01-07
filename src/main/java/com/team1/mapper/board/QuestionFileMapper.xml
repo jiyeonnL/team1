@@ -9,11 +9,32 @@
   	<insert id="insert" useGeneratedKeys="true" keyProperty="id"
 		keyColumn="id">
 		INSERT 
-		INTO tb_file_question (postId, fileName, url) 
+		INTO 
+		tb_file_question (postId, fileName, url) 
 		VALUES
 		(#{postId}, #{fileName}, #{url})
 	</insert>
   
-  
-  
+  	<select id="selectNamesByBoardId"
+		resultType="com.team1.domain.board.QuestionFileVO">
+		SELECT 
+		id, postId, fileName, url 
+		FROM
+		tb_file_question
+		WHERE 
+		postId =#{boardId}
+	</select>
+  	
+  	<delete id="deleteByBoardId">
+		DELETE FROM tb_file_question WHERE postId = #{boardId}
+	</delete>
+  	
+  	<delete id="delete">
+		DELETE FROM tb_file_question WHERE postId = #{boardId}
+		AND fileName = #{fileName}
+	</delete>
+
+	<delete id="deleteByUrl">
+		DELETE FROM tb_file_question WHERE url = #{url}
+	</delete>
   </mapper>
