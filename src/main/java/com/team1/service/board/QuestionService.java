@@ -99,17 +99,17 @@ public class QuestionService {
 		return mapper.getList();
 	}
 	
-	public List<QuestionVO> getListPage(Integer page, Integer numberPerPage) {
+	public List<QuestionVO> getListPage(Integer page, Integer numberPerPage, String location, String tag, String query) {
 
 		// sql에서 사용할 record 시작 번호 (0-index)
 		Integer from = (page - 1) * 10;
 
-		return mapper.getListPage(from, numberPerPage);
+		return mapper.getListPage(from, numberPerPage, location, tag, query);
 	}
 	
-	public QuestionPageInfoVO getPageInfo(Integer page, Integer numberPerPage) {
+	public QuestionPageInfoVO getPageInfo(Integer page, Integer numberPerPage, String location, String tag, String query) {
 		// 총 게시물 수
-		Integer countRows = mapper.getCountRows();
+		Integer countRows = mapper.getCountRows(location, tag, query);
 
 		// 마지막 페이지 번호
 		Integer lastPage = (countRows - 1) / numberPerPage + 1;

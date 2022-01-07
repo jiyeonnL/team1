@@ -46,9 +46,11 @@ public class HelpController {
 		Cover.setCover("help", model);
 		System.out.println(tag);
 		//model.addAttribute("tag", "help");
+		//게시판 정보 넘겨준다.
 		model.addAttribute("location", location);
 		model.addAttribute("tag", tag);
-
+		model.addAttribute("boardType", "help");
+		
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 //		if (uvo != null) {
 //			List<HelpVO> list = service.getList(uvo.getId());
