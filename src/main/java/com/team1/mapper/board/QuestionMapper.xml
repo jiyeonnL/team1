@@ -31,7 +31,6 @@
 		u.id,
 		u.nickname,
 		q.memberId,
-		q.views,
 		q.tag,
 		q.content,
 		q.location,
@@ -44,11 +43,8 @@
 		tb_board_question q
 		ON
 		u.id = q.memberId
-		LEFT
-		JOIN tb_reply_question r
-		
-		GROUP BY q.id
-		ORDER BY q.id DESC
+
+		ORDER BY id DESC
 	</select>
 
 	<select id="getListPage"
@@ -90,8 +86,7 @@
 		LIMIT #{from}, #{items}
 	</select>
 
-	<insert id="insert" useGeneratedKeys="true" keyProperty="id"
-		keyColumn="id">
+	<insert id="insert">
 		INSERT INTO
 		tb_board_question (memberId, location,
 		tag, title, content)
@@ -101,92 +96,26 @@
 		#{content})
 	</insert>
 
-	<update id="update">
-		UPDATE tb_board_question
-		SET
-		tag = #{tag},
-		title = #{title},
-		content = #{content},
-		updated = NOW()
-		WHERE id = #{id}
-	</update>
 
-	<delete id="delete">
-		DELETE FROM tb_board_question WHERE id = #{id}
-	</delete>
-	
-	<update id="upViews">
-		UPDATE 
-		tb_board_question
-		SET 
-		views = views +1
-		WHERE 
-		id =#{id}
-	</update>
-	
-	<select id="read" resultMap="questionResult">
+	<select id="read" resultType="com.team1.domain.board.QuestionVO">
 		SELECT
 
 		q.id,
-		q.memberId,
 		q.title,
 		q.content,
 		q.tag,
-		q.views,
 		q.inserted,
 		q.location,
 		q.updated,
-		u.nickname
+		u.nickname,
+		u.id
 		FROM
 		tb_board_question q
 		JOIN
-		tb_user u 
-		ON 
-		q.memberId = u.id
-		LEFT JOIN
-		tb_reply_question r
-		ON q.id = r.boardId
-		
-		WHERE q.id = #{id}
+		tb_user u ON q.memberId = u.id
+		WHERE
 
+		q.id = #{id}
 	</select>
-	
-	<resultMap id="questionResult"
-		type="com.team1.domain.board.QuestionVO">
-		<result property="id" column="id" />
-		<result property="memberId" column="memberId" />
-		<result property="location" column="location" />
-		<result property="up" column="up" />
-		<result property="views" column="views" />
-		<result property="title" column="title" />
-		<result property="nickname" column="nickname" />
-		<result property="content" column="content" />
-		<result property="inserted" column="inserted" />
-		<result property="updated" column="updated" />
-		<result property="replyCount" column="replyCount" />
 
-		<collection property="fileList" column="id"
-			javaType="java.util.ArrayList"
-			ofType="com.team1.domain.board.QuestionFileVO"
-			select="selectNamesByBoardId" />
-	</resultMap>
-
-	<select id="selectNamesByBoardId"
-		resultType="com.team1.domain.board.QuestionFileVO">
-		SELECT id, postId, fileName, url FROM
-		tb_file_question WHERE postId =#{boardId}
-	</select>
-	
-		<select id="getFiles"
-		resultType="com.team1.domain.board.HelpFileVO">
-		SELECT id, postId, fileName, COUNT(postId) countpostId FROM
-		tb_file_question GROUP BY postId;
-	</select>
-	
-	<select id="getFilesById"
-		resultType="com.team1.domain.board.HelpFileVO">
-		SELECT id, postId, fileName, COUNT(postId) countpostId FROM
-		tb_file_question WHERE postId=#{id} GROUP BY postId;
-	</select>
-	
 </mapper>

@@ -12,14 +12,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.team1.domain.board.HelpFileVO;
-import com.team1.domain.board.HelpVO;
+
 import com.team1.domain.board.QuestionFileVO;
 import com.team1.domain.board.QuestionPageInfoVO;
 import com.team1.domain.board.QuestionVO;
 import com.team1.mapper.board.QuestionFileMapper;
 import com.team1.mapper.board.QuestionMapper;
-import com.team1.mapper.board.QuestionReplyMapper;
 
 import lombok.Setter;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -39,10 +37,6 @@ public class QuestionService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private QuestionFileMapper fileMapper;
-	
-	@Setter(onMethod_ = @Autowired)
-	private QuestionReplyMapper questionReplyMapper;
-	
 	
 	@Value("${aws.accessKeyId}")
 	private String accessKeyId;
@@ -103,9 +97,6 @@ public class QuestionService {
 	
 	public List<QuestionVO> getList() {
 		return mapper.getList();
-	}
-	public boolean modify(QuestionVO board) {
-		return mapper.update(board) == 1;
 	}
 	
 	public List<QuestionVO> getListPage(Integer page, Integer numberPerPage, String location, String tag, String query) {
@@ -182,72 +173,5 @@ public class QuestionService {
 		
 	}
 
-	@Transactional
-	public boolean modify(QuestionVO board, String[] removeFile, MultipartFile[] files)
-			throws IllegalStateException, IOException {
-		modify(board);
-		// write files
-		// 파일 삭제
-		if (removeFile != null) {
-			for (String removeFileName : removeFile) {
-				// file system, s3에서 삭제
-				//String key = "board/help-board/" + board.getId() + "/" + removeFileName;
-				String key = removeFileName.substring(staticUrl.length());
-				System.out.println(removeFileName);
-				System.out.println(key);
-				deleteObject(key);
-				// db table에서 삭제
-				fileMapper.deleteByUrl(removeFileName);
-			}
-		}
-		
-		
-		//프로필 url 변경
-		for (MultipartFile file : files) {
-			if (file != null && file.getSize() > 0) {
-				// 1. write file to filesystem, s3
-				
-				QuestionFileVO questionFileVO = new QuestionFileVO();
-				String key = "board/help-board/" + board.getId() + "/" + file.getOriginalFilename();
-				putObject(key, file.getSize(), file.getInputStream());
-				String url = "https://" + bucketName + ".s3." + region.toString() +".amazonaws.com/" +key;
-				questionFileVO.setFileName(file.getOriginalFilename());
-				questionFileVO.setUrl(url);
-				questionFileVO.setPostId(board.getId());
-				
-				fileMapper.insert(questionFileVO);
-				// 2. db 파일명 insert
-				//fileMapper.delete(board.getId(), file.getOriginalFilename());
-				//fileMapper.insert(board.getId(), file.getOriginalFilename());
-			}
-		}
-		return false;
-	}
-
-	public boolean remove(Integer id) {
-		
-		// 1.1 게시물에 달린 댓글 지우기
-		questionReplyMapper.deleteByBoardId(id);
-		// 1.2 좋아요 지우기
-
-		// 2. 파일 지우기 , s3
-		// file system에서 삭제
-		// 정성결 - 조금 수정 했어요 혹시 오류나면 좀 봐주세요 ㅠㅠ
-		List<QuestionFileVO> files = fileMapper.selectNamesByBoardId(id);
-		if (files != null) {
-			for (QuestionFileVO file : files) {
-				//s3에서 지운다.
-				String key = "board/question-board/" + id + "/" + file.getFileName();
-				deleteObject(key);
-			}
-		}
-		// db에서 삭제
-		fileMapper.deleteByBoardId(id);
-		// 3. 게시물 지우기
-		return mapper.delete(id) == 1;
-	}
 	
-	public List<QuestionFileVO> getNamesByBoardId(Integer id) {
-		return fileMapper.selectNamesByBoardId(id);
-	}
 }

@@ -3,7 +3,7 @@ package com.team1.mapper.board;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import com.team1.domain.board.QuestionFileVO;
+
 import com.team1.domain.board.QuestionVO;
 
 public interface QuestionMapper {
@@ -19,16 +19,8 @@ public interface QuestionMapper {
 
 	public int insert(QuestionVO board);
 
-	public int delete(Integer id);
-	
-	public int update(QuestionVO board);
 
 	public QuestionVO read(Integer id);
-	
-	public List<QuestionFileVO> getFiles();
 
-	public List<QuestionFileVO> getFilesById(Integer id);
-	
-	public int upViews(Integer id);
 	
 }

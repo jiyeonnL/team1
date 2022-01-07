@@ -20,10 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team1.coverData.Cover;
 import com.team1.domain.board.QuestionPageInfoVO;
-import com.team1.domain.board.QuestionReplyVO;
 import com.team1.domain.board.QuestionVO;
 import com.team1.domain.user.UserVO;
-import com.team1.service.board.QuestionReplyService;
 import com.team1.service.board.QuestionService;
 
 import lombok.Setter;
@@ -34,8 +32,7 @@ public class QuestionController {
 
 	@Setter(onMethod_ = @Autowired)
 	private QuestionService service;
-	@Setter(onMethod_ = @Autowired )
-	private QuestionReplyService replyservice;
+
 	@GetMapping(value = "/list")
 	public void list(@RequestParam(value = "location", required = false) String location,
 			@RequestParam(value = "query", required = false) String query,
@@ -62,25 +59,11 @@ public class QuestionController {
 	
 
 	@GetMapping(value = "/get/{id}")
-	public String get(@PathVariable Integer id, Model model, HttpSession session) {
-		UserVO uvo = (UserVO) session.getAttribute("loginUser");
-		if (uvo != null) {
-		
-			QuestionVO qvo = service.get(id);
-			
-			List<QuestionReplyVO> reply = replyservice.list(id);
-			
-			model.addAttribute("post", qvo);
-			model.addAttribute("reply", reply);
-		}else {
-			QuestionVO qvo = service.get(id);
-		
-			List<QuestionReplyVO> reply = replyservice.list(id);
-			model.addAttribute("post", qvo);
-			model.addAttribute("reply", reply);
-		}
-		
-		
+	public String get(@PathVariable Integer id, Model model) {
+		QuestionVO qvo = service.get(id);
+
+		model.addAttribute("post", qvo);
+
 		return "question/get";
 	}
 
@@ -96,9 +79,7 @@ public class QuestionController {
 	}
 
 	@PostMapping("/register")
-	public String register(QuestionVO board,
-			@RequestParam(value = "page", defaultValue = "1") Integer page, 
-			MultipartFile[] files, RedirectAttributes rttr) 
+	public String register(QuestionVO board, MultipartFile[] files, RedirectAttributes rttr) 
 			throws IllegalStateException, IOException {
 
 			// 3. business logic
@@ -112,51 +93,6 @@ public class QuestionController {
 
 		// 5. forward / redirect
 		// 책: 목록으로 redirect
-		return "redirect:/question/list?page=";
-	}
-	
-	@GetMapping("/modify")
-	public String getmodi(@RequestParam("id") Integer id, Model model, HttpSession session) {
-
-		UserVO uvo = (UserVO) session.getAttribute("loginUser");
-		QuestionVO qvo = (QuestionVO) service.get(id);
-
-		if (uvo.getId() != qvo.getMemberId()) {
-			System.out.println("작성자가 아니면 수정할 수 없습니다.");
-			return "redirect:/question/list?page=";
-		}
-
-		QuestionVO board = service.get(id);
-		// String[] fileNames = service.getNamesByBoardId(id);
-		model.addAttribute("board", board);
-
-		return "question/modify";
-	}
-	
-	@PostMapping("/modify")
-	public String modify(QuestionVO board, String[] removeFile, MultipartFile[] files, RedirectAttributes rttr) {
-
-		
-
-		try {
-			if (service.modify(board, removeFile, files)) {
-				rttr.addFlashAttribute("result", board.getId() + "번 게시글이 수정되었습니다.");
-			}
-		} catch (IllegalStateException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "redirect:/question/list?page=";
-	}
-	
-	@PostMapping("/remove")
-	public String remove(@RequestParam("id") Integer id, RedirectAttributes rttr) {
-
-		
-		if (service.remove(id)) {
-			rttr.addFlashAttribute("result", id + "번 게시글이 삭제되었습니다.");
-		}
-
-		return "redirect:/question/list?page=";
+		return "redirect:/question/list?location=";
 	}
 }

@@ -90,7 +90,7 @@ width: 20%;
 
 					<div class="form-group">
 						<label for="input7">Image</label>
-						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" >
+						<input type="file" class="form-control-file" id="input6" name="files" accept="image/*" >
 				    	</div>
 				    	
 				    						<!-- 이미지들 미리보기 컨테이너 -->

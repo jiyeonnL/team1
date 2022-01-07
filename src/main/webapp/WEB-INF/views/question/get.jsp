@@ -23,7 +23,7 @@ $(document).ready(function(){
 	const listReply = function() {
 		$("#replyListContainer").empty();
 		$.ajax({
-			url : appRoot + "/questionreply/board/${board.id}",
+			url : appRoot + "/helpreply/board/${board.id}",
 			success : function (list) {
 				for (let i = 0; i<list.length; i++){
 					const replyMediaObject = $(`
@@ -72,7 +72,7 @@ $(document).ready(function(){
 								reply : reply		
 						};
 						$.ajax({
-							url : appRoot + "/questionreply/" + list[i].id,
+							url : appRoot + "/helpreply/" + list[i].id,
 							type : "put",
 							contentType : "application/json",
 							data : JSON.stringify(data),
@@ -109,7 +109,7 @@ $(document).ready(function(){
 						removeButton.click(function(){
 							if (confirm("Sure you want to delete?")){
 								$.ajax({
-									url : appRoot +"/questionreply/"+list[i].id,
+									url : appRoot +"/helpreply/"+list[i].id,
 									type : "delete",
 									complete : function(){
 										listReply();
@@ -140,7 +140,7 @@ $(document).ready(function(){
 				boardId : boardId
 		};
 		$.ajax({
-			url : appRoot+ "/questionreply/write",
+			url : appRoot+ "/helpreply/write",
 			type : "post",
 			data : data,
 			success : function() {
@@ -162,7 +162,7 @@ $(document).ready(function(){
 		const boardId = '${board.id}';
 
 		$.ajax({
-			url : appRoot+ "/questionreply/count/"+${board.id},
+			url : appRoot+ "/helpreply/count/"+${board.id},
 			type : "get",
 			success : function(count) {
 				const replyCountObject = $(`<p class="replyCount" style="margin-bottom:0px;"><i class="far fa-comment-dots fa-lg cnt"></i> </p>`);
@@ -307,7 +307,7 @@ a:hover {
 						</c:if>
 					</div>
 					<div class="col-md-2 my-auto px-auto">
-						<a href="${pageContext.request.contextPath }/question/list?page=${page }&location=${post.location}"	class="btn btn-outline-secondary"><i class="fas fa-list"> 뒤로</i></a>
+						<a href="${pageContext.request.contextPath }/question/list?location="	class="btn btn-outline-secondary"><i class="fas fa-list"> 뒤로</i></a>
 					</div>
 				</div>
 				
