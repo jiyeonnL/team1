@@ -30,9 +30,10 @@
 	width: 900px;
 	height: 100%;
 }
-.패딩정리{
-padding-right:0px;
-padding-left:0px;
+
+.패딩정리 {
+	padding-right: 0px;
+	padding-left: 0px;
 }
 
 .form-group {
@@ -53,6 +54,69 @@ padding-left:0px;
 
 .btn-cancel {
 	color: #264d73;
+}
+
+.container_radio {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container_radio input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 24px;
+	width: 24px;
+	background-color: #eee;
+	border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container_radio:hover input ~.checkmark {
+	background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container_radio input:checked ~.checkmark {
+	background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container_radio input:checked ~.checkmark:after {
+	display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container_radio .checkmark:after {
+	top: 8px;
+	left: 8px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+#line {
+	height: 3px;
+	background-color: #264d73;
+	width: 100%;
 }
 </style>
 
@@ -108,6 +172,9 @@ padding-left:0px;
 						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" onchange=setThumbnail(event) multiple>
 				    </div>
 				    
+				    <!-- 구분 선 -->
+				    <div id="d-line"></div>
+				    
 				    <!-- 미리보기 선택 알림 -->
 				    <div id="choose_preview" class="d-flex"></div>
 				    	
@@ -130,7 +197,15 @@ padding-left:0px;
 		console.log("set");
 		/* 현재 미리보기는 모두 지워야 한다. */
 		$("#image_container").empty();
+		$("#d-line").empty();
+
+		const line = $(`
+			<div id="line"></div>
+		</div>`)
 		
+		$("#d-line").append(line);
+		
+		//업로드한 이미지가 하나 이상일 경우 썸네일 고르라는 문구를 띄운다.
 		if(event.target.files.length > 1) {
 			
 			const notation = $(`
@@ -152,29 +227,35 @@ padding-left:0px;
 
 				const replyMediaObject = $(`
                 	<span id = "\${event.timeStamp}" style="height: 200px; width: 200px; position:relative;">
-						<input 
-							type="radio" 
-							id="thumbNailChoice"
-						 	name="thumbNail" 
-							value="\${image.name}"
-							style = "position: absolute; z-index:100; opacity:1; top: 10px; left: 10px;"
-						>
-						 
-						<button 
-							type="button" 
-							class="close" 
-							style = "position: absolute; z-index:100; opacity:1; top: 10px; right: 10px;" 
-							aria-label="Close"
-							onclick = "deletePicture(\${event.timeStamp})"
-						>
-								<span aria-hidden="true">&times;</span>
-						</button>
+					
+                	<div style = "position: absolute; z-index:100; opacity:1; top: 8px; left: 8px;">
+						<label class= "container_radio">
+							<input 
+								type="radio" 
+								id="thumbNailChoice"
+								name="radio"
+								checked="checked" 
+								value="\${image.name}"
+								style = "position: relatve; z-index:101; opacity:0;"
+							/>
+							<span class="checkmark"></span>
+						</label>
+					</div>
+					
+					<div 
+						class = "closeButton"
+						style = "position: absolute; z-index:101; top: 5px; right: 5px; width: 30px; height: 30px; cursor:pointer;" 
+						onclick = "deletePicture(\${event.timeStamp})"
+					>
+						<i class="fas fa-times fa-2x"></i>
+					</div>
 						<img src= "\${event.target.result}" class="img-thumbnail d-block" style="height: 100%; width: 100%" atl="aaaa"/>	
 					</span>
                 	
                 `);
 
 				$("#image_container").append(replyMediaObject);
+				
 			};
 
 		}
