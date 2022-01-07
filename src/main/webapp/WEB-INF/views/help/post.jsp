@@ -499,7 +499,7 @@ a:hover {
 					</div>
 				</div>
 			</div>
-		</c:if>
+		</c:if>t
 	</div>
 
 

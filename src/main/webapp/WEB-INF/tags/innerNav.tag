@@ -126,6 +126,7 @@ function locationChange() {
 	}
 	
 	window.location.href = "/controller1/help/list"+location+tag;
+	window.location.href = "/controller1/question/list"+location+tag;
 	/*
 	var link = window.location.href;
 	const regex = /(location=.*)(?=&|$)/i;

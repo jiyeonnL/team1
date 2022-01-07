@@ -13,8 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import com.team1.domain.board.QuestionFileVO;
 import com.team1.domain.board.QuestionPageInfoVO;
 import com.team1.domain.board.QuestionVO;
+import com.team1.mapper.board.QuestionFileMapper;
 import com.team1.mapper.board.QuestionMapper;
 
 import lombok.Setter;
@@ -32,6 +34,9 @@ public class QuestionService {
 
 	@Setter(onMethod_ = @Autowired)
 	private QuestionMapper mapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private QuestionFileMapper fileMapper;
 	
 	@Value("${aws.accessKeyId}")
 	private String accessKeyId;
@@ -81,6 +86,14 @@ public class QuestionService {
 		s3.putObject(putObjectRequest, requestBody);
 		
 	}
+	public QuestionVO get(Integer id) {
+		return mapper.read(id);
+	}
+	
+	public boolean register(QuestionVO board) {
+		
+		return mapper.insert(board) == 1;
+	}
 	
 	public List<QuestionVO> getList() {
 		return mapper.getList();
@@ -127,16 +140,38 @@ public class QuestionService {
 
 		return pageInfo;
 	}
+	
+	@Transactional
+	public void register(QuestionVO board, MultipartFile[] files) throws IllegalStateException, IOException {
+		
+		register(board);
+		
+		QuestionFileVO fileVO = new QuestionFileVO();
+		for (int i = 0; i<files.length; i++) {
+		
+		MultipartFile file = files[i];
+			
+		
+		fileVO.setPostId(board.getId());
+		fileVO.setFileName(file.getOriginalFilename());
+		
+			if (file != null && file.getSize() > 0) {
+				// 2.1 파일을 작성, FILE SYSTEM, s3
+				
+				String key = "board/question-board/" + board.getId() + "/" + file.getOriginalFilename();
+				putObject(key, file.getSize(), file.getInputStream());
+				
+				String url = "https://" + bucketName + ".s3." + region.toString() +".amazonaws.com/" +key;
+				fileVO.setUrl(url);
 
-	public boolean register(QuestionVO board) {
-		return mapper.insert(board) == 1;
+				// insert into File table, DB
+				fileMapper.insert(fileVO);
+			}
+		
+		}
+		
+		
 	}
 
-	public QuestionVO get(Integer id) {
-		// TODO Auto-generated method stub
-		return mapper.read(id);
-	}
-	
-	
 	
 }
