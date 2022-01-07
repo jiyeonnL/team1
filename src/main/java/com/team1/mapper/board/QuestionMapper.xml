@@ -114,6 +114,7 @@
 		JOIN
 		tb_user u ON q.memberId = u.id
 		WHERE
+
 		q.id = #{id}
 	</select>
 

@@ -153,6 +153,7 @@ function locationChange() {
 	}
 	
 	window.location.href = "/controller1/"+board+"/list"+location+tag;
+
 	/*
 	var link = window.location.href;
 	const regex = /(location=.*)(?=&|$)/i;

@@ -2,6 +2,7 @@ package com.team1.domain.board;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import lombok.Data;
 
@@ -18,6 +19,8 @@ public class QuestionVO {
 	private LocalDateTime inserted;
 	private LocalDateTime updated;
 	private String nickname;
+	
+	List<QuestionFileVO> fileList;
 	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

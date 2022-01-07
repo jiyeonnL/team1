@@ -19,6 +19,8 @@ public interface QuestionMapper {
 
 	public int insert(QuestionVO board);
 
+
 	public QuestionVO read(Integer id);
 
+	
 }
