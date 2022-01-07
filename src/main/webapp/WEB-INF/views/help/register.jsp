@@ -107,8 +107,11 @@ padding-left:0px;
 						<label for="input7">Image</label>
 						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" onchange=setThumbnail(event) multiple>
 				    </div>
+				    
+				    <!-- 미리보기 선택 알림 -->
+				    <div id="choose_preview" class="d-flex"></div>
 				    	
-				    						<!-- 이미지들 미리보기 컨테이너 -->
+				    <!-- 이미지들 미리보기 컨테이너 -->
 					<div id="image_container" class="d-flex"></div>
 
 					<button class="btn-register" type="submit">등록</button>
@@ -127,8 +130,21 @@ padding-left:0px;
 		console.log("set");
 		/* 현재 미리보기는 모두 지워야 한다. */
 		$("#image_container").empty();
+		
+		if(event.target.files.length > 1) {
+			
+			const notation = $(`
+				<p>썸네일로 보여줄 이미지를 선택하세요 ! </p>
+			`);
+			
+			$("#choose_preview").append(notation);
+			
+		}  else {
+			$("#choose_preview").empty();
+		}
 
 		for (const image of event.target.files) {
+			
 			console.log(image.name);
 			var reader = new FileReader();
 			reader.readAsDataURL(image);
