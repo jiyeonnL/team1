@@ -36,24 +36,92 @@
 	padding-left: 0px;
 }
 
-.form-group {
+.게시글-타이틀 {
+	padding-top: 5px;
+	padding-bottom: 10px;
+	margin-bottom: 0px;
+	border-bottom: solid;
+	border-bottom-color: lightgray;
+	letter-spacing: 2px;
+}
+
+.게시물-글씨 {
+	font-size: x-large;
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+
+.인풋-글씨 {
+	font-size: large;
+}
+
+.게시물-테두리-패딩 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	magin-bottom: 0px;
+}
+
+.이미지-아래-테두리 {
+	padding-bottom: 20px;
+}
+
+.form-group1 {
 	font-family: 'IBM Plex Sans KR', sans-serif;
+	magin-bottom: 0px;
+}
+
+#input1, #input2, #input3, #input4, #input5 {
+	border: solid;
+	border-color: #264d73;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#input1, #input2, #input3, #input5, #input7 {
+	width: 50%;
+}
+
+#input1, #input3, #input4, #input6 {
+	background-color: #eef2f6;
+}
+
+#input1, #input2, #input3, #input4, #input5, #input6, #input7 {
+	letter-spacing: 2px;
+}
+
+#input2, #input5 {
+	background-color: darkgray;
+	color: white;
+	font-weight: bold;
 }
 
 #input4 {
+	width: 70%;
 	height: 150px;
+	padding-block: 8px;
 }
 
 #input6 {
+	border: solid;
+	border-color: #264d73;
 	width: 20%;
+	padding-top: 4px;
 }
 
-.btn-register {
-	color: #f0615c;
+#썸네일-글씨{
+    font-size: larger;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-weight: bold;
+    margin-top: 15px;
+    color: cornflowerblue;
 }
 
-.btn-cancel {
-	color: #264d73;
+#image_container {
+	border-bottom: solid;
+	border-bottom-color: lightgray;
+	margin-bottom: 20px;
+	padding-bottom:15px;
+	
 }
 
 .container_radio {
@@ -114,10 +182,29 @@
 }
 
 #line {
-	height: 3px;
-	background-color: #264d73;
-	width: 100%;
+	height: 2.4px;
+	background-color: lightgray;
+	width: 900px;
 }
+
+.btn-register, .btn-cancel {
+	font-size: xx-large;
+	margin-bottom:40px;
+}
+
+.btn-register {
+	color: #f0615c;
+}
+
+.btn-cancel {
+	color: #264d73;
+	border: 2px solid;
+	border-color: red;
+	padding: 7.5px;
+	padding-block: 9px;
+}
+
+
 </style>
 
 <title>게시물 작성</title>
@@ -128,36 +215,36 @@
 		<div class="row" id="inner">
 			<div class="col 패딩정리">
 			<b:innerNav></b:innerNav>
-				<h1>게시물 작성</h1>
+				<h1 class="게시글-타이틀">게시물 작성</h1>
 
 
 			<form method="post" enctype="multipart/form-data">
 				
 				<input type="hidden" class="form-control" id="input1" name="memberId" value="${sessionScope.loginUser.id }">
 
-					<div class="form-group">
-						<label for="input2">닉네임</label>
-						<input type="text" class="form-control" id="input2" name="nickname" value="${sessionScope.loginUser.nickname }" readonly>
+					<div class="form-group1 게시물-테두리-패딩">
+						<label for="input2" class="게시물-글씨">닉네임</label>
+						<input type="text" class="form-control 인풋-글씨" id="input2" name="nickname" value="${sessionScope.loginUser.nickname }" readonly>
 					</div>
 
-					<div class="form-group">
-						<label for="input5">지역</label>
-						<input type="text" class="form-control" name="location" value="${sessionScope.loginUser.location }" id="input5" readonly>
+					<div class="form-group1 게시물-테두리-패딩">
+						<label for="input5" class="게시물-글씨">지역</label>
+						<input type="text" class="form-control 인풋-글씨" name="location" value="${sessionScope.loginUser.location }" id="input5" readonly>
 					</div>
 
-          			<div class="form-group">
-            			<label for="input3">제목</label>
-           				<input type="text" class="form-control" id="input3" name="title">
+          			<div class="form-group1 게시물-테두리-패딩" >
+            			<label for="input3" class="게시물-글씨" >게시물 제목</label>
+           				<input type="text" class="form-control 인풋-글씨" id="input3" name="title">
           			</div>
           
-         			 <div class="form-group">
-           				 <label for="input4">내용</label>
-          				 <textarea class="form-control" id="input4" name="content"></textarea>
+         			 <div class="form-group1 게시물-테두리-패딩">
+           				 <label for="input4" class="게시물-글씨">내용</label>
+          				 <textarea class="form-control 인풋-글씨" id="input4" name="content"></textarea>
           			</div>
           
-  		 		    <div class="form-group">
-           				 <label for="input6">태그</label>
-           				 <select class="form-control" id="input6" name="tag">
+  		 		    <div class="form-group1 게시물-테두리-패딩">
+           				 <label for="input6" class="게시물-글씨">태그</label>
+           				 <select class="form-control 인풋-글씨 태그-패딩" id="input6" name="tag">
           				  	<option value="기타" selected>태그 선택</option>
           				  	<option value="사다주세요">사다주세요</option>
            				 	<option value="맡아주세요">맡아주세요</option>
@@ -167,8 +254,8 @@
           				</select>
          			  </div>
 
-					<div class="form-group">
-						<label for="input7">Image</label>
+					<div class="form-group1 게시물-테두리-패딩 이미지-아래-테두리">
+						<label for="input7" class="게시물-글씨 ">Image</label>
 						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" onchange=setThumbnail(event) multiple>
 				    </div>
 				    
@@ -209,7 +296,7 @@
 		if(event.target.files.length > 1) {
 			
 			const notation = $(`
-				<p>썸네일로 보여줄 이미지를 선택하세요 ! </p>
+				<p id="썸네일-글씨">썸네일로 보여줄 이미지를 선택하세요 ! </p>
 			`);
 			
 			$("#choose_preview").append(notation);
