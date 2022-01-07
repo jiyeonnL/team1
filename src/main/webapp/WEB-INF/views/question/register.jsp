@@ -92,11 +92,7 @@ width: 20%;
 					</div>
 					<div class="form-group">
 						<label for="input7">Image</label>
-<<<<<<< HEAD
-						<input type="file" class="form-control-file" id="input6" name="files" accept="image/*"  onchange=setThumbnail(event) multiple>
-=======
 						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" >
->>>>>>> parent of 7c71adb (Revert "게시글 수정/ 삭제 (댓글 미구현)")
 				    	</div>
 				    	
 				    						<!-- 이미지들 미리보기 컨테이너 -->
