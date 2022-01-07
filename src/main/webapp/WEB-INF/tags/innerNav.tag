@@ -178,53 +178,65 @@ a.goTop {
 					<button type="button" id="news" class="btn btn-outline-dark ml-1">동네소식</button>
 					<ul id="nav-sub" class="news">
 						<li id="nav-sub" class="nav-item accident">
-							<button type="button" id="accident" class="btn btn-outline-dark ml-1">사건/사고</button>
+							<button type="button" id="n_all" class="btn btn-outline-dark ml-1">전체보기</button>
+						</li>
+						<li id="nav-sub" class="nav-item accident">
+							<button type="button" id="n_accident" class="btn btn-outline-dark ml-1">사건/사고</button>
 						</li>
 						<li id="nav-sub" class="nav-item adv">
-							<button type="button" id="adv" class="btn btn-outline-dark ml-1">광고</button>
+							<button type="button" id="n_adv" class="btn btn-outline-dark ml-1">광고</button>
 						</li>
 						<li id="nav-sub" class="nav-item other1">
-							<button type="button" id="other1" class="btn btn-outline-dark ml-1">기타</button>
+							<button type="button" id="n_other" class="btn btn-outline-dark ml-1">기타</button>
 						</li>
 					</ul>
 				</li>
+				
+				<!-- 질문 -->
 				<li id="nav-question" class="nav-item">
 					<button type="button" id="question" class="btn btn-outline-dark ml-1">동네질문</button>
 					<ul id="nav-sub" class="question">
 						<li id="nav-sub" class="nav-item lostnfound">
-							<button type="button" id="lostnfound" class="btn btn-outline-dark ml-1">분실물</button>
+							<button type="button" id="q_all" class="btn btn-outline-dark ml-1">전체보기</button>
+						</li>
+
+						<li id="nav-sub" class="nav-item lostnfound">
+							<button type="button" id="q_question" class="btn btn-outline-dark ml-1">질문</button>
 						</li>
 						<li id="nav-sub" class="nav-item conven">
-							<button type="button" id="conven" class="btn btn-outline-dark ml-1">편의시설(학원, 병원 등)</button>
+							<button type="button" id="q_suggest" class="btn btn-outline-dark ml-1">건의사항</button>
 						</li>
 						<li id="nav-sub" class="nav-item complain">
-							<button type="button" id="complain" class="btn btn-outline-dark ml-1">불만</button>
+							<button type="button" id="q_declaration" class="btn btn-outline-dark ml-1">신고합니다!</button>
 						</li>
 						<li id="nav-sub" class="nav-item suggest">
-							<button type="button" id="suggest" class="btn btn-outline-dark ml-1">건의</button>
+							<button type="button" id="q_other" class="btn btn-outline-dark ml-1">기타</button>
 						</li>
-						<li id="nav-sub" class="nav-item other2">
-							<button type="button" id="other2" class="btn btn-outline-dark ml-1">기타</button>
-						</li>
+
 					</ul>
 				</li>
+				
+				<!-- life -->
 				<li id="nav-life" class="nav-item">
 					<button type="button" id="life" class="btn btn-outline-dark ml-1">일상생활</button>
 					<ul id="nav-sub" class="life">
 						<li id="nav-sub" class="nav-item nlife">
-							<button type="button" id="nlife" class="btn btn-outline-dark ml-1">일상</button>
+							<button type="button" id="l_all" class="btn btn-outline-dark ml-1">전체보기</button>
+						</li>
+						<li id="nav-sub" class="nav-item nlife">
+							<button type="button" id="l_life" class="btn btn-outline-dark ml-1">일상</button>
 						</li>
 						<li id="nav-sub" class="nav-item hobby">
-							<button type="button" id="hobby" class="btn btn-outline-dark ml-1">취미</button>
+							<button type="button" id="l_hobby" class="btn btn-outline-dark ml-1">취미</button>
 						</li>
 						<li id="nav-sub" class="nav-item movdra">
-							<button type="button" id="movdra" class="btn btn-outline-dark ml-1">영화 & 드라마</button>
+							<button type="button" id="l_movdra" class="btn btn-outline-dark ml-1">영화 & 드라마</button>
 						</li>
 						<li id="nav-sub" class="nav-item pet">
-							<button type="button" id="pet" class="btn btn-outline-dark ml-1">반려동물</button>
+							<button type="button" id="l_pet" class="btn btn-outline-dark ml-1">반려동물</button>
 						</li>
 						<li id="nav-sub" class="nav-item other3">
-							<button type="button" id="other3" class="btn btn-outline-dark ml-1">기타</button>
+							<button type="button" id="l_other" class="btn btn-outline-dark ml-1">기타</button>
 						</li>
 					</ul>
 				</li>
@@ -264,9 +276,6 @@ a.goTop {
 
 <script>
 function locationChange() {
-	
-
-	
 	
 	//현재 위치
 	var location = $("#location option:selected").val();
@@ -402,22 +411,91 @@ function locationChange() {
 			location.href = "/controller1/all/list";
 		});
 		
-		//탭에 있는 버튼들 누르면 해당 링크로 이동한다. 현재 select 상태를 함께 포함해 컨트롤러에 get 요청 날린다.
+		//-----------------------news 버튼들 -----------------------
 		$("#news").click(function() {
 			var loc = $("#location option:selected").val();
 			location.href = "/controller1/news/list";
 		});
-
+		
+		$("#n_all").click(function() {
+			location.href = "/controller1/news/list?"+ getLocation();
+		});
+		
+		$("#n_news").click(function() {
+			location.href = "/controller1/news/list?tag=동네소식"+ getLocation();
+		});
+		
+		$("#n_accident").click(function() {
+			location.href = "/controller1/news/list?tag=사건사고"+ getLocation();
+		});
+		
+		$("#n_adv").click(function() {
+			location.href = "/controller1/news/list?tag=광고"+ getLocation();
+		});
+		
+		$("#n_other").click(function() {
+			location.href = "/controller1/news/list?tag=기타"+ getLocation();
+		});
+		
+		//-----------------------question 버튼들 -----------------------
 		$("#question").click(function() {
 			var loc = $("#location option:selected").val();
 			location.href = "/controller1/question/list?page=1";
 		});
+		
+		$("#q_all").click(function() {
+			location.href = "/controller1/question/list?page=1"+ getLocation();
+		});
+		
+		$("#q_question").click(function() {
+			window.location.href = "/controller1/question/list?page=1&tag=질문"+ getLocation();
+		})
 
+		$("#q_declaration").click(function() {
+			window.location.href = "/controller1/question/list?page=1&tag=신고합니다!"+ getLocation();
+		})
+
+		$("#q_suggest").click(function() {
+			window.location.href = "/controller1/question/list?page=1&tag=건의사항" + getLocation();
+		})
+
+		$("#q_other").click(function() {
+			window.location.href = "/controller1/question/list?page=1&tag=기타" + getLocation();
+		})
+
+		//----------------------- life 버튼들 -----------------------
 		$("#life").click(function() {
 			var loc = $("#location option:selected").val();
 			location.href = "/controller1/life/list";
 		});
+		
+		$("#l_all").click(function() {
+			window.location.href = "/controller1/life/list?" + getLocation();
+		})
+		
+		$("#l_life").click(function() {
+			window.location.href = "/controller1/life/list?tag=일상" + getLocation();
+		})
+		
+		$("#l_hobby").click(function() {
+			window.location.href = "/controller1/life/list?tag=취미" + getLocation();
+		})
+		
+		$("#l_movdra").click(function() {
+			window.location.href = "/controller1/life/list?tag=영화드라마" + getLocation();
+		})
+		
+		$("#l_pet").click(function() {
+			window.location.href = "/controller1/life/list?tag=반려동물" + getLocation();
+		})
+		
+		$("#l_other").click(function() {
+			window.location.href = "/controller1/life/list?tag=기타" + getLocation();
+		})
 
+		
+	
+		//----------------------- help 버튼들 -----------------------
 		$("#help").click(function() {
 			var loc = $("#location option:selected").val();
 			location.href = "/controller1/help/list"
@@ -438,6 +516,8 @@ function locationChange() {
 		$("#other4").click(function() {
 			location.href = "/controller1/help/list?tag=기타" + getLocation();
 		})
+		
+		
 		
 		function getLocation() {
 

@@ -38,28 +38,31 @@
 
 	})
 
-	$("#question_question").click(
-			function() {
-				window.location.href = "/controller1/question/list?page=1&tag=질문"
-						+ getLocation();
+	$("#question_question")
+			.click(
+					function() {
+						window.location.href = "/controller1/question/list?page=1&tag=질문"
+								+ getLocation();
 
-			})
+					})
 
-	$("#question_declaration").click(
-			function() {
+	$("#question_declaration")
+			.click(
+					function() {
 
-				window.location.href = "/controller1/question/list?page=1&tag=신고합니다!"
-						+ getLocation();
+						window.location.href = "/controller1/question/list?page=1&tag=신고합니다!"
+								+ getLocation();
 
-			})
+					})
 
-	$("#question_tendinous").click(
-			function() {
+	$("#question_tendinous")
+			.click(
+					function() {
 
-				window.location.href = "/controller1/question/list?page=1&tag=건의사항"
-						+ getLocation();
+						window.location.href = "/controller1/question/list?page=1&tag=건의사항"
+								+ getLocation();
 
-			})
+					})
 
 	function getLocation() {
 
