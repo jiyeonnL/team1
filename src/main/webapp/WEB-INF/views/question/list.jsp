@@ -60,7 +60,6 @@ text-align: left;
 	<div id="body">
 		<div id="inner">
 			<b:innerNav></b:innerNav>
-			<b:tagNavQuestion></b:tagNavQuestion>
 			<b:cover></b:cover>		
 			<!-- 태그 -->
 	
