@@ -42,23 +42,23 @@
 				const upviewMediaObject = $(`
 						<c:if test="${empty sessionScope.loginUser}">
 							<button id="upinsnl" class="btn btn-outline-primary">
-								<i id="upiconnl" class="far fa-heart fa-fw fa-3x m-r-3"> </i>
+								<i id="upiconnl" class="far fa-heart fa-fw fa-2x m-r-3"> </i>
 							</button>
 						</c:if>
 						<c:if test="${empty post.upposession&&not empty sessionScope.loginUser}">
 							<button id="upins" class="btn btn-outline-primary">
-								<i id="upicon" class="far fa-heart fa-fw fa-3x m-r-3"> </i> 
+								<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
 							</button>
 							<button id="updel" class="btn btn-outline-primary" style="display:none;">
-								<i id="downicon" class="fas fa-heart fa-fw fa-3x m-r-3"> </i> 
+								<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
 							</button>
 						</c:if>
 						<c:if test="${not empty post.upposession}">
 							<button id="upins" class="btn btn-outline-primary" style="display:none;">
-								<i id="upicon" class="far fa-heart fa-fw fa-3x m-r-3"> </i> 
+								<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
 							</button>
 							<button id="updel" class="btn btn-outline-primary">
-								<i id="downicon" class="fas fa-heart fa-fw fa-3x m-r-3"> </i> 
+								<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
 							</button>
 						</c:if>
 
@@ -78,7 +78,7 @@
 						success : function(cnt) {
 							console.log("업 +1됨");
 
-							$("#upview").find("#updel").html("<i id='downicon' class='fas fa-heart fa-fw fa-3x m-r-3'> </i> ");
+							$("#upview").find("#updel").html("<i id='downicon' class='fas fa-heart fa-fw fa-2x m-r-3'> </i> ");
 							$("#upview").find("#downicon").append(cnt);
 						},
 						complete : function() {
@@ -99,7 +99,7 @@
 						type : "delete",
 						success : function(cnt) {
 								console.log("업 -1됨");
-								$("#upview").find("#upins").html("<i id='upicon' class='far fa-heart fa-fw fa-3x m-r-3'> </i> ");
+								$("#upview").find("#upins").html("<i id='upicon' class='far fa-heart fa-fw fa-2x m-r-3'> </i> ");
 								$("#upview").find("#upicon").append(cnt);
 						},
 						complete : function() {
@@ -119,11 +119,6 @@
 	}
 	upview();
 
-
-
-	
-	
-
     /* 현재 게시물의 댓글 목록 가져오는 함수 */
     const listReply = function() {
       $("#replyListContainer").empty();
@@ -140,7 +135,7 @@
 									<th id="userprofile">
 											<img	id = "reply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
 									</th>
-									<th>
+									<th id="replynickname">
 										<div id ="reply-nickname" class="h6"></div>
 									</th>
 									<th id="replymenu">
@@ -154,22 +149,19 @@
 							<tbody>
 								<tr>
 									<td colspan="4">
-									<div id = "reply-text\${replyId}" class="col h6">
-							</div>
-									</div>
-						
-						<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
-						<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
-							<div class="input-group-append">
-								<button class="btn btn-outline-danger cancel-button"><i class="fas fa-ban"></i></button>
-								<button class="btn btn-outline-primary" id="sendReply\${list[i].id}">
-									<i class="far fa-comment-dots fa-lg"></i>
-								</button>
-							</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+										<div id = "reply-text\${replyId}" class="col h6"></div>
+										<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
+										<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
+											<div class="input-group-append">
+												<button class="btn btn-outline-danger cancel-button"><i class="fas fa-ban"></i></button>
+												<button class="btn btn-outline-primary" id="sendReply\${list[i].id}">
+													<i class="far fa-comment-dots fa-lg"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 					`);
 				
 				replyMediaObject.find("#sendReply" + list[i].id).click(function() {
@@ -276,7 +268,7 @@
 			url : appRoot+ "/helpreply/count/"+${post.id},
 			type : "get",
 			success : function(count) {
-				const replyCountObject = $(`<p class="replyCount" style="margin-bottom:0px;"><i class="fa fa-comments"></i> </p>`);
+				const replyCountObject = $(`<p class="replyCount fa-2x" style="margin-bottom:0px;"><i class="fa fa-comments"></i> </p>`);
 				$(".replyCount").parents().find(".replyCount").replaceWith(replyCountObject);
 				$(".replyCount").parents().find(".replyCount").append(count);
 			}
@@ -337,6 +329,29 @@ a:hover {
 }
 #buttonmenu{
 	margin-bottom: 10px;
+}
+
+.replyinput{
+	padding-top: 15px;
+	padding-left : 0px;
+	padding-bottom: 15px;
+}
+#sendReply{
+	margin-top: 15px ;
+	height : 60px;
+}
+#replynickname{
+	width : 460px;
+}
+#replymenu{
+	width : 105px;
+}
+#replytime{
+	width : 220px;
+	vertical-align: middle;
+}
+#replyModify{
+	width : 40px;
 }
 
 </style>
@@ -405,24 +420,28 @@ a:hover {
 
 				<!-- footer -->
 				<div class="row md mx-4 d-flex justify-content-center">
-					<div id="upview"  class="col-md-4 d-flex justify-content-center">
+					<div id="upview" class="col-md-4 d-flex justify-content-center">
 						<!-- 좋아요 아이콘 -->
 					</div>
-
-					
 				</div>
+				
+				<!-- 버튼 메뉴, 수정/삭제, 뒤로 -->
 				<div id="buttonmenu" class="row md mx-4 d-flex justify-content-between">
-					<div class="col-md-2 my-auto px-auto ">
+					<div class="col-md-auto my-auto px-auto ">
 						<c:if test="${sessionScope.loginUser.id eq post.memberId }">
-							<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }"	class="btn btn-outline-secondary"> 수정/삭제 </a>
+							<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }" class="btn btn-outline-secondary"> 수정/삭제 </a>
 						</c:if>
 					</div>
-					<div class="col-md-2 my-auto px-auto">
-						<a href="${pageContext.request.contextPath }/help/list?location="	class="btn btn-outline-secondary"><i class="fas fa-list"> 뒤로</i></a>
+				
+					<div class="col-md-auto my-auto px-auto">
+						<a href="${pageContext.request.contextPath }/help/list" class="btn btn-outline-secondary">
+							<i class="fas fa-list"> 뒤로</i>
+						</a>
 					</div>
 				</div>
 
 				<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
+				<div class="row md mx-4 my-3">
 				<table class="table table-hover table-bordered">
 					<thead class="thead-dark">
 						<tr>
@@ -440,39 +459,36 @@ a:hover {
 						</c:forEach>
 					</c:if>
 				</table>
-
+				</div>
 				<!-- footer 와 댓글창 구분 선-->
-				<div class="row md mx-3 my-2">
-					<div class="col-md-12 ">
+				<div class="row md mx-4 my-3">
 						<div id="line"></div>
+					<div class="col-md-12 ">
 					</div>
 				</div>
 
 				<!-- 댓글 창 -->
 				<!-- 로그인 한 사용자에게만 보여야 한다. -->
 
-				<div class="row md mx-4 my-3">
-					<p style="margin-bottom: 0px;" class="replyCount">
+				<div class="row md mx-4 my-3 ">
+					<p style="margin-bottom: 0px;" class="replyCount fa-2x">
 						<i class="far fa-comment-dots fa-lg cnt"></i>
 					</p>
-					<hr>
+					<div id="line"></div>
 					<c:if test="${not empty sessionScope.loginUser }">
-						<div class="col-md-10 mx-0">
+						<div class="col-md-10 mx-0 replyinput">
 							<textarea id="replyTextarea" class="form-control px-0"
 								placeholder="댓글을 남겨보세요!" id="exampleFormControlTextarea1"></textarea>
 						</div>
 						<div class="col-md-2 px-0">
-							<button id="sendReply"
-								class="btn btn-block btn-primary d-flex align-items-stretch">
-								<i class="far fa-comment-dots fa-lg" style="color: white"></i>
+							<button id="sendReply" class="btn btn-block btn-primary d-flex justify-content-center" >
+								<i class="far fa-comment-dots fa-3x" ></i>
 							</button>
 						</div>
 					</c:if>
-
 					<br>
-					<hr>
+					<div id="replyListContainer"></div>
 				</div>
-				<div id="replyListContainer"></div>
 			</div>
 		</div>
 		<!-- 태그 -->
