@@ -25,6 +25,7 @@ public class AllController {
 
 		model.addAttribute("tag", "all");
 		model.addAttribute("location", location);
+		model.addAttribute("boardType", "all");
 		// post들 가져온다.
 		// region이 없으면 모든 region에 대하여 검색
 

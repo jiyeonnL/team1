@@ -46,7 +46,7 @@ public class NewsController {
 		
 		model.addAttribute("location", location);
 		model.addAttribute("tag", tag);
-		
+		model.addAttribute("boardType", "news");
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 		
 		if (uvo != null) {

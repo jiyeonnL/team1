@@ -46,7 +46,7 @@ public class LifeController {
 
 		model.addAttribute("location", location);
 		model.addAttribute("tag", tag);
-		
+		model.addAttribute("boardType", "life");
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 		
 		if (uvo != null) {

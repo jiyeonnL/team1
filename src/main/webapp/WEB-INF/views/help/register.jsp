@@ -106,7 +106,7 @@ padding-left:0px;
 					<div class="form-group">
 						<label for="input7">Image</label>
 						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" onchange=setThumbnail(event) multiple>
-				    	</div>
+				    </div>
 				    	
 				    						<!-- 이미지들 미리보기 컨테이너 -->
 					<div id="image_container" class="d-flex"></div>
@@ -122,16 +122,11 @@ padding-left:0px;
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="	crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 	<script>
-	$(document).ready(function(){
-		$("#help").attr("class", "btn btn-outline ml-1 active");
-	});
-	
+
 	function setThumbnail(event) {
 		console.log("set");
 		/* 현재 미리보기는 모두 지워야 한다. */
 		$("#image_container").empty();
-
-		var i = 0;
 
 		for (const image of event.target.files) {
 			console.log(image.name);
@@ -166,9 +161,13 @@ padding-left:0px;
 				$("#image_container").append(replyMediaObject);
 			};
 
-			i++;
 		}
 	}
+	
+	$(document).ready(function(){
+		$("#help").attr("class", "btn btn-outline ml-1 active");
+	});
+	
 </script>
 </body>
 </html>
