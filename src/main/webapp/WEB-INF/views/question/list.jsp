@@ -67,7 +67,7 @@ text-align: left;
     <div class="row">
       <div class="col">
         <h1>동네 질문</h1>
-        <!-- table.table>thead>tr>th*4^^tbody -->
+        <!-- 공지사항 글 -->
         <table class="table">
           <thead>
             <tr>
@@ -84,17 +84,56 @@ text-align: left;
             </tr>
           </thead>
           <tbody>
+            <c:forEach items="${listNotice }" var="board1">
+              <tr>
+                <td>${board1.id }</td>
+                <td>${board1.tag } </td>
+                <td id="boardid">
+                  <a href="get/${board1.id }">
+                	<%-- <c:if test="${not empty board.fileList }">
+                    	<c:out value="${board.title }"/><i class="bi bi-image"></i> 
+                	</c:if>
+                	<c:if test="${board.newMark <2 }">
+                    	<span class="badge badge-danger">new!</span>
+                    </c:if> --%>
+                	<c:if test="${empty board1.fileList }">
+                    	<c:out value="${board1.title } "/> 
+                	</c:if>
+                	<c:if test="${board1.newMark <3 }">
+                   		<span class="badge badge-danger">new!</span>
+                	</c:if>
+                  </a>
+                </td>
+                <td>
+               	  <a href="../user/profile/${board1.nickname }">
+                	<c:out value="${board1.nickname }" />
+                  </a>
+                </td>
+                <td>${board1.inserted }</td>
+                
+              </tr>
+            </c:forEach>
+
+        <!-- table.table>thead>tr>th*4^^tbody 
+        	  공지사항을 제외한 나머지 글-->
             <c:forEach items="${list }" var="board">
+       		<c:if test="${board.notice < 2 }">
               <tr>
                 <td>${board.id }</td>
-                <td>${board.tag }</td>
+                <td>${board.tag } </td>
                 <td id="boardid">
                   <a href="get/${board.id }">
-                	<c:if test="${not empty board.fileList }">
-                    <c:out value="${board.title }"/><i class="bi bi-image"></i>
+                	<%-- <c:if test="${not empty board.fileList }">
+                    	<c:out value="${board.title }"/><i class="bi bi-image"></i> 
                 	</c:if>
+                	<c:if test="${board.newMark <2 }">
+                    	<span class="badge badge-danger">new!</span>
+                    </c:if> --%>
                 	<c:if test="${empty board.fileList }">
-                    <c:out value="${board.title }"/>
+                    	<c:out value="${board.title } "/> 
+                	</c:if>
+                	<c:if test="${board.newMark <3 }">
+                   		<span class="badge badge-danger">new!</span>
                 	</c:if>
                   </a>
                 </td>
@@ -106,6 +145,7 @@ text-align: left;
                 <td>${board.inserted }</td>
                 
               </tr>
+       		</c:if>
             </c:forEach>
           </tbody>
         </table>

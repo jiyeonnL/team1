@@ -201,7 +201,8 @@
 						$(this).parent().find('#replyDelete').hide();
 					});
 					replyMediaObject.find(".reply-menu").append(modifyButton);
-					
+				}
+				if (list[i].own || ${sessionScope.loginUser.adminQuali eq 1}) {
 					// 삭제버튼도 추가
 					const removeButton = $("<button id='replyDelete' class='btn btn-outline-danger'><i class='far fa-trash-alt'></i></button>");
 					const blank = $(" ");
@@ -428,7 +429,7 @@ a:hover {
 				<!-- 버튼 메뉴, 수정/삭제, 뒤로 -->
 				<div id="buttonmenu" class="row md mx-4 d-flex justify-content-between">
 					<div class="col-md-auto my-auto px-auto ">
-						<c:if test="${sessionScope.loginUser.id eq post.memberId }">
+						<c:if test="${sessionScope.loginUser.id eq post.memberId || sessionScope.loginUser.adminQuali eq 1 }">
 							<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }" class="btn btn-outline-secondary"> 수정/삭제 </a>
 						</c:if>
 					</div>
@@ -515,7 +516,7 @@ a:hover {
 					</div>
 				</div>
 			</div>
-		</c:if>t
+		</c:if>
 	</div>
 
 

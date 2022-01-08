@@ -11,10 +11,10 @@
 	margin-bottom: 8px;
 }
 
-#accident, #adv, #other1, 
-#lostnfound, #conven, #complain, #suggest, #other2, 
-#nlife, #hobby, #movdra, #pet, #other3, 
-#hlepAll, #buy, #care,	#move, #other4 {
+#n_all, #n_accident, #n_adv, #n_other, 
+#q_all, #q_question, #q_suggest, #q_declaration, #q_other, 
+#l_all, #l_life, #l_hobby, #l_movdra, #l_pet, #l_other, 
+#h_All, #h_buy, #h_care,	#h_move, #h_other {
 	border: 2px solid;
 	border-color: #2f6091;
 	border-radius: 4px;
@@ -244,19 +244,19 @@ a.goTop {
 					<button type="button" id="help" class="btn btn-outline-dark ml-1">해주세요</button>
 					<ul id="nav-sub" class="help">
 						<li id="nav-sub" class="nav-item hlepAll">
-							<button type="button" id="hlepAll" class="btn btn-outline-dark ml-1">전체보기</button>
+							<button type="button" id="h_All" class="btn btn-outline-dark ml-1">전체보기</button>
 						</li>
 						<li id="nav-sub" class="nav-item buy">
-							<button type="button" id="buy" class="btn btn-outline-dark ml-1">사다주세요</button>
+							<button type="button" id="h_buy" class="btn btn-outline-dark ml-1">사다주세요</button>
 						</li>
 						<li id="nav-sub" class="nav-item care">
-							<button type="button" id="care" class="btn btn-outline-dark ml-1">맡아주세요</button>
+							<button type="button" id="h_care" class="btn btn-outline-dark ml-1">맡아주세요</button>
 						</li>
 						<li id="nav-sub" class="nav-item move">
-							<button type="button" id="move" class="btn btn-outline-dark ml-1">옮겨주세요</button>
+							<button type="button" id="h_move" class="btn btn-outline-dark ml-1">옮겨주세요</button>
 						</li>
 						<li id="nav-sub" class="nav-item other4">
-							<button type="button" id="other4" class="btn btn-outline-dark ml-1">기타</button>
+							<button type="button" id="h_other" class="btn btn-outline-dark ml-1">기타</button>
 						</li>
 					</ul>
 				</li>

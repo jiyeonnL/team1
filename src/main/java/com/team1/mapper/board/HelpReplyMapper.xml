@@ -14,7 +14,8 @@
 	r.inserted,
 	r.updated,
 	u.nickname,
-	u.id uid
+	u.id uid,
+	u.adminQuali
 FROM
 	tb_reply_help r
 JOIN

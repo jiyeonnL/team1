@@ -161,12 +161,15 @@ font-size:1.5em;
 					<div class="container-fluid my-4 list-background-color" id="list-font-${vs.index }" style="display : ${vs.index < 5 ? '' : 'none' }">
 						<div class="row md mx-3 my-2 제목아래보더">
 							<div class="col-md-2 my-auto px-auto 태그테두리">
-								<div id="tag">${board.tag }</div>
+								<div id="tag">${board.tag } ${board.newMark }</div>
 							</div>
 							<div class="col-md-5 my-auto h5">
 								<div>
 									<a href="/controller1/help/list/${board.id}" id="title">
 										<c:out value="${board.title}" />
+										<c:if test="${board.newMark <2 }">
+											<span class="badge badge-danger">new!</span>
+										</c:if>
 									</a>
 								</div>
 							</div>

@@ -59,6 +59,21 @@ width: 20%;
 						<label for="input1">제목</label>
 						<input type="text" class="form-control" value="${board.title }" id="input1" name="title">
 					</div>
+					
+					<c:choose>
+							<c:when test="${board.notice eq 1 }">
+								<br>
+								<input type="checkbox" name="notice" id="input8" value="1" checked="checked">Notice
+							</c:when>
+							<c:when test="${sessionScope.loginUser.adminQuali eq 1 }">
+								<br>
+								<input type="checkbox" name="notice" id="input5" value="1">
+								Notice <hr>
+							</c:when>
+						</c:choose>
+						<div style="visibility: hidden">
+							<input type="hidden" name="notice" id="input6" value="0">
+						</div>
 
 					<div class="form-group">
 						<label for="input2">내용</label>
@@ -71,6 +86,9 @@ width: 20%;
 							<option value="질문" <c:if test="${board.tag eq '질문'}">selected</c:if>>질문</option>
 							<option value="건의사항" <c:if test="${board.tag  eq '건의사항'}">selected</c:if>>건의사항</option>
 							<option value="신고합니다!" <c:if test="${board.tag  eq '신고합니다!'}">selected</c:if>>신고합니다!</option>
+							<c:if test="${sessionScope.loginUser.adminQuali eq 1 }">
+           				 		<option value="공지사항" <c:if test="${board.tag  eq '공지사항'}">selected</c:if>>공지사항</option>
+           				 	</c:if>
 
 						</select>
 					</div>

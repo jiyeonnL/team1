@@ -16,5 +16,6 @@ public class UserVO {
 	private String profileurl; 
 	private String introduce; 
 	private String withdrawal;
+	private Integer adminQuali;
 	
 }
