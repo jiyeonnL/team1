@@ -16,8 +16,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 
 <style>
-.form-group{
-font-family: 'IBM Plex Sans KR', sans-serif;
+.form-group {
+	font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
 #body {
@@ -32,14 +32,61 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 	height: 100%;
 }
 
-#input2{
-height:150px;
+.게시글-타이틀 {
+	padding-top: 5px;
+	padding-bottom: 10px;
+	margin-bottom: 0px;
+	border-bottom: solid;
+	border-bottom-color: lightgray;
+	letter-spacing: 2px;
 }
 
-#input3{
-width: 20%;
+.게시물-글씨 {
+	font-size: x-large;
+	font-weight: bold;
+	letter-spacing: 2px;
 }
 
+.인풋-글씨 {
+	font-size: large;
+}
+
+.게시물-테두리-패딩 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	magin-bottom: 0px;
+}
+
+.이미지-아래-테두리 {
+	padding-bottom: 20px;
+}
+
+.form-group1 {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+	magin-bottom: 0px;
+}
+
+#input1, #input2 {
+	border: solid;
+	border-color: #264d73;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#input1 {
+	width: 65%;
+}
+
+#input2 {
+	height: 200px;
+}
+
+#input3 {
+	border: solid;
+	border-color: #264d73;
+	width: 30%;
+	padding-top: 4px;
+}
 </style>
 
 <title>게시물 수정</title>
@@ -50,24 +97,24 @@ width: 20%;
 		<div class="row" id="inner">
 			<div class="col">
 				<b:innerNav></b:innerNav>
-				<h1>게시물 수정</h1>
+				<h1 class="게시글-타이틀">게시물 수정</h1>
 
 				<form id="modifyForm" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="id" value="${board.id }">
 
-					<div class="form-group">
-						<label for="input1">제목</label>
-						<input type="text" class="form-control" value="${board.title }" id="input1" name="title">
+					<div class="form-group1 게시물-테두리-패딩">
+						<label for="input1" class="게시물-글씨">제목</label>
+						<input type="text" class="form-control 인풋-글씨" value="${board.title }" id="input1" name="title">
 					</div>
 
-					<div class="form-group">
-						<label for="input2">내용</label>
-						<textarea class="form-control" id="input2" name="content">${board.content }</textarea>
+					<div class="form-group1 게시물-테두리-패딩">
+						<label for="input2" class="게시물-글씨">내용</label>
+						<textarea class="form-control 인풋-글씨" id="input2" name="content">${board.content }</textarea>
 					</div>
 
-					<div class="form-group">
-						<label for="input3">태그</label>
-						<select class="form-control" id="input3" name="tag">
+					<div class="form-group1 게시물-테두리-패딩">
+						<label for="input3" class="게시물-글씨">태그</label>
+						<select class="form-control " id="input3" name="tag">
 							<option value="사다주세요" <c:if test="${board.tag eq '사다주세요'}">selected</c:if>>사다주세요</option>
 							<option value="맡아주세요" <c:if test="${board.tag  eq '맡아주세요'}">selected</c:if>>맡아주세요</option>
 							<option value="빌려주세요" <c:if test="${board.tag  eq '빌려주세요'}">selected</c:if>>빌려주세요</option>
@@ -103,8 +150,8 @@ width: 20%;
 						</c:if>
 					</table>
 
-					<div class="form-group">
-						<label for="input4">Image</label>
+					<div class="form-group1 게시물-테두리-패딩 이미지-아래-테두리">
+						<label for="input4" class="게시물-글씨">Image</label>
 						<input type="file" class="form-control-file" id="input4" name="files" accept="image/*" multiple>
 					</div>
 				</form>

@@ -61,7 +61,7 @@
 	border-radius: 5px;
 	width: 80%;
 	border: solid;
-	border-color: #9999ff;
+	border-color: #f0615c;
 	background-color: white;
 	margin-bottom: 5px;
 	font-weight: bold;
@@ -116,6 +116,9 @@ a:hover {
 .태그테두리 {
 	padding-left: 0px;
 	padding-right: 0px;
+}
+
+.badge{
 }
 
 .제목아래보더 {
