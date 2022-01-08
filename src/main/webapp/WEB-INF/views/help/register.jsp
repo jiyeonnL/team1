@@ -77,7 +77,7 @@
 	padding-bottom: 20px;
 }
 
-#input1, #input2, #input3, #input5, #input7 {
+#input1, #input2, #input5, #input7 {
 	width: 50%;
 }
 
@@ -94,18 +94,23 @@
 	color: white;
 	font-weight: bold;
 }
+#input3{
+width:100%;
+height: 40%;
+}
 
 #input4 {
-	width: 70%;
-	height: 150px;
+	width: 100%;
+	height: 200px;
 	padding-block: 8px;
 }
 
 #input6 {
 	border: solid;
 	border-color: #264d73;
-	width: 20%;
+	width: 100%;
 	padding-top: 4px;
+	height: 40%;
 }
 
 #썸네일-글씨{
@@ -190,18 +195,25 @@
 .btn-register, .btn-cancel {
 	font-size: xx-large;
 	margin-bottom:40px;
+	border-radius: 8px;
 }
 
 .btn-register {
 	color: #f0615c;
+	background-color:#ffe164;
 }
 
 .btn-cancel {
-	color: #264d73;
-	border: 2px solid;
-	border-color: red;
+	color: white;
 	padding: 7.5px;
 	padding-block: 9px;
+	background-color: #264d73;
+	border: 2px solid;
+	border-color:#264d73;
+	margin-left:15px;
+}
+.btn-cancel:hover{
+color:#ffe164;
 }
 
 
@@ -231,18 +243,12 @@
 						<label for="input5" class="게시물-글씨">지역</label>
 						<input type="text" class="form-control 인풋-글씨" name="location" value="${sessionScope.loginUser.location }" id="input5" readonly>
 					</div>
-
-          			<div class="form-group1 게시물-테두리-패딩" >
+					<div class="row">
+          			<div class="form-group1 게시물-테두리-패딩 col-md-8" >
             			<label for="input3" class="게시물-글씨" >게시물 제목</label>
            				<input type="text" class="form-control 인풋-글씨" id="input3" name="title">
           			</div>
-          
-         			 <div class="form-group1 게시물-테두리-패딩">
-           				 <label for="input4" class="게시물-글씨">내용</label>
-          				 <textarea class="form-control 인풋-글씨" id="input4" name="content"></textarea>
-          			</div>
-          
-  		 		    <div class="form-group1 게시물-테두리-패딩">
+  		 		    <div class="form-group1 게시물-테두리-패딩 col-md-4">
            				 <label for="input6" class="게시물-글씨">태그</label>
            				 <select class="form-control 인풋-글씨 태그-패딩" id="input6" name="tag">
           				  	<option value="기타" selected>태그 선택</option>
@@ -253,6 +259,13 @@
            				 	<option value="기타">기타</option>
           				</select>
          			  </div>
+					</div>
+          
+         			 <div class="form-group1 게시물-테두리-패딩">
+           				 <label for="input4" class="게시물-글씨">내용</label>
+          				 <textarea class="form-control 인풋-글씨" id="input4" name="content"></textarea>
+          			</div>
+          
 
 					<div class="form-group1 게시물-테두리-패딩 이미지-아래-테두리">
 						<label for="input7" class="게시물-글씨 ">Image</label>
