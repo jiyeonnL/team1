@@ -501,19 +501,19 @@ function locationChange() {
 			location.href = "/controller1/help/list"
 		});
 		
-		$("#hlepAll").click(function() {
+		$("#h_All").click(function() {
 			location.href = "/controller1/help/list?" + getLocation();
 		})
-		$("#buy").click(function() {
+		$("#h_buy").click(function() {
 			window.location.href = "/controller1/help/list?tag=사다주세요"+ getLocation();
 		})
-		$("#care").click(function() {
+		$("#h_care").click(function() {
 			window.location.href = "/controller1/help/list?tag=맡아주세요"+ getLocation();
 		})
-		$("#move").click(	function() {
+		$("#h_move").click(	function() {
 			window.location.href = "/controller1/help/list?tag=옮겨주세요"+ getLocation();
 		})
-		$("#other4").click(function() {
+		$("#h_other").click(function() {
 			location.href = "/controller1/help/list?tag=기타" + getLocation();
 		})
 		

@@ -100,7 +100,7 @@ text-align: left;
                     	<c:out value="${board1.title } "/> 
                 	</c:if>
                 	<c:if test="${board1.newMark <3 }">
-                   		<span class="badge badge-danger">new!</span>
+                   		<span class="badge badge-danger">new</span>
                 	</c:if>
                   </a>
                 </td>
