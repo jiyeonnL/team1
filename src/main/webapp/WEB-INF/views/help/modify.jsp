@@ -105,8 +105,14 @@ width: 20%;
 
 					<div class="form-group">
 						<label for="input4">Image</label>
-						<input type="file" class="form-control-file" id="input4" name="files" accept="image/*" multiple>
+						<input type="file" class="form-control-file" id="input4" name="files" accept="image/*" onchange=setThumbnail(event) multiple>
 					</div>
+					
+					<!-- 구분 선 -->
+				    <div id="d-line"></div>
+					
+					<!-- 이미지들 미리보기 컨테이너 -->
+					<div id="image_container" class="d-flex"></div>
 				</form>
 				<c:if test="${sessionScope.loginUser.nickname eq board.nickname }">
 					<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit">수정</button>
@@ -161,6 +167,145 @@ width: 20%;
 	</c:if>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 	<script>
+	
+	var queue = [];
+
+	function delRef(index) {
+		
+		var radio_now = getCurrentCheckedId();
+		console.log("현재 라디오", radio_now);
+		
+		$("#image_container").empty();
+		
+        var dt = new DataTransfer();
+        var input = document.getElementById('input4');
+        var { files } = input;
+        console.log("삭제 인덱스", index);
+
+
+		var radio_new;
+		if(radio_now == null) {
+			radio_new == 0;
+			//현재 썸네일 설정된 사진이 지워지면
+		} else if (radio_now == index) {
+			radio_new == 0;
+		} else if (radio_now < index) {
+			radio_new = radio_now
+ 		} else if (radio_now > radio_new) {
+			radio_new = radio_now - 1;
+		 }
+
+		//큐 에서도 삭제
+		
+		queue.splice(index, 1);
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i]
+            if (index !== i) dt.items.add(file) 
+            input.files = dt.files
+        }
+        
+        render(input.files, radio_new);
+        
+    }
+	
+	function render(files, radioIndex) {
+		
+		var i = 0;
+		
+		for (const image of files) {
+
+			var reader = new FileReader();
+			reader.readAsDataURL(image);
+			reader.onload = function (event) {
+						var check;
+						console.log("radio : ", radioIndex);
+						if(i == radioIndex) {
+						check = "checked";
+						} else {
+						check = "";
+						}
+
+				const replyMediaObject = $(`
+                	<span id = "\${i}" style="height: 200px; width: 200px; position:relative;">
+					
+                	<div style = "position: absolute; z-index:100; opacity:1; top: 8px; left: 8px;">
+						<label class= "container_radio">
+							<input 
+								${check}
+								type="radio" 
+								id="thumbNailChoice\${i}"
+								name="thumbNailChoice"
+								value="\${image.name}"
+								style = "position: relatve; z-index:101; opacity:0;"
+							/>
+							<span class="checkmark"></span>
+						</label>
+					</div>
+					
+					<div 
+						class = "closeButton"
+						style = "position: absolute; z-index:101; top: 5px; right: 5px; width: 30px; height: 30px; cursor:pointer;" 
+						onclick = "delRef(\${i})"
+					>
+						<i class="fas fa-times fa-2x"></i>
+					</div>
+						<img src= "\${event.target.result}" class="img-thumbnail d-block" style="height: 100%; width: 100%" atl="aaaa"/>	
+					</span>
+                	
+                `);
+			
+				$("#image_container").append(replyMediaObject);
+				
+				i++;
+			};
+		}
+	}
+
+	function setThumbnail(event) {
+
+		queue.push(...event.target.files);
+
+		var dt = new DataTransfer();
+        var input = document.getElementById('input4');
+
+        for (var i = 0; i < queue.length; i++) {
+            var file = queue[i]
+			dt.items.add(file) 
+            input.files = dt.files
+			
+        }
+		var radio = getCurrentCheckedId();
+		console.log("setThumb", radio);
+		var next_radio;
+		if(radio == null) {
+			next_radio = 0;
+		} else {
+			next_radio = radio;
+		}
+
+		/* 현재 미리보기는 모두 지워야 한다. */
+		$("#image_container").empty();
+		$("#d-line").empty();
+		
+		const line = $(`<div id="line"></div>`)
+		
+		$("#d-line").append(line);
+		
+		//이미지 생성
+		render(event.target.files, radio);
+	}
+	
+	function getCurrentCheckedId() {
+
+		var id = $('input[name="thumbNailChoice"]:checked').attr('id');
+
+		if(id == null) {
+			return null
+		} else {
+			return id.replace("thumbNailChoice", "");
+		}
+	} 
+	
 		$(document).ready(function() {
 			$("#removeSubmitButton").click(function(e) {
 				e.preventDefault(); // 기본동작을 진행하지 않도록 함
@@ -179,6 +324,8 @@ width: 20%;
 			});
 		});
 	</script>
+	
+	
 
 </body>
 </html>

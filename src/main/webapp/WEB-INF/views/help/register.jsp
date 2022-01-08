@@ -279,49 +279,74 @@
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="	crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 	<script>
+	
+	var queue = [];
 
-	function setThumbnail(event) {
-		console.log("set");
-		/* 현재 미리보기는 모두 지워야 한다. */
+	function delRef(index) {
+		
+		var radio_now = getCurrentCheckedId();
+		console.log("현재 라디오", radio_now);
+		
 		$("#image_container").empty();
-		$("#d-line").empty();
-
-		const line = $(`
-			<div id="line"></div>
-		</div>`)
 		
-		$("#d-line").append(line);
-		
-		//업로드한 이미지가 하나 이상일 경우 썸네일 고르라는 문구를 띄운다.
-		if(event.target.files.length > 1) {
-			
-			const notation = $(`
-				<p id="썸네일-글씨">썸네일로 보여줄 이미지를 선택하세요 ! </p>
-			`);
-			
-			$("#choose_preview").append(notation);
-			
-		}  else {
-			$("#choose_preview").empty();
-		}
+        var dt = new DataTransfer();
+        var input = document.getElementById('input7');
+        var { files } = input;
+        console.log("삭제 인덱스", index);
 
-		for (const image of event.target.files) {
-			
-			console.log(image.name);
+
+		var radio_new;
+		if(radio_now == null) {
+			radio_new == 0;
+			//현재 썸네일 설정된 사진이 지워지면
+		} else if (radio_now == index) {
+			radio_new == 0;
+		} else if (radio_now < index) {
+			radio_new = radio_now
+ 		} else if (radio_now > radio_new) {
+			radio_new = radio_now - 1;
+		 }
+
+		//큐 에서도 삭제
+		
+		queue.splice(index, 1);
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i]
+            if (index !== i) dt.items.add(file) 
+            input.files = dt.files
+        }
+        
+        render(input.files, radio_new);
+        
+    }
+	
+	function render(files, radioIndex) {
+		
+		var i = 0;
+		
+		for (const image of files) {
+
 			var reader = new FileReader();
 			reader.readAsDataURL(image);
 			reader.onload = function (event) {
+						var check;
+						console.log("radio : ", radioIndex);
+						if(i == radioIndex) {
+						check = "checked";
+						} else {
+						check = "";
+						}
 
 				const replyMediaObject = $(`
-                	<span id = "\${event.timeStamp}" style="height: 200px; width: 200px; position:relative;">
+                	<span id = "\${i}" style="height: 200px; width: 200px; position:relative;">
 					
                 	<div style = "position: absolute; z-index:100; opacity:1; top: 8px; left: 8px;">
 						<label class= "container_radio">
 							<input 
+								${check}
 								type="radio" 
-								id="thumbNailChoice"
-								name="radio"
-								checked="checked" 
+								id="thumbNailChoice\${i}"
+								name="thumbNailChoice"
 								value="\${image.name}"
 								style = "position: relatve; z-index:101; opacity:0;"
 							/>
@@ -332,7 +357,7 @@
 					<div 
 						class = "closeButton"
 						style = "position: absolute; z-index:101; top: 5px; right: 5px; width: 30px; height: 30px; cursor:pointer;" 
-						onclick = "deletePicture(\${event.timeStamp})"
+						onclick = "delRef(\${i})"
 					>
 						<i class="fas fa-times fa-2x"></i>
 					</div>
@@ -340,15 +365,73 @@
 					</span>
                 	
                 `);
-
+			
 				$("#image_container").append(replyMediaObject);
 				
+				i++;
 			};
-
 		}
 	}
+
+	function setThumbnail(event) {
+
+		queue.push(...event.target.files);
+
+		var dt = new DataTransfer();
+        var input = document.getElementById('input7');
+
+        for (var i = 0; i < queue.length; i++) {
+            var file = queue[i]
+			dt.items.add(file) 
+            input.files = dt.files
+			
+        }
+		var radio = getCurrentCheckedId();
+		console.log("setThumb", radio);
+		var next_radio;
+		if(radio == null) {
+			next_radio = 0;
+		} else {
+			next_radio = radio;
+		}
+
+		/* 현재 미리보기는 모두 지워야 한다. */
+		$("#image_container").empty();
+		$("#d-line").empty();
+		$("#choose_preview").empty();
+		
+		const line = $(`<div id="line"></div>`)
+		
+		$("#d-line").append(line);
+		
+		//업로드한 이미지가 하나 이상일 경우 썸네일 고르라는 문구를 띄운다.
+		if(event.target.files.length > 1) {
+			
+			const notation = $(`<p id="썸네일-글씨">썸네일로 보여줄 이미지를 선택하세요 ! </p>`);
+			
+			$("#choose_preview").append(notation);
+			
+		}  else {
+			$("#choose_preview").empty();
+		}
+
+		//이미지 생성
+		render(event.target.files, radio);
+	}
+	
+	function getCurrentCheckedId() {
+
+		var id = $('input[name="thumbNailChoice"]:checked').attr('id');
+
+		if(id == null) {
+			return null
+		} else {
+			return id.replace("thumbNailChoice", "");
+		}
+	} 
 	
 	$(document).ready(function(){
+		
 		$("#help").attr("class", "btn btn-outline ml-1 active");
 	});
 	
