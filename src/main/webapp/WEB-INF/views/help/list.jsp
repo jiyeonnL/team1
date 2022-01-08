@@ -21,7 +21,7 @@
 	font-family: 'Jua', sans-serif;
 	font-size: 25px;
 	margin-top: 10px;
-	border-radius:7px;
+	border-radius: 7px;
 }
 
 #list-font {
@@ -31,10 +31,9 @@
 
 .list-background-color {
 	background-color: #eef2f6;
-	border: 2px solid #264d73;
+	border: 3px solid #264d73;
 	border-radius: 10px;
-	
-	
+	border-color: #264d73;
 }
 
 #body {
@@ -65,6 +64,7 @@
 	border-color: #9999ff;
 	background-color: white;
 	margin-bottom: 5px;
+	font-weight: bold;
 }
 
 #image {
@@ -101,6 +101,7 @@ a {
 a#title {
 	/* border-bottom: solid; */
 	font-weight: bold;
+	padding-bottom: 5px;
 }
 
 #contentBox {
@@ -111,25 +112,29 @@ a:hover {
 	text-decoration: none;
 	color: inherit;
 }
-.태그테두리{
-padding-left:0px;
-padding-right:0px;}
+
+.태그테두리 {
+	padding-left: 0px;
+	padding-right: 0px;
+}
 
 .제목아래보더 {
-	padding-top:8px;
-	padding-bottom:3px;
+	padding-top: 8px;
+	padding-bottom: 3px;
 	border-bottom: solid;
 	border-bottom-width: 3px;
+	border-bottom-color: #264d73;
 }
-.닉네임위치{
-    padding-left: 23px;
-    }
+
+.닉네임위치 {
+	padding-left: 23px;
+	padding-bottom: 5px;
+}
 
 #게시글-작성시간 {
 	font-size: medium;
 	text-align: right;
-	padding-top: 12px;
-	font-weight: bold;
+	margin-block: 11px;
 }
 
 .댓글위의바 {
@@ -141,8 +146,13 @@ padding-right:0px;}
 	margin-top: 8px;
 	margin-bottom: 8px;
 }
-.fa-2x{
-font-size:1.5em;
+
+.fa-2x {
+	font-size: 1.3em;
+	margin-left:5px;
+}
+.fa-fw {
+width:1em;
 }
 </style>
 </head>
@@ -220,15 +230,15 @@ font-size:1.5em;
 						<div class="row md mx-3 댓글위의바">
 							<div class="col-md-2 댓글창부분">
 								<c:if test="${board.upposession !=null}">
-									<i class="fa fa-thumbs-up fa-fw fa-2x m-r-3"></i>
+									<i class="fa fa-thumbs-up fa-fw fa-1x m-r-3"></i>
 								</c:if>
 								<c:if test="${empty board.upposession }">
-									<i class="far fa-thumbs-up fa-fw fa-2x m-r-3"></i>
+									<i class="far fa-thumbs-up fa-fw fa-1x m-r-3"></i>
 								</c:if>
 								<span class="fa-2x"> ${board.up} </span>
 							</div>
 							<div class="col-md-2 댓글창부분">
-								<i class="fa fa-comments fa-fw fa-2x m-r-3"></i>
+								<i class="fa fa-comments fa-fw fa-1x m-r-3"></i>
 								<span class="fa-2x"> ${board.replyCount } </span>
 							</div>
 							<div class="col-md-2 댓글창부분">

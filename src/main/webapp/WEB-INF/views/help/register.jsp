@@ -77,7 +77,7 @@
 	padding-bottom: 20px;
 }
 
-#input1, #input2, #input3, #input5, #input7 {
+#input1, #input2, #input5, #input7 {
 	width: 50%;
 }
 
@@ -94,17 +94,20 @@
 	color: white;
 	font-weight: bold;
 }
+#input3{
+width:65%;
+}
 
 #input4 {
-	width: 70%;
-	height: 150px;
+	width: 100%;
+	height: 200px;
 	padding-block: 8px;
 }
 
 #input6 {
 	border: solid;
 	border-color: #264d73;
-	width: 20%;
+	width: 30%;
 	padding-top: 4px;
 }
 
@@ -190,18 +193,25 @@
 .btn-register, .btn-cancel {
 	font-size: xx-large;
 	margin-bottom:40px;
+	border-radius: 8px;
 }
 
 .btn-register {
 	color: #f0615c;
+	background-color:#ffe164;
 }
 
 .btn-cancel {
-	color: #264d73;
-	border: 2px solid;
-	border-color: red;
+	color: white;
 	padding: 7.5px;
 	padding-block: 9px;
+	background-color: #264d73;
+	border: 2px solid;
+	border-color:#264d73;
+	margin-left:15px;
+}
+.btn-cancel:hover{
+color:#ffe164;
 }
 
 
