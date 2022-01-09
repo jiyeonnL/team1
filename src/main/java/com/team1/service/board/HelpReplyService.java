@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.team1.domain.board.HelpReplyVO;
+import com.team1.mapper.board.HelpReReplyMapper;
 import com.team1.mapper.board.HelpReplyMapper;
 import lombok.Setter;
 
@@ -13,6 +16,9 @@ public class HelpReplyService {
 	
 	@Setter(onMethod_=@Autowired)
 	private HelpReplyMapper mapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private HelpReReplyMapper helpReReplyMapper;
 	
 	public List<HelpReplyVO> list(Integer boardId) {
 		return mapper.list(boardId);
@@ -42,7 +48,12 @@ public class HelpReplyService {
 		return mapper.update(newReply) == 1;		
 	}
 
+	@Transactional
 	public boolean delete(Integer ID) {
+		//댓글에 달린 대댓글 지우기
+		helpReReplyMapper.deleteByReplyId(ID);
+	
+		//댓글 지우기 
 		return mapper.delete(ID) == 1;
 	}
 
