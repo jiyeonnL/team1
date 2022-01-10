@@ -14,6 +14,8 @@ public interface HelpReReplyMapper {
 	
 	public int delete(Integer id);
 	
+	public int deleteByBoardId(Integer boardId);
+	
 	public int deleteByReplyId(Integer replyId);
 
 	public HelpReReplyVO selectById(Integer id);
