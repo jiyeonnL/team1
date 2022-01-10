@@ -156,7 +156,7 @@ public class HelpController {
 		System.out.println("/modify로 잘 옴.");
 
 		try {
-			if (service.modify(board, removeFile, files)) {
+			if (service.modify(board, removeFile, files, thumbNail)) {
 				rttr.addFlashAttribute("result", board.getId() + "번 게시글이 수정되었습니다.");
 			}
 		} catch (IllegalStateException | IOException e) {

@@ -14,6 +14,12 @@ public interface HelpFileMapper {
 	//List<String> selectNamesByBoardId(Integer boardId);
 	
 	List<HelpFileVO> selectNamesByBoardId(Integer boardId);
+	
+	HelpFileVO selectByUrl(String url);
+	
+	void setThumbnailById(Integer Id);
+	
+	void unsetThumbnailById(Integer Id);
 
 	void delete(@Param("boardId") Integer boardId, @Param("fileName") String fileName);
 	

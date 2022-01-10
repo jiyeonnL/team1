@@ -175,6 +175,7 @@
 		WHERE id =
 		#{id}
 	</update>
+	
 	<select id="getFiles"
 		resultType="com.team1.domain.board.HelpFileVO">
 		SELECT id, postId, fileName, COUNT(postId) countpostId FROM

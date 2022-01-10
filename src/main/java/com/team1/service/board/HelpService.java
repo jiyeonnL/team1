@@ -135,7 +135,7 @@ public class HelpService {
 	
 	//삭제할 파일명은 url로 넘어온다.
 	@Transactional
-	public boolean modify(HelpVO board, String[] removeFile, MultipartFile[] files)
+	public boolean modify(HelpVO board, String[] removeFile, MultipartFile[] files, String thumbNail)
 			throws IllegalStateException, IOException {
 		modify(board);
 		// write files
@@ -154,7 +154,7 @@ public class HelpService {
 		}
 		
 		
-		//프로필 url 변경
+		//새 파일들 추가
 		for (MultipartFile file : files) {
 			if (file != null && file.getSize() > 0) {
 				// 1. write file to filesystem, s3
@@ -174,6 +174,18 @@ public class HelpService {
 				//fileMapper.insert(board.getId(), file.getOriginalFilename());
 			}
 		}
+		
+		//새 썸네일 파일 지정 
+		List<HelpFileVO> fileVO = fileMapper.selectNamesByBoardId(board.getId());
+		
+		for(HelpFileVO file : fileVO) {
+			
+			if(file.getFileName().equals(thumbNail)) {
+				
+			}
+			
+		}
+		
 		return false;
 	}
 
