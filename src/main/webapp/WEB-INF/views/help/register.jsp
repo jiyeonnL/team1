@@ -328,7 +328,7 @@ color:#ffe164;
 
 	}
 
-	async function render(files, radioIndex) {
+	function render(files, radioIndex) {
 
 		var i = 0;
 		for (const image of files) {
@@ -347,9 +347,9 @@ color:#ffe164;
             	<div style = "position: absolute; z-index:100; opacity:1; top: 8px; left: 8px;">
 					<label class= "container_radio">
 						<input 
-							${check}
+							\${check}
 							type="radio" 
-							id="thumbNailChoice${i}"
+							id="thumbNailChoice\${i}"
 							name="thumbNailChoice"
 							value="\${image.name}"
 							style = "position: relatve; z-index:101; opacity:0;"
