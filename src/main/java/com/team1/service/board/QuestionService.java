@@ -228,7 +228,6 @@ public class QuestionService {
 		
 		// 1.1 게시물에 달린 댓글 지우기
 		questionReplyMapper.deleteByBoardId(id);
-		// 1.2 좋아요 지우기
 
 		// 2. 파일 지우기 , s3
 		// file system에서 삭제
@@ -251,7 +250,12 @@ public class QuestionService {
 		return fileMapper.selectNamesByBoardId(id);
 	}
 
+
 	public List<QuestionVO> getListPageByNotice() {
 		return mapper.getListPageByNotice();
+	}
+	public boolean upViews(Integer id) {
+		return mapper.upViews(id) == 1;
+
 	}
 }

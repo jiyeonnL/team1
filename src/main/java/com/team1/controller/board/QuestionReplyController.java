@@ -46,6 +46,7 @@ public class QuestionReplyController {
 	@PostMapping("/write")
 	public ResponseEntity<String> write(QuestionReplyVO reply, @SessionAttribute(value="loginUser", required = false) UserVO logged, HttpSession session) {
 //		logged = (UserVO) session.getAttribute("loginUser");
+		
 		System.out.println("log withdrawal: "+logged.getWithdrawal());
 		if (logged !=null && logged.getId().equals(reply.getUid())&& (logged.getWithdrawal().equals("X"))) {
 		service.insert(reply);
@@ -57,7 +58,7 @@ public class QuestionReplyController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<String>  modify(@PathVariable Integer id, @RequestBody QuestionReplyVO  reply, @SessionAttribute(value="loginuser", required = false) UserVO logged, HttpSession session) {
+	public ResponseEntity<String>  modify(@PathVariable Integer id, @RequestBody QuestionReplyVO  reply, @SessionAttribute(value="loginUser", required = false) UserVO logged, HttpSession session) {
 		// 댓글 조회
 		logged = (UserVO) session.getAttribute("loginUser");
 		
