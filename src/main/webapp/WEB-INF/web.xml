@@ -45,5 +45,9 @@
     <filter-name>CheckLogInFilter</filter-name>
     <url-pattern>/help/register</url-pattern>
     <url-pattern>/help/modify</url-pattern>
+    <url-pattern>/life/register</url-pattern>
+    <url-pattern>/life/modify</url-pattern>
+    <url-pattern>/news/register</url-pattern>
+    <url-pattern>/news/modify</url-pattern>
   </filter-mapping>
 </web-app>
