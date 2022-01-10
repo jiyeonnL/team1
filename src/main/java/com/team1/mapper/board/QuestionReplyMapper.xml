@@ -7,30 +7,31 @@
   
   <select id="list" resultType="com.team1.domain.board.QuestionReplyVO">
     SELECT
- 	r.id,
-	r.boardId,
-	r.nickname,
-	r.reply,
-	r.inserted,
-	r.updated,
-	u.nickname,
-	u.id uid
-FROM
-	tb_reply_question r
-JOIN
-	tb_user u
-ON
-	r.nickname = u.nickname
-WHERE
-	r.boardId = #{id} AND 
-	u.withdrawal = 'X'
-ORDER BY
-	r.id DESC;
+ 		r.id,
+		r.boardId,
+		r.nickname,
+		r.reply,
+		r.inserted,
+		r.updated,
+		u.nickname,
+		u.id uid
+	FROM
+		tb_reply_question r
+	JOIN
+		tb_user u
+	ON
+		r.nickname = u.nickname
+	WHERE
+		r.boardId = #{id} 
+	AND 
+		u.withdrawal = 'X'
+	ORDER BY
+		r.id DESC;
   </select>
   
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 	INSERT INTO
-	tb_reply_help (boardId, nickname, reply)
+	tb_reply_question (boardId, nickname, reply)
 	VALUES
 	(#{boardId}, #{nickname}, #{reply})
   </insert>
@@ -54,9 +55,12 @@ ORDER BY
   </delete>
   
   <select id="selectById" resultType="com.team1.domain.board.QuestionReplyVO">
-	SELECT id, boardId, nickname, reply, inserted, updated
-	FROM tb_reply_question
-	WHERE id = #{id}
+	SELECT 
+		id, boardId, nickname, reply, inserted, updated
+	FROM 
+		tb_reply_question
+	WHERE 
+		id = #{id}
   </select>
   
   <select id="readByNick" resultType="com.team1.domain.board.QuestionReplyVO">
@@ -67,10 +71,12 @@ ORDER BY
   
   <select id="listReplyCount" resultType="Integer">
 	SELECT
-	count(id)
-	FROM tb_reply_question
-	WHERE boardId=#{id}
-</select>
+		count(id)
+	FROM 
+		tb_reply_question
+	WHERE 
+		boardId = #{id}
+	</select>
   
   
   

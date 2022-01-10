@@ -128,42 +128,7 @@ width: 20%;
 		$("#question").attr("class", "btn btn-outline ml-1 active");
 	});
 	
-	//---------------이  함수가 작동을 안 합니다 ---------------
-	function setThumbnail(event) {
-		console.log("set");
-		/* 현재 미리보기는 모두 지워야 한다. */
-		$("#image_container").empty();
 
-		var i = 0;
-
-		for (const image of event.target.files) {
-			console.log(image.name);
-			var reader = new FileReader();
-			reader.readAsDataURL(image);
-			reader.onload = function (event) {
-
-				const replyMediaObject = $(`
-                	<span id = "\${event.timeStamp}" style="height: 200px; width: 200px; position:relative;">
-						<button 
-							type="button" 
-							class="close" 
-							style = "position: absolute; z-index:100; opacity:1; top: 10px; right: 10px;" 
-							aria-label="Close"
-							onclick = "deletePicture(\${event.timeStamp})"
-						>
-								<span aria-hidden="true">&times;</span>
-						</button>
-						<img src= "\${event.target.result}" class="img-thumbnail d-block" style="height: 100%; width: 100%" atl="aaaa"/>	
-					</span>
-                	
-                `);
-
-				$("#image_container").append(replyMediaObject);
-			};
-
-			i++;
-		}
-	}
 	
 </script>
 </body>

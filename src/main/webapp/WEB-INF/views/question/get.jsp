@@ -10,7 +10,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/resource/css/icon/css/all.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -23,48 +22,46 @@ $(document).ready(function(){
 	const listReply = function() {
 		$("#replyListContainer").empty();
 		$.ajax({
-			url : appRoot + "/questionreply/board/${board.id}",
+			url : appRoot + "/questionreply/board/${post.id}",
 			success : function (list) {
 				for (let i = 0; i<list.length; i++){
-					const replyMediaObject = $(`
-					<hr>
-					<div class="media">
-						<div class="media-body">
+					const replyId = list[i].id;
+					const replyMediaObject =
+					$(`
 							<table class="table table-bordered">
-								<thead class="thead-light">
-									<tr>
-										<th>
-											<div class="reply-header d-flex justify-content-between align-items-center">
-												<div class="reply-nickName">
-													<i class="far fa-comment"></i>
-												</div>
-												<div class="reply-menu">
-														\${list[i].inserted}에 작성 
-												</div>
+							<thead class="thead-light">
+								<tr>
+									<th id="userprofile">
+											<img	id = "reply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
+									</th>
+									<th id="replynickname">
+										<div id ="reply-nickname" class="h6"></div>
+									</th>
+									<th id="replymenu">
+											<div class="reply-menu"></div>
+									</th>
+									<th id="replytime">
+										<span id = "reply-time" class="h5 ms-3 mt-0 pt-0"></span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="4">
+										<div id = "reply-text\${replyId}" class="col h6"></div>
+										<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
+										<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
+											<div class="input-group-append">
+												<button class="btn btn-outline-danger cancel-button"><i class="fas fa-ban"></i></button>
+												<button class="btn btn-outline-primary" id="sendReply\${list[i].id}">
+													<i class="far fa-comment-dots fa-lg"></i>
+												</button>
 											</div>
-										</th>
+										</td>
 									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<p class="reply-body" style="white-space: pre;"></p>
-											<div class="input-group" style="display:none;">
-											<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
-												<div class="input-group-append">
-													<button class="btn btn-outline-secondary cancel-button"><i class="fas fa-ban"></i></button>
-													<button class="btn btn-outline-secondary" id="sendReply\${list[i].id}">
-														<i class="far fa-comment-dots fa-lg"></i>
-													</button>
-												</div>
-											</div>
-										</td>										
-									</tr>									
 								</tbody>
-								
 							</table>
-						</div>
-					</div>`);
+					`);
 					
 					replyMediaObject.find("#sendReply" + list[i].id).click(function() {
 						const reply = replyMediaObject.find("#replyTextarea"+list[i].id).val();
@@ -86,8 +83,9 @@ $(document).ready(function(){
 					replyMediaObject.find(".reply-body").text(list[i].reply);
 					replyMediaObject.find(".form-control").text(list[i].reply);
 					replyMediaObject.find(".cancel-button").click(function() {
-						replyMediaObject.find(".reply-body").show();
-						replyMediaObject.find(".input-group").hide();
+						console.log(replyId);
+						replyMediaObject.find("#reply-text"+replyId).show();
+						$("#input-group" + replyId).hide();
 						replyMediaObject.find("#replyModify").show();
 						replyMediaObject.find("#replyDelete").show();
 					});
@@ -122,6 +120,10 @@ $(document).ready(function(){
 			        }
 					
 					$("#replyListContainer").append(replyMediaObject);
+					
+					replyMediaObject.find("#reply-nickname").text(list[i].nickname);
+					replyMediaObject.find("#reply-text"+replyId).text(list[i].reply);
+					replyMediaObject.find("#reply-time").text(list[i].inserted);
 				};
 			}
 		})
@@ -131,13 +133,15 @@ $(document).ready(function(){
 	//댓글 전송
 	$("#sendReply").click(function() {
 		const reply =$("#replyTextarea").val();
-		const memberId = '${sessionScope.loginUser.nickname}';
-		const boardId = '${board.id}';
-
+		const memberId = '${sessionScope.loginUser.id}';
+		const boardId = '${post.id}';
+		const nickname = '${sessionScope.loginUser.nickname}';
+		
 		const data = {
 				reply : reply,
-				nickname : memberId,
-				boardId : boardId
+				uid : memberId,
+				boardId : boardId,
+				nickname : nickname
 		};
 		$.ajax({
 			url : appRoot+ "/questionreply/write",
@@ -162,7 +166,7 @@ $(document).ready(function(){
 		const boardId = '${board.id}';
 
 		$.ajax({
-			url : appRoot+ "/questionreply/count/"+${board.id},
+			url : appRoot+ "/questionreply/count/"+ ${post.id},
 			type : "get",
 			success : function(count) {
 				const replyCountObject = $(`<p class="replyCount" style="margin-bottom:0px;"><i class="far fa-comment-dots fa-lg cnt"></i> </p>`);
