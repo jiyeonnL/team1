@@ -224,7 +224,7 @@
 														checked
 													</c:if>
 													type="radio" id="thumbNailChoice${status.index}"
-													name="thumbNail" value="${image.name}"
+													name="thumbNailChoice" value="${file.fileName}"
 													style="position: relatve; z-index: 101; opacity: 0;" />
 													<span class="checkmark"></span>
 												</label>
@@ -396,17 +396,23 @@
 	function setThumbnail(event) {
 		
 		//파일명 변경하기
+		var newFiles = [];
+		//파일명 변경하기
 		for (file of event.target.files) {
 			//var fileType = file.name.slice(file.name.indexOf("."));
 			//console.log(fileType);
-			Object.defineProperty(file, 'name', {
-				writable: true,
-				value: Date.now() + file.name
-			});
+
+			var new_file = new File([file], Date.now() + file.name);
+			console.log("new file", new_file);
+			newFiles.push(new_file);
+			// Object.defineProperty(file, 'name', {
+			// 	writable: true,
+			// 	value: Date.now() + file.name
+			// });
 			sleep(10);
 		}
 
-		queue.push(...event.target.files);
+		queue.push(...newFiles);
 
 		var dt = new DataTransfer();
         var input = document.getElementById('input4');

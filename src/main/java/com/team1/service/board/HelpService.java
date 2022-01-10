@@ -101,7 +101,7 @@ public class HelpService {
 			
 			MultipartFile file = files[i];
 			
-			System.out.println(file.getName());
+			System.out.println(file.getOriginalFilename());
 			//썸네일 지정이 되지 않았으면 처음 이미지를 썸네일로 지정한다.
 			if(i==0 && thumNail == null) {
 				
