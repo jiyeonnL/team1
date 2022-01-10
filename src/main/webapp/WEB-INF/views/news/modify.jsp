@@ -16,8 +16,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 
 <style>
-.form-group{
-font-family: 'IBM Plex Sans KR', sans-serif;
+.form-group {
+	font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
 #body {
@@ -32,14 +32,132 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 	height: 100%;
 }
 
-#input2{
-height:150px;
+.게시글-타이틀 {
+	padding-top: 5px;
+	padding-bottom: 10px;
+	margin-bottom: 0px;
+	border-bottom: solid;
+	border-bottom-color: lightgray;
+	letter-spacing: 2px;
 }
 
-#input3{
-width: 20%;
+.게시물-글씨 {
+	font-size: x-large;
+	font-weight: bold;
+	letter-spacing: 2px;
 }
 
+.인풋-글씨 {
+	font-size: large;
+}
+
+.게시물-테두리-패딩 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	magin-bottom: 0px;
+}
+
+.이미지-아래-테두리 {
+	padding-bottom: 20px;
+}
+
+.form-group1 {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+	magin-bottom: 0px;
+}
+
+#input1, #input2 {
+	border: solid;
+	border-color: #264d73;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#input1 {
+	width: 65%;
+}
+
+#input2 {
+	height: 200px;
+}
+
+#input3 {
+	border: solid;
+	border-color: #264d73;
+	width: 30%;
+	padding-top: 4px;
+}
+
+#image_container {
+	border-bottom: solid;
+	border-bottom-color: lightgray;
+	margin-bottom: 20px;
+	padding-bottom:15px;
+	
+}
+
+.container_radio {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container_radio input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 24px;
+	width: 24px;
+	background-color: #eee;
+	border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container_radio:hover input ~.checkmark {
+	background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container_radio input:checked ~.checkmark {
+	background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container_radio input:checked ~.checkmark:after {
+	display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container_radio .checkmark:after {
+	top: 8px;
+	left: 8px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+#line {
+	height: 2.4px;
+	background-color: lightgray;
+	width: 900px;
+}
 </style>
 
 <title>게시물 수정</title>
@@ -50,24 +168,24 @@ width: 20%;
 		<div class="row" id="inner">
 			<div class="col">
 				<b:innerNav></b:innerNav>
-				<h1>게시물 수정</h1>
+				<h1 class="게시글-타이틀">게시물 수정</h1>
 
 				<form id="modifyForm" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="id" value="${board.id }">
 
-					<div class="form-group">
-						<label for="input1">제목</label>
-						<input type="text" class="form-control" value="${board.title }" id="input1" name="title">
+					<div class="form-group1 게시물-테두리-패딩">
+						<label for="input1" class="게시물-글씨">제목</label>
+						<input type="text" class="form-control 인풋-글씨" value="${board.title }" id="input1" name="title">
 					</div>
 
-					<div class="form-group">
-						<label for="input2">내용</label>
-						<textarea class="form-control" id="input2" name="content">${board.content }</textarea>
+					<div class="form-group1 게시물-테두리-패딩">
+						<label for="input2" class="게시물-글씨">내용</label>
+						<textarea class="form-control 인풋-글씨" id="input2" name="content">${board.content }</textarea>
 					</div>
 
-					<div class="form-group">
-						<label for="input3">태그</label>
-						<select class="form-control" id="input3" name="tag">
+					<div class="form-group1 게시물-테두리-패딩">
+						<label for="input3" class="게시물-글씨">태그</label>
+						<select class="form-control " id="input3" name="tag">
 							<option value="사건사고" <c:if test="${board.tag eq '사건사고'}">selected</c:if>>사건사고</option>
 							<option value="광고" <c:if test="${board.tag  eq '광고'}">selected</c:if>>광고</option>
 							<option value="기타" <c:if test="${board.tag  eq '기타'}">selected</c:if>>기타</option>
@@ -79,20 +197,35 @@ width: 20%;
 							<tr>
 								<th>삭제할 파일 선택</th>
 								<th>이미지</th>
+								<th>썸네일</th>
 							</tr>
 						</thead>
 						<c:if test="${not empty board.fileList }">
-							<c:forEach items="${ board.fileList }" var="file">
+							<c:forEach items="${ board.fileList }" var="file" varStatus="status">
 								<tbody>
 									<tr>
 										<td>
 											<div class="col d-flex justify-content-center align-items-center">
-												<input class="check" type="checkbox" name="removeFile" value="${file.url}">
+												<input id = "check${status.index}" class="check" type="checkbox" name="removeFile" onchange="check(this)" value="${file.url}">
 											</div>
 										</td>
 										<td>
 											<div class="col">
 												<img class="img-fluid" src="${file.url}" alt="${file.url }">
+											</div>
+										</td>
+										<td>
+											<div
+												class="col d-flex justify-content-center align-items-center">
+												<label class="container_radio"> <input 
+													<c:if test="${file.isThumbnail eq 1}">
+														checked
+													</c:if>
+													type="radio" id="thumbNailChoice${status.index}"
+													name="thumbNailChoice" value="${file.fileName}"
+													style="position: relatve; z-index: 101; opacity: 0;" />
+													<span class="checkmark"></span>
+												</label>
 											</div>
 										</td>
 									</tr>
@@ -101,13 +234,21 @@ width: 20%;
 						</c:if>
 					</table>
 
-					<div class="form-group">
-						<label for="input4">Image</label>
-						<input type="file" class="form-control-file" id="input4" name="files" accept="image/*" multiple>
-					</div>
-				</form>
 
-				<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit">수정</button>
+					<div class="form-group1 게시물-테두리-패딩 이미지-아래-테두리">
+						<label for="input4" class="게시물-글씨">Image</label>
+						<input type="file" class="form-control-file" id="input4" name="files" accept="image/*" onchange=setThumbnail(event) multiple>
+					</div>
+					
+					<!-- 구분 선 -->
+				    <div id="d-line"></div>
+					
+					<!-- 이미지들 미리보기 컨테이너 -->
+					<div id="image_container" class="d-flex"></div>
+				</form>
+				<c:if test="${sessionScope.loginUser.nickname eq board.nickname }">
+					<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit">수정</button>
+				</c:if>
 				<button id="" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmModal1"><i class="fas fa-trash"> 삭제</i></button>
 				<a href="${pageContext.request.contextPath }/news/list/${board.id }" class="btn btn-outline-secondary">취소</a>
 			</div>
@@ -158,6 +299,165 @@ width: 20%;
 	</c:if>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 	<script>
+	
+	var queue = [];
+	var currentThumbnail;
+
+	function delRef(index) {
+				
+		$("#image_container").empty();
+		
+        var dt = new DataTransfer();
+        var input = document.getElementById('input4');
+        var { files } = input;
+        console.log("삭제 인덱스", index);
+
+
+		var radio_new;
+		if(radio_now == null) {
+			radio_new == 0;
+			//현재 썸네일 설정된 사진이 지워지면
+		} else if (radio_now == index) {
+			radio_new == 0;
+		} else if (radio_now < index) {
+			radio_new = radio_now
+ 		} else if (radio_now > radio_new) {
+			radio_new = radio_now - 1;
+		 }
+
+		//큐 에서도 삭제
+		
+		queue.splice(index, 1);
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i]
+            if (index !== i) dt.items.add(file) 
+            input.files = dt.files
+        }
+        
+        render(input.files, radio_new);
+        
+    }
+	
+	function render(files, radioIndex) {
+
+		var i = 0;
+		for (const image of files) {
+			
+			var check;
+			if (i == radioIndex) {
+			check = "checked";
+			} else {
+			check = "";
+			}
+			const url = window.URL.createObjectURL(image); // blob:http://localhost:1234/28ff8746-94eb-4dbe-9d6c-2443b581dd30
+			
+				const replyMediaObject = $(`
+            	<span id = "\${i}" style="height: 200px; width: 200px; position:relative;">
+				
+            	<div style = "position: absolute; z-index:100; opacity:1; top: 8px; left: 8px;">
+					<label class= "container_radio">
+						<input 
+							\${check}
+							type="radio" 
+							id="thumbNailChoice\${i}"
+							name="thumbNailChoice"
+							value="\${image.name}"
+							style = "position: relatve; z-index:101; opacity:0;"
+							onclick="radioClick(\${i})"
+						/>
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				
+				<div 
+					class = "closeButton"
+					style = "position: absolute; z-index:101; top: 5px; right: 5px; width: 30px; height: 30px; cursor:pointer;" 
+					onclick = "delRef(\${i})"
+				>
+					<i class="fas fa-times fa-2x"></i>
+				</div>
+					<img src= "\${url}" class="img-thumbnail d-block" style="height: 100%; width: 100%" atl="aaaa"/>	
+				</span>
+            	
+            `);
+
+				$("#image_container").append(replyMediaObject);
+
+				i++;
+			};
+	}
+
+
+	function setThumbnail(event) {
+		
+		//파일명 변경하기
+		var newFiles = [];
+		//파일명 변경하기
+		for (file of event.target.files) {
+			//var fileType = file.name.slice(file.name.indexOf("."));
+			//console.log(fileType);
+
+			var new_file = new File([file], Date.now() + file.name);
+			console.log("new file", new_file);
+			newFiles.push(new_file);
+			// Object.defineProperty(file, 'name', {
+			// 	writable: true,
+			// 	value: Date.now() + file.name
+			// });
+			sleep(10);
+		}
+
+		queue.push(...newFiles);
+
+		var dt = new DataTransfer();
+        var input = document.getElementById('input4');
+
+        for (var i = 0; i < queue.length; i++) {
+            var file = queue[i]
+			dt.items.add(file) 
+            input.files = dt.files
+			
+        }
+
+
+		/* 현재 미리보기는 모두 지워야 한다. */
+		$("#image_container").empty();
+		$("#d-line").empty();
+		
+		const line = $(`<div id="line"></div>`)
+		
+		$("#d-line").append(line);
+		
+		//이미지 생성
+		render(event.target.files, null);
+	}
+	
+
+	//삭제 체크박스 눌리면 call 되는 함수
+	function check(box) {
+		
+		var id = box.id;
+		id = id.replace("check", "")
+		var radioId = "thumbNailChoice"+id;
+		var radio = document.getElementById(radioId);
+		//삭제할 대상으로 선택되면
+		if(box.checked) {
+			//매칭되는 radio 버튼을 막아버린다.
+	        radio.disabled =true;
+	        radio.checked = false;
+			
+		} else {
+			 radio.disabled =false;
+		}
+		
+	}
+	
+	//딜레이 만드는 함수
+	function sleep(ms) {
+		const wakeUpTime = Date.now() + ms;
+		while (Date.now() < wakeUpTime) {}
+	}
+	
 		$(document).ready(function() {
 			$("#removeSubmitButton").click(function(e) {
 				e.preventDefault(); // 기본동작을 진행하지 않도록 함
@@ -176,6 +476,8 @@ width: 20%;
 			});
 		});
 	</script>
+	
+	
 
 </body>
 </html>

@@ -306,16 +306,12 @@
 	var currentThumbnail;
 
 	function delRef(index) {
-		
-		var radio_now = getCurrentCheckedId();
-		console.log("현재 라디오", radio_now);
-		
+				
 		$("#image_container").empty();
 		
         var dt = new DataTransfer();
         var input = document.getElementById('input4');
         var { files } = input;
-        console.log("삭제 인덱스", index);
 
 
 		var radio_new;
@@ -423,15 +419,7 @@
             input.files = dt.files
 			
         }
-		var radio = getCurrentCheckedId();
-		console.log("setThumb", radio);
-		var next_radio;
-		if(radio == null) {
-			next_radio = 0;
-		} else {
-			next_radio = radio;
-		}
-
+        
 		/* 현재 미리보기는 모두 지워야 한다. */
 		$("#image_container").empty();
 		$("#d-line").empty();
@@ -441,7 +429,7 @@
 		$("#d-line").append(line);
 		
 		//이미지 생성
-		render(event.target.files, radio);
+		render(event.target.files, null);
 	}
 	
 

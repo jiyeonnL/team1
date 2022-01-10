@@ -282,7 +282,7 @@ color:#ffe164;
 					<div id="image_container" class="d-flex"></div>
 
 					<button class="btn-register" type="submit">등록</button>
-					<a href="${pageContext.request.contextPath }/help/list?location=" class="btn-cancel">취소</a>
+					<a href="${pageContext.request.contextPath }/help/list" class="btn-cancel">취소</a>
 				</form>
 
 			</div>

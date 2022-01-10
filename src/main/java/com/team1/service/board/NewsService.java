@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.team1.domain.board.LifeFileVO;
 import com.team1.domain.board.NewsFileVO;
 import com.team1.domain.board.NewsVO;
 import com.team1.mapper.board.NewsFileMapper;
@@ -135,7 +136,7 @@ public class NewsService {
 	
 	//삭제할 파일명은 url로 넘어온다.
 	@Transactional
-	public boolean modify(NewsVO board, String[] removeFile, MultipartFile[] files)
+	public boolean modify(NewsVO board, String[] removeFile, MultipartFile[] files, String thumbNailChoice)
 			throws IllegalStateException, IOException {
 		modify(board);
 		// write files
@@ -168,10 +169,30 @@ public class NewsService {
 				newsFileVO.setPostId(board.getId());
 				newsFileVO.setIsThumbnail(0);
 				
+				if(file.getOriginalFilename().equals(thumbNailChoice)) {
+					
+					newsFileVO.setIsThumbnail(1);
+				} else {
+					newsFileVO.setIsThumbnail(0);
+				}
+				
 				fileMapper.insert(newsFileVO);
 				// 2. db 파일명 insert
 				//fileMapper.delete(board.getId(), file.getOriginalFilename());
 				//fileMapper.insert(board.getId(), file.getOriginalFilename());
+			}
+			
+			//새 썸네일 파일 지정 (기존 파일들에 대하여 검사)
+			List<NewsFileVO> fileVO = fileMapper.selectNamesByBoardId(board.getId());
+			
+			for(NewsFileVO file1 : fileVO) {
+				
+				if(file1.getFileName().equals(thumbNailChoice)) {
+					fileMapper.setThumbnailById(file1.getId());
+				} else {
+					fileMapper.unsetThumbnailById(file1.getId());
+				}
+				
 			}
 		}
 		return false;
