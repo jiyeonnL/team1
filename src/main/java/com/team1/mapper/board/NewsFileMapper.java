@@ -13,6 +13,10 @@ public interface NewsFileMapper {
 	//List<String> selectNamesByBoardId(Integer boardId);
 	
 	List<NewsFileVO> selectNamesByBoardId(Integer boardId);
+	
+	void setThumbnailById(Integer Id);
+	
+	void unsetThumbnailById(Integer Id);
 
 	void delete(@Param("boardId") Integer boardId, @Param("fileName") String fileName);
 	
