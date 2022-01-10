@@ -150,13 +150,13 @@ public class HelpController {
 	}
 
 	@PostMapping("/modify")
-	public String modify(HelpVO board, String[] removeFile, MultipartFile[] files, String thumbNail,
+	public String modify(HelpVO board, String[] removeFile, MultipartFile[] files, String thumbNailChoice,
 			RedirectAttributes rttr) {
 
 		System.out.println("/modify로 잘 옴.");
 
 		try {
-			if (service.modify(board, removeFile, files)) {
+			if (service.modify(board, removeFile, files, thumbNailChoice)) {
 				rttr.addFlashAttribute("result", board.getId() + "번 게시글이 수정되었습니다.");
 			}
 		} catch (IllegalStateException | IOException e) {
@@ -173,12 +173,12 @@ public class HelpController {
 
 	// helpVO와 이미지 파일, 썸네일로 지정된 파일명을 받아온다(thumbNail).
 	@PostMapping("/register")
-	public String register(HelpVO board, MultipartFile[] files, String thumbNail, RedirectAttributes rttr,
+	public String register(HelpVO board, MultipartFile[] files, String thumbNailChoice, RedirectAttributes rttr,
 			HttpServletRequest req) throws IllegalStateException, IOException {
 
-		service.register(board, files, thumbNail);
+		service.register(board, files, thumbNailChoice);
 
-		System.out.println(thumbNail);
+		System.out.println(thumbNailChoice);
 		rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
 
 		return "redirect:/help/list";

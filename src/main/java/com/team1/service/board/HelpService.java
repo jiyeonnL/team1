@@ -90,7 +90,8 @@ public class HelpService {
 
 	@Transactional
 	public void register(HelpVO board, MultipartFile[] files, String thumNail) throws IllegalStateException, IOException {
-		System.out.println(thumNail);
+		System.out.println("thumbNail" + thumNail);
+	
 		register(board);
 		
 		//이미지들에 대하여 처리
@@ -100,6 +101,7 @@ public class HelpService {
 			
 			MultipartFile file = files[i];
 			
+			System.out.println(file.getOriginalFilename());
 			//썸네일 지정이 되지 않았으면 처음 이미지를 썸네일로 지정한다.
 			if(i==0 && thumNail == null) {
 				
@@ -135,8 +137,10 @@ public class HelpService {
 	
 	//삭제할 파일명은 url로 넘어온다.
 	@Transactional
-	public boolean modify(HelpVO board, String[] removeFile, MultipartFile[] files)
+	public boolean modify(HelpVO board, String[] removeFile, MultipartFile[] files, String thumbNail)
 			throws IllegalStateException, IOException {
+		
+		System.out.println(thumbNail);
 		modify(board);
 		// write files
 		// 파일 삭제
@@ -154,7 +158,7 @@ public class HelpService {
 		}
 		
 		
-		//프로필 url 변경
+		//새 파일들 추가 (썸네일 검사도 같이 진행)
 		for (MultipartFile file : files) {
 			if (file != null && file.getSize() > 0) {
 				// 1. write file to filesystem, s3
@@ -166,7 +170,13 @@ public class HelpService {
 				helpFileVO.setFileName(file.getOriginalFilename());
 				helpFileVO.setUrl(url);
 				helpFileVO.setPostId(board.getId());
-				helpFileVO.setIsThumbnail(0);
+				//helpFileVO.setIsThumbnail(0);
+				
+				if(file.getOriginalFilename().equals(thumbNail)) {
+					helpFileVO.setIsThumbnail(1);
+				} else {
+					helpFileVO.setIsThumbnail(0);
+				}
 				
 				fileMapper.insert(helpFileVO);
 				// 2. db 파일명 insert
@@ -174,6 +184,20 @@ public class HelpService {
 				//fileMapper.insert(board.getId(), file.getOriginalFilename());
 			}
 		}
+		
+		//새 썸네일 파일 지정 (기존 파일들에 대하여 검사)
+		List<HelpFileVO> fileVO = fileMapper.selectNamesByBoardId(board.getId());
+		
+		for(HelpFileVO file : fileVO) {
+			
+			if(file.getFileName().equals(thumbNail)) {
+				fileMapper.setThumbnailById(file.getId());
+			} else {
+				fileMapper.unsetThumbnailById(file.getId());
+			}
+			
+		}
+		
 		return false;
 	}
 

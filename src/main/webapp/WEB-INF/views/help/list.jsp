@@ -214,7 +214,7 @@ width:1em;
 									<c:if test="${not empty board.fileList }">
 										<c:forEach items="${board.fileList }" var="file" varStatus="vs">
 											<c:if test="${file.isThumbnail eq 1 }">
-												<img src="${file.url}" class="d-block w-100" alt="${file.url}">
+												<img src="${file.url}"  style = "width: 600px; height: 300px; object-fit: cover;" alt="${file.url}">
 
 											</c:if>
 										</c:forEach>

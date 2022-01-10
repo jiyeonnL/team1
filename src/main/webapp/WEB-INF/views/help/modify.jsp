@@ -87,6 +87,77 @@
 	width: 30%;
 	padding-top: 4px;
 }
+
+#image_container {
+	border-bottom: solid;
+	border-bottom-color: lightgray;
+	margin-bottom: 20px;
+	padding-bottom:15px;
+	
+}
+
+.container_radio {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container_radio input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 24px;
+	width: 24px;
+	background-color: #eee;
+	border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container_radio:hover input ~.checkmark {
+	background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container_radio input:checked ~.checkmark {
+	background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container_radio input:checked ~.checkmark:after {
+	display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container_radio .checkmark:after {
+	top: 8px;
+	left: 8px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+#line {
+	height: 2.4px;
+	background-color: lightgray;
+	width: 900px;
+}
 </style>
 
 <title>게시물 수정</title>
@@ -128,20 +199,35 @@
 							<tr>
 								<th>삭제할 파일 선택</th>
 								<th>이미지</th>
+								<th>썸네일</th>
 							</tr>
 						</thead>
 						<c:if test="${not empty board.fileList }">
-							<c:forEach items="${ board.fileList }" var="file">
+							<c:forEach items="${ board.fileList }" var="file" varStatus="status">
 								<tbody>
 									<tr>
 										<td>
 											<div class="col d-flex justify-content-center align-items-center">
-												<input class="check" type="checkbox" name="removeFile" value="${file.url}">
+												<input id = "check${status.index}" class="check" type="checkbox" name="removeFile" onchange="check(this)" value="${file.url}">
 											</div>
 										</td>
 										<td>
 											<div class="col">
 												<img class="img-fluid" src="${file.url}" alt="${file.url }">
+											</div>
+										</td>
+										<td>
+											<div
+												class="col d-flex justify-content-center align-items-center">
+												<label class="container_radio"> <input 
+													<c:if test="${file.isThumbnail eq 1}">
+														checked
+													</c:if>
+													type="radio" id="thumbNailChoice${status.index}"
+													name="thumbNailChoice" value="${file.fileName}"
+													style="position: relatve; z-index: 101; opacity: 0;" />
+													<span class="checkmark"></span>
+												</label>
 											</div>
 										</td>
 									</tr>
@@ -217,6 +303,7 @@
 	<script>
 	
 	var queue = [];
+	var currentThumbnail;
 
 	function delRef(index) {
 		
@@ -257,61 +344,75 @@
     }
 	
 	function render(files, radioIndex) {
-		
+
 		var i = 0;
-		
 		for (const image of files) {
-
-			var reader = new FileReader();
-			reader.readAsDataURL(image);
-			reader.onload = function (event) {
-						var check;
-						console.log("radio : ", radioIndex);
-						if(i == radioIndex) {
-						check = "checked";
-						} else {
-						check = "";
-						}
-
-				const replyMediaObject = $(`
-                	<span id = "\${i}" style="height: 200px; width: 200px; position:relative;">
-					
-                	<div style = "position: absolute; z-index:100; opacity:1; top: 8px; left: 8px;">
-						<label class= "container_radio">
-							<input 
-								${check}
-								type="radio" 
-								id="thumbNailChoice\${i}"
-								name="thumbNailChoice"
-								value="\${image.name}"
-								style = "position: relatve; z-index:101; opacity:0;"
-							/>
-							<span class="checkmark"></span>
-						</label>
-					</div>
-					
-					<div 
-						class = "closeButton"
-						style = "position: absolute; z-index:101; top: 5px; right: 5px; width: 30px; height: 30px; cursor:pointer;" 
-						onclick = "delRef(\${i})"
-					>
-						<i class="fas fa-times fa-2x"></i>
-					</div>
-						<img src= "\${event.target.result}" class="img-thumbnail d-block" style="height: 100%; width: 100%" atl="aaaa"/>	
-					</span>
-                	
-                `);
 			
-				$("#image_container").append(replyMediaObject);
+			var check;
+			if (i == radioIndex) {
+			check = "checked";
+			} else {
+			check = "";
+			}
+			const url = window.URL.createObjectURL(image); // blob:http://localhost:1234/28ff8746-94eb-4dbe-9d6c-2443b581dd30
+			
+				const replyMediaObject = $(`
+            	<span id = "\${i}" style="height: 200px; width: 200px; position:relative;">
 				
+            	<div style = "position: absolute; z-index:100; opacity:1; top: 8px; left: 8px;">
+					<label class= "container_radio">
+						<input 
+							\${check}
+							type="radio" 
+							id="thumbNailChoice\${i}"
+							name="thumbNailChoice"
+							value="\${image.name}"
+							style = "position: relatve; z-index:101; opacity:0;"
+							onclick="radioClick(\${i})"
+						/>
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				
+				<div 
+					class = "closeButton"
+					style = "position: absolute; z-index:101; top: 5px; right: 5px; width: 30px; height: 30px; cursor:pointer;" 
+					onclick = "delRef(\${i})"
+				>
+					<i class="fas fa-times fa-2x"></i>
+				</div>
+					<img src= "\${url}" class="img-thumbnail d-block" style="height: 100%; width: 100%" atl="aaaa"/>	
+				</span>
+            	
+            `);
+
+				$("#image_container").append(replyMediaObject);
+
 				i++;
 			};
-		}
 	}
 
-	function setThumbnail(event) {
 
-		queue.push(...event.target.files);
+	function setThumbnail(event) {
+		
+		//파일명 변경하기
+		var newFiles = [];
+		//파일명 변경하기
+		for (file of event.target.files) {
+			//var fileType = file.name.slice(file.name.indexOf("."));
+			//console.log(fileType);
+
+			var new_file = new File([file], Date.now() + file.name);
+			console.log("new file", new_file);
+			newFiles.push(new_file);
+			// Object.defineProperty(file, 'name', {
+			// 	writable: true,
+			// 	value: Date.now() + file.name
+			// });
+			sleep(10);
+		}
+
+		queue.push(...newFiles);
 
 		var dt = new DataTransfer();
         var input = document.getElementById('input4');
@@ -343,16 +444,31 @@
 		render(event.target.files, radio);
 	}
 	
-	function getCurrentCheckedId() {
 
-		var id = $('input[name="thumbNailChoice"]:checked').attr('id');
-
-		if(id == null) {
-			return null
+	//삭제 체크박스 눌리면 call 되는 함수
+	function check(box) {
+		
+		var id = box.id;
+		id = id.replace("check", "")
+		var radioId = "thumbNailChoice"+id;
+		var radio = document.getElementById(radioId);
+		//삭제할 대상으로 선택되면
+		if(box.checked) {
+			//매칭되는 radio 버튼을 막아버린다.
+	        radio.disabled =true;
+	        radio.checked = false;
+			
 		} else {
-			return id.replace("thumbNailChoice", "");
+			 radio.disabled =false;
 		}
-	} 
+		
+	}
+	
+	//딜레이 만드는 함수
+	function sleep(ms) {
+		const wakeUpTime = Date.now() + ms;
+		while (Date.now() < wakeUpTime) {}
+	}
 	
 		$(document).ready(function() {
 			$("#removeSubmitButton").click(function(e) {

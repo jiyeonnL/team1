@@ -22,10 +22,31 @@
 		isThumbnail) VALUES (#{postId}, #{fileName}, #{url}, #{isThumbnail})
 	</insert>
 
+	<update id="setThumbnailById">
+		UPDATE tb_file_help
+		SET isThumbnail = 1
+		WHERE id =
+		#{Id}
+	</update>
+
+	<update id="unsetThumbnailById">
+		UPDATE tb_file_help
+		SET isThumbnail = 0
+		WHERE id =
+		#{Id}
+	</update>
+
+
 	<select id="selectNamesByBoardId"
 		resultType="com.team1.domain.board.HelpFileVO">
 		SELECT id, postId, fileName, url, isThumbnail FROM
 		tb_file_help WHERE postId =#{boardId}
+	</select>
+
+	<select id="selectByUrl"
+		resultType="com.team1.domain.board.HelpFileVO">
+		SELECT id, postId, fileName, url, isThumbnail FROM
+		tb_file_help WHERE url =#{url}
 	</select>
 
 </mapper>
