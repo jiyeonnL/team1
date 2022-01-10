@@ -82,7 +82,7 @@ public class QuestionController {
 			model.addAttribute("reply", reply);
 		}
 		
-		
+		service.upViews(id);
 		return "question/get";
 	}
 
