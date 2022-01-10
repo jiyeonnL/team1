@@ -355,6 +355,11 @@ a:hover {
 	width : 40px;
 }
 
+#내용{
+	padding-left: 154px;
+	padding-right: 154px;
+}
+
 </style>
 </head>
 <body>
@@ -401,7 +406,7 @@ a:hover {
 							<div id="line"></div>
 						</div>
 						<!-- 내용  -->
-						<div class="col-md-10 h4 my-auto ">
+						<div id="내용" class="col-md-10 h4 my-auto ">
 							<pre><c:out value="${post.content}" /></pre>
 						</div>
 

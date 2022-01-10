@@ -74,7 +74,8 @@
 }
 
 #input1 {
-	width: 65%;
+	width: 100%;
+	height: 40%;
 }
 
 #input2 {
@@ -84,8 +85,9 @@
 #input3 {
 	border: solid;
 	border-color: #264d73;
-	width: 30%;
+	width: 100%;
 	padding-top: 4px;
+	height: 40%;
 }
 
 #image_container {
@@ -158,6 +160,30 @@
 	background-color: lightgray;
 	width: 900px;
 }
+
+.btn-modify, .btn-cancel, .btn-delete {
+	font-size: xx-large;
+	margin-bottom:40px;
+	border-radius: 8px;
+}
+
+.btn-modify {
+	color: #f0615c;
+	background-color:#ffe164;
+}
+
+.btn-cancel {
+	color: white;
+	padding: 7.5px;
+	padding-block: 6px;
+	background-color: #264d73;
+	border: 1px solid;
+	border-color:#264d73;
+	margin-left:15px;
+}
+.btn-cancel:hover{
+color:#ffe164;
+}
 </style>
 
 <title>게시물 수정</title>
@@ -172,27 +198,29 @@
 
 				<form id="modifyForm" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="id" value="${board.id }">
-
-					<div class="form-group1 게시물-테두리-패딩">
+					
+					<div class="row">
+					<div class="form-group1 게시물-테두리-패딩 col-md-8">
 						<label for="input1" class="게시물-글씨">제목</label>
 						<input type="text" class="form-control 인풋-글씨" value="${board.title }" id="input1" name="title">
 					</div>
-
+						<div class="form-group1 게시물-테두리-패딩 col-md-4">
+							<label for="input3" class="게시물-글씨">태그</label>
+							<select class="form-control " id="input3" name="tag">
+								<option value="사다주세요" <c:if test="${board.tag eq '사다주세요'}">selected</c:if>>사다주세요</option>
+								<option value="맡아주세요" <c:if test="${board.tag  eq '맡아주세요'}">selected</c:if>>맡아주세요</option>
+								<option value="빌려주세요" <c:if test="${board.tag  eq '빌려주세요'}">selected</c:if>>빌려주세요</option>
+								<option value="옮겨주세요" <c:if test="${board.tag  eq '옮겨주세요'}">selected</c:if>>옮겨주세요</option>
+								<option value="기타" <c:if test="${board.tag  eq '기타'}">selected</c:if>>기타</option>
+							</select>
+						</div>
+					</div>
 					<div class="form-group1 게시물-테두리-패딩">
 						<label for="input2" class="게시물-글씨">내용</label>
 						<textarea class="form-control 인풋-글씨" id="input2" name="content">${board.content }</textarea>
 					</div>
 
-					<div class="form-group1 게시물-테두리-패딩">
-						<label for="input3" class="게시물-글씨">태그</label>
-						<select class="form-control " id="input3" name="tag">
-							<option value="사다주세요" <c:if test="${board.tag eq '사다주세요'}">selected</c:if>>사다주세요</option>
-							<option value="맡아주세요" <c:if test="${board.tag  eq '맡아주세요'}">selected</c:if>>맡아주세요</option>
-							<option value="빌려주세요" <c:if test="${board.tag  eq '빌려주세요'}">selected</c:if>>빌려주세요</option>
-							<option value="옮겨주세요" <c:if test="${board.tag  eq '옮겨주세요'}">selected</c:if>>옮겨주세요</option>
-							<option value="기타" <c:if test="${board.tag  eq '기타'}">selected</c:if>>기타</option>
-						</select>
-					</div>
+					
 
 					<table class="table table-hover table-bordered">
 						<thead class="thead-dark">
@@ -249,10 +277,10 @@
 					<div id="image_container" class="d-flex"></div>
 				</form>
 				<c:if test="${sessionScope.loginUser.nickname eq board.nickname }">
-					<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit">수정</button>
+					<button id="modifySubmitButton" class="btn btn-modify" type="submit">수정</button>
 				</c:if>
-				<button id="" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmModal1"><i class="fas fa-trash"> 삭제</i></button>
-				<a href="${pageContext.request.contextPath }/help/list/${board.id }" class="btn btn-outline-secondary">취소</a>
+				<button id="" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirmModal1"><i class="fas fa-trash"> 삭제</i></button>
+				<a href="${pageContext.request.contextPath }/help/list/${board.id }" class="btn btn-cancel">취소</a>
 			</div>
 		</div>
 	</div>
