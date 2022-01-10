@@ -19,27 +19,22 @@
 .form-group{
 font-family: 'IBM Plex Sans KR', sans-serif;
 }
-
 #body {
 	/* height: calc(100vh-72px); */
 	width: 100%;
 	justify-content: center;
 	display: flex;
 }
-
 #inner {
 	width: 900px;
 	height: 100%;
 }
-
 #input2{
 height:150px;
 }
-
 #input3{
 width: 20%;
 }
-
 </style>
 
 <title>게시물 수정</title>
@@ -83,7 +78,12 @@ width: 20%;
 					<div class="form-group">
 						<label for="input3">태그</label>
 						<select class="form-control" id="input3" name="tag">
-
+							<option value="질문" <c:if test="${board.tag eq '질문'}">selected</c:if>>질문</option>
+							<option value="건의사항" <c:if test="${board.tag  eq '건의사항'}">selected</c:if>>건의사항</option>
+							<option value="신고합니다!" <c:if test="${board.tag  eq '신고합니다!'}">selected</c:if>>신고합니다!</option>
+							<c:if test="${sessionScope.loginUser.adminQuali eq 1 }">
+           				 		<option value="공지사항" <c:if test="${board.tag  eq '공지사항'}">selected</c:if>>공지사항</option>
+           				 	</c:if>
 
 						</select>
 					</div>
@@ -122,10 +122,9 @@ width: 20%;
 					
 					<!-- 구분 선 -->
 				    <div id="d-line"></div>
-					
-					<!-- 이미지들 미리보기 컨테이너 -->
+				    	
+				    <!-- 이미지들 미리보기 컨테이너 -->
 					<div id="image_container" class="d-flex"></div>
-					
 				</form>
 
 				<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit">수정</button>

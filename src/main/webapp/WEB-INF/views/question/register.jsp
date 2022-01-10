@@ -110,7 +110,7 @@ width: 20%;
 						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" onchange=setThumbnail(event) multiple>
 				    	</div>
 				    
-				    	<!-- 구분 선 -->
+				    <!-- 구분 선 -->
 				    <div id="d-line"></div>
 				    	
 				    <!-- 이미지들 미리보기 컨테이너 -->
