@@ -435,6 +435,7 @@ color:#ffe164;
 		render(input.files, currentThumbnail);
 
 	}
+	
 	$(document).ready(function () {
 
 

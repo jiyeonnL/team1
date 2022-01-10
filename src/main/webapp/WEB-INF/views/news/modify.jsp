@@ -245,6 +245,7 @@
 					
 					<!-- 이미지들 미리보기 컨테이너 -->
 					<div id="image_container" class="d-flex"></div>
+					
 				</form>
 				<c:if test="${sessionScope.loginUser.nickname eq board.nickname }">
 					<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit">수정</button>

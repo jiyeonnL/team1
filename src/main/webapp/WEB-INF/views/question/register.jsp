@@ -107,14 +107,17 @@ width: 20%;
 					</div>
 					<div class="form-group">
 						<label for="input7">Image</label>
-						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" >
+						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" onchange=setThumbnail(event) multiple>
 				    	</div>
+				    
+				    	<!-- 구분 선 -->
+				    <div id="d-line"></div>
 				    	
-				    						<!-- 이미지들 미리보기 컨테이너 -->
+				    <!-- 이미지들 미리보기 컨테이너 -->
 					<div id="image_container" class="d-flex"></div>
 
 					<button class="btn btn-outline-primary" type="submit">등록</button>
-					<a href="${pageContext.request.contextPath }/question/list?location=" class="btn btn-outline-danger">취소</a>
+					<a href="${pageContext.request.contextPath }/question/list?page=1" class="btn btn-outline-danger">취소</a>
 				</form>
 
 			</div>
@@ -127,6 +130,106 @@ width: 20%;
 	$(document).ready(function(){
 		$("#question").attr("class", "btn btn-outline ml-1 active");
 	});
+	
+	var queue = [];
+
+	function delRef(index) {
+
+		$("#image_container").empty();
+
+		var dt = new DataTransfer();
+		var input = document.getElementById('input7');
+		var {files} = input;	
+
+		//큐 에서도 삭제
+		queue.splice(index, 1);
+		for (var i = 0; i < files.length; i++) {
+			var file = files[i]
+			if (index !== i) dt.items.add(file);
+			input.files = dt.files
+		}
+
+		render(input.files);
+
+	}
+	
+	function render(files) {
+
+		var i = 0;
+		for (const image of files) {
+			
+			const url = window.URL.createObjectURL(image); // blob:http://localhost:1234/28ff8746-94eb-4dbe-9d6c-2443b581dd30
+			
+				const replyMediaObject = $(`
+            	<span id = "\${i}" style="height: 200px; width: 200px; position:relative;">
+			
+				<div 
+					class = "closeButton"
+					style = "position: absolute; z-index:101; top: 5px; right: 5px; width: 30px; height: 30px; cursor:pointer;" 
+					onclick = "delRef(\${i})"
+				>
+					<i class="fas fa-times fa-2x"></i>
+				</div>
+					<img src= "\${url}" class="img-thumbnail d-block" style="height: 100%; width: 100%" atl="aaaa"/>	
+				</span>
+            	
+            `);
+
+				$("#image_container").append(replyMediaObject);
+
+				i++;
+			};
+	}
+	
+	function setThumbnail(event) {
+
+		//파일명 변경하기
+			var newFiles = [];
+			//파일명 변경하기
+			for (file of event.target.files) {
+				//var fileType = file.name.slice(file.name.indexOf("."));
+				//console.log(fileType);
+
+				var new_file = new File([file], Date.now() + file.name);
+				console.log("new file", new_file);
+				newFiles.push(new_file);
+				// Object.defineProperty(file, 'name', {
+				// 	writable: true,
+				// 	value: Date.now() + file.name
+				// });
+				sleep(10);
+			}
+
+			queue.push(...newFiles);
+
+
+		var dt = new DataTransfer();
+		var input = document.getElementById('input7');
+
+		for (var i = 0; i < queue.length; i++) {
+			var file = queue[i]
+			dt.items.add(file)
+			input.files = dt.files
+
+		}
+
+		/* 현재 미리보기는 모두 지워야 한다. */
+		$("#image_container").empty();
+		$("#d-line").empty();
+
+		const line = $(`<div id="line"></div>`)
+
+		$("#d-line").append(line);
+
+		render(input.files);
+
+	}
+	
+	//딜레이 만드는 함수
+	function sleep(ms) {
+		const wakeUpTime = Date.now() + ms;
+		while (Date.now() < wakeUpTime) {}
+	}
 	
 
 	
