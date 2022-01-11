@@ -424,6 +424,8 @@
 				}
 				listReReplyCount();
 				
+				//대댓글 개수세기 (댓글마다) 추가하기 
+				
 			} //for문종료 	
         } //success property value function 끝 
       }); //ajax 종료 (댓글리스트 불러오기 완료)
