@@ -25,10 +25,10 @@ public class HelpReplyVO {
 	// 댓글을 작성하는데 탈퇴한 회원과 닉네임이 같을 때 필터
 	
 	public String getInserted() {
-		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 	}
 	
 	public String getUpdated() {
-		return this.updated.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		return this.updated.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 	}
 }
