@@ -558,9 +558,18 @@ a:hover {
 	vertical-align: middle;
 }
 
+/* 몰라서 놔둠..... 
 #replyModify {
 	width: 40px;
 }
+*/
+
+/* 왠지 이게 맞는 거 같아서 살려둠.... 나중에 처리하세용.... */
+#내용{
+	padding-left: 154px;
+	padding-right: 154px;
+}
+
 </style>
 </head>
 <body>
@@ -607,11 +616,9 @@ a:hover {
 						<div class="row md mx-3 my-2">
 							<div id="line"></div>
 						</div>
-						<!-- 내용  -->
-						<div class="col-md-10 h4 my-auto ">
-							<pre>
-								<c:out value="${post.content}" />
-							</pre>
+						<!-- 내용  --> <!-- 이것도 아이디만 차이 나서 아이디 있는 걸로 살려둠 나중에 확인하세요...-->
+						<div id="내용" class="col-md-10 h4 my-auto ">
+							<pre><c:out value="${post.content}" /></pre>
 						</div>
 
 					</div>

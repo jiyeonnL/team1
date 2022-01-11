@@ -192,7 +192,7 @@ height: 40%;
 	width: 900px;
 }
 
-.btn-register, .btn-cancel {
+.btn-register, .btn-cancel{
 	font-size: xx-large;
 	margin-bottom:40px;
 	border-radius: 8px;
@@ -206,9 +206,9 @@ height: 40%;
 .btn-cancel {
 	color: white;
 	padding: 7.5px;
-	padding-block: 9px;
+	padding-block: 6px;
 	background-color: #264d73;
-	border: 2px solid;
+	border: 1px solid;
 	border-color:#264d73;
 	margin-left:15px;
 }
@@ -281,8 +281,9 @@ color:#ffe164;
 				    <!-- 이미지들 미리보기 컨테이너 -->
 					<div id="image_container" class="d-flex"></div>
 
-					<button class="btn-register" type="submit">등록</button>
-					<a href="${pageContext.request.contextPath }/help/list?location=" class="btn-cancel">취소</a>
+
+					<button class="btn btn-register" type="submit">등록</button>
+					<a href="${pageContext.request.contextPath }/help/list" class="btn btn-cancel">취소</a>
 				</form>
 
 			</div>

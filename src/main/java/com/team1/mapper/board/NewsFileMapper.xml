@@ -27,5 +27,19 @@
 		SELECT id, postId, fileName, url, isThumbnail FROM
 		tb_file_news WHERE postId =#{boardId}
 	</select>
+	
+		<update id="setThumbnailById">
+		UPDATE tb_file_news
+		SET isThumbnail = 1
+		WHERE id =
+		#{Id}
+	</update>
+
+	<update id="unsetThumbnailById">
+		UPDATE tb_file_news
+		SET isThumbnail = 0
+		WHERE id =
+		#{Id}
+	</update>
 
 </mapper>
