@@ -742,29 +742,27 @@ border: 2px solid #264d73;
 							alert("Logged out! Please login again!");
 						},
 						complete : function() {
-							// list refresh
+							//refresh
 							listReReply();
 							//listReReplyCount();
+							//countInBoard();
 						}
 					})
 				})//대댓글 등록하기 끝 
 				
-				//대댓글 개수 세기 (합치기)
+				
+/* 				//각 댓글에 달린 대댓글 개수 세기 
 				const listReReplyCount = function() {
-					//const replyId = '${list[i].id}';
-					
 					$.ajax({
 						url : appRoot+ "/helprereply/count/"+replyId,
 						type : "get",
 						success : function(recount) {
-							console.log(recount);
-							a = a + recount;
-							console.log(a);
+							//console.log(recount);
 						}
 					})
 				}
-				listReReplyCount();
-				//대댓글 개수세기 (댓글마다) 추가하기 
+				listReReplyCount(); */
+				
 				
 				// 대댓글 입력창만 토글
 				$("#rereply-fold"+list[i].id).click(function() {
@@ -810,6 +808,17 @@ border: 2px solid #264d73;
 		})
 	})//댓글전송
 	
+/* 	//게시판에 달린 대댓글 개수 세기 (댓글수와 합칠 용도)
+	const countInBoard = function() {
+		$.ajax({
+			url : appRoot+ "/helprereply/countb/"+${post.id},
+			type : "get",
+			success : function(recountb) {
+				console.log(recountb);
+			}
+		})
+	}
+	countInBoard(); */
 	
 	//댓글 갯수
 	const listReplyCount = function() {
