@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team1.service.board.HelpService;
+import com.team1.service.user.UserService;
 
 /**
  * Handles requests for the application home page.
@@ -20,9 +21,7 @@ import com.team1.service.board.HelpService;
 @Controller
 public class HomeController {
 	
-	@Autowired
-	HelpService helpService;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
@@ -38,7 +37,6 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		
 		
 		return "home";
 	}

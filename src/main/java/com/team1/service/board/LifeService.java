@@ -264,7 +264,11 @@ public class LifeService {
 	}
 
 	public List<LifeFileVO> getFilesById(Integer id) {
-		return  mapper.getFilesById(id);
+		return mapper.getFilesById(id);
+	}
+	
+	public List<LifeVO> getListByUserId(Integer Id) {
+		return mapper.getListByUserId(Id);
 	}
 
 }

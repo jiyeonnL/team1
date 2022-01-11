@@ -23,6 +23,8 @@ public interface HelpMapper {
 	
 	public List<HelpVO> getListByConditions(@Param("location") String location, @Param("tag") String tag, @Param("query") String query, @Param("loginId") Integer loginId);
 	
+	public List<HelpVO> getListByUserId(Integer Id);
+	
 	public int upViews(Integer id);
 
 	public List<HelpFileVO> getFiles();

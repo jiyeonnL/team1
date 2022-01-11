@@ -266,4 +266,8 @@ public class NewsService {
 	public List<NewsFileVO> getFilesById(Integer id) {
 		return  mapper.getFilesById(id);
 	}
+	
+	public List<NewsVO> getListByUserId(Integer Id) {
+		return mapper.getListByUserId(Id);
+	}
 }

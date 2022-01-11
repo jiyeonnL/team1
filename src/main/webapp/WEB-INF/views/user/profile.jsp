@@ -28,6 +28,15 @@
 
 
 <style>
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+a:hover {
+	text-decoration: none;
+	color: inherit;
+}
 #body {
 	height: 150vh;
 	/* height: calc(100vh-72px); */
@@ -103,10 +112,11 @@ margin-top:5px;
 		 		<div class="container">
    					<div class="row">
       					<div class="col">
-       						<h3>내가 쓴 글 - 해주세요</h3>
+       						<h3>내가 쓴 글 </h3>
        						<table class="table">
           					<thead>
             				<tr>
+            					<th>게시판</th>
               					<th>Tag(태그)</th>
               					<th>제목</th>
               					<th>작성 일자</th>
@@ -115,11 +125,17 @@ margin-top:5px;
           					<tbody>
             					<c:forEach items="${list }" var="list">
               					<tr>
+              					<td>
+                  					${list.boardType }
+                				</td>
                 				<td>
                   					${list.tag }
                 				</td>
                 				<td>
-                  					${list.title }
+                					<a href = "/controller1/${list.link}/list/${list.postId}">
+                						${list.title }
+                					</a>
+                  					
                 				</td>
                					<td>
                   					${list.inserted }

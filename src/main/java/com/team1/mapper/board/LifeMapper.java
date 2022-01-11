@@ -24,6 +24,8 @@ public interface LifeMapper {
 	public List<LifeVO> getListByConditions(@Param("location") String location, @Param("tag") String tag, @Param("query") String query, @Param("loginId") Integer loginId);
 	
 	public int upViews(Integer id);
+	
+	public List<LifeVO> getListByUserId(Integer Id);
 
 	public List<LifeFileVO> getFiles();
 

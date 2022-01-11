@@ -29,6 +29,20 @@ public class LifeVO {
 	
 	private Integer upposession;
 	
+	public UserPostVO toUserPostVO() {
+		
+		UserPostVO postVO = new UserPostVO();
+		postVO.setBoardType("동네생활");
+		postVO.setLink("life");
+		postVO.setPostId(this.id);
+		postVO.setTag(this.tag);
+		postVO.setTitle(this.title);
+		postVO.setInserted(this.inserted);
+		postVO.setUpdated(this.updated);
+		
+		return postVO;
+	}
+	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 	}
