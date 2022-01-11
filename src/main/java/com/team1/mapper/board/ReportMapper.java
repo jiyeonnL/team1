@@ -1,0 +1,17 @@
+package com.team1.mapper.board;
+
+import java.util.List;
+
+import com.team1.domain.board.ReportVO;
+
+public interface ReportMapper {
+	
+	public List<ReportVO> getList();
+	
+	public int insert(ReportVO report);
+	
+	public int delete(Integer id);
+	
+	public int deleteByBoardId(Integer boardId);
+
+}
