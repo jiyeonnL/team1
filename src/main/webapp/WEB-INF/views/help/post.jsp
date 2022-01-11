@@ -11,8 +11,6 @@
 <title>${post.title}-${post.nickname}</title>
 
 <!-- 게시물 상세보기 페이지 -->
-
-
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
 	integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
@@ -28,6 +26,296 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<style>
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+a:hover {
+	text-decoration: none;
+	color: inherit;
+}
+
+#body {
+	height: 120vh;
+	/* height: calc(100vh-72px); */
+	width: 100%;
+	justify-content: center;
+	display: flex;
+}
+
+#inner {
+	border: 2px;
+	width: 900px;
+	height: auto%;
+}
+
+#postBody {
+	width: 100%;
+	border: 3px solid #264d73;
+	border-radius: 10px;
+	margin-top: 5px;
+	background-color: #eef2f6;
+	margin-bottom: 40px;
+	padding-block: 15px;
+	padding-right: 15px;
+	padding-left: 15px;
+	/* letter-spacing: 1px; */
+}
+
+.상세보기-헤더 {
+	padding-bottom: 10px;
+}
+
+.상세보기-게시물-내용 {
+	border-bottom-color: darkgray;
+	border-bottom-style: solid;
+	margin-bottom: 10px;
+}
+
+.게시물-조회수-작성시간 {
+	font-weight: 200;
+	font-size: 17px;
+}
+
+#tag {
+	font-size: large;
+	font-weight: bold;
+	text-align: center;
+	justify-content: center;
+	border-radius: 5px;
+	border: 3px solid #f0615c;
+	background-color: white;
+}
+
+#userprofile {
+	height: 60px;
+	width: 60px;
+}
+
+#buttonmenu {
+	margin-bottom: 10px;
+}
+
+.상세보기-업로드이미지-테두리 {
+	border: solid;
+}
+
+.상세보기-업로드이미지-배경 {
+	color: black;
+	background-color: #ffe164;
+}
+
+.상세보기-이미지 {
+	width: 50%;
+}
+
+.replyinput {
+	padding-block: 15px;
+	padding-inline: 0px;
+}
+
+#replyTextarea{
+padding:5px;
+border: 2px solid #264d73;
+
+}
+#sendReply {
+	margin-top: 15px;
+	height: 60px;
+	padding-top: 12px;
+	background-color: #ffe164;
+	color: black;
+}
+
+.상세보기-댓글칸 {
+	padding-right: 0px;
+}
+
+#replynickname {
+	width: 460px;
+}
+
+#replymenu {
+	width: 105px;
+}
+
+#replytime {
+	width: 220px;
+	vertical-align: middle;
+	font-weight: 100;
+}
+
+#replyModify {
+	width: 40px;
+}
+
+.댓글아이콘 {
+	border-bottom: solid 2px;
+	margin: 0px;
+}
+
+.댓글입력창 {
+	border-bottom: solid 2px;
+	margin: 0px;
+}
+</style>
+</head>
+<body>
+
+	<b:header></b:header>
+	<div id="body">
+		<div id="inner">
+			<b:innerNav></b:innerNav>
+			<div id="postBody">
+				<div class="container-fluid 상세보기-게시물-내용">
+					<!-- 헤더 -->
+					<div class="row md ms-4 px-2 align-middle 상세보기-헤더 상세보기-게시물-내용">
+						<div class="col-md-1 px-1 py-0 my-0">
+							<img id="상세보기-프로필" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+						</div>
+						<div class="col-md-5 my-auto h2 align-middle ">${post.nickname}</div>
+
+						<div class=" my-auto h4 ml-auto 게시물-조회수-작성시간">
+							<i class="fas fa-eye "></i>
+							${post.views } ||
+							<i class="far fa-calendar-alt"></i>
+							${post.inserted}
+							<c:if test="${post.inserted ne post.updated}">(수정됨)</c:if>
+						</div>
+					</div>
+
+					<!-- body -->
+					<div class="row md ms-4 my-2 align-middle">
+
+						<!-- tag -->
+						<div class="col-md-2 my-auto px-auto 상세보기-태그">
+							<div id="tag">${post.tag }</div>
+						</div>
+						<!-- 제목  -->
+						<div class="col-md-10 h4 my-auto 상세보기-제목">
+							<c:out value="${post.title}" />
+						</div>
+						<div class="row md mx-3 my-2 ">
+							<div id="line"></div>
+						</div>
+						<!-- 내용  -->
+
+					</div>
+					<div id="내용" class="h4 my-auto ">
+						<pre><c:out value="${post.content}" /></pre>
+					</div>
+				</div>
+
+				<!-- footer -->
+				<div class="row md mx-4 d-flex justify-content-center">
+					<div id="upview" class="col-md-4 d-flex justify-content-center">
+						<!-- 좋아요 아이콘 -->
+					</div>
+				</div>
+
+				<!-- 버튼 메뉴, 수정/삭제, 뒤로 -->
+				<div id="buttonmenu" class="row d-flex justify-content-between">
+					<div class="col-md-auto my-auto px-auto ">
+						<c:if test="${sessionScope.loginUser.id eq post.memberId || sessionScope.loginUser.adminQuali eq 1 }">
+							<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }" class="btn btn-outline-secondary"> 수정/삭제 </a>
+						</c:if>
+					</div>
+
+					<div class="col-md-auto my-auto px-auto">
+						<a href="${pageContext.request.contextPath }/help/list" class="btn btn-outline-secondary">
+							<i class="fas fa-list"> 뒤로</i>
+						</a>
+					</div>
+				</div>
+
+				<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
+				<div class="md my-3">
+					<table class="table table-hover table-bordered">
+						<thead class="thead">
+							<tr class="상세보기-업로드이미지-테두리">
+								<th class="상세보기-업로드이미지-배경">Uploaded Images</th>
+							</tr>
+						</thead>
+						<c:if test="${not empty post.fileList }">
+							<c:forEach items="${post.fileList }" var="file" varStatus="vs">
+								<tbody>
+									<tr style="text-align: center;">
+										<td>
+											<img class="img-fluid 상세보기-이미지" style="width: 50%;" src="${file.url}" alt="${file.fileName}">
+										</td>
+									</tr>
+								</tbody>
+							</c:forEach>
+						</c:if>
+					</table>
+				</div>
+
+				<!-- 댓글 창 -->
+				<!-- 로그인 한 사용자에게만 보여야 한다. -->
+
+				<div class="row 댓글아이콘">
+					<div style="margin-bottom: 0px;" class="replyCount fa-2x">
+						<i class="far fa-comment-dots fa-lg cnt" style="background-color: #ffe164;"></i>
+					</div>
+				</div>
+				<div class="row 댓글입력창">
+					<c:if test="${not empty sessionScope.loginUser }">
+						<div class="col-10 replyinput">
+							<textarea id="replyTextarea" class="form-control" placeholder="댓글을 남겨보세요!"></textarea>
+						</div>
+						<div class="col-2 상세보기-댓글칸">
+							<button id="sendReply" class="btn btn-block d-flex justify-content-center ">
+								<i class="far fa-comment-dots fa-2x 상세보기-댓글-이모티콘"></i>
+							</button>
+						</div>
+					</c:if>
+				</div>
+				<br>
+				<div id="replyListContainer"></div>
+				</div>
+			</div>
+		</div>
+		<!-- 태그 -->
+
+		<!-- Result Modal -->
+		<c:if test="${not empty result }">
+			<div class="modal" tabindex="-1" id="modal1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Process Result</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>${result }</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</c:if>
+	</div>
+
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+		crossorigin="anonymous"></script>
+	<script>
+	$(document).ready(function(){
+		$("#help").attr("class", "btn btn-outline ml-1 active");
+	});
+</script>
 
 <script>
   $(document).ready(function() {
@@ -481,278 +769,5 @@
 	listReplyCount();
 });
 </script>
-<style>
-a {
-	text-decoration: none;
-	color: inherit;
-}
-
-a:hover {
-	text-decoration: none;
-	color: inherit;
-}
-
-#body {
-	height: 120vh;
-	/* height: calc(100vh-72px); */
-	width: 100%;
-	justify-content: center;
-	display: flex;
-}
-
-#inner {
-	border: 2px;
-	width: 900px;
-	height: auto%;
-}
-
-#postBody {
-	width: 100%;
-	border: 3px solid #264d73;
-	border-radius: 10px;
-	margin-top: 5px;
-	background-color: #eef2f6;
-	margin-bottom: 40px;
-	padding-block: 15px;
-	padding-right: 15px;
-	padding-left: 15px;
-	/* letter-spacing: 1px; */
-}
-
-#상세보기-프로필{
-padding-bottom: 6px;}
-.상세보기-게시물-내용 {
-	border-bottom-color: darkgray;
-	border-bottom-style: solid;
-}
-
-.게시물-조회수-작성시간 {
-	font-weight: 200;
-	font-size: 17px;
-}
-
-#tag {
-	font-size: large;
-	font-weight: bold;
-	text-align: center;
-	justify-content: center;
-	border-radius: 5px;
-	border: 3px solid #f0615c;
-	background-color: white;
-}
-
-#userprofile {
-	height: 60px;
-	width: 60px;
-}
-
-#buttonmenu {
-	margin-bottom: 10px;
-}
-
-상세보기-이미지{
-width:50%;
-}
-
-.replyinput {
-	padding-top: 15px;
-	padding-bottom: 15px;
-}
-
-#sendReply {
-	margin-top: 15px;
-	height: 60px;
-	padding-top: 12px;
-	background-color: #ffe164;
-	color:black;
-}
-
-#replynickname {
-	width: 460px;
-}
-
-#replymenu {
-	width: 105px;
-}
-
-#replytime {
-	width: 220px;
-	vertical-align: middle;
-	font-weight: 100;
-}
-
-#replyModify {
-	width: 40px;
-}
-
-.댓글아이콘{
-	border-bottom: solid 2px;
-	margin : 0px;
-	
-}
-
-.댓글입력창{
-	border-bottom: solid 2px;
-	margin : 0px;
-}
-
-</style>
-</head>
-<body>
-
-	<b:header></b:header>
-	<div id="body">
-		<div id="inner">
-			<b:innerNav></b:innerNav>
-			<div id="postBody">
-				<div class="container-fluid my-1 상세보기-게시물-내용">
-					<!-- 헤더 -->
-					<div class="row md ms-4 px-2 align-middle 상세보기-헤더 상세보기-게시물-내용">
-						<div class="col-md-1 px-1 py-0 my-0">
-							<img id="상세보기-프로필" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
-						</div>
-						<div class="col-md-5 my-auto h2 align-middle ">${post.nickname}</div>
-
-						<div class=" my-auto h4 ml-auto 게시물-조회수-작성시간">
-							<i class="fas fa-eye "></i>
-							${post.views } ||
-							<i class="far fa-calendar-alt"></i>
-							${post.inserted}
-							<c:if test="${post.inserted ne post.updated}">(수정됨)</c:if>
-						</div>
-					</div>
-
-					<!-- body -->
-					<div class="row md ms-4 my-2 align-middle">
-
-						<!-- tag -->
-						<div class="col-md-2 my-auto px-auto 상세보기-태그">
-							<div id="tag">${post.tag }</div>
-						</div>
-						<!-- 제목  -->
-						<div class="col-md-10 h4 my-auto 상세보기-제목">
-							<c:out value="${post.title}" />
-						</div>
-						<div class="row md mx-3 my-2 ">
-							<div id="line"></div>
-						</div>
-						<!-- 내용  -->
-
-					</div>
-					<div id="내용" class="col-md-10 h4 my-auto ">
-						<pre>
-								<c:out value="${post.content}" />
-							</pre>
-					</div>
-				</div>
-
-				<!-- footer -->
-				<div class="row md mx-4 d-flex justify-content-center">
-					<div id="upview" class="col-md-4 d-flex justify-content-center">
-						<!-- 좋아요 아이콘 -->
-					</div>
-				</div>
-
-				<!-- 버튼 메뉴, 수정/삭제, 뒤로 -->
-				<div id="buttonmenu" class="row d-flex justify-content-between">
-					<div class="col-md-auto my-auto px-auto ">
-						<c:if test="${sessionScope.loginUser.id eq post.memberId || sessionScope.loginUser.adminQuali eq 1 }">
-							<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }" class="btn btn-outline-secondary"> 수정/삭제 </a>
-						</c:if>
-					</div>
-
-					<div class="col-md-auto my-auto px-auto">
-						<a href="${pageContext.request.contextPath }/help/list" class="btn btn-outline-secondary">
-							<i class="fas fa-list"> 뒤로</i>
-						</a>
-					</div>
-				</div>
-
-				<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
-				<div class="md my-3">
-					<table class="table table-hover table-bordered">
-						<thead class="thead-dark">
-							<tr>
-								<th>Uploaded Images</th>
-							</tr>
-						</thead>
-						<c:if test="${not empty post.fileList }">
-							<c:forEach items="${post.fileList }" var="file" varStatus="vs">
-								<tbody>
-									<tr style="text-align: center;">
-										<td>
-											<img class="img-fluid 상세보기-이미지" style="width: 50%;" src="${file.url}" alt="${file.fileName}">
-										</td>
-									</tr>
-								</tbody>
-							</c:forEach>
-						</c:if>
-					</table>
-				</div>
-
-				<!-- 댓글 창 -->
-				<!-- 로그인 한 사용자에게만 보여야 한다. -->
-
-				<div class="row 댓글아이콘">
-					<div style="margin-bottom: 0px;" class="replyCount fa-2x">
-						<i class="far fa-comment-dots fa-lg cnt" style="background-color: #ffe164;"></i>
-					</div>
-				</div>
-				<div class="row 댓글입력창">
-					<c:if test="${not empty sessionScope.loginUser }">
-						<div class="col-10 replyinput">
-							<textarea id="replyTextarea" class="form-control px-0" placeholder="댓글을 남겨보세요!" id="exampleFormControlTextarea1"></textarea>
-						</div>
-						<div class="col-2 ">
-							<button id="sendReply" class="btn btn-block d-flex justify-content-center ">
-								<i class="far fa-comment-dots fa-2x"></i>
-							</button>
-						</div>
-					</c:if>
-				</div>
-				<br>
-				<div id="replyListContainer"></div>
-				</div>
-			</div>
-		</div>
-		<!-- 태그 -->
-
-		<!-- Result Modal -->
-		<c:if test="${not empty result }">
-			<div class="modal" tabindex="-1" id="modal1">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">Process Result</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<p>${result }</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</c:if>
-	</div>
-
-
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-		crossorigin="anonymous"></script>
-	<script>
-	$(document).ready(function(){
-		$("#help").attr("class", "btn btn-outline ml-1 active");
-	});
-</script>
-
 </body>
 </html>

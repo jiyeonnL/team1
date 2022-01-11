@@ -4,7 +4,7 @@
 
 
 
-</style>
+
 <c:url value="/board/list" var="listUrl"></c:url>
 <c:url value="/board/register" var="registerUrl"></c:url>
 <c:url value="/member/signup" var="signupUrl"></c:url>
