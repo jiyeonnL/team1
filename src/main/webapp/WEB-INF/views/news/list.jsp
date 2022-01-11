@@ -287,19 +287,15 @@ font-size:1.5em;
 		$(document).ready(function(){
 			$("#news").attr("class", "btn btn-outline ml-1 active");
 			var count = 5;
-			$(window).scroll(
-					function() {
-						if ($(window).scrollTop() == $(document)
-								.height()
-								- $(window).height()) {
-							for (i = 0; i < 5; i++) {
-								$("#inner").find("#list-font-" + count)
-										.removeAttr("style", "none");
-								count++;
-							}
-							;
-						}
-					});
+			$(window).scroll(function() {
+				if ($(window).scrollTop() == $(document).height()	- $(window).height()) {
+					for (i = 0; i < 5; i++) {
+						$("#inner").find("#list-font-" + count).removeAttr("style", "none");
+						count++;
+					}
+				}
+			});
+		});
 	</script>
 </body>
 </html>

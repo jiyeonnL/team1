@@ -102,6 +102,7 @@ a#title {
 	/* border-bottom: solid; */
 	font-weight: bold;
 	padding-bottom: 5px;
+	width: auto;
 }
 
 #contentBox {
@@ -179,13 +180,13 @@ width:1em;
 								<div id="tag">${board.tag } </div>
 							</div>
 							<div class="col-md-5 my-auto h5">
-								<div>
+								<div class="d-flex justify-content-start">
 									<a href="/controller1/help/list/${board.id}" id="title">
 										<c:out value="${board.title}" />
-										<c:if test="${board.newMark <2 }">
-											<span class="badge badge-danger">new</span>
-										</c:if>
 									</a>
+									<c:if test="${board.newMark <2 }">
+										<span class="badge badge-danger" style="margin-left: 5px; line-height: 1; height: 25.5px;">new</span>
+									</c:if>
 								</div>
 							</div>
 							<div class="col-md-3 offset-md-2 my-auto h5">
@@ -292,19 +293,15 @@ width:1em;
 				function() {
 					$("#help").attr("class", "btn btn-outline ml-1 active");
 					var count = 5;
-					$(window).scroll(
-							function() {
-								if ($(window).scrollTop() == $(document)
-										.height()
-										- $(window).height()) {
-									for (i = 0; i < 5; i++) {
-										$("#inner").find("#list-font-" + count)
-												.removeAttr("style", "none");
-										count++;
-									}
-									;
-								}
-							});
+					$(window).scroll(function() {
+						if ($(window).scrollTop() == $(document).height()	- $(window).height()) {
+							for (i = 0; i < 5; i++) {
+								$("#inner").find("#list-font-" + count)
+										.removeAttr("style", "none");
+								count++;
+							};
+						}
+					});
 					/* 		var count = 0;
 					 //스크롤 바닥 감지
 					 window.onscroll = function(e) {
