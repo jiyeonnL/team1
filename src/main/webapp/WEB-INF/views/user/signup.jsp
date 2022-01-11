@@ -187,7 +187,7 @@ label {
 							<%-- <input type="text" class="form-control input2" id="input1" required name="nickname" value="${user.nickname }">
 										<button class="btn btn-secondary" id="nicknameCheckButton" type="button">중복확인</button> --%>
 							<div class="input-group">
-								<input type="text" class="form-control" id="input1" required name="nickname" value="${user.nickname }">
+								<input type="text" class="form-control" id="input1" maxlength="10" required name="nickname" value="${user.nickname }">
 								<div class="input-group-append">
 									<button class="btn btn-outline-dark" id="nicknameCheckButton" type="button">중복확인</button>
 								</div>
@@ -199,6 +199,7 @@ label {
 							<label for="input2">비밀번호</label>
 							<div class="input-group" id="input2-1">
 								<input type="password" class="form-control" id="input2" required name="pw" value="${user.pw }">
+								<small class="form-text" id="pwCheckMessage"></small>
 							</div>
 						</div>
 
@@ -436,16 +437,33 @@ label {
 
 								const pwValue = pwInput.val();
 								const pwConfirmValue = pwConfirmInput.val();
-
-								if (pwValue === pwConfirmValue) {
-
+								var reg = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+								
+								var pwTest = reg.test(pwValue);
+								
+								if (pwTest && pwValue === pwConfirmValue) {
+										
+								
 									pwCheck = true;
-
-								} else {
-
-									pwCheck = false;
+									$('#pwCheckMessage').text('비밀번호 확인 완료!')
+														.removeClass("text-danger")
+														.addClass("text-primary");
+								
+								} else if(!pwTest){
 									
+									pwCheck = false;
+									$('#pwCheckMessage').text('비밀번호 형식에 맞지 않습니다(  문자 / 숫자 / 특수문자 포함 형태의 8~16)')
+														.removeClass("text-primary")
+														.addClass("text-danger");
+
+									
+								}else if(pwValue !== pwConfirmValue){
+									pwCheck = false;
+									$('#pwCheckMessage').text('비밀번호를 다시 확인해주세요')
+									.removeClass("text-primary")
+									.addClass("text-danger");
 								}
+									
 								//일치 할 경우 서브밋 버튼 활성화
 								enableSubmit();
 							};
