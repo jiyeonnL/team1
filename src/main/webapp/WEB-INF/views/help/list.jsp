@@ -119,14 +119,15 @@ a:hover {
 	padding-right: 0px;
 }
 
-.badge{
+.badge {
+	
 }
 
 .제목아래보더 {
 	padding-top: 8px;
 	padding-bottom: 3px;
 	border-bottom: solid;
-	border-bottom-width: 3px;
+	border-bottom-width: 2px;
 	border-bottom-color: #264d73;
 }
 
@@ -140,7 +141,7 @@ a:hover {
 	font-size: medium;
 	text-align: right;
 	margin-block: 11px;
-	margin-right:10px
+	margin-right: 10px
 }
 
 .댓글위의바 {
@@ -155,10 +156,11 @@ a:hover {
 
 .fa-2x {
 	font-size: 1.3em;
-	margin-left:5px;
+	margin-left: 5px;
 }
+
 .fa-fw {
-width:1em;
+	width: 1em;
 }
 </style>
 </head>

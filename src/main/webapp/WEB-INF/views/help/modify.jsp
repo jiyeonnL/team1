@@ -90,12 +90,30 @@
 	height: 40%;
 }
 
+.게시물수정-이미지 {
+	width: 50%;
+}
+
 #image_container {
 	border-bottom: solid;
 	border-bottom-color: lightgray;
 	margin-bottom: 20px;
-	padding-bottom:15px;
-	
+	padding-bottom: 15px;
+}
+
+.상세보기-이미지박스 {
+	text-align: center;
+}
+
+.상세보기-이미지-첫번째칸 {
+	width: 84px;
+}
+.상세보기-이미지-두번째칸{
+	padding-bottom: 23px;
+}
+.상세보기-이미지-세번째칸 {
+	width: 66px;
+	padding-bottom: 23px;
 }
 
 .container_radio {
@@ -163,13 +181,17 @@
 
 .btn-modify, .btn-cancel, .btn-delete {
 	font-size: xx-large;
-	margin-bottom:40px;
+	margin-bottom: 40px;
 	border-radius: 8px;
 }
 
 .btn-modify {
 	color: #f0615c;
-	background-color:#ffe164;
+	background-color: #ffe164;
+}
+
+.btn-danger {
+	margin-left: 10px;
 }
 
 .btn-cancel {
@@ -178,11 +200,12 @@
 	padding-block: 6px;
 	background-color: #264d73;
 	border: 1px solid;
-	border-color:#264d73;
-	margin-left:15px;
+	border-color: #264d73;
+	margin-left: 10px;
 }
-.btn-cancel:hover{
-color:#ffe164;
+
+.btn-cancel:hover {
+	color: #ffe164;
 }
 </style>
 
@@ -222,12 +245,12 @@ color:#ffe164;
 
 					
 
-					<table class="table table-hover table-bordered">
+					<table class="table table-hover table-bordered 상세보기-이미지박스">
 						<thead class="thead-dark">
 							<tr>
-								<th>삭제할 파일 선택</th>
-								<th>이미지</th>
-								<th>썸네일</th>
+								<th class="상세보기-이미지-첫번째칸">삭제할 파일 선택</th>
+								<th class="상세보기-이미지-두번째칸" style="vertical-align: middle;">이미지</th>
+								<th class="상세보기-이미지-세번째칸" style="vertical-align: middle;">썸네일</th>
 							</tr>
 						</thead>
 						<c:if test="${not empty board.fileList }">
@@ -241,7 +264,7 @@ color:#ffe164;
 										</td>
 										<td>
 											<div class="col">
-												<img class="img-fluid" src="${file.url}" alt="${file.url }">
+												<img class="img-fluid 게시물수정-이미지" src="${file.url}" alt="${file.url }">
 											</div>
 										</td>
 										<td>
@@ -279,7 +302,7 @@ color:#ffe164;
 				<c:if test="${sessionScope.loginUser.nickname eq board.nickname }">
 					<button id="modifySubmitButton" class="btn btn-modify" type="submit">수정</button>
 				</c:if>
-				<button id="" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirmModal1"><i class="fas fa-trash"> 삭제</i></button>
+				<button id="" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirmModal1"> 삭제</i></button>
 				<a href="${pageContext.request.contextPath }/help/list/${board.id }" class="btn btn-cancel">취소</a>
 			</div>
 		</div>

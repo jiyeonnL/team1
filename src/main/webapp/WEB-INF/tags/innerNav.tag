@@ -21,6 +21,9 @@
 	font-size: medium;
 }
 
+.메뉴바-아래-호버{
+border-radius: 7px;
+}
 #nav-color {
 	background-color: #ffe164;
 	border-radius: 6px;
@@ -46,6 +49,7 @@
 	margin-bottom: 0px;
 	diplay: felx;
 	align-item: center;
+	padding-top: 6px;
 }
 
 a.goTop {
@@ -176,7 +180,7 @@ a.goTop {
 				</li>
 				<li id="nav-news" class="nav-item">
 					<button type="button" id="news" class="btn btn-outline-dark ml-1">동네소식</button>
-					<ul id="nav-sub" class="news">
+					<ul id="nav-sub" class="news 메뉴바-아래-호버">
 						<!-- <li id="nav-sub" class="nav-item accident">
 							<button type="button" id="n_all" class="btn btn-outline-dark ml-1">전체보기</button>
 						</li> -->
@@ -195,7 +199,7 @@ a.goTop {
 				<!-- 질문 -->
 				<li id="nav-question" class="nav-item">
 					<button type="button" id="question" class="btn btn-outline-dark ml-1">동네질문</button>
-					<ul id="nav-sub" class="question">
+					<ul id="nav-sub" class="question 메뉴바-아래-호버">
 						<!-- <li id="nav-sub" class="nav-item lostnfound">
 							<button type="button" id="q_all" class="btn btn-outline-dark ml-1">전체보기</button>
 						</li> -->
@@ -219,7 +223,7 @@ a.goTop {
 				<!-- life -->
 				<li id="nav-life" class="nav-item">
 					<button type="button" id="life" class="btn btn-outline-dark ml-1">일상생활</button>
-					<ul id="nav-sub" class="life">
+					<ul id="nav-sub" class="life 메뉴바-아래-호버">
 						<!-- <li id="nav-sub" class="nav-item nlife">
 							<button type="button" id="l_all" class="btn btn-outline-dark ml-1">전체보기</button>
 						</li> -->
@@ -242,11 +246,11 @@ a.goTop {
 				</li>
 				<li id="nav-help" class="nav-item ">
 					<button type="button" id="help" class="btn btn-outline-dark ml-1">해주세요</button>
-					<ul id="nav-sub" class="help">
+					<ul id="nav-sub" class="help 메뉴바-아래-호버">
 						<!-- <li id="nav-sub" class="nav-item hlepAll">
 							<button type="button" id="h_All" class="btn btn-outline-dark ml-1">전체보기</button>
 						</li> -->
-						<li id="nav-sub" class="nav-item buy">
+						<li id="nav-sub" class="nav-item buy ">
 							<button type="button" id="h_buy" class="btn btn-outline-dark ml-1">사다주세요</button>
 						</li>
 						<li id="nav-sub" class="nav-item care">

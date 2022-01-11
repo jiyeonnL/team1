@@ -99,6 +99,9 @@ a:hover {
 	margin-bottom: 10px;
 }
 
+.상세보기-제목{
+font-weight: bold;
+}
 .상세보기-업로드이미지-테두리 {
 	border: solid;
 }
@@ -106,6 +109,22 @@ a:hover {
 .상세보기-업로드이미지-배경 {
 	color: black;
 	background-color: #ffe164;
+	border-top-right-radius: 8px;
+	border-top-left-radius:8px;
+	border-top:none;
+	border-bottom:none;
+}
+#id{
+font-size: large;
+}
+.게시글-수정-삭제,.게시글-뒤로가기{
+background-color: #264d73;
+color:white;
+font-weight: bold;
+
+}
+.table th{
+border-bottom: none;
 }
 
 .상세보기-이미지 {
@@ -210,7 +229,7 @@ border: 2px solid #264d73;
 							<img id="상세보기-프로필" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 						</div>
 						
-						<div class="col-md-5 my-auto h2 align-middle "> 
+						<div class="col-md-5 my-auto h2 align-middle 상세보기-제목"> 
 							<a href = "${pageContext.request.contextPath }/user/profile/${post.nickname}"> ${post.nickname} </a>
 						</div>
 
@@ -256,12 +275,13 @@ border: 2px solid #264d73;
 				<div id="buttonmenu" class="row d-flex justify-content-between">
 					<div class="col-md-auto my-auto px-auto ">
 						<c:if test="${sessionScope.loginUser.id eq post.memberId || sessionScope.loginUser.adminQuali eq 1 }">
-							<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }" class="btn btn-outline-secondary"> 수정/삭제 </a>
+							<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }" class="btn btn-outline-secondary 게시글-수정-삭제"> 
+							<i class="fas fa-eraser"></i> 수정 / 삭제 </a>
 						</c:if>
 					</div>
 
 					<div class="col-md-auto my-auto px-auto">
-						<a href="${pageContext.request.contextPath }/help/list" class="btn btn-outline-secondary">
+						<a href="${pageContext.request.contextPath }/help/list" class="btn btn-outline-secondary 게시글-뒤로가기">
 							<i class="fas fa-list"> 뒤로</i>
 						</a>
 					</div>
@@ -269,9 +289,9 @@ border: 2px solid #264d73;
 
 				<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
 				<div class="md my-3">
-					<table class="table table-hover table-bordered">
+					<table class="table table-hover">
 						<thead class="thead">
-							<tr class="상세보기-업로드이미지-테두리">
+							<tr>
 								<th class="상세보기-업로드이미지-배경">Uploaded Images</th>
 							</tr>
 						</thead>
@@ -339,7 +359,6 @@ border: 2px solid #264d73;
 				</div>
 			</div>
 		</c:if>
-	</div>
 
 
 
@@ -365,23 +384,23 @@ border: 2px solid #264d73;
 			success : function() {
 				const upviewMediaObject = $(`
 						<c:if test="${empty sessionScope.loginUser}">
-							<button id="upinsnl" class="btn btn-outline-primary">
+							<button id="upinsnl" class="btn btn-outline-danger">
 								<i id="upiconnl" class="far fa-heart fa-fw fa-2x m-r-3"> </i>
 							</button>
 						</c:if>
 						<c:if test="${empty post.upposession&&not empty sessionScope.loginUser}">
-							<button id="upins" class="btn btn-outline-primary">
+							<button id="upins" class="btn btn-outline-dark">
 								<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
 							</button>
-							<button id="updel" class="btn btn-outline-primary" style="display:none;">
+							<button id="updel" class="btn btn-outline-light" style ="background-color:#264d73;">
 								<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
 							</button>
 						</c:if>
 						<c:if test="${not empty post.upposession}">
-							<button id="upins" class="btn btn-outline-primary" style="display:none;">
-								<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
+							<button id="upins" class="btn btn-outline-dark" style="display:none;">
+								<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3" > </i> 
 							</button>
-							<button id="updel" class="btn btn-outline-primary">
+							<button id="updel" class="btn btn-outline-light" style="background-color:#264d73;">
 								<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
 							</button>
 						</c:if>
