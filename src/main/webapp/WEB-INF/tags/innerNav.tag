@@ -119,7 +119,7 @@ a.goTop {
 	display: none;
 	position: absolute;
 	top: 53px;
-	left: 100px;
+	left: 160px;
 	padding : 5px;
 	background-color: #ffe164;
 	border: 3px solid #2f6091;
@@ -143,7 +143,7 @@ a.goTop {
 	display: none;
 	position: absolute;
 	top: 53px;
-	left: 280px;
+	left: 320px;
 	padding : 5px;
 	background-color: #ffe164;
 	border: 3px solid #2f6091;
@@ -177,9 +177,9 @@ a.goTop {
 				<li id="nav-news" class="nav-item">
 					<button type="button" id="news" class="btn btn-outline-dark ml-1">동네소식</button>
 					<ul id="nav-sub" class="news">
-						<li id="nav-sub" class="nav-item accident">
+						<!-- <li id="nav-sub" class="nav-item accident">
 							<button type="button" id="n_all" class="btn btn-outline-dark ml-1">전체보기</button>
-						</li>
+						</li> -->
 						<li id="nav-sub" class="nav-item accident">
 							<button type="button" id="n_accident" class="btn btn-outline-dark ml-1">사건/사고</button>
 						</li>
@@ -196,9 +196,9 @@ a.goTop {
 				<li id="nav-question" class="nav-item">
 					<button type="button" id="question" class="btn btn-outline-dark ml-1">동네질문</button>
 					<ul id="nav-sub" class="question">
-						<li id="nav-sub" class="nav-item lostnfound">
+						<!-- <li id="nav-sub" class="nav-item lostnfound">
 							<button type="button" id="q_all" class="btn btn-outline-dark ml-1">전체보기</button>
-						</li>
+						</li> -->
 
 						<li id="nav-sub" class="nav-item lostnfound">
 							<button type="button" id="q_question" class="btn btn-outline-dark ml-1">질문</button>
@@ -220,9 +220,9 @@ a.goTop {
 				<li id="nav-life" class="nav-item">
 					<button type="button" id="life" class="btn btn-outline-dark ml-1">일상생활</button>
 					<ul id="nav-sub" class="life">
-						<li id="nav-sub" class="nav-item nlife">
+						<!-- <li id="nav-sub" class="nav-item nlife">
 							<button type="button" id="l_all" class="btn btn-outline-dark ml-1">전체보기</button>
-						</li>
+						</li> -->
 						<li id="nav-sub" class="nav-item nlife">
 							<button type="button" id="l_life" class="btn btn-outline-dark ml-1">일상</button>
 						</li>
@@ -243,9 +243,9 @@ a.goTop {
 				<li id="nav-help" class="nav-item ">
 					<button type="button" id="help" class="btn btn-outline-dark ml-1">해주세요</button>
 					<ul id="nav-sub" class="help">
-						<li id="nav-sub" class="nav-item hlepAll">
+						<!-- <li id="nav-sub" class="nav-item hlepAll">
 							<button type="button" id="h_All" class="btn btn-outline-dark ml-1">전체보기</button>
-						</li>
+						</li> -->
 						<li id="nav-sub" class="nav-item buy">
 							<button type="button" id="h_buy" class="btn btn-outline-dark ml-1">사다주세요</button>
 						</li>
