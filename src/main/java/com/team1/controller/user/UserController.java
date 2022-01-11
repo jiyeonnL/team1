@@ -158,7 +158,7 @@ public class UserController {
 	public String profile(@PathVariable String nickname, Model model) {
 		
 		UserVO vo = service.readByNickName(nickname);
-		
+		System.out.println(vo.getProfileurl());
 		//List<HelpVO> list = service.UserBoardHelpList(vo.getId());
 		List<UserPostVO> list = service.getUserPostList(nickname);
 		

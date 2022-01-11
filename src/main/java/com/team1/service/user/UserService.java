@@ -1,6 +1,10 @@
 package com.team1.service.user;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,32 +91,48 @@ public class UserService {
 		
 		List<UserPostVO> postVOs = new ArrayList<UserPostVO>();
 		
-		List<HelpVO> helpVOs = helpService.getListByUserId(userVO.getId());
-		List<LifeVO> lifeVOs = lifeService.getListByUserId(userVO.getId());
-		List<NewsVO> newsVOs = newsService.getListByUserId(userVO.getId());
-		List<QuestionVO> questionVOs = questionService.getListByUserId(userVO.getId());
-		
-		for(HelpVO helpVO : helpVOs) {
-			UserPostVO userPostVO = helpVO.toUserPostVO();
-			postVOs.add(userPostVO);
-		}
-		
-		for(LifeVO lifeVO : lifeVOs) {
-			UserPostVO userPostVO = lifeVO.toUserPostVO();
-			postVOs.add(userPostVO);
-		}
-		
-		for(NewsVO newsVO : newsVOs) {
-			UserPostVO userPostVO = newsVO.toUserPostVO();
-			postVOs.add(userPostVO);
-		}
-		
-		for(QuestionVO questionVO : questionVOs) {
-			UserPostVO userPostVO = questionVO.toUserPostVO();
-			postVOs.add(userPostVO);
-		}
-		
-		System.out.println(postVOs);
+
+		try {
+			List<HelpVO> helpVOs = helpService.getListByUserId(userVO.getId());
+			List<LifeVO> lifeVOs = lifeService.getListByUserId(userVO.getId());
+			List<NewsVO> newsVOs = newsService.getListByUserId(userVO.getId());
+			List<QuestionVO> questionVOs = questionService.getListByUserId(userVO.getId());
+
+			for(HelpVO helpVO : helpVOs) {
+				UserPostVO userPostVO = helpVO.toUserPostVO();
+				postVOs.add(userPostVO);
+			}
+			
+			for(LifeVO lifeVO : lifeVOs) {
+				UserPostVO userPostVO = lifeVO.toUserPostVO();
+				postVOs.add(userPostVO);
+			}
+			
+			for(NewsVO newsVO : newsVOs) {
+				UserPostVO userPostVO = newsVO.toUserPostVO();
+				postVOs.add(userPostVO);
+			}
+			
+			for(QuestionVO questionVO : questionVOs) {
+				UserPostVO userPostVO = questionVO.toUserPostVO();
+				postVOs.add(userPostVO);
+			}
+			
+			System.out.println(postVOs);
+			
+			Comparator<UserPostVO> comparator = (c1, c2) -> { 
+				long timeC1 = Date.from(c1.getOriginalInserted().atZone(ZoneId.systemDefault()).toInstant()).getTime();
+				long timeC2 = Date.from(c2.getOriginalInserted().atZone(ZoneId.systemDefault()).toInstant()).getTime();
+
+				return Long.valueOf(timeC2).compareTo(timeC1); 
+			};
+			
+			
+			Collections.sort(postVOs, comparator);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}   
 		
 		return postVOs;
 	}

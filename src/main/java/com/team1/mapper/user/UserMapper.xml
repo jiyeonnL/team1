@@ -46,14 +46,14 @@
 	
 	
 	<select id="selectByNickName" resultType="com.team1.domain.user.UserVO">
-	SELECT id, pw, email, location, nickname, introduce
+	SELECT id, pw, email, location, nickname, introduce, profileurl
 	FROM tb_user
 	WHERE withdrawal = 'X'AND nickname = #{nickname}
 	GROUP BY nickname
 	</select>
 	
 	<select id="selectByEmail" resultType="com.team1.domain.user.UserVO">
-	SELECT id, pw, email, location, nickname, introduce
+	SELECT id, pw, email, location, nickname, introduce, profileurl
 	FROM tb_user
 	WHERE withdrawal = 'X'AND email = #{email}
 	GROUP BY email

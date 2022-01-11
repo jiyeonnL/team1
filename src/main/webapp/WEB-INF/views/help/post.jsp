@@ -176,7 +176,10 @@ border: 2px solid #264d73;
 						<div class="col-md-1 px-1 py-0 my-0">
 							<img id="상세보기-프로필" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 						</div>
-						<div class="col-md-5 my-auto h2 align-middle ">${post.nickname}</div>
+						
+						<div class="col-md-5 my-auto h2 align-middle "> 
+							<a href = "${pageContext.request.contextPath }/user/profile/${post.nickname}"> ${post.nickname} </a>
+						</div>
 
 						<div class=" my-auto h4 ml-auto 게시물-조회수-작성시간">
 							<i class="fas fa-eye "></i>
