@@ -244,24 +244,24 @@ color:#ffe164;
 						<input type="text" class="form-control 인풋-글씨" name="location" value="${sessionScope.loginUser.location }" id="input5" readonly>
 					</div>
 					<div class="row">
-          			<div class="form-group1 게시물-테두리-패딩 col-md-8" >
-            			<label for="input3" class="게시물-글씨" >게시물 제목</label>
-           				<input type="text" class="form-control 인풋-글씨" id="input3" name="title">
-          			</div>
-  		 		    <div class="form-group1 게시물-테두리-패딩 col-md-4">
-           				 <label for="input6" class="게시물-글씨">태그</label>
-           				 <select class="form-control 인풋-글씨 태그-패딩" id="input6" name="tag">
-          				  	<option value="기타" selected>태그 선택</option>
-          				  	<option value="사다주세요">사다주세요</option>
-           				 	<option value="맡아주세요">맡아주세요</option>
-           				 	<option value="빌려주세요">빌려주세요</option>
-           				 	<option value="옮겨주세요">옮겨주세요</option>
-           				 	<option value="기타">기타</option>
-          				</select>
-         			  </div>
+						<div class="form-group1 게시물-테두리-패딩 col-md-8">
+							<label for="input3" class="게시물-글씨">게시물 제목</label>
+							<input type="text" class="form-control 인풋-글씨" id="input3" name="title">
+						</div>
+						<div class="form-group1 게시물-테두리-패딩 col-md-4">
+							<label for="input6" class="게시물-글씨">태그</label>
+							<select class="form-control 인풋-글씨 태그-패딩" id="input6" name="tag">
+								<option value="기타" selected>태그 선택</option>
+								<option value="사다주세요">사다주세요</option>
+								<option value="맡아주세요">맡아주세요</option>
+								<option value="빌려주세요">빌려주세요</option>
+								<option value="옮겨주세요">옮겨주세요</option>
+								<option value="기타">기타</option>
+							</select>
+						</div>
 					</div>
-          
-         			 <div class="form-group1 게시물-테두리-패딩">
+
+					<div class="form-group1 게시물-테두리-패딩">
            				 <label for="input4" class="게시물-글씨">내용</label>
           				 <textarea class="form-control 인풋-글씨" id="input4" name="content"></textarea>
           			</div>
