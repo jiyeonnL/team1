@@ -96,11 +96,4 @@ public class HelpReReplyController {
 	public Integer countReReplyList(@PathVariable Integer replyid) {
 		return service.countReReplyList(replyid);
 	}
-	
-	
-	
-	
-	
-	
-	
 }

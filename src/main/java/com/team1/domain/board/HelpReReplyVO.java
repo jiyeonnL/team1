@@ -24,10 +24,10 @@ public class HelpReReplyVO {
 	private Integer adminQuali;
 
 	public String getInserted() {
-		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 	}
 	
 	public String getUpdated() {
-		return this.updated.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		return this.updated.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 	}
 }
