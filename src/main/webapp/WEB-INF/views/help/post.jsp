@@ -316,9 +316,9 @@ border: 2px solid #264d73;
 					<div style="margin-bottom: 0px;" class="replyCount fa-2x">
 						<i class="far fa-comment-dots fa-lg cnt" style="background-color: #ffe164;"></i>
 					</div>
-					<div class="btn btn-danger" style="height: fit-content;">
-						<i class="fas fa-exclamation-triangle" data-toggle="modal" data-target="#reportModal1"> 신고</i> 
-					</div>
+					<button class="btn btn-danger" style="height: fit-content;" data-toggle="modal" data-target="#reportModal1">
+						<i class="fas fa-exclamation-triangle"> 신고</i> 
+					</button>
 				</div>
 				<div class="row 댓글입력창">
 					<c:if test="${not empty sessionScope.loginUser }">
@@ -375,17 +375,18 @@ border: 2px solid #264d73;
 				</div>
 				<div class="modal-body">
 					<form method="post" id="reportForm">
-						<input type="hidden" class="form-control" id="reportinput1" name="memberId" value="${sessionScope.loginUser.id }">
+						<input type="hidden" class="form-control" id="reportinput1" name="boardName" value="해주세요">
+						<input type="hidden" class="form-control" id="reportinput4" name="content" value="${post.content }">
 						<div class="form-group">
 							<label for="reportinput2">작성자</label>
-							<input type="text" class="form-control" id="input2" name="nickname" value="${post.nickname }님" readonly>
+							<input type="text" class="form-control" id="reportinput2" name="nickname" value="${post.nickname }님" readonly>
 						</div>
 						<div class="form-group">
-							<label for="input5">제목</label>
-							<input type="text" class="form-control" name="location" value="${post.title}" id="input3" readonly>
+							<label for="reportinput3">제목</label>
+							<input type="text" class="form-control" name="title" value="${post.title}" id="reportinput3" readonly>
 						</div>
 						<div class="form-group">
-							<label for="input6">태그</label>
+							<label for="reportReason">태그</label>
 							<select class="form-control" id="reportReason" name="tag">
 								<optgroup label="태그를 선택해주세요.">
 									<option value="욕설" selected>욕설/타인 비하</option>
@@ -396,15 +397,15 @@ border: 2px solid #264d73;
 								</optgroup>
 							</select>
 						</div>
-						<div class="form-group">
-							<label for="input4">내용</label>
-							<textarea class="form-control" id="input4" name="content" placeholder="기타 사항의 경우 작성해 주세요"></textarea>
+						<div id="reasonDetailTextArea" class="form-group" style="display: none">
+							<label for="reportReasonDetail">기타 사항</label>
+							<textarea class="form-control" id="reportReasonDetail" name="reasonDetail" placeholder="기타 사항의 경우 작성해 주세요"></textarea>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button id="reportSubmitButton" type="submit" class="btn btn-danger">
-						<i class="fas fa-trash"> 신고</i>
+						<i class="fas fa-bullhorn"> 신고</i>
 					</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 				</div>
@@ -422,35 +423,49 @@ border: 2px solid #264d73;
 		// innerNav 탭 active 표시
 		$("#help").attr("class", "btn btn-outline ml-1 active");
 		
+		// 신고 사유 select가 '기타'일 때 텍스트 입력창을 나타냄
+		$("#reportReason").click(function(e) {
+			if(($("#reportReason").val()) === '기타'){
+				$("#reasonDetailTextArea").show();
+			}else{
+				$("#reasonDetailTextArea").hide();
+			}
+		});
 		// 신고하기 버튼 누르면 db에 인서트
 		$("#reportSubmitButton").click(function(e) {
 			const appRoot = '${pageContext.request.contextPath}';
-
-			const boardName = '해주세요';
-			const boardUrl =$(location).attr("href");
-			const content = '${post.content}';
-			const nickname = '${post.nickname}';
-			const reason = $(#rereplyTextarea"+relist[i].id).val();
-			const reasonDetail = "#rereplyTextarea"+relist[i].id).val();
-			const boardId = '${post.id}';
-			const data = {
+			
+			const boardName = $("#reportinput1").val(); // 이 게시판은 어디 게시판인가
+			const boardUrl =$(location).attr("href"); // 현재 게시물의 url
+			const title = '${post.title}'; // 현재 게시물의 제목
+			const content = $("#reportinput4").val(); // 현재 게시물의 내용
+			const nickname = '${post.nickname}'; // 현재 게시물의 작성자
+			const reason = $("#reportReason").val(); // select에서 선택한 신고사유
+			const reasonDetail = $("#reportReasonDetail").val(); // select가 '기타'일 때 사용자가 직접 입력한 신고 사유 내용
+			const helpId = '${post.id}'; // 현재 게시판의 id, 동네 소식 게시판이 된다면 newsId가 됨.
+			const report = {
 				boardName : boardName,
 				boardUrl : boardUrl,
-				boardId : boardId,
-				nickname : nickname
+				title : title,
+				content : content,
+				nickname : nickname,
+				reason : reason,
+				reasonDetail : reasonDetail,
+				helpId : helpId,
 			};
-			console.log(data);
 			$.ajax({
 	        	url : appRoot + "/report/register",
 				type : "post",
+				data : report,
 				success : function() {
-						console.log("업 -1됨");
+					//$("#reportForm").attr("action", "report").submit();
+					alert("신고가 성공적으로 이루어졌습니다.")
 				},
 				complete : function() {
-					console.log("델리트 컴플리트까지 옴")
+					//$("#reportModal1").hide();
+					$('#reportModal1').modal('hide');
 				}
 				});
-			//$("#reportForm").attr("action", "report").submit();
 		});
 	});
 	</script>
@@ -459,7 +474,6 @@ border: 2px solid #264d73;
 	  $(document).ready(function() {
 	    /* contextPath */
 	    const appRoot = '${pageContext.request.contextPath}';
-		
 		const upview = function() {
 			$("#upview").empty();
 			$.ajax({
@@ -467,56 +481,28 @@ border: 2px solid #264d73;
 				success : function() {
 					const upviewMediaObject = $(`
 							<c:if test="${empty sessionScope.loginUser}">
-								<button id="upinsnl" class="btn btn-outline-primary">
+								<button id="upinsnl" class="btn btn-outline-danger">
 									<i id="upiconnl" class="far fa-heart fa-fw fa-2x m-r-3"> </i>
 								</button>
 							</c:if>
 							<c:if test="${empty post.upposession&&not empty sessionScope.loginUser}">
-								<button id="upins" class="btn btn-outline-primary">
+								<button id="upins" class="btn btn-outline-dark">
 									<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
 								</button>
-								<button id="updel" class="btn btn-outline-primary" style="display:none;">
+								<button id="updel" class="btn btn-outline-light" style ="background-color:#264d73;">
 									<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
 								</button>
 							</c:if>
 							<c:if test="${not empty post.upposession}">
-								<button id="upins" class="btn btn-outline-primary" style="display:none;">
-									<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
+								<button id="upins" class="btn btn-outline-dark" style="display:none;">
+									<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3" > </i> 
 								</button>
-								<button id="updel" class="btn btn-outline-primary">
+								<button id="updel" class="btn btn-outline-light" style="background-color:#264d73;">
 									<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
 								</button>
 							</c:if>
-	
-	const upview = function() {
-		$("#upview").empty();
-		$.ajax({
-			url : appRoot + "/helpup/",
-			success : function() {
-				const upviewMediaObject = $(`
-						<c:if test="${empty sessionScope.loginUser}">
-							<button id="upinsnl" class="btn btn-outline-danger">
-								<i id="upiconnl" class="far fa-heart fa-fw fa-2x m-r-3"> </i>
-							</button>
-						</c:if>
-						<c:if test="${empty post.upposession&&not empty sessionScope.loginUser}">
-							<button id="upins" class="btn btn-outline-dark">
-								<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
-							</button>
-							<button id="updel" class="btn btn-outline-light" style ="background-color:#264d73;">
-								<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
-							</button>
-						</c:if>
-						<c:if test="${not empty post.upposession}">
-							<button id="upins" class="btn btn-outline-dark" style="display:none;">
-								<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3" > </i> 
-							</button>
-							<button id="updel" class="btn btn-outline-light" style="background-color:#264d73;">
-								<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
-							</button>
-						</c:if>
 
-				`);
+						`);
 				$("#upview").append(upviewMediaObject);
 				upviewMediaObject.find("#upiconnl").append(' ${post.up}');
 				upviewMediaObject.find("#upicon").append(' ${post.up}');
@@ -541,7 +527,8 @@ border: 2px solid #264d73;
 							console.log("컴플리트까지 옴")
 						}
 						});
-					}
+					});
+				}
 					upPost();
 					/* 좋아요 갯수 1 감소*/
 					const downPost = function() {
@@ -925,7 +912,7 @@ border: 2px solid #264d73;
 					listReplyCount();
 				}
 			})
-		})//댓글전송
+		});//댓글전송
 		
 	/* 	//게시판에 달린 대댓글 개수 세기 (댓글수와 합칠 용도)
 		const countInBoard = function() {

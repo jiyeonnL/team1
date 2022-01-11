@@ -8,7 +8,7 @@
 	<select id="getList"
 		resultType="com.team1.domain.board.ReportVO">
 		SELECT
-		boardName, boardUrl, content, nickname, 
+		boardName, boardUrl, title, content, nickname, 
 		reason, reasonDetail, inserted, 
 		helpId, lifeId, newsId, questionId
 		FROM
@@ -22,11 +22,11 @@
 		tb_report 
 		(boardName, boardUrl, content, nickname, 
 		reason, reasonDetail, 
-		helpId, lifeId, newsId, questionId)
+		helpId, lifeId, newsId, questionId, title)
 		VALUES
 		(#{boardName}, #{boardUrl}, #{content}, #{nickname}, 
 		#{reason}, #{reasonDetail}, 
-		#{helpId}, #{lifeId}, #{newsId}, #{questionId})
+		#{helpId}, #{lifeId}, #{newsId}, #{questionId}, #{title})
 	</insert>
 
 	<delete id="delete">

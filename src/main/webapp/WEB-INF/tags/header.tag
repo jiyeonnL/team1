@@ -83,9 +83,11 @@ font-size:x-large;
 						<li>
 							<a class="dropdown-item" href="${pageContext.request.contextPath }/user/logout">로그아웃</a>
 						</li>
+						<c:if test="${sessionScope.loginUser.adminQuali eq 1 }">
 						<li>
 							<a class="dropdown-item" href="${pageContext.request.contextPath }/report/list">신고 관리</a>
 						</li>
+						</c:if>
 					</ul>
 				</c:if>
 			</div>
