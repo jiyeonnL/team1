@@ -125,6 +125,7 @@
       $.ajax({
         url : appRoot + "/helpreply/board/${post.id}",
         success : function(list) {
+        	let a = 0;
           	for (let i = 0; i < list.length; i++) {
 				const replyId = list[i].id;
 				const replyMediaObject = $(`
@@ -148,27 +149,170 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td colspan="4">
+									<td id="rereplyfold">
+										<button id="rereply-fold"><i class="fas fa-caret-down fa-2x"></i></a>
+									</td>
+									<td colspan="3">
 										<div id = "reply-text\${replyId}" class="col h6"></div>
 										<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
-										<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
+											<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
 											<div class="input-group-append">
 												<button class="btn btn-outline-danger cancel-button"><i class="fas fa-ban"></i></button>
 												<button class="btn btn-outline-primary" id="sendReply\${list[i].id}">
-													<i class="far fa-comment-dots fa-lg"></i>
+												<i class="far fa-comment-dots fa-lg"></i>
 												</button>
 											</div>
-										</td>
+										</div>
+									</td>
 									</tr>
 								</tbody>
 							</table>
+						
+							<div class="fold row">
+                            <c:if test="${not empty sessionScope.loginUser }">
+                                <div class="rereplyinput col-10">
+                                    <textarea id="rereplyTextarea\${list[i].id}" placeholder="대댓글을 남겨보세요!"></textarea>
+                                </div>
+                                <div class="col-2">
+                                    <button id="sendReReply\${list[i].id}">
+                                        <i class="far fa-comment-dots fa-3x" ></i>
+                                    </button>
+                                </div>
+                            </c:if>
+                            <div id="rereplyListContainer\${list[i].id}" class="row"></div>
+                            </div>
+						
 					`);
 				
+			    // 대댓글 리스트 함수 
+				  const listReReply = function() {
+			      $("#rereplyListContainer"+replyId).empty();
+			      $.ajax({
+			        url : appRoot + "/helprereply/reply/" + replyId,
+			        success : function(relist) {
+			          	for (let i = 0; i < relist.length; i++) {
+							const rereplyId = relist[i].id;
+							const rereplyMediaObject = $(`
+									<div class="col-1"></div>
+                                    <div class="col-11">
+									<table class="table table-bordered">
+										<thead class="thead-light">
+											<tr>
+												<th id="userprofile">
+													<img	id = "rereply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
+												</th>
+												<th id="rereplynickname">
+													<div id ="rereply-nickname" class="h6"></div>
+												</th>
+												<th id="rereplymenu">
+													<div class="rereply-menu"></div>
+												</th>
+												<th id="rereplytime">
+													<span id = "rereply-time" class="h5 ms-3 mt-0 pt-0"></span>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td colspan="4">
+												<div id = "rereply-text\${relist[i].id}" class="col h6"></div>
+												<div class="re-input-group" id="re-input-group\${relist[i].id}" style="display:none;">
+													<textarea id="rereplyTextarea\${relist[i].id}" class="re-form-control reply-modi"></textarea>
+													<div class="re-input-group-append">
+														<button class="btn btn-outline-danger re-cancel-button"><i class="fas fa-ban"></i></button>
+														<button class="btn btn-outline-primary" id="sendReReplyMd\${relist[i].id}">
+														<i class="far fa-comment-dots fa-lg"></i>
+														</button>
+													</div>
+												</div>
+												</td>
+											</tr> 
+										</tbody>
+									</table> 
+								</div>
+							`);
+								
+							//대댓글 수정 삭제 
+							
+							//대댓글 수정 등록 버튼 
+							rereplyMediaObject.find("#sendReReplyMd" + relist[i].id).click(function() {
+								const rereply = rereplyMediaObject.find("#rereplyTextarea"+relist[i].id).val();
+								const data =  {
+										reReply : rereply		
+								};
+								//대댓글 수정 요청 
+								$.ajax({
+									url : appRoot + "/helprereply/" + relist[i].id,
+									type : "put",
+									contentType : "application/json",
+									data : JSON.stringify(data),
+									complete : function() {
+										listReReply();
+									}
+								});
+							});//대댓글 수정 등록 버튼 끝
+							
+							
+							rereplyMediaObject.find(".rereply-nickname").append(relist[i].nickname);
+							rereplyMediaObject.find(".rereply-body").text(relist[i].reReply);
+							rereplyMediaObject.find(".re-form-control").text(relist[i].reReply);
+							rereplyMediaObject.find(".re-cancel-button").click(function() {
+								console.log(rereplyId);
+								replyMediaObject.find("#rereply-text"+rereplyId).show();
+								$("#re-input-group" + rereplyId).hide();
+								rereplyMediaObject.find("#rereplyModify").show();
+								rereplyMediaObject.find("#rereplyDelete").show();
+							});
+							
+							
+							if (relist[i].own) {
+								// 본인이 작성한 것만 수정버튼 추가
+								const remodifyButton = $("<button id='rereplyModify' class='btn btn-outline-primary'><i class='fas fa-edit'></i></button>")
+								remodifyButton.click(function() {
+									$(this).parent().parent().parent().parent().parent().find('#rereply-text' + rereplyId).hide();// this는 클릭이벤트가 발생한 버튼
+									$(this).parent().parent().parent().parent().parent().find(`#re-input-group\${relist[i].id}`).show();
+									$(this).parent().find('#rereplyModify').hide();
+									$(this).parent().find('#rereplyDelete').hide();
+								});
+								rereplyMediaObject.find(".rereply-menu").append(remodifyButton);
+							}
+							if (relist[i].own || ${sessionScope.loginUser.adminQuali eq 1}) {
+								// 삭제버튼도 추가
+								const reremoveButton = $("<button id='rereplyDelete' class='btn btn-outline-danger'><i class='far fa-trash-alt'></i></button>");
+								const blank = $(" ");
+								reremoveButton.click(function(){
+									if (confirm("Sure you want to delete?")){
+										$.ajax({
+											url : appRoot +"/helprereply/"+relist[i].id,
+											type : "delete",
+											complete : function(){
+												listReReply();
+												//listReplyCount();
+											}
+										})
+									}
+								})
+								rereplyMediaObject.find(".rereply-menu").append(reremoveButton);
+							} //대댓글 수정 삭제 끝 
+							
+							$("#rereplyListContainer"+replyId).append(rereplyMediaObject);
+							
+							rereplyMediaObject.find("#rereply-nickname").text(relist[i].nickname);
+							rereplyMediaObject.find("#rereply-text"+rereplyId).text(relist[i].reReply);
+							rereplyMediaObject.find("#rereply-time").text(relist[i].inserted);	
+			          	}// 대댓글 for 문 종료 
+			        }
+			      });
+			    } //대댓글 리스트 함수 종료 
+			    listReReply();
+							
+				//댓글 수정 등록 버튼 
 				replyMediaObject.find("#sendReply" + list[i].id).click(function() {
 					const reply = replyMediaObject.find("#replyTextarea"+list[i].id).val();
 					const data =  {
 							reply : reply		
 					};
+					//댓글 수정 요청 
 					$.ajax({
 						url : appRoot + "/helpreply/" + list[i].id,
 						type : "put",
@@ -178,7 +322,9 @@
 							listReply();
 						}
 					});
-				});
+				});//댓글 수정 등록 버튼 끝
+				
+				
 				replyMediaObject.find(".reply-nickName").append(list[i].nickName);
 				replyMediaObject.find(".reply-body").text(list[i].reply);
 				replyMediaObject.find(".form-control").text(list[i].reply);
@@ -226,12 +372,65 @@
 				replyMediaObject.find("#reply-nickname").text(list[i].nickname);
 				replyMediaObject.find("#reply-text"+replyId).text(list[i].reply);
 				replyMediaObject.find("#reply-time").text(list[i].inserted);
-			}	
-        }
-      });
-    }
+				
+				
+				  //대댓글 등록하기 
+				$("#sendReReply"+list[i].id).click(function() {
+					const rereply =$("#rereplyTextarea"+list[i].id).val();
+					const memberId = '${sessionScope.loginUser.id}';
+					const replyId = list[i].id;
+					const nickname = '${sessionScope.loginUser.nickname}';
+					const boardId = '${post.id}';
+					const data = {
+							boardId : boardId,
+							reReply : rereply,
+							uid : memberId,
+							replyId : replyId,
+							nickname : nickname
+					};
+					
+					$.ajax({
+						url : appRoot+ "/helprereply/write",
+						type : "post",
+						data : data,
+						success : function() {
+							// textarea reset
+							$("#rereplyTextarea"+list[i].id).val(""); 
+						},
+						error : function(){
+							alert("Logged out! Please login again!");
+						},
+						complete : function() {
+							// list refresh
+							listReReply();
+							//listReReplyCount();
+						}
+					})
+				})//대댓글 등록하기 끝 
+				
+				//대댓글 개수 세기 (합치기)
+				const listReReplyCount = function() {
+					//const replyId = '${list[i].id}';
+					
+					$.ajax({
+						url : appRoot+ "/helprereply/count/"+replyId,
+						type : "get",
+						success : function(recount) {
+							console.log(recount);
+							a = a + recount;
+							console.log(a);
+						}
+					})
+				}
+				listReReplyCount();
+				
+			} //for문종료 	
+        } //success property value function 끝 
+      }); //ajax 종료 (댓글리스트 불러오기 완료)
+    } //listReply 정의하는 function 종료 
     listReply(); // 페이지 로딩 후 댓글 리스트 가져오는 함수 한 번 실행
-	//댓글 전송
+    
+	//댓글 등록 
 	$("#sendReply").click(function() {
 		const reply =$("#replyTextarea").val();
 		const memberId = '${sessionScope.loginUser.id}';
@@ -262,6 +461,8 @@
 			}
 		})
 	})//댓글전송
+	
+	
 	//댓글 갯수
 	const listReplyCount = function() {
 		const boardId = '${board.id}';
@@ -328,33 +529,42 @@ a:hover {
 	height: 60px;
 	width: 60px;
 }
-#buttonmenu{
+
+#buttonmenu {
 	margin-bottom: 10px;
 }
 
-.replyinput{
+.replyinput {
 	padding-top: 15px;
-	padding-left : 0px;
+	padding-left: 0px;
 	padding-bottom: 15px;
 }
-#sendReply{
-	margin-top: 15px ;
-	height : 60px;
-}
-#replynickname{
-	width : 460px;
-}
-#replymenu{
-	width : 105px;
-}
-#replytime{
-	width : 220px;
-	vertical-align: middle;
-}
-#replyModify{
-	width : 40px;
+
+#sendReply {
+	margin-top: 15px;
+	height: 60px;
 }
 
+#replynickname {
+	width: 460px;
+}
+
+#replymenu {
+	width: 105px;
+}
+
+#replytime {
+	width: 220px;
+	vertical-align: middle;
+}
+
+/* 몰라서 놔둠..... 
+#replyModify {
+	width: 40px;
+}
+*/
+
+/* 왠지 이게 맞는 거 같아서 살려둠.... 나중에 처리하세용.... */
 #내용{
 	padding-left: 154px;
 	padding-right: 154px;
@@ -363,7 +573,6 @@ a:hover {
 </style>
 </head>
 <body>
-
 	<b:header></b:header>
 	<div id="body">
 		<div id="inner">
@@ -378,9 +587,11 @@ a:hover {
 								class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 						</div>
 						<div class="col-md-4 bg-warning my-auto h2 align-middle">${post.nickname}</div>
-						
-						<div class="col-md-5 bg-info my-auto h4 offset-md-2 px-3"><i class="fas fa-eye "></i> ${post.views } || <i class="far fa-calendar-alt"></i> ${post.inserted}<c:if
-								test="${post.inserted ne post.updated}">(수정됨)</c:if>
+
+						<div class="col-md-5 bg-info my-auto h4 offset-md-2 px-3">
+							<i class="fas fa-eye "></i> ${post.views } || <i
+								class="far fa-calendar-alt"></i> ${post.inserted}
+							<c:if test="${post.inserted ne post.updated}">(수정됨)</c:if>
 						</div>
 					</div>
 
@@ -405,7 +616,7 @@ a:hover {
 						<div class="row md mx-3 my-2">
 							<div id="line"></div>
 						</div>
-						<!-- 내용  -->
+						<!-- 내용  --> <!-- 이것도 아이디만 차이 나서 아이디 있는 걸로 살려둠 나중에 확인하세요...-->
 						<div id="내용" class="col-md-10 h4 my-auto ">
 							<pre><c:out value="${post.content}" /></pre>
 						</div>
@@ -430,47 +641,51 @@ a:hover {
 						<!-- 좋아요 아이콘 -->
 					</div>
 				</div>
-				
+
 				<!-- 버튼 메뉴, 수정/삭제, 뒤로 -->
-				<div id="buttonmenu" class="row md mx-4 d-flex justify-content-between">
+				<div id="buttonmenu"
+					class="row md mx-4 d-flex justify-content-between">
 					<div class="col-md-auto my-auto px-auto ">
-						<c:if test="${sessionScope.loginUser.id eq post.memberId || sessionScope.loginUser.adminQuali eq 1 }">
-							<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }" class="btn btn-outline-secondary"> 수정/삭제 </a>
+						<c:if
+							test="${sessionScope.loginUser.id eq post.memberId || sessionScope.loginUser.adminQuali eq 1 }">
+							<a
+								href="${pageContext.request.contextPath }/help/modify?id=${post.id }"
+								class="btn btn-outline-secondary"> 수정/삭제 </a>
 						</c:if>
 					</div>
-				
+
 					<div class="col-md-auto my-auto px-auto">
-						<a href="${pageContext.request.contextPath }/help/list" class="btn btn-outline-secondary">
-							<i class="fas fa-list"> 뒤로</i>
+						<a href="${pageContext.request.contextPath }/help/list"
+							class="btn btn-outline-secondary"> <i class="fas fa-list">
+								뒤로</i>
 						</a>
 					</div>
 				</div>
 
 				<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
 				<div class="row md mx-4 my-3">
-				<table class="table table-hover table-bordered">
-					<thead class="thead-dark">
-						<tr>
-							<th>Uploaded Images</th>
-						</tr>
-					</thead>
-					<c:if test="${not empty post.fileList }">
-						<c:forEach items="${post.fileList }" var="file" varStatus="vs">
-							<tbody>
-								<tr>
-									<td><img class="img-fluid" src="${file.url}"
-										alt="${file.fileName}"></td>
-								</tr>
-							</tbody>
-						</c:forEach>
-					</c:if>
-				</table>
+					<table class="table table-hover table-bordered">
+						<thead class="thead-dark">
+							<tr>
+								<th>Uploaded Images</th>
+							</tr>
+						</thead>
+						<c:if test="${not empty post.fileList }">
+							<c:forEach items="${post.fileList }" var="file" varStatus="vs">
+								<tbody>
+									<tr>
+										<td><img class="img-fluid" src="${file.url}"
+											alt="${file.fileName}"></td>
+									</tr>
+								</tbody>
+							</c:forEach>
+						</c:if>
+					</table>
 				</div>
 				<!-- footer 와 댓글창 구분 선-->
 				<div class="row md mx-4 my-3">
-						<div id="line"></div>
-					<div class="col-md-12 ">
-					</div>
+					<div id="line"></div>
+					<div class="col-md-12 "></div>
 				</div>
 
 				<!-- 댓글 창 -->
@@ -487,8 +702,9 @@ a:hover {
 								placeholder="댓글을 남겨보세요!" id="exampleFormControlTextarea1"></textarea>
 						</div>
 						<div class="col-md-2 px-0">
-							<button id="sendReply" class="btn btn-block btn-primary d-flex justify-content-center" >
-								<i class="far fa-comment-dots fa-3x" ></i>
+							<button id="sendReply"
+								class="btn btn-block btn-primary d-flex justify-content-center">
+								<i class="far fa-comment-dots fa-3x"></i>
 							</button>
 						</div>
 					</c:if>
@@ -530,7 +746,7 @@ a:hover {
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
 		crossorigin="anonymous"></script>
-<script>
+	<script>
 	$(document).ready(function(){
 		$("#help").attr("class", "btn btn-outline ml-1 active");
 	});

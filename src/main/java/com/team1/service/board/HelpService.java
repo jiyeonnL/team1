@@ -16,6 +16,7 @@ import com.team1.domain.board.HelpFileVO;
 import com.team1.domain.board.HelpVO;
 import com.team1.mapper.board.HelpFileMapper;
 import com.team1.mapper.board.HelpMapper;
+import com.team1.mapper.board.HelpReReplyMapper;
 import com.team1.mapper.board.HelpReplyMapper;
 import com.team1.mapper.board.HelpUpMapper;
 
@@ -36,6 +37,9 @@ public class HelpService {
 
 	@Setter(onMethod_ = @Autowired)
 	private HelpReplyMapper helpReplyMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private HelpReReplyMapper helpReReplyMapper;
 
 	@Setter(onMethod_ = @Autowired)
 	private HelpFileMapper fileMapper;
@@ -219,6 +223,9 @@ public class HelpService {
 	
 	@Transactional
 	public boolean remove(Integer id) {
+		
+		//1.0 게시물에 달린 대댓글 지우기
+		helpReReplyMapper.deleteByBoardId(id);
 
 		// 1.1 게시물에 달린 댓글 지우기
 		helpReplyMapper.deleteByBoardId(id);

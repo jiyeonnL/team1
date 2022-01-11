@@ -6,3 +6,4 @@
 *.properties
 .springBeans
 /target/
+.DS_Store

@@ -11,8 +11,14 @@ public class HelpReReplyVO {
 	private Integer replyId;
 	private String nickname;
 	private String reReply;
+	private Integer boardId;
 	private LocalDateTime inserted;
 	private LocalDateTime updated;
+	
+	// 댓글 수정 삭제 버튼 여부
+	private Boolean own;
+	private String userprofile;
+	private Integer uid;
 	
 	// 관리자 권한
 	private Integer adminQuali;
