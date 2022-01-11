@@ -211,11 +211,15 @@ a:hover {
 }
 
 #tag {
-	font-size: 1rem;
+	font-size: 1.2rem;
+	font-family : 'Jua', sans-serif;
 	text-align: center;
 	justify-content: center;
 	border: 3px solid #264d73;
 	border-radius: 5px;
+	position: relative;
+	padding-left: 15;
+
 }
 
 #line {
@@ -231,6 +235,34 @@ a:hover {
 #buttonmenu{
 	margin-bottom: 10px;
 }
+#writerName{
+	font-family : 'Jua', sans-serif;
+}
+#title{
+	font-size: 25px;
+	position: relative;
+	bottom: 4px;
+	right: 5px;
+}
+#content{
+	position: relative;
+	top: 20px;
+}
+#header{
+	position: relative;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+#image-tr{
+	border: none;
+}
+#image-background{
+	font-size : 20px;
+	font-family : 'Jua', sans-serif;
+	color: black;
+	background-color: #ffe164;
+
+}
 
 </style>
 <title>${post.nickname }님의 ${post.tag }</title>
@@ -243,27 +275,30 @@ a:hover {
 				<div class="container-fluid my-1">
 					
 					<!-- 헤더 -->
-					<div class="row md ms-4 px-2 align-middle">
+					<div id="header" class="row md ms-4 px-2 align-middle">
 						<div class="col-md-1 px-1 py-0 my-0">
-							<img
-								src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"
-								class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+							<img 
+								src="${post.profileurl }"
+								class="img-thumbnail rounded-circle mx-auto d-block " style="width:60px; height:60px;" />
 						</div>
-						<div class="col-md-4 bg-warning my-auto h2 align-middle">
-							<a href = "${pageContext.request.contextPath }/user/profile/${post.nickname}"> ${post.nickname} </a>
+						<div class="col-md-4 my-auto h2 align-middle">
+							
+							<a id="writerName" href = "${pageContext.request.contextPath }/user/profile/${post.nickname}"> 
+							${post.nickname}(${post.location }) </a>
 						</div>
 						
-						<div class="col-md-5 bg-info my-auto h4 offset-md-2 px-3"><i class="fas fa-eye "></i> ${post.views } || <i class="far fa-calendar-alt"></i> ${post.inserted}<c:if
+						<div class="col-md-5 my-auto align-middle h5 offset-md-2 px-3"><i class="fas fa-eye "></i> ${post.views } || <i class="far fa-calendar-alt"></i> ${post.inserted}<c:if
+
 								test="${post.inserted ne post.updated}">(수정됨)</c:if>
 						</div>
 					</div>
 
 					<!-- 헤더랑 body 구분 선 -->
-					<div class="row md mx-3 my-2">
+					
 						<div class="col-md-12 ">
 							<div id="line"></div>
 						</div>
-					</div>
+				
 
 					<!-- body -->
 					<div class="row md ms-4 my-2 align-middle">
@@ -273,14 +308,15 @@ a:hover {
 							<div id="tag">${post.tag }</div>
 						</div>
 						<!-- 제목  -->
-						<div class="col-md-10 h4 my-auto ">
+						<div id="title" class="col-md-10 h4 my-auto px-auto ">
 							<c:out value="${post.title}" />
 						</div>
 						<div class="row md mx-3 my-2">
 							<div id="line"></div>
 						</div>
 						<!-- 내용  -->
-						<div class="col-md-10 h4 my-auto ">
+					
+						<div id="content" class="col-md-10 h4 my-auto ">
 							<pre><c:out value="${post.content}" /></pre>
 						</div>
 
@@ -298,14 +334,9 @@ a:hover {
 					</div>
 				</div>
 
-				<!-- footer -->
-				<div class="row md mx-4 d-flex justify-content-center">
-					<div id="upview"  class="col-md-4 d-flex justify-content-center">
-						<!-- 좋아요 아이콘 -->
-					</div>
+		
 
-					
-				</div>
+				
 				<div id="buttonmenu" class="row md mx-4 d-flex justify-content-between">
 					<div class="col-md-2 my-auto px-auto ">
 						<c:if test="${sessionScope.loginUser.id eq post.memberId }">
@@ -319,8 +350,8 @@ a:hover {
 				
 					<table class="table table-hover table-bordered">
 					<thead class="thead-dark">
-						<tr>
-							<th>Uploaded Images</th>
+						<tr id="image-tr">
+							<th id="image-background">Uploaded Images</th>
 						</tr>
 					</thead>
 					<c:if test="${not empty post.fileList }">
@@ -337,7 +368,10 @@ a:hover {
 				<!-- footer 와 댓글창 구분 선-->
 				<div class="row md mx-3 my-2">
 					<div class="col-md-12 ">
-						<div id="line"></div>
+						<div style="margin-bottom: 0px;" class="replyCount fa-2x">
+					
+						<i class="far fa-comment-dots fa-lg cnt"></i>
+						</div>
 					</div>
 				</div>
 
@@ -345,16 +379,12 @@ a:hover {
 				<!-- 로그인 한 사용자에게만 보여야 한다. -->
 
 				<div class="row md mx-4 my-3">
-					<p style="margin-bottom: 0px;" class="replyCount">
-						<i class="far fa-comment-dots fa-lg cnt"></i>
-					</p>
-					<hr>
 					<c:if test="${not empty sessionScope.loginUser }">
 						<div class="col-md-10 mx-0">
 							<textarea id="replyTextarea" class="form-control px-0"
 								placeholder="댓글을 남겨보세요!" id="exampleFormControlTextarea1"></textarea>
 						</div>
-						<div class="col-md-2 px-0">
+						<div class="col-md-2 mx-0">
 							<button id="sendReply"
 								class="btn btn-block btn-primary d-flex align-items-stretch">
 								<i class="far fa-comment-dots fa-lg" style="color: white"></i>

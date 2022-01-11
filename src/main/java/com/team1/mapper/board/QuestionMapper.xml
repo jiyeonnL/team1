@@ -187,7 +187,6 @@
 	</update>
 	
 	<select id="read" resultMap="questionResult"> 
-	<!--  이 쿼리가 여러개의 결과를 가질 수 있는데 QuestionVO 리스트가 아니라 vo 하나 여서 생긴 문제 입니다.한번수정해볼게요 -->
 		SELECT
 
 		q.id,
@@ -201,7 +200,8 @@
 		q.updated,
 		q.notice,
 		COUNT(r.id) replyCount,
-		u.nickname
+		u.nickname,
+		u.profileurl
 
 		FROM
 		tb_board_question q
