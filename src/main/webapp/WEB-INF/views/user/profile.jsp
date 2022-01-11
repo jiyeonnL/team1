@@ -75,7 +75,7 @@ margin-top:5px;
 			<div class="container-fluid my-1">
 				<div class="row md mx-3 mt-4 mb-2">
 					<div class="col-md-3 my-auto align-self-center ">
-						<img src="${sessionScope.loginUser.profileurl }"
+						<img src="${user.profileurl}"
 							class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 					</div>
 					<div class="col-md-5 mx-3 my-auto align-self-center ">

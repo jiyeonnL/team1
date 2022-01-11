@@ -249,7 +249,9 @@ a:hover {
 								src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"
 								class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 						</div>
-						<div class="col-md-4 bg-warning my-auto h2 align-middle">${post.nickname}</div>
+						<div class="col-md-4 bg-warning my-auto h2 align-middle">
+							<a href = "${pageContext.request.contextPath }/user/profile/${post.nickname}"> ${post.nickname} </a>
+						</div>
 						
 						<div class="col-md-5 bg-info my-auto h4 offset-md-2 px-3"><i class="fas fa-eye "></i> ${post.views } || <i class="far fa-calendar-alt"></i> ${post.inserted}<c:if
 								test="${post.inserted ne post.updated}">(수정됨)</c:if>

@@ -121,6 +121,10 @@
 		ON p.id = r.boardId
 
 		WHERE p.memberId = #{Id}
+		
+		GROUP BY p.id
+		Order By p.id
+		DESC;
 	</select>
 
 	<select id="getListByConditions" resultMap="newsResult">

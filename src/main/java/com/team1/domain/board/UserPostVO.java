@@ -25,4 +25,12 @@ public class UserPostVO {
 	public String getUpdated() {
 		return this.updated.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 	}
+	
+	public LocalDateTime getOriginalInserted() {
+		return inserted;
+	}
+	
+	public LocalDateTime getOriginalUpdated() {
+		return updated;
+	}
 }
