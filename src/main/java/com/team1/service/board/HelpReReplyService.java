@@ -43,5 +43,9 @@ public class HelpReReplyService {
 	public Integer countReReplyList(Integer replyId) {
 		return mapper.listReReplyCount(replyId);
 	}
+	
+	public Integer countInBoard(Integer boardId) {
+		return mapper.countInBoard(boardId);
+	}
 
 }

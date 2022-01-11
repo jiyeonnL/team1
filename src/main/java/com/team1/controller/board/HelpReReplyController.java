@@ -92,8 +92,13 @@ public class HelpReReplyController {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 		}
 	}
-	@GetMapping("/count/{replyid}")
-	public Integer countReReplyList(@PathVariable Integer replyid) {
-		return service.countReReplyList(replyid);
+	@GetMapping("/count/{replyId}")
+	public Integer countReReplyList(@PathVariable Integer replyId) {
+		return service.countReReplyList(replyId);
+	}
+	
+	@GetMapping("/countb/{boardId}")
+	public Integer countInBoard(@PathVariable Integer boardId) {
+		return service.countInBoard(boardId);
 	}
 }

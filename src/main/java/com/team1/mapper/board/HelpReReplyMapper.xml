@@ -77,4 +77,11 @@ ORDER BY
 	WHERE replyId=#{replyId}
   </select>
   
+    <select id="countInBoard" resultType="Integer">
+		SELECT
+		count(id)
+		FROM tb_rereply_help
+		WHERE boardId=#{boardId}
+    </select>
+  
 </mapper>

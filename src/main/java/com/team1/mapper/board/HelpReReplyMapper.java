@@ -23,5 +23,7 @@ public interface HelpReReplyMapper {
 	public HelpReReplyVO readByNick(String nickname);
 	
 	public Integer listReReplyCount(Integer replyId);
+	
+	public Integer countInBoard(Integer boardId);
 
 }
