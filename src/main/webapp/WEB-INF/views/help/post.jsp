@@ -424,6 +424,8 @@
 				}
 				listReReplyCount();
 				
+				//대댓글 개수세기 (댓글마다) 추가하기 
+				
 			} //for문종료 	
         } //success property value function 끝 
       }); //ajax 종료 (댓글리스트 불러오기 완료)
@@ -491,7 +493,7 @@ a:hover {
 }
 
 #body {
-	height: 150vh;
+	height: 120vh;
 	/* height: calc(100vh-72px); */
 	width: 100%;
 	justify-content: center;
@@ -501,7 +503,7 @@ a:hover {
 #inner {
 	border: 2px;
 	width: 900px;
-	height: 100%;
+	height: auto%;
 }
 
 #postBody {
@@ -509,20 +511,34 @@ a:hover {
 	border: 3px solid #264d73;
 	border-radius: 10px;
 	margin-top: 5px;
+	background-color: #eef2f6;
+	margin-bottom: 40px;
+	padding-block: 15px;
+	padding-right: 15px;
+	padding-left: 15px;
+	/* letter-spacing: 1px; */
+}
+
+#상세보기-프로필{
+padding-bottom: 6px;}
+.상세보기-게시물-내용 {
+	border-bottom-color: darkgray;
+	border-bottom-style: solid;
+}
+
+.게시물-조회수-작성시간 {
+	font-weight: 200;
+	font-size: 17px;
 }
 
 #tag {
-	font-size: 1.5rem;
+	font-size: large;
+	font-weight: bold;
 	text-align: center;
 	justify-content: center;
-	border: 3px solid #264d73;
 	border-radius: 5px;
-}
-
-#line {
-	height: 2px;
-	background-color: #264d73;
-	width: 100%;
+	border: 3px solid #f0615c;
+	background-color: white;
 }
 
 #userprofile {
@@ -534,15 +550,21 @@ a:hover {
 	margin-bottom: 10px;
 }
 
+상세보기-이미지{
+width:50%;
+}
+
 .replyinput {
 	padding-top: 15px;
-	padding-left: 0px;
 	padding-bottom: 15px;
 }
 
 #sendReply {
 	margin-top: 15px;
 	height: 60px;
+	padding-top: 12px;
+	background-color: #ffe164;
+	color:black;
 }
 
 #replynickname {
@@ -556,49 +578,47 @@ a:hover {
 #replytime {
 	width: 220px;
 	vertical-align: middle;
+	font-weight: 100;
 }
 
-/* 몰라서 놔둠..... 
 #replyModify {
 	width: 40px;
 }
-*/
 
-/* 왠지 이게 맞는 거 같아서 살려둠.... 나중에 처리하세용.... */
-#내용{
-	padding-left: 154px;
-	padding-right: 154px;
+.댓글아이콘{
+	border-bottom: solid 2px;
+	margin : 0px;
+	
+}
+
+.댓글입력창{
+	border-bottom: solid 2px;
+	margin : 0px;
 }
 
 </style>
 </head>
 <body>
+
 	<b:header></b:header>
 	<div id="body">
 		<div id="inner">
 			<b:innerNav></b:innerNav>
 			<div id="postBody">
-				<div class="container-fluid my-1">
+				<div class="container-fluid my-1 상세보기-게시물-내용">
 					<!-- 헤더 -->
-					<div class="row md ms-4 px-2 align-middle">
+					<div class="row md ms-4 px-2 align-middle 상세보기-헤더 상세보기-게시물-내용">
 						<div class="col-md-1 px-1 py-0 my-0">
-							<img
-								src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"
-								class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+							<img id="상세보기-프로필" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 						</div>
-						<div class="col-md-4 bg-warning my-auto h2 align-middle">${post.nickname}</div>
+						<div class="col-md-5 my-auto h2 align-middle ">${post.nickname}</div>
 
-						<div class="col-md-5 bg-info my-auto h4 offset-md-2 px-3">
-							<i class="fas fa-eye "></i> ${post.views } || <i
-								class="far fa-calendar-alt"></i> ${post.inserted}
+						<div class=" my-auto h4 ml-auto 게시물-조회수-작성시간">
+							<i class="fas fa-eye "></i>
+							${post.views } ||
+							<i class="far fa-calendar-alt"></i>
+							${post.inserted}
 							<c:if test="${post.inserted ne post.updated}">(수정됨)</c:if>
-						</div>
-					</div>
-
-					<!-- 헤더랑 body 구분 선 -->
-					<div class="row md mx-3 my-2">
-						<div class="col-md-12 ">
-							<div id="line"></div>
 						</div>
 					</div>
 
@@ -606,32 +626,23 @@ a:hover {
 					<div class="row md ms-4 my-2 align-middle">
 
 						<!-- tag -->
-						<div class="col-md-2 my-auto px-auto">
+						<div class="col-md-2 my-auto px-auto 상세보기-태그">
 							<div id="tag">${post.tag }</div>
 						</div>
 						<!-- 제목  -->
-						<div class="col-md-10 h4 my-auto ">
+						<div class="col-md-10 h4 my-auto 상세보기-제목">
 							<c:out value="${post.title}" />
 						</div>
-						<div class="row md mx-3 my-2">
+						<div class="row md mx-3 my-2 ">
 							<div id="line"></div>
 						</div>
-						<!-- 내용  --> <!-- 이것도 아이디만 차이 나서 아이디 있는 걸로 살려둠 나중에 확인하세요...-->
-						<div id="내용" class="col-md-10 h4 my-auto ">
-							<pre><c:out value="${post.content}" /></pre>
-						</div>
+						<!-- 내용  -->
 
 					</div>
-				</div>
-				<!-- 이미지 파트 -->
-				<div class="row md mx-3 mt-4 mb-2 justify-content-center">
-					<div class="col-md-8 my-auto align-self-center"></div>
-				</div>
-
-				<!-- body랑 footer 구분 선 -->
-				<div class="row md mx-3 my-2">
-					<div class="col-md-12 ">
-						<div id="line"></div>
+					<div id="내용" class="col-md-10 h4 my-auto ">
+						<pre>
+								<c:out value="${post.content}" />
+							</pre>
 					</div>
 				</div>
 
@@ -643,27 +654,22 @@ a:hover {
 				</div>
 
 				<!-- 버튼 메뉴, 수정/삭제, 뒤로 -->
-				<div id="buttonmenu"
-					class="row md mx-4 d-flex justify-content-between">
+				<div id="buttonmenu" class="row d-flex justify-content-between">
 					<div class="col-md-auto my-auto px-auto ">
-						<c:if
-							test="${sessionScope.loginUser.id eq post.memberId || sessionScope.loginUser.adminQuali eq 1 }">
-							<a
-								href="${pageContext.request.contextPath }/help/modify?id=${post.id }"
-								class="btn btn-outline-secondary"> 수정/삭제 </a>
+						<c:if test="${sessionScope.loginUser.id eq post.memberId || sessionScope.loginUser.adminQuali eq 1 }">
+							<a href="${pageContext.request.contextPath }/help/modify?id=${post.id }" class="btn btn-outline-secondary"> 수정/삭제 </a>
 						</c:if>
 					</div>
 
 					<div class="col-md-auto my-auto px-auto">
-						<a href="${pageContext.request.contextPath }/help/list"
-							class="btn btn-outline-secondary"> <i class="fas fa-list">
-								뒤로</i>
+						<a href="${pageContext.request.contextPath }/help/list" class="btn btn-outline-secondary">
+							<i class="fas fa-list"> 뒤로</i>
 						</a>
 					</div>
 				</div>
 
 				<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
-				<div class="row md mx-4 my-3">
+				<div class="md my-3">
 					<table class="table table-hover table-bordered">
 						<thead class="thead-dark">
 							<tr>
@@ -673,43 +679,39 @@ a:hover {
 						<c:if test="${not empty post.fileList }">
 							<c:forEach items="${post.fileList }" var="file" varStatus="vs">
 								<tbody>
-									<tr>
-										<td><img class="img-fluid" src="${file.url}"
-											alt="${file.fileName}"></td>
+									<tr style="text-align: center;">
+										<td>
+											<img class="img-fluid 상세보기-이미지" style="width: 50%;" src="${file.url}" alt="${file.fileName}">
+										</td>
 									</tr>
 								</tbody>
 							</c:forEach>
 						</c:if>
 					</table>
 				</div>
-				<!-- footer 와 댓글창 구분 선-->
-				<div class="row md mx-4 my-3">
-					<div id="line"></div>
-					<div class="col-md-12 "></div>
-				</div>
 
 				<!-- 댓글 창 -->
 				<!-- 로그인 한 사용자에게만 보여야 한다. -->
 
-				<div class="row md mx-4 my-3 ">
-					<p style="margin-bottom: 0px;" class="replyCount fa-2x">
-						<i class="far fa-comment-dots fa-lg cnt"></i>
-					</p>
-					<div id="line"></div>
+				<div class="row 댓글아이콘">
+					<div style="margin-bottom: 0px;" class="replyCount fa-2x">
+						<i class="far fa-comment-dots fa-lg cnt" style="background-color: #ffe164;"></i>
+					</div>
+				</div>
+				<div class="row 댓글입력창">
 					<c:if test="${not empty sessionScope.loginUser }">
-						<div class="col-md-10 mx-0 replyinput">
-							<textarea id="replyTextarea" class="form-control px-0"
-								placeholder="댓글을 남겨보세요!" id="exampleFormControlTextarea1"></textarea>
+						<div class="col-10 replyinput">
+							<textarea id="replyTextarea" class="form-control px-0" placeholder="댓글을 남겨보세요!" id="exampleFormControlTextarea1"></textarea>
 						</div>
-						<div class="col-md-2 px-0">
-							<button id="sendReply"
-								class="btn btn-block btn-primary d-flex justify-content-center">
-								<i class="far fa-comment-dots fa-3x"></i>
+						<div class="col-2 ">
+							<button id="sendReply" class="btn btn-block d-flex justify-content-center ">
+								<i class="far fa-comment-dots fa-2x"></i>
 							</button>
 						</div>
 					</c:if>
-					<br>
-					<div id="replyListContainer"></div>
+				</div>
+				<br>
+				<div id="replyListContainer"></div>
 				</div>
 			</div>
 		</div>
