@@ -19,6 +19,7 @@ import com.team1.mapper.board.HelpMapper;
 import com.team1.mapper.board.HelpReReplyMapper;
 import com.team1.mapper.board.HelpReplyMapper;
 import com.team1.mapper.board.HelpUpMapper;
+import com.team1.mapper.board.ReportMapper;
 
 import lombok.Setter;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -40,6 +41,9 @@ public class HelpService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private HelpReReplyMapper helpReReplyMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReportMapper reportMapper;
 
 	@Setter(onMethod_ = @Autowired)
 	private HelpFileMapper fileMapper;
@@ -231,6 +235,8 @@ public class HelpService {
 		helpReplyMapper.deleteByBoardId(id);
 		// 1.2 좋아요 지우기
 		upMapper.upDeleteByBoardId(id);
+		//1.3 신고내역 지우기 
+		reportMapper.deleteByBoardId(id);
 
 		// 2. 파일 지우기 , s3
 		// file system에서 삭제
