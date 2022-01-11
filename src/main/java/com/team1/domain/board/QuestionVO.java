@@ -30,6 +30,20 @@ public class QuestionVO {
 	
 	private Integer replyCount;
 	
+	public UserPostVO toUserPostVO() {
+		
+		UserPostVO postVO = new UserPostVO();
+		postVO.setLink("question");
+		postVO.setBoardType("동네질문");
+		postVO.setPostId(this.id);
+		postVO.setTag(this.tag);
+		postVO.setTitle(this.title);
+		postVO.setInserted(this.inserted);
+		postVO.setUpdated(this.updated);
+		
+		return postVO;
+	}
+	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 	}

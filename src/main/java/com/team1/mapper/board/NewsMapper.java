@@ -23,6 +23,8 @@ public interface NewsMapper {
 	
 	public List<NewsVO> getListByConditions(@Param("location") String location, @Param("tag") String tag, @Param("query") String query, @Param("loginId") Integer loginId);
 	
+	public List<NewsVO> getListByUserId(Integer Id);
+	
 	public int upViews(Integer id);
 
 	public List<NewsFileVO> getFiles();

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team1.domain.board.HelpVO;
+import com.team1.domain.board.UserPostVO;
 import com.team1.domain.user.UserVO;
 import com.team1.service.user.UserService;
 
@@ -158,7 +159,8 @@ public class UserController {
 		
 		UserVO vo = service.readByNickName(nickname);
 		
-		List<HelpVO> list = service.UserBoardHelpList(vo.getId());
+		//List<HelpVO> list = service.UserBoardHelpList(vo.getId());
+		List<UserPostVO> list = service.getUserPostList(nickname);
 		
 		model.addAttribute("user", vo);
 		model.addAttribute("list", list);

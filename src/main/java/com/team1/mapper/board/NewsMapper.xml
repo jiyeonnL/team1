@@ -100,6 +100,28 @@
 
 		WHERE p.id = #{id}
 	</select>
+	
+	<select id="getListByUserId" resultMap="newsResult">
+		SELECT
+		p.id, p.memberId, p.location,
+		(SELECT count(postId) FROM tb_board_news_up
+		WHERE postId = p.id) up,
+		p.views, p.tag,
+		p.title, p.content, p.inserted, p.updated, m.nickname,
+		COUNT(r.id) replyCount,
+		(SELECT hu.userId FROM tb_board_news_up hu
+		WHERE hu.userId =
+		#{loginId} AND hu.postId=p.id) upposession
+		FROM
+		tb_board_news p
+		JOIN tb_user m
+		ON m.id = p.memberId
+		LEFT JOIN
+		tb_reply_news r
+		ON p.id = r.boardId
+
+		WHERE p.memberId = #{Id}
+	</select>
 
 	<select id="getListByConditions" resultMap="newsResult">
 		SELECT

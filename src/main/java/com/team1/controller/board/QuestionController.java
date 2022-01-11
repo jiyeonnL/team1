@@ -63,7 +63,7 @@ public class QuestionController {
 
 	
 
-	@GetMapping(value = "/get/{id}")
+	@GetMapping(value = "/list/{id}")
 	public String get(@PathVariable Integer id, Model model, HttpSession session) {
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 		if (uvo != null) {

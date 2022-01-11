@@ -27,7 +27,7 @@
 		GROUP BY h.id
 		ORDER BY h.id DESC
 	</select>
-
+	
 	<resultMap id="helpResult"
 		type="com.team1.domain.board.HelpVO">
 		<result property="id" column="id" />
@@ -77,6 +77,35 @@
 		GROUP BY p.id
 		Order By p.id
 		DESC;
+	</select>
+	
+	<select id="getListByUserId" resultMap="helpResult">
+		SELECT
+		p.id, p.memberId,
+		p.location, (SELECT count(postId) FROM tb_board_help_up
+		WHERE postId =
+		p.id) up, p.views, p.tag,
+		p.title, p.content, p.inserted, p.updated,
+		m.nickname, COUNT(r.id) replyCount,
+		(SELECT hu.userId FROM
+		tb_board_help_up hu WHERE hu.userId =
+		#{loginId} AND hu.postId=p.id)
+		upposession,
+		datediff(now(), p.inserted) newMark
+		FROM tb_board_help p
+		JOIN tb_user m
+		ON m.id = p.memberId
+		LEFT
+		JOIN tb_reply_help r
+		ON p.id = r.boardId
+	
+		WHERE p.memberId = #{Id}
+		
+		GROUP BY p.id
+		Order By p.id
+		DESC;
+		
+
 	</select>
 
 
@@ -181,10 +210,12 @@
 		SELECT id, postId, fileName, COUNT(postId) countpostId FROM
 		tb_file_help GROUP BY postId;
 	</select>
+	
 	<select id="getFilesById"
 		resultType="com.team1.domain.board.HelpFileVO">
 		SELECT id, postId, fileName, COUNT(postId) countpostId FROM
 		tb_file_help WHERE postId=#{id} GROUP BY postId;
 	</select>
+
 
 </mapper>

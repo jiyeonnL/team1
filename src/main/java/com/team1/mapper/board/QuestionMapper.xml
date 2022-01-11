@@ -52,7 +52,7 @@
 		GROUP BY q.id
 		ORDER BY q.id DESC
 	</select>
-
+	
 	<select id="getListPage"
 		resultType="com.team1.domain.board.QuestionVO">
 		SELECT
@@ -91,6 +91,37 @@
 		GROUP BY q.id
 		ORDER BY q.id DESC
 		LIMIT #{from}, #{items}
+	</select>
+	
+	<select id="getListByUserId" resultType="com.team1.domain.board.QuestionVO">
+		SELECT
+		q.id,
+		u.id,
+		u.nickname,
+		q.memberId,
+		q.views,
+		q.tag,
+		q.content,
+		q.location,
+		q.title,
+		q.inserted,
+		q.updated,
+		q.notice,
+		datediff(now(), q.inserted) newMark
+		FROM
+		tb_user u
+		JOIN
+		tb_board_question q
+		ON
+		u.id = q.memberId
+		LEFT
+		JOIN tb_reply_question r
+		ON q.id=r.boardId
+		
+		WHERE q.memberId = #{Id}
+		
+		GROUP BY q.id
+		ORDER BY q.id DESC
 	</select>
 	
 	<select id="getListPageByNotice"

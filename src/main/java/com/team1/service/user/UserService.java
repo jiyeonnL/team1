@@ -1,13 +1,24 @@
 package com.team1.service.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team1.domain.board.HelpVO;
+import com.team1.domain.board.LifeVO;
+import com.team1.domain.board.NewsVO;
+import com.team1.domain.board.QuestionVO;
+import com.team1.domain.board.UserPostVO;
 import com.team1.domain.user.UserVO;
+import com.team1.mapper.board.HelpMapper;
+import com.team1.mapper.board.QuestionMapper;
 import com.team1.mapper.user.UserMapper;
+import com.team1.service.board.HelpService;
+import com.team1.service.board.LifeService;
+import com.team1.service.board.NewsService;
+import com.team1.service.board.QuestionService;
 
 import lombok.Setter;
 
@@ -18,6 +29,17 @@ public class UserService {
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper mapper;
 	
+	@Setter(onMethod_ = @Autowired)
+	private HelpService helpService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private QuestionService questionService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private LifeService lifeService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private NewsService newsService;
 	
 	public UserVO readByNickName (String nickName) {
 		return mapper.selectByNickName(nickName);
@@ -57,6 +79,42 @@ public class UserService {
 	
 	public List<HelpVO> UserBoardHelpList(Integer id) {
 		return mapper.selectUserBoardHelp(id);
+	}
+	
+	public List<UserPostVO> getUserPostList(String nickName) {
+		
+		UserVO userVO = readByNickName(nickName);
+		
+		List<UserPostVO> postVOs = new ArrayList<UserPostVO>();
+		
+		List<HelpVO> helpVOs = helpService.getListByUserId(userVO.getId());
+		List<LifeVO> lifeVOs = lifeService.getListByUserId(userVO.getId());
+		List<NewsVO> newsVOs = newsService.getListByUserId(userVO.getId());
+		List<QuestionVO> questionVOs = questionService.getListByUserId(userVO.getId());
+		
+		for(HelpVO helpVO : helpVOs) {
+			UserPostVO userPostVO = helpVO.toUserPostVO();
+			postVOs.add(userPostVO);
+		}
+		
+		for(LifeVO lifeVO : lifeVOs) {
+			UserPostVO userPostVO = lifeVO.toUserPostVO();
+			postVOs.add(userPostVO);
+		}
+		
+		for(NewsVO newsVO : newsVOs) {
+			UserPostVO userPostVO = newsVO.toUserPostVO();
+			postVOs.add(userPostVO);
+		}
+		
+		for(QuestionVO questionVO : questionVOs) {
+			UserPostVO userPostVO = questionVO.toUserPostVO();
+			postVOs.add(userPostVO);
+		}
+		
+		System.out.println(postVOs);
+		
+		return postVOs;
 	}
 }
 	

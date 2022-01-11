@@ -100,6 +100,32 @@
 
 		WHERE p.id = #{id}
 	</select>
+	
+	<select id="getListByUserId" resultMap="lifeResult">
+		SELECT
+		p.id, p.memberId, p.location,
+		(SELECT count(postId) FROM tb_board_life_up
+		WHERE postId = p.id) up,
+		p.views, p.tag,
+		p.title, p.content, p.inserted, p.updated, m.nickname,
+		COUNT(r.id) replyCount,
+		(SELECT hu.userId FROM tb_board_life_up hu
+		WHERE hu.userId =
+		#{loginId} AND hu.postId=p.id) upposession
+		FROM
+		tb_board_life p
+		JOIN tb_user m
+		ON m.id = p.memberId
+		LEFT JOIN
+		tb_reply_life r
+		ON p.id = r.boardId
+
+		WHERE p.memberId = #{id}
+		
+		GROUP BY p.id
+		Order By p.id
+		DESC;
+	</select>
 
 	<select id="getListByConditions" resultMap="lifeResult">
 		SELECT
@@ -178,6 +204,7 @@
 		SELECT id, postId, fileName, COUNT(postId) countpostId FROM
 		tb_file_life GROUP BY postId;
 	</select>
+	
 	<select id="getFilesById"
 		resultType="com.team1.domain.board.LifeFileVO">
 		SELECT id, postId, fileName, COUNT(postId) countpostId FROM

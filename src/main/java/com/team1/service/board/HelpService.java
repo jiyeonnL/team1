@@ -274,7 +274,12 @@ public class HelpService {
 	}
 
 	public List<HelpFileVO> getFilesById(Integer id) {
-		return  mapper.getFilesById(id);
+		return mapper.getFilesById(id);
 	}
+	
+	public List<HelpVO> getListByUserId(Integer id) {
+		return mapper.getListByUserId(id);
+	}
+	
 
 }

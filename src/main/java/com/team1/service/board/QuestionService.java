@@ -254,8 +254,13 @@ public class QuestionService {
 	public List<QuestionVO> getListPageByNotice() {
 		return mapper.getListPageByNotice();
 	}
+	
 	public boolean upViews(Integer id) {
 		return mapper.upViews(id) == 1;
 
+	}
+	
+	public List<QuestionVO> getListByUserId(Integer Id){
+		return mapper.getListByUserId(Id);
 	}
 }

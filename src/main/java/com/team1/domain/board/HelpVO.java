@@ -30,6 +30,20 @@ public class HelpVO {
 	
 	private Integer newMark;
 	
+	public UserPostVO toUserPostVO() {
+		
+		UserPostVO postVO = new UserPostVO();
+		postVO.setBoardType("해주세요");
+		postVO.setLink("help");
+		postVO.setPostId(this.id);
+		postVO.setTag(this.tag);
+		postVO.setTitle(this.title);
+		postVO.setInserted(this.inserted);
+		postVO.setUpdated(this.updated);
+		
+		return postVO;
+	}
+	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 	}

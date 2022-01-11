@@ -89,7 +89,7 @@ text-align: left;
                 <td>${board1.id }</td>
                 <td>${board1.tag } </td>
                 <td id="boardid">
-                  <a href="get/${board1.id }">
+                  <a href="list/${board1.id }">
                 	<%-- <c:if test="${not empty board.fileList }">
                     	<c:out value="${board.title }"/><i class="bi bi-image"></i> 
                 	</c:if>
