@@ -54,7 +54,7 @@ font-size:x-large;
 				<i class="fas fa-home" id="icon-header"></i> 홈 
 				</a></li>
 				<li><a href="/" class="nav-link px-2 text-white"> 
-				<i class="far fa-file-alt" id="icon-header"></i> 미정 
+				<i class="far fa-file-alt" id="icon-header"></i> 미정   
 				</a></li>
 				<li><a href="/" class="nav-link px-2 text-white"> 
 				<i class="fas fa-question-circle" id="icon-header"></i> 자주묻는 질문 </a></li>
@@ -84,7 +84,7 @@ font-size:x-large;
 							<a class="dropdown-item" href="${pageContext.request.contextPath }/user/logout">로그아웃</a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="#">아직 미정</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath }/report/list">신고 관리</a>
 						</li>
 					</ul>
 				</c:if>
