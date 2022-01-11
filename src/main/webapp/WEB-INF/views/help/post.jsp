@@ -112,6 +112,13 @@ a:hover {
 	width: 50%;
 }
 
+/* 댓글 관련------------------------------------- */
+#replyhead{
+	background-color: #ffe164;
+}
+#replybody{
+	background-color: white;
+}
 .replyinput {
 	padding-block: 15px;
 	padding-inline: 0px;
@@ -161,6 +168,32 @@ border: 2px solid #264d73;
 	border-bottom: solid 2px;
 	margin: 0px;
 }
+/* 댓글 관련 끝 ----------------------------------*/
+
+/* 대댓글 관련 ----------------------------------*/
+#rereplyhead{
+	background-color: #ffe164;
+}
+#rereplybody{
+	background-color: white;
+}
+.rereplyinput {
+	padding-block: 15px;
+	padding-inline: 0px;
+}
+
+.re-reply-input{
+padding:5px;
+border: 2px solid #264d73;
+
+}
+.send-rereply-btn{
+	background-color: #ffe164;
+	color: black;
+	height: 64px;
+	border: 2px solid #264d73;
+}
+/* 대댓글 관련 끝 ----------------------*/
 </style>
 </head>
 <body>
@@ -422,7 +455,7 @@ border: 2px solid #264d73;
 				const replyMediaObject = $(`
 						
 						<table class="table table-bordered">
-							<thead class="thead-light">
+							<thead id="replyhead" class="">
 								<tr>
 									<th id="userprofile">
 											<img	id = "reply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
@@ -438,10 +471,10 @@ border: 2px solid #264d73;
 									</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="replybody">
 								<tr>
 									<td id="rereplyfold">
-										<button id="rereply-fold"><i class="fas fa-caret-down fa-2x"></i></a>
+										<button id="rereply-fold\${replyId}"><i class="fas fa-caret-down fa-2x"></i></a>
 									</td>
 									<td colspan="3">
 										<div id = "reply-text\${replyId}" class="col h6"></div>
@@ -458,21 +491,37 @@ border: 2px solid #264d73;
 									</tr>
 								</tbody>
 							</table>
-						
-							<div class="fold row">
-                            <c:if test="${not empty sessionScope.loginUser }">
-                                <div class="rereplyinput col-10">
-                                    <textarea id="rereplyTextarea\${list[i].id}" placeholder="대댓글을 남겨보세요!"></textarea>
-                                </div>
-                                <div class="col-2">
-                                    <button id="sendReReply\${list[i].id}">
-                                        <i class="far fa-comment-dots fa-3x" ></i>
-                                    </button>
-                                </div>
-                            </c:if>
-                            <div id="rereplyListContainer\${list[i].id}" class="row"></div>
-                            </div>
-						
+							 <table class="table table-borderless">
+	                               <tbody id="rereply-input-body">
+	                               		<tr>
+	                                		<td>
+		                                		<div id="rereplyListContainer\${list[i].id}"></div>
+		                           				</div>
+	                                		</td>
+	                                	</tr>
+	                               	</tbody>
+	                           	 </table>
+							<div class="fold\${replyId}" style="display:none;">
+                                <table class="table table-borderless">
+                                	<thead id="rereply-input-head">
+                                		<tr>
+                            				<c:if test="${not empty sessionScope.loginUser }">
+                                			<th>
+                                				<div class="rereplyinput input-group">
+                                    				<textarea id="rereplyTextarea\${list[i].id}" class="form-control re-reply-input" placeholder="대댓글을 남겨보세요!"></textarea>
+					                                <div class="input-group-append">
+					                                    <button id="sendReReply\${list[i].id}" class="btn btn-block send-rereply-btn">
+					                                        <i class="far fa-comment-dots fa-2x my-auto"></i>
+					                                    </button>
+					                                </div>
+                                				</div>
+                                			</th>
+                          				</c:if>
+                                		</tr>
+                                	</thead>
+                                </table>
+                               </div>
+                              
 					`);
 				
 			    // 대댓글 리스트 함수 
@@ -484,10 +533,10 @@ border: 2px solid #264d73;
 			          	for (let i = 0; i < relist.length; i++) {
 							const rereplyId = relist[i].id;
 							const rereplyMediaObject = $(`
-									<div class="col-1"></div>
-                                    <div class="col-11">
-									<table class="table table-bordered">
-										<thead class="thead-light">
+                                    <div class="">
+				                    <i class="fa fa-share"></i>
+									<table class="table table-borderless">
+										<thead id="rereplyhead">
 											<tr>
 												<th id="userprofile">
 													<img	id = "rereply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
@@ -503,13 +552,13 @@ border: 2px solid #264d73;
 												</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody id="rereplybody">
 											<tr>
 												<td colspan="4">
 												<div id = "rereply-text\${relist[i].id}" class="col h6"></div>
-												<div class="re-input-group" id="re-input-group\${relist[i].id}" style="display:none;">
-													<textarea id="rereplyTextarea\${relist[i].id}" class="re-form-control reply-modi"></textarea>
-													<div class="re-input-group-append">
+												<div class="input-group" id="re-input-group\${relist[i].id}" style="display:none;">
+													<textarea id="rereplyTextarea\${relist[i].id}" class="form-control re-reply-modi"></textarea>
+													<div class="input-group-append">
 														<button class="btn btn-outline-danger re-cancel-button"><i class="fas fa-ban"></i></button>
 														<button class="btn btn-outline-primary" id="sendReReplyMd\${relist[i].id}">
 														<i class="far fa-comment-dots fa-lg"></i>
@@ -546,7 +595,7 @@ border: 2px solid #264d73;
 							
 							rereplyMediaObject.find(".rereply-nickname").append(relist[i].nickname);
 							rereplyMediaObject.find(".rereply-body").text(relist[i].reReply);
-							rereplyMediaObject.find(".re-form-control").text(relist[i].reReply);
+							rereplyMediaObject.find(".re-reply-modi").text(relist[i].reReply);
 							rereplyMediaObject.find(".re-cancel-button").click(function() {
 								console.log(rereplyId);
 								replyMediaObject.find("#rereply-text"+rereplyId).show();
@@ -590,13 +639,15 @@ border: 2px solid #264d73;
 							
 							rereplyMediaObject.find("#rereply-nickname").text(relist[i].nickname);
 							rereplyMediaObject.find("#rereply-text"+rereplyId).text(relist[i].reReply);
-							rereplyMediaObject.find("#rereply-time").text(relist[i].inserted);	
+							rereplyMediaObject.find("#rereply-time").text(relist[i].inserted);
+							
+
 			          	}// 대댓글 for 문 종료 
 			        }
 			      });
 			    } //대댓글 리스트 함수 종료 
 			    listReReply();
-							
+				
 				//댓글 수정 등록 버튼 
 				replyMediaObject.find("#sendReply" + list[i].id).click(function() {
 					const reply = replyMediaObject.find("#replyTextarea"+list[i].id).val();
@@ -618,9 +669,8 @@ border: 2px solid #264d73;
 				
 				replyMediaObject.find(".reply-nickName").append(list[i].nickName);
 				replyMediaObject.find(".reply-body").text(list[i].reply);
-				replyMediaObject.find(".form-control").text(list[i].reply);
+				replyMediaObject.find(".reply-modi").text(list[i].reply);
 				replyMediaObject.find(".cancel-button").click(function() {
-					console.log(replyId);
 					replyMediaObject.find("#reply-text"+replyId).show();
 					$("#input-group" + replyId).hide();
 					replyMediaObject.find("#replyModify").show();
@@ -714,8 +764,13 @@ border: 2px solid #264d73;
 					})
 				}
 				listReReplyCount();
-				
 				//대댓글 개수세기 (댓글마다) 추가하기 
+				
+				// 대댓글 입력창만 토글
+				$("#rereply-fold"+list[i].id).click(function() {
+					$("#replyListContainer").find(".fold"+list[i].id).toggle();
+				});
+
 				
 			} //for문종료 	
         } //success property value function 끝 
