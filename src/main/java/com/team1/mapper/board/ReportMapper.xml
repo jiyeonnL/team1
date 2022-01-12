@@ -13,7 +13,7 @@
 		helpId, lifeId, newsId, questionId
 		FROM
 		tb_report
-		ORDER BY id
+		ORDER BY id DESC
 	</select>
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id"
