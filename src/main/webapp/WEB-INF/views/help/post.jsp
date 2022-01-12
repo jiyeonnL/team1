@@ -312,10 +312,13 @@ border: 2px solid #264d73;
 				<!-- 댓글 창 -->
 				<!-- 로그인 한 사용자에게만 보여야 한다. -->
 
-				<div class="row 댓글아이콘">
+				<div class="row 댓글아이콘 justify-content-between">
 					<div style="margin-bottom: 0px;" class="replyCount fa-2x">
 						<i class="far fa-comment-dots fa-lg cnt" style="background-color: #ffe164;"></i>
 					</div>
+					<button class="btn btn-danger" style="height: fit-content;" data-toggle="modal" data-target="#reportModal1">
+						<i class="fas fa-exclamation-triangle"> 신고</i> 
+					</button>
 				</div>
 				<div class="row 댓글입력창">
 					<c:if test="${not empty sessionScope.loginUser }">
@@ -359,7 +362,56 @@ border: 2px solid #264d73;
 				</div>
 			</div>
 		</c:if>
-
+		
+	<!-- 신고 버튼 모달 -->
+	<div class="modal fade" id="reportModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel" style="color: black;">신고하시겠습니까?</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="post" id="reportForm">
+						<input type="hidden" class="form-control" id="reportinput1" name="boardName" value="해주세요">
+						<input type="hidden" class="form-control" id="reportinput4" name="content" value="${post.content }">
+						<div class="form-group">
+							<label for="reportinput2">작성자</label>
+							<input type="text" class="form-control" id="reportinput2" name="nickname" value="${post.nickname }님" readonly>
+						</div>
+						<div class="form-group">
+							<label for="reportinput3">제목</label>
+							<input type="text" class="form-control" name="title" value="${post.title}" id="reportinput3" readonly>
+						</div>
+						<div class="form-group">
+							<label for="reportReason">태그</label>
+							<select class="form-control" id="reportReason" name="tag">
+								<optgroup label="태그를 선택해주세요.">
+									<option value="욕설" selected>욕설/타인 비하</option>
+									<option value="부적절한사진">부적절한 사진</option>
+									<option value="허위사실유포">허위사실 유포</option>
+									<option value="타인의개인정보유출">타인의 개인정보 유출</option>
+									<option value="기타">기타</option>
+								</optgroup>
+							</select>
+						</div>
+						<div id="reasonDetailTextArea" class="form-group" style="display: none">
+							<label for="reportReasonDetail">기타 사항</label>
+							<textarea class="form-control" id="reportReasonDetail" name="reasonDetail" placeholder="기타 사항의 경우 작성해 주세요"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button id="reportSubmitButton" type="submit" class="btn btn-danger">
+						<i class="fas fa-bullhorn"> 신고</i>
+					</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<script
@@ -368,44 +420,89 @@ border: 2px solid #264d73;
 		crossorigin="anonymous"></script>
 	<script>
 	$(document).ready(function(){
+		// innerNav 탭 active 표시
 		$("#help").attr("class", "btn btn-outline ml-1 active");
+		
+		// 신고 사유 select가 '기타'일 때 텍스트 입력창을 나타냄
+		$("#reportReason").click(function(e) {
+			if(($("#reportReason").val()) === '기타'){
+				$("#reasonDetailTextArea").show();
+			}else{
+				$("#reasonDetailTextArea").hide();
+			}
+		});
+		// 신고하기 버튼 누르면 db에 인서트
+		$("#reportSubmitButton").click(function(e) {
+			const appRoot = '${pageContext.request.contextPath}';
+			
+			const boardName = $("#reportinput1").val(); // 이 게시판은 어디 게시판인가
+			const boardUrl =$(location).attr("href"); // 현재 게시물의 url
+			const title = '${post.title}'; // 현재 게시물의 제목
+			const content = $("#reportinput4").val(); // 현재 게시물의 내용
+			const nickname = '${post.nickname}'; // 현재 게시물의 작성자
+			const reason = $("#reportReason").val(); // select에서 선택한 신고사유
+			const reasonDetail = $("#reportReasonDetail").val(); // select가 '기타'일 때 사용자가 직접 입력한 신고 사유 내용
+			const helpId = '${post.id}'; // 현재 게시판의 id, 동네 소식 게시판이 된다면 newsId가 됨.
+			const report = {
+				boardName : boardName,
+				boardUrl : boardUrl,
+				title : title,
+				content : content,
+				nickname : nickname,
+				reason : reason,
+				reasonDetail : reasonDetail,
+				helpId : helpId,
+			};
+			$.ajax({
+	        	url : appRoot + "/report/register",
+				type : "post",
+				data : report,
+				success : function() {
+					//$("#reportForm").attr("action", "report").submit();
+					alert("신고가 성공적으로 이루어졌습니다.")
+				},
+				complete : function() {
+					//$("#reportModal1").hide();
+					$('#reportModal1').modal('hide');
+				}
+				});
+		});
 	});
-</script>
+	</script>
 
-<script>
-  $(document).ready(function() {
-    /* contextPath */
-    const appRoot = '${pageContext.request.contextPath}';
-	
-	const upview = function() {
-		$("#upview").empty();
-		$.ajax({
-			url : appRoot + "/helpup/",
-			success : function() {
-				const upviewMediaObject = $(`
-						<c:if test="${empty sessionScope.loginUser}">
-							<button id="upinsnl" class="btn btn-outline-danger">
-								<i id="upiconnl" class="far fa-heart fa-fw fa-2x m-r-3"> </i>
-							</button>
-						</c:if>
-						<c:if test="${empty post.upposession&&not empty sessionScope.loginUser}">
-							<button id="upins" class="btn btn-outline-dark">
-								<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
-							</button>
-							<button id="updel" class="btn btn-outline-light" style ="background-color:#264d73;">
-								<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
-							</button>
-						</c:if>
-						<c:if test="${not empty post.upposession}">
-							<button id="upins" class="btn btn-outline-dark" style="display:none;">
-								<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3" > </i> 
-							</button>
-							<button id="updel" class="btn btn-outline-light" style="background-color:#264d73;">
-								<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
-							</button>
-						</c:if>
+	<script>
+	  $(document).ready(function() {
+	    /* contextPath */
+	    const appRoot = '${pageContext.request.contextPath}';
+		const upview = function() {
+			$("#upview").empty();
+			$.ajax({
+				url : appRoot + "/helpup/",
+				success : function() {
+					const upviewMediaObject = $(`
+							<c:if test="${empty sessionScope.loginUser}">
+								<button id="upinsnl" class="btn btn-outline-danger">
+									<i id="upiconnl" class="far fa-heart fa-fw fa-2x m-r-3"> </i>
+								</button>
+							</c:if>
+							<c:if test="${empty post.upposession&&not empty sessionScope.loginUser}">
+								<button id="upins" class="btn btn-outline-dark">
+									<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
+								</button>
+								<button id="updel" class="btn btn-outline-light" style ="background-color:#264d73;">
+									<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
+								</button>
+							</c:if>
+							<c:if test="${not empty post.upposession}">
+								<button id="upins" class="btn btn-outline-dark" style="display:none;">
+									<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3" > </i> 
+								</button>
+								<button id="updel" class="btn btn-outline-light" style="background-color:#264d73;">
+									<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
+								</button>
+							</c:if>
 
-				`);
+						`);
 				$("#upview").append(upviewMediaObject);
 				upviewMediaObject.find("#upiconnl").append(' ${post.up}');
 				upviewMediaObject.find("#upicon").append(' ${post.up}');
@@ -432,428 +529,418 @@ border: 2px solid #264d73;
 						});
 					});
 				}
-				upPost();
-				/* 좋아요 갯수 1 감소*/
-				const downPost = function() {
-					$("#updel").click(function() {
-						console.log("업버튼 다시 클릭됨.");
-						$.ajax({
-			        	url : appRoot + "/helpup/${post.id}",
-						type : "delete",
-						success : function(cnt) {
-								console.log("업 -1됨");
-								$("#upview").find("#upins").html("<i id='upicon' class='far fa-heart fa-fw fa-2x m-r-3'> </i> ");
-								$("#upview").find("#upicon").append(cnt);
-						},
-						complete : function() {
-							$("#upview").find("#updel").hide();
-							$("#upview").find("#upins").show();
-							console.log("델리트 컴플리트까지 옴")
-						}
+					upPost();
+					/* 좋아요 갯수 1 감소*/
+					const downPost = function() {
+						$("#updel").click(function() {
+							console.log("업버튼 다시 클릭됨.");
+							$.ajax({
+				        	url : appRoot + "/helpup/${post.id}",
+							type : "delete",
+							success : function(cnt) {
+									console.log("업 -1됨");
+									$("#upview").find("#upins").html("<i id='upicon' class='far fa-heart fa-fw fa-2x m-r-3'> </i> ");
+									$("#upview").find("#upicon").append(cnt);
+							},
+							complete : function() {
+								$("#upview").find("#updel").hide();
+								$("#upview").find("#upins").show();
+								console.log("델리트 컴플리트까지 옴")
+							}
+							});
 						});
+					}
+					downPost();	
+					$("#upinsnl").click(function() {
+						alert("로그인 후 이용해 주세요!");
 					});
 				}
-				downPost();	
-				$("#upinsnl").click(function() {
-					alert("로그인 후 이용해 주세요!");
-				});
-			}
-		});
-	}
-	upview();
-
-    /* 현재 게시물의 댓글 목록 가져오는 함수 */
-    const listReply = function() {
-      $("#replyListContainer").empty();
-      $.ajax({
-        url : appRoot + "/helpreply/board/${post.id}",
-        success : function(list) {
-        	let a = 0;
-          	for (let i = 0; i < list.length; i++) {
-				const replyId = list[i].id;
-				const replyMediaObject = $(`
-						
-						<table class="table table-bordered">
-							<thead id="replyhead" class="">
-								<tr>
-									<th id="userprofile">
-											<img	id = "reply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
-									</th>
-									<th id="replynickname">
-										<div id ="reply-nickname" class="h6"></div>
-									</th>
-									<th id="replymenu">
-											<div class="reply-menu"></div>
-									</th>
-									<th id="replytime">
-										<span id = "reply-time" class="h5 ms-3 mt-0 pt-0"></span>
-									</th>
-								</tr>
-							</thead>
-							<tbody id="replybody">
-								<tr>
-									<td id="rereplyfold">
-										<button id="rereply-fold\${replyId}"><i class="fas fa-caret-down fa-2x"></i></a>
-									</td>
-									<td colspan="3">
-										<div id = "reply-text\${replyId}" class="col h6"></div>
-										<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
-											<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
-											<div class="input-group-append">
-												<button class="btn btn-outline-danger cancel-button"><i class="fas fa-ban"></i></button>
-												<button class="btn btn-outline-primary" id="sendReply\${list[i].id}">
-												<i class="far fa-comment-dots fa-lg"></i>
-												</button>
-											</div>
-										</div>
-									</td>
+			});
+		}
+		upview();
+	
+	    /* 현재 게시물의 댓글 목록 가져오는 함수 */
+	    const listReply = function() {
+	      $("#replyListContainer").empty();
+	      $.ajax({
+	        url : appRoot + "/helpreply/board/${post.id}",
+	        success : function(list) {
+	        	let a = 0;
+	          	for (let i = 0; i < list.length; i++) {
+					const replyId = list[i].id;
+					const replyMediaObject = $(`
+							
+							<table class="table table-bordered">
+								<thead id="replyhead" class="">
+									<tr>
+										<th id="userprofile">
+												<img	id = "reply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
+										</th>
+										<th id="replynickname">
+											<div id ="reply-nickname" class="h6"></div>
+										</th>
+										<th id="replymenu">
+												<div class="reply-menu"></div>
+										</th>
+										<th id="replytime">
+											<span id = "reply-time" class="h5 ms-3 mt-0 pt-0"></span>
+										</th>
 									</tr>
-								</tbody>
-							</table>
-							 <table class="table table-borderless">
-	                               <tbody id="rereply-input-body">
-	                               		<tr>
-	                                		<td>
-		                                		<div id="rereplyListContainer\${list[i].id}"></div>
-		                           				</div>
-	                                		</td>
-	                                	</tr>
-	                               	</tbody>
-	                           	 </table>
-							<div class="fold\${replyId}" style="display:none;">
-                                <table class="table table-borderless">
-                                	<thead id="rereply-input-head">
-                                		<tr>
-                            				<c:if test="${not empty sessionScope.loginUser }">
-                                			<th>
-                                				<div class="rereplyinput input-group">
-                                    				<textarea id="rereplyTextarea\${list[i].id}" class="form-control re-reply-input" placeholder="대댓글을 남겨보세요!"></textarea>
-					                                <div class="input-group-append">
-					                                    <button id="sendReReply\${list[i].id}" class="btn btn-block send-rereply-btn">
-					                                        <i class="far fa-comment-dots fa-2x my-auto"></i>
-					                                    </button>
-					                                </div>
-                                				</div>
-                                			</th>
-                          				</c:if>
-                                		</tr>
-                                	</thead>
-                                </table>
-                               </div>
-                              
-					`);
-				
-			    // 대댓글 리스트 함수 
-				  const listReReply = function() {
-			      $("#rereplyListContainer"+replyId).empty();
-			      $.ajax({
-			        url : appRoot + "/helprereply/reply/" + replyId,
-			        success : function(relist) {
-			          	for (let i = 0; i < relist.length; i++) {
-							const rereplyId = relist[i].id;
-							const rereplyMediaObject = $(`
-                                    <div class="">
-				                    <i class="fa fa-share"></i>
-									<table class="table table-borderless">
-										<thead id="rereplyhead">
-											<tr>
-												<th id="userprofile">
-													<img	id = "rereply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
-												</th>
-												<th id="rereplynickname">
-													<div id ="rereply-nickname" class="h6"></div>
-												</th>
-												<th id="rereplymenu">
-													<div class="rereply-menu"></div>
-												</th>
-												<th id="rereplytime">
-													<span id = "rereply-time" class="h5 ms-3 mt-0 pt-0"></span>
-												</th>
-											</tr>
-										</thead>
-										<tbody id="rereplybody">
-											<tr>
-												<td colspan="4">
-												<div id = "rereply-text\${relist[i].id}" class="col h6"></div>
-												<div class="input-group" id="re-input-group\${relist[i].id}" style="display:none;">
-													<textarea id="rereplyTextarea\${relist[i].id}" class="form-control re-reply-modi"></textarea>
-													<div class="input-group-append">
-														<button class="btn btn-outline-danger re-cancel-button"><i class="fas fa-ban"></i></button>
-														<button class="btn btn-outline-primary" id="sendReReplyMd\${relist[i].id}">
-														<i class="far fa-comment-dots fa-lg"></i>
-														</button>
-													</div>
+								</thead>
+								<tbody id="replybody">
+									<tr>
+										<td id="rereplyfold">
+											<button id="rereply-fold\${replyId}"><i class="fas fa-caret-down fa-2x"></i></a>
+										</td>
+										<td colspan="3">
+											<div id = "reply-text\${replyId}" class="col h6"></div>
+											<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
+												<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
+												<div class="input-group-append">
+													<button class="btn btn-outline-danger cancel-button"><i class="fas fa-ban"></i></button>
+													<button class="btn btn-outline-primary" id="sendReply\${list[i].id}">
+													<i class="far fa-comment-dots fa-lg"></i>
+													</button>
 												</div>
-												</td>
-											</tr> 
-										</tbody>
-									</table> 
-								</div>
-							`);
+											</div>
+										</td>
+										</tr>
+									</tbody>
+								</table>
+								 <table class="table table-borderless">
+		                               <tbody id="rereply-input-body">
+		                               		<tr>
+		                                		<td>
+			                                		<div id="rereplyListContainer\${list[i].id}"></div>
+			                           				</div>
+		                                		</td>
+		                                	</tr>
+		                               	</tbody>
+		                           	 </table>
+								<div class="fold\${replyId}" style="display:none;">
+	                                <table class="table table-borderless">
+	                                	<thead id="rereply-input-head">
+	                                		<tr>
+	                            				<c:if test="${not empty sessionScope.loginUser }">
+	                                			<th>
+	                                				<div class="rereplyinput input-group">
+	                                    				<textarea id="rereplyTextarea\${list[i].id}" class="form-control re-reply-input" placeholder="대댓글을 남겨보세요!"></textarea>
+						                                <div class="input-group-append">
+						                                    <button id="sendReReply\${list[i].id}" class="btn btn-block send-rereply-btn">
+						                                        <i class="far fa-comment-dots fa-2x my-auto"></i>
+						                                    </button>
+						                                </div>
+	                                				</div>
+	                                			</th>
+	                          				</c:if>
+	                                		</tr>
+	                                	</thead>
+	                                </table>
+	                               </div>
+						`);
+					
+				    // 대댓글 리스트 함수 
+					  const listReReply = function() {
+				      $("#rereplyListContainer"+replyId).empty();
+				      $.ajax({
+				        url : appRoot + "/helprereply/reply/" + replyId,
+				        success : function(relist) {
+				          	for (let i = 0; i < relist.length; i++) {
+								const rereplyId = relist[i].id;
+								const rereplyMediaObject = $(`
+	                                    <div class="">
+					                    <i class="fa fa-share"></i>
+										<table class="table table-borderless">
+											<thead id="rereplyhead">
+												<tr>
+													<th id="userprofile">
+														<img	id = "rereply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
+													</th>
+													<th id="rereplynickname">
+														<div id ="rereply-nickname" class="h6"></div>
+													</th>
+													<th id="rereplymenu">
+														<div class="rereply-menu"></div>
+													</th>
+													<th id="rereplytime">
+														<span id = "rereply-time" class="h5 ms-3 mt-0 pt-0"></span>
+													</th>
+												</tr>
+											</thead>
+											<tbody id="rereplybody">
+												<tr>
+													<td colspan="4">
+													<div id = "rereply-text\${relist[i].id}" class="col h6"></div>
+													<div class="input-group" id="re-input-group\${relist[i].id}" style="display:none;">
+														<textarea id="rereplyTextarea\${relist[i].id}" class="form-control re-reply-modi"></textarea>
+														<div class="input-group-append">
+															<button class="btn btn-outline-danger re-cancel-button"><i class="fas fa-ban"></i></button>
+															<button class="btn btn-outline-primary" id="sendReReplyMd\${relist[i].id}">
+															<i class="far fa-comment-dots fa-lg"></i>
+															</button>
+														</div>
+													</div>
+													</td>
+												</tr> 
+											</tbody>
+										</table> 
+									</div>
+								`);
+									
+								//대댓글 수정 삭제 
 								
-							//대댓글 수정 삭제 
-							
-							//대댓글 수정 등록 버튼 
-							rereplyMediaObject.find("#sendReReplyMd" + relist[i].id).click(function() {
-								const rereply = rereplyMediaObject.find("#rereplyTextarea"+relist[i].id).val();
-								const data =  {
-										reReply : rereply		
-								};
-								//대댓글 수정 요청 
-								$.ajax({
-									url : appRoot + "/helprereply/" + relist[i].id,
-									type : "put",
-									contentType : "application/json",
-									data : JSON.stringify(data),
-									complete : function() {
-										listReReply();
-									}
+								//대댓글 수정 등록 버튼 
+								rereplyMediaObject.find("#sendReReplyMd" + relist[i].id).click(function() {
+									const rereply = rereplyMediaObject.find("#rereplyTextarea"+relist[i].id).val();
+									const data =  {
+											reReply : rereply		
+									};
+									//대댓글 수정 요청 
+									$.ajax({
+										url : appRoot + "/helprereply/" + relist[i].id,
+										type : "put",
+										contentType : "application/json",
+										data : JSON.stringify(data),
+										complete : function() {
+											listReReply();
+										}
+									});
+								});//대댓글 수정 등록 버튼 끝
+								rereplyMediaObject.find(".rereply-nickname").append(relist[i].nickname);
+								rereplyMediaObject.find(".rereply-body").text(relist[i].reReply);
+								rereplyMediaObject.find(".re-reply-modi").text(relist[i].reReply);
+								rereplyMediaObject.find(".re-cancel-button").click(function() {
+									console.log(rereplyId);
+									replyMediaObject.find("#rereply-text"+rereplyId).show();
+									$("#re-input-group" + rereplyId).hide();
+									rereplyMediaObject.find("#rereplyModify").show();
+									rereplyMediaObject.find("#rereplyDelete").show();
 								});
-							});//대댓글 수정 등록 버튼 끝
-							
-							
-							rereplyMediaObject.find(".rereply-nickname").append(relist[i].nickname);
-							rereplyMediaObject.find(".rereply-body").text(relist[i].reReply);
-							rereplyMediaObject.find(".re-reply-modi").text(relist[i].reReply);
-							rereplyMediaObject.find(".re-cancel-button").click(function() {
-								console.log(rereplyId);
-								replyMediaObject.find("#rereply-text"+rereplyId).show();
-								$("#re-input-group" + rereplyId).hide();
-								rereplyMediaObject.find("#rereplyModify").show();
-								rereplyMediaObject.find("#rereplyDelete").show();
-							});
-							
-							
-							if (relist[i].own) {
-								// 본인이 작성한 것만 수정버튼 추가
-								const remodifyButton = $("<button id='rereplyModify' class='btn btn-outline-primary'><i class='fas fa-edit'></i></button>")
-								remodifyButton.click(function() {
-									$(this).parent().parent().parent().parent().parent().find('#rereply-text' + rereplyId).hide();// this는 클릭이벤트가 발생한 버튼
-									$(this).parent().parent().parent().parent().parent().find(`#re-input-group\${relist[i].id}`).show();
-									$(this).parent().find('#rereplyModify').hide();
-									$(this).parent().find('#rereplyDelete').hide();
-								});
-								rereplyMediaObject.find(".rereply-menu").append(remodifyButton);
+								
+								if (relist[i].own) {
+									// 본인이 작성한 것만 수정버튼 추가
+									const remodifyButton = $("<button id='rereplyModify' class='btn btn-outline-primary'><i class='fas fa-edit'></i></button>")
+									remodifyButton.click(function() {
+										$(this).parent().parent().parent().parent().parent().find('#rereply-text' + rereplyId).hide();// this는 클릭이벤트가 발생한 버튼
+										$(this).parent().parent().parent().parent().parent().find(`#re-input-group\${relist[i].id}`).show();
+										$(this).parent().find('#rereplyModify').hide();
+										$(this).parent().find('#rereplyDelete').hide();
+									});
+									rereplyMediaObject.find(".rereply-menu").append(remodifyButton);
+								}
+								if (relist[i].own || ${sessionScope.loginUser.adminQuali eq 1}) {
+									// 삭제버튼도 추가
+									const reremoveButton = $("<button id='rereplyDelete' class='btn btn-outline-danger'><i class='far fa-trash-alt'></i></button>");
+									const blank = $(" ");
+									reremoveButton.click(function(){
+										if (confirm("Sure you want to delete?")){
+											$.ajax({
+												url : appRoot +"/helprereply/"+relist[i].id,
+												type : "delete",
+												complete : function(){
+													listReReply();
+													//listReplyCount();
+												}
+											})
+										}
+									})
+									rereplyMediaObject.find(".rereply-menu").append(reremoveButton);
+								} //대댓글 수정 삭제 끝 
+								
+								$("#rereplyListContainer"+replyId).append(rereplyMediaObject);
+								
+								rereplyMediaObject.find("#rereply-nickname").text(relist[i].nickname);
+								rereplyMediaObject.find("#rereply-text"+rereplyId).text(relist[i].reReply);
+								rereplyMediaObject.find("#rereply-time").text(relist[i].inserted);
+				          	}// 대댓글 for 문 종료 
+				        }
+				      });
+				    } //대댓글 리스트 함수 종료 
+				    listReReply();
+					
+					//댓글 수정 등록 버튼 
+					replyMediaObject.find("#sendReply" + list[i].id).click(function() {
+						const reply = replyMediaObject.find("#replyTextarea"+list[i].id).val();
+						const data =  {
+								reply : reply		
+						};
+						//댓글 수정 요청 
+						$.ajax({
+							url : appRoot + "/helpreply/" + list[i].id,
+							type : "put",
+							contentType : "application/json",
+							data : JSON.stringify(data),
+							complete : function() {
+								listReply();
 							}
-							if (relist[i].own || ${sessionScope.loginUser.adminQuali eq 1}) {
-								// 삭제버튼도 추가
-								const reremoveButton = $("<button id='rereplyDelete' class='btn btn-outline-danger'><i class='far fa-trash-alt'></i></button>");
-								const blank = $(" ");
-								reremoveButton.click(function(){
-									if (confirm("Sure you want to delete?")){
-										$.ajax({
-											url : appRoot +"/helprereply/"+relist[i].id,
-											type : "delete",
-											complete : function(){
-												listReReply();
-												//listReplyCount();
-											}
-										})
+						});
+					});//댓글 수정 등록 버튼 끝
+					replyMediaObject.find(".reply-nickName").append(list[i].nickName);
+					replyMediaObject.find(".reply-body").text(list[i].reply);
+					replyMediaObject.find(".reply-modi").text(list[i].reply);
+					replyMediaObject.find(".cancel-button").click(function() {
+						replyMediaObject.find("#reply-text"+replyId).show();
+						$("#input-group" + replyId).hide();
+						replyMediaObject.find("#replyModify").show();
+						replyMediaObject.find("#replyDelete").show();
+					});
+
+					if (list[i].own) {
+						// 본인이 작성한 것만 수정버튼 추가
+						const modifyButton = $("<button id='replyModify' class='btn btn-outline-primary'><i class='fas fa-edit'></i></button>")
+						modifyButton.click(function() {
+							$(this).parent().parent().parent().parent().parent().find('#reply-text' + replyId).hide();// this는 클릭이벤트가 발생한 버튼
+							$(this).parent().parent().parent().parent().parent().find(`#input-group\${list[i].id}`).show();
+							$(this).parent().find('#replyModify').hide();
+							$(this).parent().find('#replyDelete').hide();
+						});
+						replyMediaObject.find(".reply-menu").append(modifyButton);
+					}
+					if (list[i].own || ${sessionScope.loginUser.adminQuali eq 1}) {
+						// 삭제버튼도 추가
+						const removeButton = $("<button id='replyDelete' class='btn btn-outline-danger'><i class='far fa-trash-alt'></i></button>");
+						const blank = $(" ");
+						removeButton.click(function(){
+							if (confirm("Sure you want to delete?")){
+								$.ajax({
+									url : appRoot +"/helpreply/"+list[i].id,
+									type : "delete",
+									complete : function(){
+										listReply();
+										listReplyCount();
 									}
 								})
-								rereplyMediaObject.find(".rereply-menu").append(reremoveButton);
-							} //대댓글 수정 삭제 끝 
-							
-							$("#rereplyListContainer"+replyId).append(rereplyMediaObject);
-							
-							rereplyMediaObject.find("#rereply-nickname").text(relist[i].nickname);
-							rereplyMediaObject.find("#rereply-text"+rereplyId).text(relist[i].reReply);
-							rereplyMediaObject.find("#rereply-time").text(relist[i].inserted);
-							
-
-			          	}// 대댓글 for 문 종료 
-			        }
-			      });
-			    } //대댓글 리스트 함수 종료 
-			    listReReply();
-				
-				//댓글 수정 등록 버튼 
-				replyMediaObject.find("#sendReply" + list[i].id).click(function() {
-					const reply = replyMediaObject.find("#replyTextarea"+list[i].id).val();
-					const data =  {
-							reply : reply		
-					};
-					//댓글 수정 요청 
-					$.ajax({
-						url : appRoot + "/helpreply/" + list[i].id,
-						type : "put",
-						contentType : "application/json",
-						data : JSON.stringify(data),
-						complete : function() {
-							listReply();
-						}
-					});
-				});//댓글 수정 등록 버튼 끝
-				
-				
-				replyMediaObject.find(".reply-nickName").append(list[i].nickName);
-				replyMediaObject.find(".reply-body").text(list[i].reply);
-				replyMediaObject.find(".reply-modi").text(list[i].reply);
-				replyMediaObject.find(".cancel-button").click(function() {
-					replyMediaObject.find("#reply-text"+replyId).show();
-					$("#input-group" + replyId).hide();
-					replyMediaObject.find("#replyModify").show();
-					replyMediaObject.find("#replyDelete").show();
-				});
-				
-				
-				if (list[i].own) {
-					// 본인이 작성한 것만 수정버튼 추가
-					const modifyButton = $("<button id='replyModify' class='btn btn-outline-primary'><i class='fas fa-edit'></i></button>")
-					modifyButton.click(function() {
-						$(this).parent().parent().parent().parent().parent().find('#reply-text' + replyId).hide();// this는 클릭이벤트가 발생한 버튼
-						$(this).parent().parent().parent().parent().parent().find(`#input-group\${list[i].id}`).show();
-						$(this).parent().find('#replyModify').hide();
-						$(this).parent().find('#replyDelete').hide();
-					});
-					replyMediaObject.find(".reply-menu").append(modifyButton);
-				}
-				if (list[i].own || ${sessionScope.loginUser.adminQuali eq 1}) {
-					// 삭제버튼도 추가
-					const removeButton = $("<button id='replyDelete' class='btn btn-outline-danger'><i class='far fa-trash-alt'></i></button>");
-					const blank = $(" ");
-					removeButton.click(function(){
-						if (confirm("Sure you want to delete?")){
-							$.ajax({
-								url : appRoot +"/helpreply/"+list[i].id,
-								type : "delete",
-								complete : function(){
-									listReply();
-									listReplyCount();
-								}
-							})
-						}
-					})
-					replyMediaObject.find(".reply-menu").append(removeButton);
-				}
-				
-				$("#replyListContainer").append(replyMediaObject);
-				
-				replyMediaObject.find("#reply-nickname").text(list[i].nickname);
-				replyMediaObject.find("#reply-text"+replyId).text(list[i].reply);
-				replyMediaObject.find("#reply-time").text(list[i].inserted);
-				
-				
-				  //대댓글 등록하기 
-				$("#sendReReply"+list[i].id).click(function() {
-					const rereply =$("#rereplyTextarea"+list[i].id).val();
-					const memberId = '${sessionScope.loginUser.id}';
-					const replyId = list[i].id;
-					const nickname = '${sessionScope.loginUser.nickname}';
-					const boardId = '${post.id}';
-					const data = {
-							boardId : boardId,
-							reReply : rereply,
-							uid : memberId,
-							replyId : replyId,
-							nickname : nickname
-					};
+							}
+						})
+						replyMediaObject.find(".reply-menu").append(removeButton);
+					}
 					
-					$.ajax({
-						url : appRoot+ "/helprereply/write",
-						type : "post",
-						data : data,
-						success : function() {
-							// textarea reset
-							$("#rereplyTextarea"+list[i].id).val(""); 
-						},
-						error : function(){
-							alert("Logged out! Please login again!");
-						},
-						complete : function() {
-							//refresh
-							listReReply();
-							//listReReplyCount();
-							//countInBoard();
-						}
-					})
-				})//대댓글 등록하기 끝 
-				
-				
-/* 				//각 댓글에 달린 대댓글 개수 세기 
-				const listReReplyCount = function() {
-					$.ajax({
-						url : appRoot+ "/helprereply/count/"+replyId,
-						type : "get",
-						success : function(recount) {
-							//console.log(recount);
-						}
-					})
+					$("#replyListContainer").append(replyMediaObject);
+					replyMediaObject.find("#reply-nickname").text(list[i].nickname);
+					replyMediaObject.find("#reply-text"+replyId).text(list[i].reply);
+					replyMediaObject.find("#reply-time").text(list[i].inserted);
+					
+					
+					  //대댓글 등록하기 
+					$("#sendReReply"+list[i].id).click(function() {
+						const rereply =$("#rereplyTextarea"+list[i].id).val();
+						const memberId = '${sessionScope.loginUser.id}';
+						const replyId = list[i].id;
+						const nickname = '${sessionScope.loginUser.nickname}';
+						const boardId = '${post.id}';
+						const data = {
+								boardId : boardId,
+								reReply : rereply,
+								uid : memberId,
+								replyId : replyId,
+								nickname : nickname
+						};
+						
+						$.ajax({
+							url : appRoot+ "/helprereply/write",
+							type : "post",
+							data : data,
+							success : function() {
+								// textarea reset
+								$("#rereplyTextarea"+list[i].id).val(""); 
+							},
+							error : function(){
+								alert("Logged out! Please login again!");
+							},
+							complete : function() {
+								//refresh
+								listReReply();
+								//listReReplyCount();
+								//countInBoard();
+							}
+						})
+					})//대댓글 등록하기 끝 
+					
+					
+	/* 				//각 댓글에 달린 대댓글 개수 세기 
+					const listReReplyCount = function() {
+						$.ajax({
+							url : appRoot+ "/helprereply/count/"+replyId,
+							type : "get",
+							success : function(recount) {
+								//console.log(recount);
+							}
+						})
+					}
+					listReReplyCount(); */
+					
+					
+					// 대댓글 입력창만 토글
+					$("#rereply-fold"+list[i].id).click(function() {
+						$("#replyListContainer").find(".fold"+list[i].id).toggle();
+					});
+	
+					
+				} //for문종료 	
+	        } //success property value function 끝 
+	      }); //ajax 종료 (댓글리스트 불러오기 완료)
+	    } //listReply 정의하는 function 종료 
+	    listReply(); // 페이지 로딩 후 댓글 리스트 가져오는 함수 한 번 실행
+	    
+		//댓글 등록 
+		$("#sendReply").click(function() {
+			const reply =$("#replyTextarea").val();
+			const memberId = '${sessionScope.loginUser.id}';
+			const boardId = '${post.id}';
+			const nickname = '${sessionScope.loginUser.nickname}';
+			const data = {
+					reply : reply,
+					uid : memberId,
+					boardId : boardId,
+					nickname : nickname
+			};
+			
+			$.ajax({
+				url : appRoot+ "/helpreply/write",
+				type : "post",
+				data : data,
+				success : function() {
+					// textarea reset
+					$("#replyTextarea").val(""); 
+				},
+				error : function(){
+					alert("Logged out! Please login again!");
+				},
+				complete : function() {
+					// list refresh
+					listReply();
+					listReplyCount();
 				}
-				listReReplyCount(); */
-				
-				
-				// 대댓글 입력창만 토글
-				$("#rereply-fold"+list[i].id).click(function() {
-					$("#replyListContainer").find(".fold"+list[i].id).toggle();
-				});
-
-				
-			} //for문종료 	
-        } //success property value function 끝 
-      }); //ajax 종료 (댓글리스트 불러오기 완료)
-    } //listReply 정의하는 function 종료 
-    listReply(); // 페이지 로딩 후 댓글 리스트 가져오는 함수 한 번 실행
-    
-	//댓글 등록 
-	$("#sendReply").click(function() {
-		const reply =$("#replyTextarea").val();
-		const memberId = '${sessionScope.loginUser.id}';
-		const boardId = '${post.id}';
-		const nickname = '${sessionScope.loginUser.nickname}';
-		const data = {
-				reply : reply,
-				uid : memberId,
-				boardId : boardId,
-				nickname : nickname
-		};
+			})
+		});//댓글전송
 		
-		$.ajax({
-			url : appRoot+ "/helpreply/write",
-			type : "post",
-			data : data,
-			success : function() {
-				// textarea reset
-				$("#replyTextarea").val(""); 
-			},
-			error : function(){
-				alert("Logged out! Please login again!");
-			},
-			complete : function() {
-				// list refresh
-				listReply();
-				listReplyCount();
-			}
-		})
-	})//댓글전송
-	
-/* 	//게시판에 달린 대댓글 개수 세기 (댓글수와 합칠 용도)
-	const countInBoard = function() {
-		$.ajax({
-			url : appRoot+ "/helprereply/countb/"+${post.id},
-			type : "get",
-			success : function(recountb) {
-				console.log(recountb);
-			}
-		})
-	}
-	countInBoard(); */
-	
-	//댓글 갯수
-	const listReplyCount = function() {
-		const boardId = '${board.id}';
-		$.ajax({
-			url : appRoot+ "/helpreply/count/"+${post.id},
-			type : "get",
-			success : function(count) {
-				const replyCountObject = $(`<p class="replyCount fa-2x" style="margin-bottom:0px;"><i class="fa fa-comments"></i> </p>`);
-				$(".replyCount").parents().find(".replyCount").replaceWith(replyCountObject);
-				$(".replyCount").parents().find(".replyCount").append(count);
-			}
-		})
-	}
-	listReplyCount();
-});
-</script>
+	/* 	//게시판에 달린 대댓글 개수 세기 (댓글수와 합칠 용도)
+		const countInBoard = function() {
+			$.ajax({
+				url : appRoot+ "/helprereply/countb/"+${post.id},
+				type : "get",
+				success : function(recountb) {
+					console.log(recountb);
+				}
+			})
+		}
+		countInBoard(); */
+		
+		//댓글 갯수
+		const listReplyCount = function() {
+			const boardId = '${board.id}';
+			$.ajax({
+				url : appRoot+ "/helpreply/count/"+${post.id},
+				type : "get",
+				success : function(count) {
+					const replyCountObject = $(`<p class="replyCount fa-2x" style="margin-bottom:0px;"><i class="fa fa-comments"></i> </p>`);
+					$(".replyCount").parents().find(".replyCount").replaceWith(replyCountObject);
+					$(".replyCount").parents().find(".replyCount").append(count);
+				}
+			})
+		}
+		listReplyCount();
+	});
+	</script>
 </body>
 </html>

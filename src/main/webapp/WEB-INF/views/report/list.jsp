@@ -13,7 +13,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <style>
-.title{
+.title {
 	padding-top: 5px;
 	padding-bottom: 10px;
 	margin-bottom: 0px;
@@ -26,9 +26,39 @@
 <body>
 	<b:header></b:header>
 	<b:innerNav></b:innerNav>
-	
+
 	<h1 class="title">신고관리 게시판</h1>
 
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					<i class="fab fa-slack-hash"></i>
+				</th>
+				<th>tag</th>
+				<th>제목</th>
+				<th>
+					<i class="fas fa-user"></i>
+				</th>
+				<th>작성일</th>
+
+			</tr>
+		</thead>
+		<tbody>
+
+			<!-- table.table>thead>tr>th*4^^tbody 
+        	  공지사항을 제외한 나머지 글-->
+			<c:forEach items="${list }" var="board">
+					<tr>
+						<td>
+						<a href="${board.boardUrl }">${board.boardUrl }</a>
+						</td>
+						
+
+					</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 
 
 
@@ -36,7 +66,6 @@
 
 
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 </body>
 </html>

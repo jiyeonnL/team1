@@ -18,5 +18,6 @@ public class ReportVO {
 	private Integer lifeId;
 	private Integer newsId;
 	private Integer questionId;
+	private String title;
 
 }
