@@ -236,7 +236,7 @@ public class HelpService {
 		// 1.2 좋아요 지우기
 		upMapper.upDeleteByBoardId(id);
 		//1.3 신고내역 지우기 
-		reportMapper.deleteByBoardId(id);
+		reportMapper.deleteByHelpId(id);
 
 		// 2. 파일 지우기 , s3
 		// file system에서 삭제

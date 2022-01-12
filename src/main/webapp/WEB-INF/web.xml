@@ -49,5 +49,6 @@
     <url-pattern>/life/modify</url-pattern>
     <url-pattern>/news/register</url-pattern>
     <url-pattern>/news/modify</url-pattern>
+    <url-pattern>/report/list</url-pattern>
   </filter-mapping>
 </web-app>
