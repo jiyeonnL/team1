@@ -459,7 +459,10 @@ border: 2px solid #264d73;
 				data : report,
 				success : function() {
 					//$("#reportForm").attr("action", "report").submit();
-					alert("신고가 성공적으로 이루어졌습니다.")
+					alert("신고가 정상적으로 접수되었습니다.")
+				},
+				error : function(){
+					alert("로그인을 하신 뒤 다시 시도해주세요.")
 				},
 				complete : function() {
 					//$("#reportModal1").hide();
