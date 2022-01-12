@@ -21,6 +21,25 @@
 	border-bottom-color: lightgray;
 	letter-spacing: 2px;
 }
+
+#tooltip{
+	position: relative;
+}
+#tooltip-text{
+	display: none;
+	position: absolute;
+	top: 25px;
+	left:0px;
+	border-radius: 3px;
+	background-color: #ffe6e6;
+	z-index: 999;
+}
+#tooltip:hover> #tooltip-text{
+	display: block;
+}
+.align{
+	float: left;
+}
 </style>
 </head>
 <body>
@@ -34,8 +53,6 @@
  	<table class="table">
 		<thead>
 			<tr>
-				<th>id</th>
-				<th>helpid</th>
 				<th>게시판</th>
 				<th>신고 게시글</th>
 				<th>작성자</th>
@@ -47,14 +64,22 @@
 		<tbody>
 			<c:forEach items="${list }" var="board">
 					<tr>
-						<td>${board.id }</td>
-						<td>${board.helpId }</td>
 						<td>${board.boardName }</td>
 						<td>
 						<a href="${board.boardUrl }">${board.title }</a>
 						</td>
 						<td>${board.nickname }</td>
-						<td>${board.reason }</td>
+						<td>
+						<div id="tooltip">
+							<div class="align">${board.reason } &nbsp;</div>
+								<div id="tooltip-text">
+									<c:if test="${board.reasonDetail ne '' || not empty board.reasonDetail }">&nbsp;&nbsp;${board.reasonDetail }&nbsp;&nbsp;</c:if>
+								</div>
+						</div>
+						<c:if test="${board.reasonDetail ne '' || not empty board.reasonDetail }">
+						 	<i class="fas fa-caret-down align"></i>
+						</c:if>
+						</td>
 						<td>${board.inserted }</td>
 						<td>
 						<button id="removeButton${board.id }" data-href="${pageContext.request.contextPath }/report/delete/${board.id }" data-toggle="modal" data-target="#confirmModal1" class="btn btn-danger removeButton" ><i class="fas fa-trash"> 삭제</i></button>
