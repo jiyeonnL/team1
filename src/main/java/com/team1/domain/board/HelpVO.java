@@ -27,8 +27,10 @@ public class HelpVO {
 	private Integer replyCount;
 	
 	private Integer upposession;
-	
+	// 현재시간 - 작성시간으로 new 마크를 해줄지 말지 결정
 	private Integer newMark;
+	//신고 누적 갯수
+	private Integer reportCount;
 	
 	public UserPostVO toUserPostVO() {
 		

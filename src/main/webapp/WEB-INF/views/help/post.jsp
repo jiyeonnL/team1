@@ -374,34 +374,44 @@ border: 2px solid #264d73;
 					</button>
 				</div>
 				<div class="modal-body">
-					<form method="post" id="reportForm">
-						<input type="hidden" class="form-control" id="reportinput1" name="boardName" value="해주세요">
-						<input type="hidden" class="form-control" id="reportinput4" name="content" value="${post.content }">
-						<div class="form-group">
-							<label for="reportinput2">작성자</label>
-							<input type="text" class="form-control" id="reportinput2" name="nickname" value="${post.nickname }님" readonly>
-						</div>
-						<div class="form-group">
-							<label for="reportinput3">제목</label>
-							<input type="text" class="form-control" name="title" value="${post.title}" id="reportinput3" readonly>
-						</div>
-						<div class="form-group">
-							<label for="reportReason">태그</label>
-							<select class="form-control" id="reportReason" name="tag">
-								<optgroup label="태그를 선택해주세요.">
-									<option value="욕설" selected>욕설/타인 비하</option>
-									<option value="부적절한사진">부적절한 사진</option>
-									<option value="허위사실유포">허위사실 유포</option>
-									<option value="타인의개인정보유출">타인의 개인정보 유출</option>
-									<option value="기타">기타</option>
-								</optgroup>
-							</select>
-						</div>
-						<div id="reasonDetailTextArea" class="form-group" style="display: none">
-							<label for="reportReasonDetail">기타 사항</label>
-							<textarea class="form-control" id="reportReasonDetail" name="reasonDetail" placeholder="기타 사항의 경우 작성해 주세요"></textarea>
-						</div>
-					</form>
+					<c:choose>
+						<c:when test="${post.reportCount<=5 }">
+							<form method="post" id="reportForm">
+								<input type="hidden" class="form-control" id="reportinput1" name="boardName" value="해주세요">
+								<input type="hidden" class="form-control" id="reportinput4" name="content" value="${post.content }">
+								<div class="form-group">
+									<label for="reportinput2">작성자</label>
+									<input type="text" class="form-control" id="reportinput2" name="nickname" value="${post.nickname }님" readonly>
+								</div>
+								<div class="form-group">
+									<label for="reportinput3">제목</label>
+									<input type="text" class="form-control" name="title" value="${post.title}" id="reportinput3" readonly>
+								</div>
+								<div class="form-group">
+									<label for="reportReason">태그</label>
+									<select class="form-control" id="reportReason" name="tag">
+										<optgroup label="태그를 선택해주세요.">
+											<option value="욕설" selected>욕설/타인 비하</option>
+											<option value="부적절한사진">부적절한 사진</option>
+											<option value="허위사실유포">허위사실 유포</option>
+											<option value="타인의개인정보유출">타인의 개인정보 유출</option>
+											<option value="기타">기타</option>
+										</optgroup>
+									</select>
+								</div>
+								<div id="reasonDetailTextArea" class="form-group" style="display: none">
+									<label for="reportReasonDetail">기타 사항</label>
+									<textarea class="form-control" id="reportReasonDetail" name="reasonDetail" placeholder="기타 사항의 경우 작성해 주세요"></textarea>
+								</div>
+							</form>
+						</c:when>
+						<c:otherwise>
+							<p>
+								신고가 누적되어 처리중입니다.<br>
+								게시판에 대한 관심에 감사드립니다.
+							</p>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="modal-footer">
 					<button id="reportSubmitButton" type="submit" class="btn btn-danger">
@@ -423,6 +433,9 @@ border: 2px solid #264d73;
 		// innerNav 탭 active 표시
 		$("#help").attr("class", "btn btn-outline ml-1 active");
 		
+		if('${post.reportCount}'>=5){
+			$("#reportSubmitButton").hide();
+		}
 		// 신고 사유 select가 '기타'일 때 텍스트 입력창을 나타냄
 		$("#reportReason").click(function(e) {
 			if(($("#reportReason").val()) === '기타'){
@@ -492,11 +505,11 @@ border: 2px solid #264d73;
 								<button id="upins" class="btn btn-outline-dark">
 									<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
 								</button>
-								<button id="updel" class="btn btn-outline-light" style ="background-color:#264d73;">
+								<button id="updel" class="btn btn-outline-light" style ="background-color:#264d73; display:none;">
 									<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
 								</button>
 							</c:if>
-							<c:if test="${not empty post.upposession}">
+							<c:if test="${not empty post.upposession&&not empty sessionScope.loginUser}">
 								<button id="upins" class="btn btn-outline-dark" style="display:none;">
 									<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3" > </i> 
 								</button>

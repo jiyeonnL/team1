@@ -30,21 +30,21 @@
 	</insert>
 
 	<delete id="delete">
-		DELETE FROM tb_report 
-		<where>
+		DELETE FROM tb_report WHERE id=#{id}
+		<!-- <where>
 			<if test="helpId != null">
-				helpId = (SELECT helpId FROM tb_report WHERE id = #{id})
+				id=#{id} OR helpId = #(SELECT id FROM tb_report WHERE id = #{id})
 			</if>
 			<if test="lifeId != null">
-				lifeId = (SELECT lifeId FROM tb_report WHERE id = #{id})
+				id=#{id} OR lifeId = #(SELECT lifeId FROM tb_report WHERE id = #{id})
 			</if>
 			<if test="newsId != null">
-				newsId = (SELECT newsId FROM tb_report WHERE id = #{id})
+				id=#{id} OR newsId = #(SELECT newsId FROM tb_report WHERE id = #{id})
 			</if>
 			<if test="questionId != null">
-				questionId = (SELECT questionId FROM tb_report WHERE id = #{id})
+				id=#{id} OR questionId = #(SELECT questionId FROM tb_report WHERE id = #{id})
 			</if>
-		</where>
+		</where> -->
 	</delete>
 	
 	<delete id="deleteByHelpId">

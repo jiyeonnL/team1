@@ -34,6 +34,8 @@
  	<table class="table">
 		<thead>
 			<tr>
+				<th>id</th>
+				<th>helpid</th>
 				<th>게시판</th>
 				<th>신고 게시글</th>
 				<th>작성자</th>
@@ -45,6 +47,8 @@
 		<tbody>
 			<c:forEach items="${list }" var="board">
 					<tr>
+						<td>${board.id }</td>
+						<td>${board.helpId }</td>
 						<td>${board.boardName }</td>
 						<td>
 						<a href="${board.boardUrl }">${board.title }</a>
@@ -53,13 +57,44 @@
 						<td>${board.reason }</td>
 						<td>${board.inserted }</td>
 						<td>
-						<button id="removeSubmitButton\${board.id }" class="btn btn-danger" ><i class="fas fa-trash"> 삭제</i></button>
+						<button id="removeButton${board.id }" data-href="${pageContext.request.contextPath }/report/delete/${board.id }" data-toggle="modal" data-target="#confirmModal1" class="btn btn-danger removeButton" ><i class="fas fa-trash"> 삭제</i></button>
 						</td>
 					</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
+	<!-- Delete Confirm Modal -->
+	<div class="modal fade" id="confirmModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel" style="color:black;">삭제 확인</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">삭제하시겠습니까?</div>
+				<div class="modal-footer">
+					<a id="deleteLink" href=""><button id="removeSubmitButton" type="submit" class="btn btn-danger">
+						<i class="fas fa-trash"> 삭제</i>
+					</button></a>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+	<script>
+			$(document).ready(function() {
+				$(".removeButton").click(function(e) {
+					var link = $(".removeButton" ).attr( 'data-href' );
+					console.log(link);
+					$("#deleteLink").attr("href", link)
+
+				});
+		});
+	</script>
 </body>
 </html>

@@ -54,10 +54,10 @@ public class ReportController {
 		}
 	}
 	
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<String> remove(HttpSession session, @PathVariable Integer id){
+	@GetMapping("/delete/{id}")
+	public String remove(HttpSession session, @PathVariable Integer id){
 		service.remove(id);
-		return ResponseEntity.status(HttpStatus.OK).build();
+		return "redirect:/report/list";
 	}
 	
 
