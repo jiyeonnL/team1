@@ -22,7 +22,7 @@ public class ReportVO {
 	private String title;
 	
 	public String getInserted() {
-		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 	}
 	
 

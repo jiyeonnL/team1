@@ -119,7 +119,8 @@
 		COUNT(r.id) replyCount,
 		(SELECT hu.userId FROM tb_board_help_up hu
 		WHERE hu.userId =
-		#{loginId} AND hu.postId=p.id) upposession
+		#{loginId} AND hu.postId=p.id) upposession,
+		(select count(id) from tb_report where helpId=#{id}) reportCount
 		FROM
 		tb_board_help p
 		JOIN tb_user m
