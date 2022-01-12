@@ -2,6 +2,7 @@ package com.team1.controller.board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team1.domain.board.ReportVO;
+import com.team1.domain.user.UserVO;
 import com.team1.service.board.ReportService;
 
 import lombok.Setter;
@@ -27,9 +30,17 @@ public class ReportController {
 	private ReportService service;
 	
 	@GetMapping("/list")
-	public void list(Model model){
-		List<ReportVO> list = service.getList();
-		model.addAttribute("list", list);
+	public String list(Model model, HttpSession session){
+		UserVO uvo = (UserVO) session.getAttribute("loginUser");
+		
+		if(uvo.getAdminQuali() == 1) {
+			List<ReportVO> list = service.getList();
+			model.addAttribute("list", list);
+			return "report/list";
+		} else {
+			return "redirect:/all/list";
+		}
+
 	}
 	
 	@PostMapping("/register")
@@ -38,8 +49,8 @@ public class ReportController {
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 	
-	@DeleteMapping("/delete")
-	public ResponseEntity<String> remove(HttpSession session, Integer id){
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> remove(HttpSession session, @PathVariable Integer id){
 		service.remove(id);
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}

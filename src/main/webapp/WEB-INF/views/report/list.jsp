@@ -28,43 +28,37 @@
 	<b:innerNav></b:innerNav>
 
 	<h1 class="title">신고관리 게시판</h1>
+	
+	<div id="reportList"></div>
 
-	<table class="table">
+ 	<table class="table">
 		<thead>
 			<tr>
-				<th>
-					<i class="fab fa-slack-hash"></i>
-				</th>
-				<th>tag</th>
-				<th>제목</th>
-				<th>
-					<i class="fas fa-user"></i>
-				</th>
-				<th>작성일</th>
-
+				<th>게시판</th>
+				<th>신고 게시글</th>
+				<th>작성자</th>
+				<th>신고 사유</th>
+				<th>신고 접수시간</th>
+				<th>신고내역 삭제</th>
 			</tr>
 		</thead>
 		<tbody>
-
-			<!-- table.table>thead>tr>th*4^^tbody 
-        	  공지사항을 제외한 나머지 글-->
 			<c:forEach items="${list }" var="board">
 					<tr>
+						<td>${board.boardName }</td>
 						<td>
-						<a href="${board.boardUrl }">${board.boardUrl }</a>
+						<a href="${board.boardUrl }">${board.title }</a>
 						</td>
-						
-
+						<td>${board.nickname }</td>
+						<td>${board.reason }</td>
+						<td>${board.inserted }</td>
+						<td>
+						<button id="removeSubmitButton\${board.id }" class="btn btn-danger" ><i class="fas fa-trash"> 삭제</i></button>
+						</td>
 					</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
-
-
-
-
-
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 </body>

@@ -12,6 +12,13 @@ public interface ReportMapper {
 	
 	public int delete(Integer id);
 	
-	public int deleteByBoardId(Integer boardId);
+	public int deleteByHelpId(Integer helpId);
+	
+	public int deleteByLifeId(Integer lifeId);
+
+	public int deleteByNewsId(Integer newsId);
+
+	public int deleteByQuestionId(Integer questionId);
+
 
 }

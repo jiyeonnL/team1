@@ -1,6 +1,7 @@
 package com.team1.domain.board;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import lombok.Data;
 
@@ -19,5 +20,10 @@ public class ReportVO {
 	private Integer newsId;
 	private Integer questionId;
 	private String title;
+	
+	public String getInserted() {
+		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+	}
+	
 
 }
