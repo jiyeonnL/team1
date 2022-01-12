@@ -45,8 +45,13 @@ public class ReportController {
 	
 	@PostMapping("/register")
 	public ResponseEntity<String> register(ReportVO report, HttpSession session){
-		service.register(report);
-		return ResponseEntity.status(HttpStatus.OK).build();
+		UserVO uvo = (UserVO) session.getAttribute("loginUser");
+		if(uvo == null) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}else {
+			service.register(report);
+			return ResponseEntity.status(HttpStatus.OK).build();
+		}
 	}
 	
 	@DeleteMapping("/delete/{id}")
