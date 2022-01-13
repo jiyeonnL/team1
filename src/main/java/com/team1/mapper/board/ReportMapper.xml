@@ -9,7 +9,7 @@
 		SELECT
 		id, boardName, boardUrl, title, nickname, 
 		reason, reasonDetail, inserted, 
-		helpId, lifeId, newsId, questionId, title, replyId, rereplyId, categories
+		helpId, lifeId, newsId, questionId, title, helpReplyId, helpReReplyId, lifeReplyId, lifeReReplyId, newsReplyId, newsReReplyId, questionReplyId, questionReReplyId, categories
 		FROM
 		tb_report
 		ORDER BY id DESC
@@ -21,11 +21,11 @@
 		tb_report 
 		(boardName, boardUrl, nickname, 
 		reason, reasonDetail, 
-		helpId, lifeId, newsId, questionId, title, replyId, rereplyId, categories)
+		helpId, lifeId, newsId, questionId, title, helpReplyId, helpReReplyId, lifeReplyId, lifeReReplyId, newsReplyId, newsReReplyId, questionReplyId, questionReReplyId, categories)
 		VALUES
 		(#{boardName}, #{boardUrl}, #{nickname}, 
 		#{reason}, #{reasonDetail}, 
-		#{helpId}, #{lifeId}, #{newsId}, #{questionId}, #{title}, #{replyId}, #{rereplyId}, #{categories})
+		#{helpId}, #{lifeId}, #{newsId}, #{questionId}, #{title}, #{helpReplyId}, #{helpReReplyId}, #{lifeReplyId}, #{lifeReReplyId}, #{newsReplyId}, #{newsReReplyId}, #{questionReplyId}, #{questionReReplyId}, #{categories})
 	</insert>
 
 	<delete id="delete">

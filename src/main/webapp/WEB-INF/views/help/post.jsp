@@ -561,14 +561,14 @@ padding-inline
 					<form method="post" id="replyReportForm">
 						<input type="hidden" class="form-control" id="replyreportinput1" name="boardName" value="해주세요">
 						<input type="hidden" class="form-control" id="replyreportinput4" name="categories" value="댓글">
-						<input type="hidden" class="form-control" id="replyreportinput5" name="helpReply" value="">
+						<input type="hidden" class="form-control" id="replyreportinput5" name="helpReplyId" value="">
 						<div class="form-group">
 							<label for="reportinput2">작성자</label>
 							<input type="text" class="form-control" id="replyreportinput2" name="nickname" value="" readonly>
 						</div>
 						<div class="form-group">
 							<label for="replyreportinput3">댓글 내용</label>
-							<input type="text" class="form-control" name="title" value="${post.title}" id="replyreportinput3" readonly>
+							<input type="text" class="form-control" id="replyreportinput3" name="title" value="" readonly>
 						</div>
 						<div class="form-group">
 							<label for="replyReportReason">태그</label>
@@ -621,7 +621,7 @@ padding-inline
 						</div>
 						<div class="form-group">
 							<label for="replyreportinput3">댓글 내용</label>
-							<input type="text" class="form-control" name="title" value="${post.title}" id="rereplyreportinput3" readonly>
+							<input type="text" class="form-control" id="rereplyreportinput3" name="title" value="" readonly>
 						</div>
 						<div class="form-group">
 							<label for="rereplyReportReason">태그</label>
@@ -712,6 +712,7 @@ padding-inline
 				reasonDetail : reasonDetail,
 				helpId : helpId,
 			};
+			console.log(report);
 			$.ajax({
 	        	url : appRoot + "/reportajax/register",
 				type : "post",
@@ -1124,7 +1125,7 @@ padding-inline
 									const helpReReplyId = relist[i].id// 대댓글 id
 									
 									$.ajax({
-										url : appRoot +"/reportajax/rrcount/"+helpReReplyId,
+										url : appRoot +"/reportajax/helprrcount/"+helpReReplyId,
 										type : "get",
 										success : function(rrcnt){
 											if(rrcnt<5){
@@ -1273,7 +1274,7 @@ padding-inline
 						const helpReplyId = list[i].id // 댓글id
 						
 						$.ajax({
-							url : appRoot +"/reportajax/rcount/"+helpReplyId,
+							url : appRoot +"/reportajax/helprcount/"+helpReplyId,
 							type : "get",
 							success : function(rcnt){
 								if(rcnt<5){
