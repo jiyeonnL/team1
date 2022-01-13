@@ -23,29 +23,32 @@ import com.team1.service.board.ReportService;
 
 import lombok.Setter;
 
-@Controller
-@RequestMapping("/report")
-public class ReportController {
+@RestController
+@RequestMapping("/reportajax")
+public class ReportController2 {
 	@Setter(onMethod_ = @Autowired)
 	private ReportService service;
 	
-	@GetMapping("/list")
-	public String list(Model model, HttpSession session){
+	@PostMapping("/register")
+	public ResponseEntity<String> register(ReportVO report, HttpSession session){
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
-		
-		if(uvo.getAdminQuali() == 1) {
-			List<ReportVO> list = service.getList();
-			model.addAttribute("list", list);
-			return "report/list";
-		} else {
-			return "redirect:/all/list";
+		if(uvo == null) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}else {
+			service.register(report);
+			return ResponseEntity.status(HttpStatus.OK).build();
 		}
-
 	}
 	
-	@GetMapping("/delete/{id}")
-	public String remove(HttpSession session, @PathVariable Integer id){
-		service.remove(id);
-		return "redirect:/report/list";
+	@GetMapping("/rcount/{id}")
+	public Integer rcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countReplyId(id);
+		return rcnt;
+	}
+	
+	@GetMapping("/rrcount/{id}")
+	public Integer rrcount(HttpSession session, @PathVariable Integer id){
+		Integer rrcnt = service.countReReplyId(id);
+		return rrcnt;
 	}
 }

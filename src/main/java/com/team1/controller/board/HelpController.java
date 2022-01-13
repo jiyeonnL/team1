@@ -18,12 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team1.coverData.Cover;
-import com.team1.domain.board.HelpFileVO;
 import com.team1.domain.board.HelpReplyVO;
 import com.team1.domain.board.HelpVO;
 import com.team1.domain.user.UserVO;
 import com.team1.service.board.HelpReplyService;
 import com.team1.service.board.HelpService;
+import com.team1.service.board.ReportService;
 
 import lombok.Setter;
 
@@ -36,6 +36,9 @@ public class HelpController {
 
 	@Setter(onMethod_ = @Autowired)
 	private HelpReplyService replyservice;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReportService reportservice;
 
 	@GetMapping(value = "/list")
 	public void help(@RequestParam(value = "location", required = false) String location,
