@@ -35,33 +35,146 @@
 	<style>
 
          /* 메인 화면 */
-        .visual {
-            background-color: beige;
+        a {
+            text-decoration: none;
         }
 
+        /* visual  */
+        .header {
+            background-color: burlywood;
+            height: 84px;
+            width: 100%;
+        }
+
+        /* 메인 화면 */
+        .visual {}
+
         /* 전체 화면(100 view height)에서 헤더 높이(84px) 뺀 값 */
-        .visual .inner  {
+        .visual .inner {
             height: calc(100vh - 84px);
+        }
+
+        .visual .inner .main-cover {
+            /* Full height */
+            /*             width: 100%;
+            height: 100%;
+            background-image: url("https://cdn.pixabay.com/photo/2020/06/05/09/34/village-5262357_960_720.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            filter: blur(2px);
+            -webkit-filter: blur(2px); */
+
+        }
+
+        /*로고 */
+        .visual .logo {
+            display: flex;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
+            animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
+        }
+
+        @-webkit-keyframes tracking-in-expand {
+            0% {
+                letter-spacing: -0.5em;
+                opacity: 0;
+            }
+
+            40% {
+                opacity: 0.6;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes tracking-in-expand {
+            0% {
+                letter-spacing: -0.5em;
+                opacity: 0;
+            }
+
+            40% {
+                opacity: 0.6;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* 로고 이미지(아이콘) 담는 컨테이너 div */
+        .visual .logo-container {
+            margin-right: 30px;
+            height: 120px;
+            width: 120px;
+            background-color: blueviolet;
+            -webkit-animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;
+            animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;
+
+        }
+
+        /* 로고 텍스트 */
+        .visual .logo-text {
+
+            font-size: 4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 로고 회전주는 애니메이션 */
+        @-webkit-keyframes rotate-in-center {
+            0% {
+                -webkit-transform: rotate(-360deg);
+                transform: rotate(-360deg);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: rotate(0);
+                transform: rotate(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes rotate-in-center {
+            0% {
+                -webkit-transform: rotate(-360deg);
+                transform: rotate(-360deg);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: rotate(0);
+                transform: rotate(0);
+                opacity: 1;
+            }
         }
 
         /* 메인 타이틀 */
         .visual .title {
             position: absolute;
-            top: 50%;
+            top: 70%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 3rem;
+            font-size: 1.7rem;
         }
 
         /* 서브타이틀 */
         .visual .subTitle {
 
             position: absolute;
-            top: 55%;
+            top: 75%;
             left: 50%;
-            transform: translate(-50%, 0%);
+            transform: translate(-50%, -50%);
 
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         .visual .image1 {
@@ -79,6 +192,7 @@
             display: flex;
             width: 100%;
             height: 400px;
+            background-color: aquamarine;
         }
 
         /* 커버 이미지 담는 div 영역 */
@@ -105,7 +219,8 @@
             height: 100%;
 
         }
-
+        
+        /* 마름모꼴 만드는 코드 */
         .cover-image.left {
             -webkit-clip-path: polygon(0 0, 100% 0, 55% 100%, 0% 100%);
             clip-path: polygon(0 0, 100% 0, 50% 100%, 0% 100%);
@@ -167,25 +282,49 @@
         }
         
         /* 링크를 버튼으로 만든다. */
+        /* a 링크를 버튼으로 만들고 hover 시 효과 부여 */
         .button {
-            margin-top: 30px;
-            width: 160px;
-            padding: 20px;
-            border: 2px solid #333;
-            color: blue;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: 700;
-            text-align: center;
-            cursor: pointer;
-            box-sizing: border-box;
+            margin-top: 10px;
+            width: 150px;
             display: block;
-            transition: 0.4s;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid orangeRed;
+            background: linear-gradient(45deg, #fff 50%, orangeRed 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+
+            color: #fff;
+            /*For IE*/
         }
 
-        .button:hover {
-            background-color: #333;
-            color: #fff;
+        .button:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(45deg, orangeRed 50%, transparent 50%);
+            z-index: -1;
+        }
+
+        .button,
+        .button:after {
+            background-size: 300%;
+            background-position: 100%;
+            transition: 0.7s, font-size 0.2s;
+        }
+
+        .button:hover,
+        .button:hover:after {
+            background-position: 0;
+            font-size: 1.1em;
+
+            color: orangeRed;
+            /*For IE*/
         }
 
 
@@ -199,22 +338,22 @@
 	</div>
     <section class="visual">
         <div class="inner">
+            <div class="main-cover"></div>
+
+            <div class="logo">
+                <div class="logo-container">
+                    아이콘
+                </div>
+                <div class="logo-text">
+                    사용할 로고명
+                </div>
+            </div>
+
             <div class="title">
                 WelCome to (프로젝트 이름)
             </div>
             <div class="subTitle">
                 서브 타이틀 Lorem, ipsum dolor sit
-            </div>
-
-            <div class="fade-in image1">
-                <!-- <div style="background-color: aqua; width: 200px; height:330px;"></div> -->
-                <!-- <img src="./images/visual_cup1.png" alt="image1" class="cup1 image"> -->
-            </div>
-            <div class="fade-in">
-                <!-- <img src="./images/visual_cup2.png" alt="new STARBUCKS CARAMMEL LATTE" class="cup2 image"> -->
-            </div>
-            <div class="fade-in">
-                <!-- <img src="./images/visual_spoon.png" alt="spoon" class="spoon"> -->
             </div>
         </div>
     </section>
@@ -249,44 +388,45 @@
 
 </body>
 <script>
-    gsap.from("#head-all", {
-        opacity: 0,
-        duration: 0.7,
-       
-    })
+gsap.from("#header", {
+    opacity: 0,
+    delay: 0.3,
+    duration: 0.7,
+    
+})
 
-    gsap.from(".title", {
-        opacity: 0,
-        delay: 0.3,
-        duration: 0.7,
-        y: 50
-    })
+gsap.from(".title", {
+    opacity: 0,
+    delay: 0.9,
+    duration: 0.7,
+    y: 50
+})
 
-    gsap.from(".subTitle", {
-        opacity: 0,
-        delay: 0.6,
-        duration: 0.7,
-        y: 50
-    })
+gsap.from(".subTitle", {
+    opacity: 0,
+    delay: 1.2,
+    duration: 0.7,
+    y: 50
+})
 
-    gsap.from(".newsImage", {
-        opacity: 0,
-        duration: 0.7,
-        x: -100
-    })
+gsap.from(".newsImage", {
+    opacity: 0,
+    duration: 0.7,
+    x: -100
+})
 
-    const spyEls = document.querySelectorAll('.scroll-spy');
-    spyEls.forEach(function (spyEl) {
-        console.log("aasdasd");
-        new ScrollMagic
-            .Scene({
-                triggerElement: spyEl, //보여짐 여부를 감시할 요소를 지정
-                triggerHook: 0.8 //뷰포트 기준 0.8 높이(밑에서 위로 20) 이상 올라오면 토글 트리거
-            })
-            .setClassToggle(spyEl, 'show')
-            .addTo(new ScrollMagic.Controller());
+const spyEls = document.querySelectorAll('.scroll-spy');
+spyEls.forEach(function (spyEl) {
+    console.log("aasdasd");
+    new ScrollMagic
+        .Scene({
+            triggerElement: spyEl, //보여짐 여부를 감시할 요소를 지정
+            triggerHook: 0.8 //뷰포트 기준 0.8 높이(밑에서 위로 20) 이상 올라오면 토글 트리거
+        })
+        .setClassToggle(spyEl, 'show')
+        .addTo(new ScrollMagic.Controller());
 
-    });
+});
 </script>
 
 </html>
