@@ -429,22 +429,22 @@ margin-bottom: 0rem;}
 			</div>
 		</c:if>
 		
-	<!-- 신고 버튼 모달 -->
+	<!-- 게시물 신고 버튼 모달 -->
 	<div class="modal fade" id="reportModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel" style="color: black;">신고하시겠습니까?</h5>
+					<h5 class="modal-title" id="exampleModalLabel" style="color: black;">게시물을 신고하시겠습니까?</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
 					<c:choose>
-						<c:when test="${post.reportCount<=5 }">
+						<c:when test="${post.reportCount<5 }">
 							<form method="post" id="reportForm">
 								<input type="hidden" class="form-control" id="reportinput1" name="boardName" value="해주세요">
-								<input type="hidden" class="form-control" id="reportinput4" name="content" value="${post.content }">
+								<input type="hidden" class="form-control" id="reportinput4" name="categories" value="게시글">
 								<div class="form-group">
 									<label for="reportinput2">작성자</label>
 									<input type="text" class="form-control" id="reportinput2" name="nickname" value="${post.nickname }님" readonly>
@@ -457,10 +457,10 @@ margin-bottom: 0rem;}
 									<label for="reportReason">태그</label>
 									<select class="form-control" id="reportReason" name="tag">
 										<optgroup label="태그를 선택해주세요.">
-											<option value="욕설" selected>욕설/타인 비하</option>
-											<option value="부적절한사진">부적절한 사진</option>
-											<option value="허위사실유포">허위사실 유포</option>
-											<option value="타인의개인정보유출">타인의 개인정보 유출</option>
+											<option value="욕설/타인 비하" selected>욕설/타인 비하</option>
+											<option value="부적절한 사진">부적절한 사진</option>
+											<option value="허위사실 유포">허위사실 유포</option>
+											<option value="타인의 개인정보 유출">타인의 개인정보 유출</option>
 											<option value="기타">기타</option>
 										</optgroup>
 									</select>
@@ -472,9 +472,8 @@ margin-bottom: 0rem;}
 							</form>
 						</c:when>
 						<c:otherwise>
-							<p>
+							<p id="replyReportOnProgress">
 								신고가 누적되어 처리중입니다.<br>
-								게시판에 대한 관심에 감사드립니다.
 							</p>
 						</c:otherwise>
 					</c:choose>
@@ -483,7 +482,113 @@ margin-bottom: 0rem;}
 					<button id="reportSubmitButton" type="submit" class="btn btn-danger">
 						<i class="fas fa-bullhorn"> 신고</i>
 					</button>
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+					<button type="button" id="reportCancel" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 댓글 신고 버튼 모달 -->
+	<div class="modal fade" id="replyReportModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel" style="color: black;">댓글을 신고하시겠습니까?</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="replyReportModalBody modal-body">
+					<form method="post" id="replyReportForm">
+						<input type="hidden" class="form-control" id="replyreportinput1" name="boardName" value="해주세요">
+						<input type="hidden" class="form-control" id="replyreportinput4" name="categories" value="댓글">
+						<input type="hidden" class="form-control" id="replyreportinput5" name="replyId" value="">
+						<div class="form-group">
+							<label for="reportinput2">작성자</label>
+							<input type="text" class="form-control" id="replyreportinput2" name="nickname" value="" readonly>
+						</div>
+						<div class="form-group">
+							<label for="replyreportinput3">댓글 내용</label>
+							<input type="text" class="form-control" name="title" value="${post.title}" id="replyreportinput3" readonly>
+						</div>
+						<div class="form-group">
+							<label for="replyReportReason">태그</label>
+							<select class="form-control" id="replyReportReason" name="tag">
+								<optgroup label="태그를 선택해주세요.">
+									<option value="욕설/타인 비하" selected>욕설/타인 비하</option>
+									<option value="허위사실 유포">허위사실 유포</option>
+									<option value="타인의 개인정보 유출">타인의 개인정보 유출</option>
+									<option value="기타">기타</option>
+								</optgroup>
+							</select>
+						</div>
+						<div id="replyReasonDetailTextArea" class="form-group" style="display: none">
+							<label for="replyReportReasonDetail">기타 사항</label>
+							<textarea class="form-control" id="replyReportReasonDetail" name="reasonDetail" placeholder="기타 사항의 경우 작성해 주세요"></textarea>
+						</div>
+					</form>
+					<p id="replyReportOnProgress" style="display: none;">
+						신고가 누적되어 처리중입니다.<br>
+					</p>
+				</div>
+				<div class="replyReportModalFooter modal-footer">
+					<button id="replyReportSubmitButton" type="submit" class="btn btn-danger">
+						<i class="fas fa-bullhorn"> 신고</i>
+					</button>
+					<button type="button" id="replyReportCancel" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 대댓글 신고 버튼 모달 -->
+	<div class="modal fade" id="rereplyReportModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel" style="color: black;">대댓글을 신고하시겠습니까?</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="rereplyReportModalBody modal-body">
+					<form method="post" id="rereplyReportForm">
+						<input type="hidden" class="form-control" id="rereplyreportinput1" name="boardName" value="해주세요">
+						<input type="hidden" class="form-control" id="rereplyreportinput4" name="categories" value="댓글">
+						<input type="hidden" class="form-control" id="rereplyreportinput5" name="rereplyId" value="">
+						<div class="form-group">
+							<label for="reportinput2">작성자</label>
+							<input type="text" class="form-control" id="rereplyreportinput2" name="nickname" value="" readonly>
+						</div>
+						<div class="form-group">
+							<label for="replyreportinput3">댓글 내용</label>
+							<input type="text" class="form-control" name="title" value="${post.title}" id="rereplyreportinput3" readonly>
+						</div>
+						<div class="form-group">
+							<label for="rereplyReportReason">태그</label>
+							<select class="form-control" id="rereplyReportReason" name="tag">
+								<optgroup label="태그를 선택해주세요.">
+									<option value="욕설/타인 비하" selected>욕설/타인 비하</option>
+									<option value="허위사실 유포">허위사실 유포</option>
+									<option value="타인의 개인정보 유출">타인의 개인정보 유출</option>
+									<option value="기타">기타</option>
+								</optgroup>
+							</select>
+						</div>
+						<div id="rereplyReasonDetailTextArea" class="form-group" style="display: none">
+							<label for="rereplyReportReasonDetail">기타 사항</label>
+							<textarea class="form-control" id="rereplyReportReasonDetail" name="reasonDetail" placeholder="기타 사항의 경우 작성해 주세요"></textarea>
+						</div>
+					</form>
+					<p id="rereplyReportOnProgress" style="display: none;">
+						신고가 누적되어 처리중입니다.<br>
+					</p>
+				</div>
+				<div class="rereplyReportModalFooter modal-footer">
+					<button id="rereplyReportSubmitButton" type="submit" class="btn btn-danger">
+						<i class="fas fa-bullhorn"> 신고</i>
+					</button>
+					<button type="button" id="rereplyReportCancel" class="btn btn-secondary" data-dismiss="modal">취소</button>
 				</div>
 			</div>
 		</div>
@@ -501,6 +606,8 @@ margin-bottom: 0rem;}
 		
 		if('${post.reportCount}'>=5){
 			$("#reportSubmitButton").hide();
+			$("#reportCancel").text("닫기");
+			
 		}
 		// 신고 사유 select가 '기타'일 때 텍스트 입력창을 나타냄
 		$("#reportReason").click(function(e) {
@@ -510,14 +617,28 @@ margin-bottom: 0rem;}
 				$("#reasonDetailTextArea").hide();
 			}
 		});
-		// 신고하기 버튼 누르면 db에 인서트
+		$("#replyReportReason").click(function(e) {
+			if(($("#replyReportReason").val()) === '기타'){
+				$("#replyReasonDetailTextArea").show();
+			}else{
+				$("#replyReasonDetailTextArea").hide();
+			}
+		});
+		$("#rereplyReportReason").click(function(e) {
+			if(($("#rereplyReportReason").val()) === '기타'){
+				$("#rereplyReasonDetailTextArea").show();
+			}else{
+				$("#rereplyReasonDetailTextArea").hide();
+			}
+		});
+		// 게시글 신고하기, 버튼 누르면 db에 인서트
 		$("#reportSubmitButton").click(function(e) {
 			const appRoot = '${pageContext.request.contextPath}';
 			
 			const boardName = $("#reportinput1").val(); // 이 게시판은 어디 게시판인가
 			const boardUrl =$(location).attr("href"); // 현재 게시물의 url
+			const categories = $("#reportinput4").val(); // 신고 대상이 게시판인지 댓글인지 구분
 			const title = '${post.title}'; // 현재 게시물의 제목
-			const content = $("#reportinput4").val(); // 현재 게시물의 내용
 			const nickname = '${post.nickname}'; // 현재 게시물의 작성자
 			const reason = $("#reportReason").val(); // select에서 선택한 신고사유
 			const reasonDetail = $("#reportReasonDetail").val(); // select가 '기타'일 때 사용자가 직접 입력한 신고 사유 내용
@@ -525,30 +646,111 @@ margin-bottom: 0rem;}
 			const report = {
 				boardName : boardName,
 				boardUrl : boardUrl,
+				categories : categories,
 				title : title,
-				content : content,
 				nickname : nickname,
 				reason : reason,
 				reasonDetail : reasonDetail,
 				helpId : helpId,
 			};
 			$.ajax({
-	        	url : appRoot + "/report/register",
+	        	url : appRoot + "/reportajax/register",
 				type : "post",
 				data : report,
 				success : function() {
-					//$("#reportForm").attr("action", "report").submit();
 					alert("신고가 정상적으로 접수되었습니다.")
 				},
 				error : function(){
 					alert("로그인을 하신 뒤 다시 시도해주세요.")
 				},
 				complete : function() {
-					//$("#reportModal1").hide();
 					$('#reportModal1').modal('hide');
+					$("#reportForm").empty().html('<p>이미 신고한 게시물입니다.</p>');
+					$("#reportSubmitButton").hide();
+					$("#reportCancel").text("닫기");
 				}
-				});
-		});
+			});
+		});// 게시글 신고 끝
+		
+		// 댓글 신고하기 버튼 누르면 db에 인서트
+		$("#replyReportSubmitButton").click(function(e) {
+			const appRoot = '${pageContext.request.contextPath}';
+			
+			const boardName = $("#replyreportinput1").val(); // 이 게시판은 어디 게시판인가
+			const boardUrl =$(location).attr("href"); // 현재 게시물의 url
+			const categories = $("#replyreportinput4").val(); // 신고 대상이 게시판인지 댓글인지 구분
+			const title = $("#replyreportinput3").val(); // 현재 게시물의 제목
+			const nickname = $("#replyreportinput2").val(); // 현재 게시물의 작성자
+			const reason = $("#replyReportReason").val(); // select에서 선택한 신고사유
+			const reasonDetail = $("#replyReportReasonDetail").val(); // select가 '기타'일 때 사용자가 직접 입력한 신고 사유 내용
+			const helpId = '${post.id}'; // 현재 게시판의 id, 동네 소식 게시판이 된다면 newsId가 됨.
+			const replyId = $("#replyreportinput5").val();//댓글 id
+			const report = {
+				boardName : boardName,
+				boardUrl : boardUrl,
+				categories : categories,
+				title : title,
+				nickname : nickname,
+				reason : reason,
+				reasonDetail : reasonDetail,
+				helpId : helpId,
+				replyId : replyId
+			};
+			$.ajax({
+	        	url : appRoot + "/reportajax/register",
+				type : "post",
+				data : report,
+				success : function() {
+					alert("신고가 정상적으로 접수되었습니다.")
+				},
+				error : function(){
+					alert("로그인을 하신 뒤 다시 시도해주세요.")
+				},
+				complete : function() {
+					$('#replyReportModal1').modal('hide');
+				}
+			});
+		});// 댓글 신고 끝
+		
+		// 대댓글 신고하기 버튼 누르면 db에 인서트
+		$("#rereplyReportSubmitButton").click(function(e) {
+			const appRoot = '${pageContext.request.contextPath}';
+			
+			const boardName = $("#rereplyreportinput1").val(); // 이 게시판은 어디 게시판인가
+			const boardUrl =$(location).attr("href"); // 현재 게시물의 url
+			const categories = $("#rereplyreportinput4").val(); // 신고 대상이 게시판인지 댓글인지 구분
+			const title = $("#rereplyreportinput3").val(); // 현재 게시물의 제목
+			const nickname = $("#rereplyreportinput2").val(); // 현재 게시물의 작성자
+			const reason = $("#rereplyReportReason").val(); // select에서 선택한 신고사유
+			const reasonDetail = $("#rereplyReportReasonDetail").val(); // select가 '기타'일 때 사용자가 직접 입력한 신고 사유 내용
+			const helpId = '${post.id}'; // 현재 게시판의 id, 동네 소식 게시판이 된다면 newsId가 됨.
+			const rereplyId = $("#rereplyreportinput5").val();//대댓글 id
+			const report = {
+				boardName : boardName,
+				boardUrl : boardUrl,
+				categories : categories,
+				title : title,
+				nickname : nickname,
+				reason : reason,
+				reasonDetail : reasonDetail,
+				helpId : helpId,
+				rereplyId : rereplyId,
+			};
+			$.ajax({
+	        	url : appRoot + "/reportajax/register",
+				type : "post",
+				data : report,
+				success : function() {
+					alert("신고가 정상적으로 접수되었습니다.")
+				},
+				error : function(){
+					alert("로그인을 하신 뒤 다시 시도해주세요.")
+				},
+				complete : function() {
+					$('#rereplyReportModal1').modal('hide');
+				}
+			});
+		});// 대댓글 신고 끝
 	});
 	</script>
 
@@ -674,7 +876,7 @@ margin-bottom: 0rem;}
 										<td id="rereplyfold">
 											<button id="rereply-fold\${replyId}"><i class="far fa-comment-dots 대댓글달기-이모티콘"></i></a>
 										</td>
-										<td colspan="3">
+										<td colspan="2">
 											<div id = "reply-text\${replyId}" class="col h6"></div>
 											<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
 												<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
@@ -685,6 +887,11 @@ margin-bottom: 0rem;}
 													</button>
 												</div>
 											</div>
+										</td>
+										<td>
+											<button id="replyreport\${list[i].id}" class="btn btn-light" style="height: fit-content;" data-toggle="modal" data-target="#replyReportModal1">
+												<i class="fas fa-exclamation-triangle"> 신고</i> 
+											</button>
 										</td>
 										</tr>
 									</tbody>
@@ -753,7 +960,7 @@ margin-bottom: 0rem;}
 											</thead>
 											<tbody id="rereplybody">
 												<tr>
-													<td colspan="4">
+													<td colspan="3">
 													<div id = "rereply-text\${relist[i].id}" class="col h6"></div>
 													<div class="input-group" id="re-input-group\${relist[i].id}" style="display:none;">
 														<textarea id="rereplyTextarea\${relist[i].id}" class="form-control re-reply-modi"></textarea>
@@ -764,6 +971,11 @@ margin-bottom: 0rem;}
 															</button>
 														</div>
 													</div>
+													</td>
+													<td>
+														<button id="rereplyreport\${relist[i].id}" class="btn btn-light" style="height: fit-content;" data-toggle="modal" data-target="#rereplyReportModal1">
+															<i class="fas fa-exclamation-triangle"> 신고</i> 
+														</button>
 													</td>
 												</tr> 
 											</tbody>
@@ -836,6 +1048,38 @@ margin-bottom: 0rem;}
 								rereplyMediaObject.find("#rereply-nickname").text(relist[i].nickname);
 								rereplyMediaObject.find("#rereply-text"+rereplyId).text(relist[i].reReply);
 								rereplyMediaObject.find("#rereply-time").text(relist[i].inserted);
+				          	
+								// 대댓글 신고하기 버튼 누르면 body의 모달로 작성자 닉네임, 내용, id 전달
+								$("#rereplyreport"+relist[i].id).click(function(e) {
+									const title = relist[i].reReply; // 대댓글내용
+									const nickname = relist[i].nickname; // 현재 댓글의 작성자
+									const rereplyId = relist[i].id// 대댓글 id
+									
+									$.ajax({
+										url : appRoot +"/reportajax/rrcount/"+rereplyId,
+										type : "get",
+										success : function(rrcnt){
+											if(rrcnt<5){
+												$("#rereplyReportSubmitButton").show();
+												$("#rereplyReportForm").show();
+												$("#rereplyReportOnProgress").hide();
+												$("#rereplyreportinput2").attr("value", nickname);
+												$("#rereplyreportinput3").attr("value", title);
+												$("#rereplyreportinput5").attr("value", rereplyId);
+												
+											} else {
+												$("#rereplyReportForm").hide();
+												$("#rereplyReportOnProgress").show();
+												$("#rereplyReportSubmitButton").hide();
+												$("#rereplyReportCancel").text("닫기");
+												$("#rereplyReportCancel").click(function(){
+													
+												});
+											}//if문 끝남
+										}//success 끝남
+									});
+								});// 대댓글 신고 끝
+				          	
 				          	}// 대댓글 for 문 종료 
 				        }
 				      });
@@ -940,6 +1184,37 @@ margin-bottom: 0rem;}
 						})
 					})//대댓글 등록하기 끝 
 					
+					// 댓글 신고하기 버튼 누르면 body의 모달로 작성자 닉네임하고 내용 전달
+					$("#replyreport"+replyId).click(function(e) {
+						const title = list[i].reply; // 댓글내용
+						const nickname = list[i].nickname; // 현재 댓글의 작성자
+						const replyId = list[i].id // 댓글id
+						
+						$.ajax({
+							url : appRoot +"/reportajax/rcount/"+replyId,
+							type : "get",
+							success : function(rcnt){
+								if(rcnt<5){
+									$("#replyReportSubmitButton").show();
+									$("#replyReportCancel").text("취소");
+									$("#replyReportForm").show();
+									$("#replyReportOnProgress").hide();
+									$("#replyreportinput2").attr("value", nickname);
+									$("#replyreportinput3").attr("value", title);
+									$("#replyreportinput5").attr("value", replyId);
+									
+								} else {
+									$("#replyReportForm").hide();
+									$("#replyReportOnProgress").show();
+									$("#replyReportSubmitButton").hide();
+									$("#replyReportCancel").text("닫기");
+									$("#replyReportCancel").click(function(){
+										
+									});
+								}
+							}
+						});
+					});// 댓글 신고 끝
 					
 	/* 				//각 댓글에 달린 대댓글 개수 세기 
 					const listReReplyCount = function() {

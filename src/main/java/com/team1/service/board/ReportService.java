@@ -27,4 +27,12 @@ public class ReportService {
 	public boolean remove(Integer id) {
 		return mapper.delete(id) == 1;
 	}
+	
+	public Integer countReplyId(Integer id) {
+		return mapper.countReplyId(id);
+	}
+	
+	public Integer countReReplyId(Integer id) {
+		return mapper.countReReplyId(id);
+	}
 }
