@@ -5,12 +5,11 @@
 
   <mapper namespace="com.team1.mapper.board.ReportMapper">
 
-	<select id="getList"
-		resultType="com.team1.domain.board.ReportVO">
+	<select id="getList" resultType="com.team1.domain.board.ReportVO">
 		SELECT
-		id, boardName, boardUrl, title, content, nickname, 
+		id, boardName, boardUrl, title, nickname, 
 		reason, reasonDetail, inserted, 
-		helpId, lifeId, newsId, questionId
+		helpId, lifeId, newsId, questionId, title, replyId, rereplyId, categories
 		FROM
 		tb_report
 		ORDER BY id DESC
@@ -20,13 +19,13 @@
 		keyColumn="id">
 		INSERT INTO
 		tb_report 
-		(boardName, boardUrl, content, nickname, 
+		(boardName, boardUrl, nickname, 
 		reason, reasonDetail, 
-		helpId, lifeId, newsId, questionId, title)
+		helpId, lifeId, newsId, questionId, title, replyId, rereplyId, categories)
 		VALUES
-		(#{boardName}, #{boardUrl}, #{content}, #{nickname}, 
+		(#{boardName}, #{boardUrl}, #{nickname}, 
 		#{reason}, #{reasonDetail}, 
-		#{helpId}, #{lifeId}, #{newsId}, #{questionId}, #{title})
+		#{helpId}, #{lifeId}, #{newsId}, #{questionId}, #{title}, #{replyId}, #{rereplyId}, #{categories})
 	</insert>
 
 	<delete id="delete">
@@ -53,22 +52,37 @@
 		helpId = #{helpId}
 	</delete>
 	
-		<delete id="deleteByLifeId">
+	<delete id="deleteByLifeId">
 		DELETE FROM tb_report
 		WHERE
 		lifeId = #{lifeId}
-		</delete>
+	</delete>
 	
-		<delete id="deleteByNewsId">
+	<delete id="deleteByNewsId">
 		DELETE FROM tb_report
 		WHERE
 		newsId = #{newsId}
-		</delete>
+	</delete>
 	
-		<delete id="deleteByQuestionId">
+	<delete id="deleteByQuestionId">
 		DELETE FROM tb_report
 		WHERE
 		questionId = #{questionId}
-		</delete>
-
+	</delete>
+	
+	<select id="countReplyId" resultType="Int">
+		SELECT
+		count(id)
+		FROM
+		tb_report
+		WHERE replyId = #{replyId}
+	</select>
+	
+	<select id="countReReplyId" resultType="Int">
+		SELECT
+		count(id)
+		FROM
+		tb_report
+		WHERE rereplyId = #{rereplyId}
+	</select>
 </mapper>

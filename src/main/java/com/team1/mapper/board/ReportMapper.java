@@ -20,5 +20,9 @@ public interface ReportMapper {
 
 	public int deleteByQuestionId(Integer questionId);
 
+	public Integer countReplyId(Integer id);
+
+	public Integer countReReplyId(Integer id);
+
 
 }

@@ -20,6 +20,9 @@ public class ReportVO {
 	private Integer newsId;
 	private Integer questionId;
 	private String title;
+	private Integer replyId;
+	private Integer rereplyId;
+	private String categories;
 	
 	public String getInserted() {
 		return this.inserted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));

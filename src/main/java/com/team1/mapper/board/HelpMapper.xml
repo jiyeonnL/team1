@@ -120,7 +120,9 @@
 		(SELECT hu.userId FROM tb_board_help_up hu
 		WHERE hu.userId =
 		#{loginId} AND hu.postId=p.id) upposession,
-		(select count(id) from tb_report where helpId=#{id}) reportCount
+		(SELECT count(id) FROM tb_report WHERE helpId=#{id} AND categories = '게시글') reportCount
+<!-- 		(SELECT count(replyId) FROM tb_report WHERE replyId = (SELECT replyId FROM tb_report WHERE replyId is NOT NULL)) replyReportCount,
+		(SELECT count(rereplyId) FROM tb_report WHERE rereplyId = (SELECT rereplyId FROM tb_report WHERE rereplyId is NOT NULL)) rereplyReportCount -->
 		FROM
 		tb_board_help p
 		JOIN tb_user m
