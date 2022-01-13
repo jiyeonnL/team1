@@ -70,19 +70,116 @@
 		questionId = #{questionId}
 	</delete>
 	
-	<select id="countReplyId" resultType="Int">
+		<delete id="deleteByHelpReplyId">
+		DELETE FROM tb_report
+		WHERE
+		helpReplyId = #{helpReplyId}
+	</delete>
+	
+	<delete id="deleteByLifeReplyId">
+		DELETE FROM tb_report
+		WHERE
+		lifeReplyId = #{lifeReplyId}
+	</delete>
+	
+	<delete id="deleteByNewsReplyId">
+		DELETE FROM tb_report
+		WHERE
+		newsReplyId = #{newsReplyId}
+	</delete>
+	
+	<delete id="deleteByQuestionReplyId">
+		DELETE FROM tb_report
+		WHERE
+		questionReplyId = #{questionReplyId}
+	</delete>
+	
+		<delete id="deleteByHelpReReplyId">
+		DELETE FROM tb_report
+		WHERE
+		helpReReplyId = #{helpReReplyId}
+	</delete>
+	
+	<delete id="deleteByLifeReReplyId">
+		DELETE FROM tb_report
+		WHERE
+		lifeReReplyId = #{lifeReReplyId}
+	</delete>
+	
+	<delete id="deleteByNewsReReplyId">
+		DELETE FROM tb_report
+		WHERE
+		newsReReplyId = #{newsReReplyId}
+	</delete>
+	
+	<delete id="deleteByQuestionReReplyId">
+		DELETE FROM tb_report
+		WHERE
+		questionReReplyId = #{questionReReplyId}
+	</delete>
+	
+	<select id="countHelpReplyId" resultType="Int">
 		SELECT
 		count(id)
 		FROM
 		tb_report
-		WHERE replyId = #{replyId}
+		WHERE helpReplyId = #{helpReplyId}
 	</select>
 	
-	<select id="countReReplyId" resultType="Int">
+	<select id="countLifeReplyId" resultType="Int">
 		SELECT
 		count(id)
 		FROM
 		tb_report
-		WHERE rereplyId = #{rereplyId}
+		WHERE lifeReplyId = #{lifeReplyId}
 	</select>
+	
+	<select id="countNewsReplyId" resultType="Int">
+		SELECT
+		count(id)
+		FROM
+		tb_report
+		WHERE newsReplyId = #{newsReplyId}
+	</select>
+	
+	<select id="countQuestionReplyId" resultType="Int">
+		SELECT
+		count(id)
+		FROM
+		tb_report
+		WHERE questionReplyId = #{questionReplyId}
+	</select>
+	
+	<select id="countHelpReReplyId" resultType="Int">
+		SELECT
+		count(id)
+		FROM
+		tb_report
+		WHERE helpReReplyId = #{helpReReplyId}
+	</select>
+	
+	<select id="countLifeReReplyId" resultType="Int">
+		SELECT
+		count(id)
+		FROM
+		tb_report
+		WHERE lifeReReplyId = #{lifeReReplyId}
+	</select>
+	
+	<select id="countNewsReReplyId" resultType="Int">
+		SELECT
+		count(id)
+		FROM
+		tb_report
+		WHERE newsReReplyId = #{newsReReplyId}
+	</select>
+	
+	<select id="countQuestionReReplyId" resultType="Int">
+		SELECT
+		count(id)
+		FROM
+		tb_report
+		WHERE questionReReplyId = #{questionReReplyId}
+	</select>
+
 </mapper>

@@ -61,7 +61,7 @@ public class HelpReReplyController {
 		logged = (UserVO) session.getAttribute("loginUser");
 		
 		HelpReReplyVO old = service.readById(id);
-		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만 또는 관리자일 때
+		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만
 		if ((logged !=null && logged.getNickname().equals(old.getNickname()))&& (logged.getWithdrawal().equals("X"))) { // 관리자 권한 ||logged.getAdminQuali()==1
 			// 업데이트
 			old.setReReply(rereply.getReReply());
@@ -82,7 +82,7 @@ public class HelpReReplyController {
 		// 댓글 조회
 		HelpReReplyVO old = service.readById(id);
 		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만 또는 관리자일 때
-		if ((logged !=null && logged.getNickname().equals(old.getNickname()))&& (logged.getWithdrawal().equals("X"))) {
+		if (((logged !=null && logged.getNickname().equals(old.getNickname()))&& (logged.getWithdrawal().equals("X"))) || logged.getAdminQuali()==1) {
 			// 삭제
 			service.remove(id);
 			

@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.team1.domain.board.HelpReplyVO;
 import com.team1.mapper.board.HelpReReplyMapper;
 import com.team1.mapper.board.HelpReplyMapper;
+import com.team1.mapper.board.ReportMapper;
+
 import lombok.Setter;
 
 @Service
@@ -19,6 +21,9 @@ public class HelpReplyService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private HelpReReplyMapper helpReReplyMapper;
+	
+	@Setter(onMethod_=@Autowired)
+	private ReportMapper reportMapper;
 	
 	public List<HelpReplyVO> list(Integer boardId) {
 		return mapper.list(boardId);
@@ -52,6 +57,9 @@ public class HelpReplyService {
 	public boolean delete(Integer ID) {
 		//댓글에 달린 대댓글 지우기
 		helpReReplyMapper.deleteByReplyId(ID);
+		
+		//댓글의 신고내역 지우기
+		reportMapper.deleteByHelpReplyId(ID);
 	
 		//댓글 지우기 
 		return mapper.delete(ID) == 1;

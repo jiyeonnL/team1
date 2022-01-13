@@ -19,9 +19,15 @@ public class ReportVO {
 	private Integer lifeId;
 	private Integer newsId;
 	private Integer questionId;
+	private Integer helpReplyId;
+	private Integer lifeReplyId;
+	private Integer newsReplyId;
+	private Integer questionReplyId;
+	private Integer helpReReplyId;
+	private Integer lifeReReplyId;
+	private Integer newsReReplyId;
+	private Integer questionReReplyId;
 	private String title;
-	private Integer replyId;
-	private Integer rereplyId;
 	private String categories;
 	
 	public String getInserted() {
