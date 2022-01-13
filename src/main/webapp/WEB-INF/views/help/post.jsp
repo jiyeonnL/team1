@@ -458,7 +458,7 @@ padding-inline
 						</div>
 					</c:if>
 				</div>
-				<div id="replyListContainer"></div>
+				<div id="replyListContainer" ></div>
 				</div>
 			</div>
 		</div>
@@ -936,8 +936,8 @@ padding-inline
 										<td id="rereplyfold">
 											<button class="대댓글-작성-이모티콘" id="rereply-fold\${replyId}"><i class="far fa-comment-dots fa-2x 대댓글달기-이모티콘"></i></a>
 										</td>
-										<td colspan="2" style="vertical-align: bottom;">
-											<div id = "reply-text\${replyId}" class="col h6"></div>
+										<td colspan="2">
+											<div id = "reply-text\${replyId}" class="col h6" style="white-space: pre-wrap; overflow: auto"></div>
 											<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
 												<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
 												<div class="input-group-append">
@@ -1048,20 +1048,27 @@ padding-inline
 								
 								//대댓글 수정 등록 버튼 
 								rereplyMediaObject.find("#sendReReplyMd" + relist[i].id).click(function() {
-									const rereply = rereplyMediaObject.find("#rereplyTextarea"+relist[i].id).val();
-									const data =  {
-											reReply : rereply		
-									};
-									//대댓글 수정 요청 
-									$.ajax({
-										url : appRoot + "/helprereply/" + relist[i].id,
-										type : "put",
-										contentType : "application/json",
-										data : JSON.stringify(data),
-										complete : function() {
-											listReReply();
-										}
-									});
+									// 댓글 공백 감지
+									var replyText = $("#rereplyTextarea"+relist[i].id).val();
+									if(replyText.replace(/\s|　/gi, "").length==0){
+							  			alert("내용을 입력해주세요.");
+							  			$("#rereplyTextarea"+relist[i].id).focus();
+						  			} else {
+										const rereply = rereplyMediaObject.find("#rereplyTextarea"+relist[i].id).val();
+										const data =  {
+												reReply : rereply		
+										};
+										//대댓글 수정 요청 
+										$.ajax({
+											url : appRoot + "/helprereply/" + relist[i].id,
+											type : "put",
+											contentType : "application/json",
+											data : JSON.stringify(data),
+											complete : function() {
+												listReReply();
+											}
+										});
+						  			}
 								});//대댓글 수정 등록 버튼 끝
 								rereplyMediaObject.find(".rereply-nickname").append(relist[i].nickname);
 								rereplyMediaObject.find(".rereply-body").text(relist[i].reReply);
@@ -1149,20 +1156,27 @@ padding-inline
 					
 					//댓글 수정 등록 버튼 
 					replyMediaObject.find("#sendReply" + list[i].id).click(function() {
-						const reply = replyMediaObject.find("#replyTextarea"+list[i].id).val();
-						const data =  {
-								reply : reply		
-						};
-						//댓글 수정 요청 
-						$.ajax({
-							url : appRoot + "/helpreply/" + list[i].id,
-							type : "put",
-							contentType : "application/json",
-							data : JSON.stringify(data),
-							complete : function() {
-								listReply();
-							}
-						});
+						// 댓글 공백 감지
+						var replyText = $("#replyTextarea"+list[i].id).val();
+						if(replyText.replace(/\s|　/gi, "").length==0){
+				  			alert("내용을 입력해주세요.");
+				  			$("#replyTextarea"+list[i].id).focus();
+			  			} else {
+							const reply = replyMediaObject.find("#replyTextarea"+list[i].id).val();
+							const data =  {
+									reply : reply		
+							};
+							//댓글 수정 요청 
+							$.ajax({
+								url : appRoot + "/helpreply/" + list[i].id,
+								type : "put",
+								contentType : "application/json",
+								data : JSON.stringify(data),
+								complete : function() {
+									listReply();
+								}
+							});
+			  			}
 					});//댓글 수정 등록 버튼 끝
 					replyMediaObject.find(".reply-nickName").append(list[i].nickName);
 					replyMediaObject.find(".reply-body").text(list[i].reply);
@@ -1212,37 +1226,44 @@ padding-inline
 					
 					  //대댓글 등록하기 
 					$("#sendReReply"+list[i].id).click(function() {
-						const rereply =$("#rereplyTextarea"+list[i].id).val();
-						const memberId = '${sessionScope.loginUser.id}';
-						const replyId = list[i].id;
-						const nickname = '${sessionScope.loginUser.nickname}';
-						const boardId = '${post.id}';
-						const data = {
-								boardId : boardId,
-								reReply : rereply,
-								uid : memberId,
-								replyId : replyId,
-								nickname : nickname
-						};
-						
-						$.ajax({
-							url : appRoot+ "/helprereply/write",
-							type : "post",
-							data : data,
-							success : function() {
-								// textarea reset
-								$("#rereplyTextarea"+list[i].id).val(""); 
-							},
-							error : function(){
-								alert("Logged out! Please login again!");
-							},
-							complete : function() {
-								//refresh
-								listReReply();
-								//listReReplyCount();
-								//countInBoard();
-							}
-						})
+						// 댓글 공백 감지
+						var replyText = $("#rereplyTextarea"+list[i].id).val();
+						if(replyText.replace(/\s|　/gi, "").length==0){
+				  			alert("내용을 입력해주세요.");
+				  			$("#rereplyTextarea"+list[i].id).focus();
+			  			} else {
+							const rereply =$("#rereplyTextarea"+list[i].id).val();
+							const memberId = '${sessionScope.loginUser.id}';
+							const replyId = list[i].id;
+							const nickname = '${sessionScope.loginUser.nickname}';
+							const boardId = '${post.id}';
+							const data = {
+									boardId : boardId,
+									reReply : rereply,
+									uid : memberId,
+									replyId : replyId,
+									nickname : nickname
+							};
+							
+							$.ajax({
+								url : appRoot+ "/helprereply/write",
+								type : "post",
+								data : data,
+								success : function() {
+									// textarea reset
+									$("#rereplyTextarea"+list[i].id).val(""); 
+								},
+								error : function(){
+									alert("Logged out! Please login again!");
+								},
+								complete : function() {
+									//refresh
+									listReReply();
+									//listReReplyCount();
+									//countInBoard();
+								}
+							});
+			  			}
 					})//대댓글 등록하기 끝 
 					
 					// 댓글 신고하기 버튼 누르면 body의 모달로 작성자 닉네임하고 내용 전달
@@ -1277,6 +1298,8 @@ padding-inline
 						});
 					});// 댓글 신고 끝
 					
+					
+					
 	/* 				//각 댓글에 달린 대댓글 개수 세기 
 					const listReReplyCount = function() {
 						$.ajax({
@@ -1304,34 +1327,41 @@ padding-inline
 	    
 		//댓글 등록 
 		$("#sendReply").click(function() {
-			const reply =$("#replyTextarea").val();
-			const memberId = '${sessionScope.loginUser.id}';
-			const boardId = '${post.id}';
-			const nickname = '${sessionScope.loginUser.nickname}';
-			const data = {
-					reply : reply,
-					uid : memberId,
-					boardId : boardId,
-					nickname : nickname
-			};
-			
-			$.ajax({
-				url : appRoot+ "/helpreply/write",
-				type : "post",
-				data : data,
-				success : function() {
-					// textarea reset
-					$("#replyTextarea").val(""); 
-				},
-				error : function(){
-					alert("Logged out! Please login again!");
-				},
-				complete : function() {
-					// list refresh
-					listReply();
-					listReplyCount();
-				}
-			})
+			// 댓글 공백 감지
+			var replyText = $("#replyTextarea").val();
+			if(replyText.replace(/\s|　/gi, "").length==0){
+	  			alert("내용을 입력해주세요.");
+	  			$("#replyTextarea").focus();
+  			} else {
+	  			const reply =$("#replyTextarea").val();
+				const memberId = '${sessionScope.loginUser.id}';
+				const boardId = '${post.id}';
+				const nickname = '${sessionScope.loginUser.nickname}';
+				const data = {
+						reply : reply,
+						uid : memberId,
+						boardId : boardId,
+						nickname : nickname
+				};
+				
+				$.ajax({
+					url : appRoot+ "/helpreply/write",
+					type : "post",
+					data : data,
+					success : function() {
+						// textarea reset
+						$("#replyTextarea").val(""); 
+					},
+					error : function(){
+						alert("Logged out! Please login again!");
+					},
+					complete : function() {
+						// list refresh
+						listReply();
+						listReplyCount();
+					}
+				});
+  			}
 		});//댓글전송
 		
 	/* 	//게시판에 달린 대댓글 개수 세기 (댓글수와 합칠 용도)
