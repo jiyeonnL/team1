@@ -24,7 +24,8 @@ ON
 	r.nickname = u.nickname
 WHERE
 	r.replyId = #{replyId} AND 
-	u.withdrawal = 'X';
+	u.withdrawal = 'X'
+	ORDER BY r.id
   </select>
   
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">

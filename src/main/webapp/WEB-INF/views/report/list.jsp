@@ -17,8 +17,6 @@
 	padding-top: 5px;
 	padding-bottom: 10px;
 	margin-bottom: 0px;
-	border-bottom: solid;
-	border-bottom-color: lightgray;
 	letter-spacing: 2px;
 }
 
@@ -40,33 +38,71 @@
 .align{
 	float: left;
 }
+.custom-select{
+	width : 30%;
+}
+#body {
+	/* height: calc(100vh-72px); */
+	width: 100%;
+	justify-content: center;
+	display: flex;
+}
+
+#inner {
+	width: 900px;
+	height: 100%;
+}
+#limit{
+	display: inline-block;
+	width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 </style>
 </head>
 <body>
 	<b:header></b:header>
+	
+	<div id="body">
+		<div id="inner">
+	
 	<b:innerNav></b:innerNav>
 
 	<h1 class="title">신고관리 게시판</h1>
 	
-	<div id="reportList"></div>
+	<br/>
+	
+ 	<form method="get">
+		<select class="custom-select" id="category" style="height: 100%" name="category" onchange="this.form.submit()">
+			<option value="" <c:if test="${category eq '' || empty category}">selected</c:if>>전체보기</option>
+			<option value="게시글" <c:if test="${category eq '게시글'}">selected</c:if>>게시글 신고</option>
+			<option value="댓글" <c:if test="${category eq '댓글'}">selected</c:if>>댓글 신고</option>
+		</select>
+	</form>
+
+	<br/>
 
  	<table class="table">
 		<thead>
 			<tr>
 				<th>게시판</th>
-				<th>신고 게시글</th>
+				<th>유형</th>
+				<th>내용</th>
 				<th>작성자</th>
-				<th>신고 사유</th>
-				<th>신고 접수시간</th>
-				<th>신고내역 삭제</th>
+				<th>사유</th>
+				<th>접수시간</th>
+				<th>신고삭제</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${list }" var="board">
+			<c:if test="${category eq board.categories || category eq '' || empty category }">
 					<tr>
 						<td>${board.boardName }</td>
+						<td>${board.categories }</td>
 						<td>
-						<a href="${board.boardUrl }">${board.title }</a>
+						<a href="${board.boardUrl }"  id="limit"><c:out value="${board.title }" /></a>
 						</td>
 						<td>${board.nickname }</td>
 						<td>
@@ -85,9 +121,12 @@
 						<button id="removeButton${board.id }" data-href="${pageContext.request.contextPath }/report/delete/${board.id }" data-toggle="modal" data-target="#confirmModal1" class="btn btn-danger removeButton" ><i class="fas fa-trash"> 삭제</i></button>
 						</td>
 					</tr>
+					</c:if>
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
+</div>
 
 	<!-- Delete Confirm Modal -->
 	<div class="modal fade" id="confirmModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

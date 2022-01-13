@@ -40,15 +40,52 @@ public class ReportController2 {
 		}
 	}
 	
-	@GetMapping("/rcount/{id}")
-	public Integer rcount(HttpSession session, @PathVariable Integer id){
-		Integer rcnt = service.countReplyId(id);
+	@GetMapping("/helprcount/{id}")
+	public Integer helprcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countHelpReplyId(id);
 		return rcnt;
 	}
 	
-	@GetMapping("/rrcount/{id}")
-	public Integer rrcount(HttpSession session, @PathVariable Integer id){
-		Integer rrcnt = service.countReReplyId(id);
-		return rrcnt;
+	@GetMapping("/lifercount/{id}")
+	public Integer lifercount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countLifeReplyId(id);
+		return rcnt;
 	}
+	
+	@GetMapping("/newsrcount/{id}")
+	public Integer newsrcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countNewsReplyId(id);
+		return rcnt;
+	}
+	
+	@GetMapping("/questionrcount/{id}")
+	public Integer questionrcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countQuestionReplyId(id);
+		return rcnt;
+	}
+	
+	@GetMapping("/helprrcount/{id}")
+	public Integer helprrcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countHelpReReplyId(id);
+		return rcnt;
+	}
+	
+	@GetMapping("/liferrcount/{id}")
+	public Integer liferrcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countLifeReReplyId(id);
+		return rcnt;
+	}
+	
+	@GetMapping("/newsrrcount/{id}")
+	public Integer newsrrcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countNewsReReplyId(id);
+		return rcnt;
+	}
+	
+	@GetMapping("/questionrrcount/{id}")
+	public Integer questionrrcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countQuestionReReplyId(id);
+		return rcnt;
+	}
+	
 }
