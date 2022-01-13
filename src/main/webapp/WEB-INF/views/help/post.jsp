@@ -99,32 +99,39 @@ a:hover {
 	margin-bottom: 10px;
 }
 
-.상세보기-제목{
-font-weight: bold;
-}
-.상세보기-업로드이미지-테두리 {
-	border: solid;
+.상세보기-제목 {
+	font-weight: bold;
 }
 
 .상세보기-업로드이미지-배경 {
 	color: black;
 	background-color: #ffe164;
 	border-top-right-radius: 8px;
-	border-top-left-radius:8px;
-	border-top:none;
-	border-bottom:none;
+	border-top-left-radius: 8px;
+	border-top: none;
+	border-top-width: 0px;
 }
-#id{
-font-size: large;
-}
-.게시글-수정-삭제,.게시글-뒤로가기{
-background-color: #264d73;
-color:white;
-font-weight: bold;
 
+.table thead th {
+	border-bottom: none;
 }
-.table th{
-border-bottom: none;
+
+#id {
+	font-size: large;
+}
+
+.상세보기-본문 {
+	font-size: large;
+}
+
+.게시글-수정-삭제, .게시글-뒤로가기 {
+	background-color: #264d73;
+	color: white;
+	font-weight: bold;
+}
+
+.table th {
+	border-bottom: none;
 }
 
 .상세보기-이미지 {
@@ -132,22 +139,53 @@ border-bottom: none;
 }
 
 /* 댓글 관련------------------------------------- */
-#replyhead{
-	background-color: #ffe164;
+table {
+	border-radius: 0.5em;
+	overflow: hidden;
 }
-#replybody{
+.table{
+margin-bottom: 0rem;}
+/* th, td {
+
+  padding: 1em;
+
+  border-bottom: 2px solid white; 
+
+} */
+#replyListContainer{
+	margin-top:16px;
+}
+.기본댓글-테이블 {
+	border-style: hidden;
+	box-shadow: 0 0 0 2px #264d73;
+	margin-bottom: 0px;
+	margin-top: 10px;
+}
+
+#userprofile {
+	height: 70px;
+	width: 70px;
+}
+
+#replyhead {
+	background-color: #264d73;
+	color: white;
+}
+
+#replybody {
 	background-color: white;
 }
+
 .replyinput {
 	padding-block: 15px;
 	padding-inline: 0px;
 }
 
-#replyTextarea{
-padding:5px;
-border: 2px solid #264d73;
-
+#replyTextarea {
+	padding: 5px;
+	border: 2px solid #264d73;
 }
+
 #sendReply {
 	margin-top: 15px;
 	height: 60px;
@@ -160,18 +198,20 @@ border: 2px solid #264d73;
 	padding-right: 0px;
 }
 
-#replynickname {
+#reply-nickname {
 	width: 460px;
+	font-weight: bold;
 }
 
 #replymenu {
 	width: 105px;
 }
 
-#replytime {
-	width: 220px;
+#reply-time {
 	vertical-align: middle;
-	font-weight: 100;
+	font-size: 17px;
+	float: right;
+	font-weight: 500;
 }
 
 #replyModify {
@@ -190,23 +230,50 @@ border: 2px solid #264d73;
 /* 댓글 관련 끝 ----------------------------------*/
 
 /* 대댓글 관련 ----------------------------------*/
-#rereplyhead{
+.대댓글-테이블 {
+	border-style: hidden;
+	box-shadow: 0 0 0 2px #264d73;
+}
+
+.대댓글-아이콘 {
+	margin: 7px;
+}
+
+.대댓글-위치 {
+	width: 97%;
+	margin-left: 35px;
+}
+
+#rereplyhead {
 	background-color: #ffe164;
 }
-#rereplybody{
+
+#rereplybody {
 	background-color: white;
 }
+
+#rereply-nickname {
+	font-weight: bold;
+}
+
+#rereply-time {
+	vertical-align: middle;
+	font-size: 17px;
+	float: right;
+	font-weight: 500;
+}
+
 .rereplyinput {
 	padding-block: 15px;
 	padding-inline: 0px;
 }
 
-.re-reply-input{
-padding:5px;
-border: 2px solid #264d73;
-
+.re-reply-input {
+	padding: 5px;
+	border: 2px solid #264d73;
 }
-.send-rereply-btn{
+
+.send-rereply-btn {
 	background-color: #ffe164;
 	color: black;
 	height: 64px;
@@ -260,7 +327,7 @@ border: 2px solid #264d73;
 
 					</div>
 					<div id="내용" class="h4 my-auto ">
-						<pre><c:out value="${post.content}" /></pre>
+						<pre class="상세보기-본문"><c:out value="${post.content}" /></pre>
 					</div>
 				</div>
 
@@ -289,7 +356,7 @@ border: 2px solid #264d73;
 
 				<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
 				<div class="md my-3">
-					<table class="table table-hover">
+					<table class="table table-borderless">
 						<thead class="thead">
 							<tr>
 								<th class="상세보기-업로드이미지-배경">Uploaded Images</th>
@@ -332,7 +399,6 @@ border: 2px solid #264d73;
 						</div>
 					</c:if>
 				</div>
-				<br>
 				<div id="replyListContainer"></div>
 				</div>
 			</div>
@@ -497,26 +563,26 @@ border: 2px solid #264d73;
 				success : function() {
 					const upviewMediaObject = $(`
 							<c:if test="${empty sessionScope.loginUser}">
-								<button id="upinsnl" class="btn btn-outline-danger">
-									<i id="upiconnl" class="far fa-heart fa-fw fa-2x m-r-3"> </i>
-								</button>
-							</c:if>
-							<c:if test="${empty post.upposession&&not empty sessionScope.loginUser}">
-								<button id="upins" class="btn btn-outline-dark">
-									<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
-								</button>
-								<button id="updel" class="btn btn-outline-light" style ="background-color:#264d73; display:none;">
-									<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
-								</button>
-							</c:if>
-							<c:if test="${not empty post.upposession&&not empty sessionScope.loginUser}">
-								<button id="upins" class="btn btn-outline-dark" style="display:none;">
-									<i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3" > </i> 
-								</button>
-								<button id="updel" class="btn btn-outline-light" style="background-color:#264d73;">
-									<i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
-								</button>
-							</c:if>
+                            <button id="upinsnl" class="btn btn-outline-dark" >
+                                <i id="upiconnl" class="far fa-heart fa-fw fa-2x m-r-3"> </i>
+                            </button>
+                        </c:if>
+                        <c:if test="${empty post.upposession&&not empty sessionScope.loginUser}">
+                            <button id="upins" class="btn btn-outline-dark">
+                                <i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3"> </i> 
+                            </button>
+                            <button id="updel" class="btn btn-outline-light" style ="background-color:#264d73; display:none;">
+                                <i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
+                            </button>
+                        </c:if>
+                        <c:if test="${not empty post.upposession&&not empty sessionScope.loginUser}">
+                            <button id="upins" class="btn btn-outline-dark" style="display:none;">
+                                <i id="upicon" class="far fa-heart fa-fw fa-2x m-r-3" > </i> 
+                            </button>
+                            <button id="updel" class="btn btn-outline-light" style="background-color:#264d73;">
+                                <i id="downicon" class="fas fa-heart fa-fw fa-2x m-r-3"> </i> 
+                            </button>
+                        </c:if>	
 
 						`);
 				$("#upview").append(upviewMediaObject);
@@ -586,27 +652,27 @@ border: 2px solid #264d73;
 					const replyId = list[i].id;
 					const replyMediaObject = $(`
 							
-							<table class="table table-bordered">
+							<table class="table table-borderless 기본댓글-테이블">
 								<thead id="replyhead" class="">
 									<tr>
 										<th id="userprofile">
 												<img	id = "reply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
 										</th>
 										<th id="replynickname">
-											<div id ="reply-nickname" class="h6"></div>
+											<div id ="reply-nickname" class="h5"></div>
 										</th>
 										<th id="replymenu">
 												<div class="reply-menu"></div>
 										</th>
 										<th id="replytime">
-											<span id = "reply-time" class="h5 ms-3 mt-0 pt-0"></span>
+											<span id = "reply-time" class="ms-3 mt-0 pt-0"></span>
 										</th>
 									</tr>
 								</thead>
 								<tbody id="replybody">
 									<tr>
 										<td id="rereplyfold">
-											<button id="rereply-fold\${replyId}"><i class="fas fa-caret-down fa-2x"></i></a>
+											<button id="rereply-fold\${replyId}"><i class="far fa-comment-dots 대댓글달기-이모티콘"></i></a>
 										</td>
 										<td colspan="3">
 											<div id = "reply-text\${replyId}" class="col h6"></div>
@@ -623,7 +689,7 @@ border: 2px solid #264d73;
 										</tr>
 									</tbody>
 								</table>
-								 <table class="table table-borderless">
+								 <table class="table table-borderless ">
 		                               <tbody id="rereply-input-body">
 		                               		<tr>
 		                                		<td>
@@ -634,7 +700,7 @@ border: 2px solid #264d73;
 		                               	</tbody>
 		                           	 </table>
 								<div class="fold\${replyId}" style="display:none;">
-	                                <table class="table table-borderless">
+	                                <table class="table table-borderless ">
 	                                	<thead id="rereply-input-head">
 	                                		<tr>
 	                            				<c:if test="${not empty sessionScope.loginUser }">
@@ -664,22 +730,24 @@ border: 2px solid #264d73;
 				          	for (let i = 0; i < relist.length; i++) {
 								const rereplyId = relist[i].id;
 								const rereplyMediaObject = $(`
-	                                    <div class="">
-					                    <i class="fa fa-share"></i>
-										<table class="table table-borderless">
+	                                    <div class="대댓글-위치">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-right 대댓글-아이콘" viewBox="0 0 16 16">
+										  <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+										</svg>
+										<table class="table table-borderless 대댓글-테이블">
 											<thead id="rereplyhead">
 												<tr>
 													<th id="userprofile">
 														<img	id = "rereply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
 													</th>
 													<th id="rereplynickname">
-														<div id ="rereply-nickname" class="h6"></div>
+														<div id ="rereply-nickname" class="h5"></div>
 													</th>
 													<th id="rereplymenu">
 														<div class="rereply-menu"></div>
 													</th>
 													<th id="rereplytime">
-														<span id = "rereply-time" class="h5 ms-3 mt-0 pt-0"></span>
+														<span id = "rereply-time" class="ms-3 mt-0 pt-0"></span>
 													</th>
 												</tr>
 											</thead>
@@ -749,7 +817,7 @@ border: 2px solid #264d73;
 									const reremoveButton = $("<button id='rereplyDelete' class='btn btn-outline-danger'><i class='far fa-trash-alt'></i></button>");
 									const blank = $(" ");
 									reremoveButton.click(function(){
-										if (confirm("Sure you want to delete?")){
+										if (confirm("정말 삭제하시겠습니까?")){
 											$.ajax({
 												url : appRoot +"/helprereply/"+relist[i].id,
 												type : "delete",
