@@ -192,75 +192,139 @@
             display: flex;
             justify-content: center;
             align-items: center;
+/*             -webkit-animation: jello-vertical 0.9s 4.0s both;
+            animation: jello-vertical 0.9s 4.0s both; */
         }
 
-        .visual .logo-text .letter {
+        @-webkit-keyframes jello-vertical {
+            0% {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+
+            30% {
+                -webkit-transform: scale3d(0.75, 1.25, 1);
+                transform: scale3d(0.75, 1.25, 1);
+            }
+
+            40% {
+                -webkit-transform: scale3d(1.25, 0.75, 1);
+                transform: scale3d(1.25, 0.75, 1);
+            }
+
+            50% {
+                -webkit-transform: scale3d(0.85, 1.15, 1);
+                transform: scale3d(0.85, 1.15, 1);
+            }
+
+            65% {
+                -webkit-transform: scale3d(1.05, 0.95, 1);
+                transform: scale3d(1.05, 0.95, 1);
+            }
+
+            75% {
+                -webkit-transform: scale3d(0.95, 1.05, 1);
+                transform: scale3d(0.95, 1.05, 1);
+            }
+
+            100% {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
         }
+
+        @keyframes jello-vertical {
+            0% {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+
+            30% {
+                -webkit-transform: scale3d(0.75, 1.25, 1);
+                transform: scale3d(0.75, 1.25, 1);
+            }
+
+            40% {
+                -webkit-transform: scale3d(1.25, 0.75, 1);
+                transform: scale3d(1.25, 0.75, 1);
+            }
+
+            50% {
+                -webkit-transform: scale3d(0.85, 1.15, 1);
+                transform: scale3d(0.85, 1.15, 1);
+            }
+
+            65% {
+                -webkit-transform: scale3d(1.05, 0.95, 1);
+                transform: scale3d(1.05, 0.95, 1);
+            }
+
+            75% {
+                -webkit-transform: scale3d(0.95, 1.05, 1);
+                transform: scale3d(0.95, 1.05, 1);
+            }
+
+            100% {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+
+
+        .visual .logo-text .letter {}
 
         .visual .letter.delay-0 {
 
-            -webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.8s both;
-            animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.8s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.8s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.8s both;
         }
 
         .visual .letter.delay-1 {
 
-            -webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.0s both;
-            animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.0s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.9s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.9s both;
         }
 
         .visual .letter.delay-2 {
 
-            -webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.2s both;
-            animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.2s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.0s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.0s both;
         }
 
         .visual .letter.delay-3 {
 
-            -webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.4s both;
-            animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.4s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.1s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.1s both;
         }
 
         .visual .letter.delay-4 {
 
-            -webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.6s both;
-            animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.6s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.2s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.2s both;
         }
 
         .visual .letter.delay-5 {
 
-            -webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.8s both;
-            animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.8s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.3s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.3s both;
         }
 
-        @-webkit-keyframes flip-horizontal-bottom {
-            0% {
-                -webkit-transform: rotateX(0);
-                transform: rotateX(0);
-            }
+        @-webkit-keyframes text-color {
+            0% {}
 
             100% {
-                -webkit-transform: rotateX(-360deg);
-                transform: rotateX(-360deg);
-                color: yellowgreen;
+                color: yellow;
             }
         }
 
-        @keyframes flip-horizontal-bottom {
-            0% {
-                -webkit-transform: rotateX(0);
-                transform: rotateX(0);
-            }
+        @keyframes text-color {
+            0% {}
 
             100% {
-                -webkit-transform: rotateX(-360deg);
-                transform: rotateX(-360deg);
-                color: yellowgreen;
+                color: yellow;
             }
         }
-
-
-
 
         /* 소개 타이틀 */
         .visual .title {
@@ -452,6 +516,8 @@
             background-color: #333;
             color: #fff;
         } */
+    </style>
+
     </style>
        
 </head>
