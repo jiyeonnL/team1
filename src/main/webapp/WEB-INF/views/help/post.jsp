@@ -119,7 +119,7 @@ a:hover {
 	font-size: large;
 }
 
-.게시글-수정-삭제, .게시글-뒤로가기 {
+.게시글-수정-삭제, .게시글-목록가기 {
 	background-color: #264d73;
 	color: white;
 	font-weight: bold;
@@ -397,7 +397,7 @@ padding-inline
 					</div>
 				</div>
 
-				<!-- 버튼 메뉴, 수정/삭제, 뒤로 -->
+				<!-- 버튼 메뉴, 수정/삭제, 목록 -->
 				<div id="buttonmenu" class="row d-flex justify-content-between">
 					<div class="col-md-auto my-auto px-auto ">
 						<c:if test="${sessionScope.loginUser.id eq post.memberId || sessionScope.loginUser.adminQuali eq 1 }">
@@ -407,8 +407,8 @@ padding-inline
 					</div>
 
 					<div class="col-md-auto my-auto px-auto">
-						<a href="${pageContext.request.contextPath }/help/list" class="btn btn-outline-secondary 게시글-뒤로가기">
-							<i class="fas fa-list"> 뒤로</i>
+						<a href="${pageContext.request.contextPath }/help/list" class="btn btn-outline-secondary 게시글-목록가기">
+							<i class="fas fa-list"> 목록</i>
 						</a>
 					</div>
 				</div>
@@ -937,7 +937,7 @@ padding-inline
 											<button class="대댓글-작성-이모티콘" id="rereply-fold\${replyId}"><i class="far fa-comment-dots fa-2x 대댓글달기-이모티콘"></i></a>
 										</td>
 										<td colspan="2">
-											<div id = "reply-text\${replyId}" class="col h6" style="white-space: pre-wrap; overflow: auto"></div>
+											<div id = "reply-text\${replyId}" class="col h6" style="white-space: pre-wrap; overflow: initial"></div>
 											<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
 												<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
 												<div class="input-group-append">
@@ -956,6 +956,26 @@ padding-inline
 										</tr>
 									</tbody>
 								</table>
+								<div class="fold\${replyId}" style="display:none;">
+	                                <table class="table table-borderless ">
+	                                	<thead id="rereply-input-head">
+	                                		<tr>
+	                            				<c:if test="${not empty sessionScope.loginUser }">
+		                                			<th>
+		                                				<div class="rereplyinput input-group 대댓글인풋-전체박스">
+		                                    				<textarea id="rereplyTextarea\${list[i].id}" class="form-control re-reply-input" placeholder="대댓글을 남겨보세요!"></textarea>
+							                                <div class="col-2 input-group-append">
+							                                    <button id="sendReReply\${list[i].id}" class="btn btn-block send-rereply-btn 상세보기-대댓글-전송이모티콘">
+							                                        <i class="far fa-paper-plane fa-2x my-auto"></i>
+							                                    </button>
+							                                </div>
+		                                				</div>
+		                                			</th>
+	                          					</c:if>
+	                                		</tr>
+	                                	</thead>
+	                                </table>
+                               </div>
 								 <table class="table table-borderless ">
 		                               <tbody id="rereply-input-body">
 		                               		<tr>
@@ -966,26 +986,6 @@ padding-inline
 		                                	</tr>
 		                               	</tbody>
 		                           	 </table>
-								<div class="fold\${replyId}" style="display:none;">
-	                                <table class="table table-borderless ">
-	                                	<thead id="rereply-input-head">
-	                                		<tr>
-	                            				<c:if test="${not empty sessionScope.loginUser }">
-	                                			<th>
-	                                				<div class="rereplyinput input-group 대댓글인풋-전체박스">
-	                                    				<textarea id="rereplyTextarea\${list[i].id}" class="form-control re-reply-input" placeholder="대댓글을 남겨보세요!"></textarea>
-						                                <div class="col-2 input-group-append">
-						                                    <button id="sendReReply\${list[i].id}" class="btn btn-block send-rereply-btn 상세보기-대댓글-전송이모티콘">
-						                                        <i class="far fa-paper-plane fa-2x my-auto"></i>
-						                                    </button>
-						                                </div>
-	                                				</div>
-	                                			</th>
-	                          				</c:if>
-	                                		</tr>
-	                                	</thead>
-	                                </table>
-	                               </div>
 						`);
 					
 				    // 대댓글 리스트 함수 
@@ -1022,7 +1022,7 @@ padding-inline
 											<tbody id="rereplybody">
 												<tr>
 													<td colspan="3" class="대댓글-내용" style="vertical-align: bottom;">
-													<div id = "rereply-text\${relist[i].id}" class="col h6"></div>
+													<div id = "rereply-text\${relist[i].id}" class="col h6" style="white-space: pre-wrap; overflow: initial"></div>
 													<div class="input-group" id="re-input-group\${relist[i].id}" style="display:none;">
 														<textarea id="rereplyTextarea\${relist[i].id}" class="form-control re-reply-modi"></textarea>
 														<div class="input-group-append">
