@@ -90,11 +90,6 @@ a:hover {
 	background-color: white;
 }
 
-#userprofile {
-	height: 60px;
-	width: 60px;
-}
-
 #buttonmenu {
 	margin-bottom: 10px;
 }
@@ -140,11 +135,13 @@ a:hover {
 
 /* 댓글 관련------------------------------------- */
 table {
-	border-radius: 0.5em;
+	border-radius: 0.7em;
 	overflow: hidden;
 }
-.table{
-margin-bottom: 0rem;}
+
+.table {
+	margin-bottom: 0rem;
+}
 /* th, td {
 
   padding: 1em;
@@ -152,9 +149,10 @@ margin-bottom: 0rem;}
   border-bottom: 2px solid white; 
 
 } */
-#replyListContainer{
-	margin-top:16px;
+#replyListContainer {
+	margin-top: 16px;
 }
+
 .기본댓글-테이블 {
 	border-style: hidden;
 	box-shadow: 0 0 0 2px #264d73;
@@ -190,8 +188,18 @@ margin-bottom: 0rem;}
 	margin-top: 15px;
 	height: 60px;
 	padding-top: 12px;
-	background-color: #ffe164;
-	color: black;
+	background-color: #264d73;
+	color: white;
+}
+
+.댓글아이콘 {
+	border-bottom: solid 2px;
+	margin: 0px;
+}
+
+.댓글입력창 {
+	border-bottom: solid 2px;
+	margin: 0px;
 }
 
 .상세보기-댓글칸 {
@@ -207,6 +215,10 @@ margin-bottom: 0rem;}
 	width: 105px;
 }
 
+#replytime {
+	vertical-align: middle;
+}
+
 #reply-time {
 	vertical-align: middle;
 	font-size: 17px;
@@ -214,21 +226,19 @@ margin-bottom: 0rem;}
 	font-weight: 500;
 }
 
+.대댓글-작성-이모티콘 {
+	border: none;
+	background-color: gray;
+}
+
 #replyModify {
 	width: 40px;
 }
 
-.댓글아이콘 {
-	border-bottom: solid 2px;
-	margin: 0px;
-}
-
-.댓글입력창 {
-	border-bottom: solid 2px;
-	margin: 0px;
-}
 /* 댓글 관련 끝 ----------------------------------*/
-
+.댓글-신고버튼, .대댓글-신고버튼 {
+	float: right;
+}
 /* 대댓글 관련 ----------------------------------*/
 .대댓글-테이블 {
 	border-style: hidden;
@@ -244,6 +254,11 @@ margin-bottom: 0rem;}
 	margin-left: 35px;
 }
 
+.상세보기-대댓글-전송이모티콘 {
+	border-top-left-radius: none;
+	border-bottom-left-radius: none;
+}
+
 #rereplyhead {
 	background-color: #ffe164;
 }
@@ -256,28 +271,71 @@ margin-bottom: 0rem;}
 	font-weight: bold;
 }
 
+#rereplytime {
+	vertical-align: middle;
+}
+
 #rereply-time {
 	vertical-align: middle;
 	font-size: 17px;
 	float: right;
 	font-weight: 500;
+	vertical-align: middle;
 }
 
 .rereplyinput {
-	padding-block: 15px;
 	padding-inline: 0px;
 }
 
+}
+.rereplyinput {
+	padding-inline: 0px;
+}
+
+:middle;font-size
+	: 17px; float :
+}
+
+:
+middle;
+font-size
+:
+17px;
+float
+:
+right;
+font-weight
+:
+500;
+vertical-align
+:
+middle;
+}
+.rereplyinput
+{
+padding-inline
+:
+0px;
+}
+}
+.rereplyinput
+{
+padding-inline
+:
+0px;
+}
 .re-reply-input {
 	padding: 5px;
 	border: 2px solid #264d73;
+	margin-left: 34px;
+	padding-right:
 }
 
 .send-rereply-btn {
 	background-color: #ffe164;
 	color: black;
 	height: 64px;
-	border: 2px solid #264d73;
+	border-radius: 5px;
 }
 /* 대댓글 관련 끝 ----------------------*/
 </style>
@@ -293,7 +351,8 @@ margin-bottom: 0rem;}
 					<!-- 헤더 -->
 					<div class="row md ms-4 px-2 align-middle 상세보기-헤더 상세보기-게시물-내용">
 						<div class="col-md-1 px-1 py-0 my-0">
-							<img id="상세보기-프로필" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+							<img id="상세보기-프로필" 
+							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 						</div>
 						
 						<div class="col-md-5 my-auto h2 align-middle 상세보기-제목"> 
@@ -394,7 +453,7 @@ margin-bottom: 0rem;}
 						</div>
 						<div class="col-2 상세보기-댓글칸">
 							<button id="sendReply" class="btn btn-block d-flex justify-content-center ">
-								<i class="far fa-comment-dots fa-2x 상세보기-댓글-이모티콘"></i>
+								<i class="far fa-paper-plane fa-2x 상세보기-댓글-이모티콘"></i>
 							</button>
 						</div>
 					</c:if>
@@ -858,7 +917,8 @@ margin-bottom: 0rem;}
 								<thead id="replyhead" class="">
 									<tr>
 										<th id="userprofile">
-												<img	id = "reply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
+												<img	id = "reply-profile" 
+												src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
 										</th>
 										<th id="replynickname">
 											<div id ="reply-nickname" class="h5"></div>
@@ -874,9 +934,9 @@ margin-bottom: 0rem;}
 								<tbody id="replybody">
 									<tr>
 										<td id="rereplyfold">
-											<button id="rereply-fold\${replyId}"><i class="far fa-comment-dots 대댓글달기-이모티콘"></i></a>
+											<button class="대댓글-작성-이모티콘" id="rereply-fold\${replyId}"><i class="far fa-comment-dots fa-2x 대댓글달기-이모티콘"></i></a>
 										</td>
-										<td colspan="2">
+										<td colspan="2" style="vertical-align: bottom;">
 											<div id = "reply-text\${replyId}" class="col h6"></div>
 											<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
 												<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
@@ -889,7 +949,7 @@ margin-bottom: 0rem;}
 											</div>
 										</td>
 										<td>
-											<button id="replyreport\${list[i].id}" class="btn btn-light" style="height: fit-content;" data-toggle="modal" data-target="#replyReportModal1">
+											<button id="replyreport\${list[i].id}" class="btn btn-light 댓글-신고버튼" style="height: fit-content;" data-toggle="modal" data-target="#replyReportModal1">
 												<i class="fas fa-exclamation-triangle"> 신고</i> 
 											</button>
 										</td>
@@ -912,11 +972,11 @@ margin-bottom: 0rem;}
 	                                		<tr>
 	                            				<c:if test="${not empty sessionScope.loginUser }">
 	                                			<th>
-	                                				<div class="rereplyinput input-group">
+	                                				<div class="rereplyinput input-group 대댓글인풋-전체박스">
 	                                    				<textarea id="rereplyTextarea\${list[i].id}" class="form-control re-reply-input" placeholder="대댓글을 남겨보세요!"></textarea>
-						                                <div class="input-group-append">
-						                                    <button id="sendReReply\${list[i].id}" class="btn btn-block send-rereply-btn">
-						                                        <i class="far fa-comment-dots fa-2x my-auto"></i>
+						                                <div class="col-2 input-group-append">
+						                                    <button id="sendReReply\${list[i].id}" class="btn btn-block send-rereply-btn 상세보기-대댓글-전송이모티콘">
+						                                        <i class="far fa-paper-plane fa-2x my-auto"></i>
 						                                    </button>
 						                                </div>
 	                                				</div>
@@ -945,7 +1005,8 @@ margin-bottom: 0rem;}
 											<thead id="rereplyhead">
 												<tr>
 													<th id="userprofile">
-														<img	id = "rereply-profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
+														<img	id = "rereply-profile" 
+														src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
 													</th>
 													<th id="rereplynickname">
 														<div id ="rereply-nickname" class="h5"></div>
@@ -960,7 +1021,7 @@ margin-bottom: 0rem;}
 											</thead>
 											<tbody id="rereplybody">
 												<tr>
-													<td colspan="3">
+													<td colspan="3" class="대댓글-내용" style="vertical-align: bottom;">
 													<div id = "rereply-text\${relist[i].id}" class="col h6"></div>
 													<div class="input-group" id="re-input-group\${relist[i].id}" style="display:none;">
 														<textarea id="rereplyTextarea\${relist[i].id}" class="form-control re-reply-modi"></textarea>
@@ -973,7 +1034,7 @@ margin-bottom: 0rem;}
 													</div>
 													</td>
 													<td>
-														<button id="rereplyreport\${relist[i].id}" class="btn btn-light" style="height: fit-content;" data-toggle="modal" data-target="#rereplyReportModal1">
+														<button id="rereplyreport\${relist[i].id}" class="btn btn-light 대댓글-신고버튼" style="height: fit-content;" data-toggle="modal" data-target="#rereplyReportModal1">
 															<i class="fas fa-exclamation-triangle"> 신고</i> 
 														</button>
 													</td>
