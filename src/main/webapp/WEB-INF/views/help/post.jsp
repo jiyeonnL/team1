@@ -561,7 +561,7 @@ padding-inline
 					<form method="post" id="replyReportForm">
 						<input type="hidden" class="form-control" id="replyreportinput1" name="boardName" value="해주세요">
 						<input type="hidden" class="form-control" id="replyreportinput4" name="categories" value="댓글">
-						<input type="hidden" class="form-control" id="replyreportinput5" name="replyId" value="">
+						<input type="hidden" class="form-control" id="replyreportinput5" name="helpReply" value="">
 						<div class="form-group">
 							<label for="reportinput2">작성자</label>
 							<input type="text" class="form-control" id="replyreportinput2" name="nickname" value="" readonly>
@@ -614,7 +614,7 @@ padding-inline
 					<form method="post" id="rereplyReportForm">
 						<input type="hidden" class="form-control" id="rereplyreportinput1" name="boardName" value="해주세요">
 						<input type="hidden" class="form-control" id="rereplyreportinput4" name="categories" value="댓글">
-						<input type="hidden" class="form-control" id="rereplyreportinput5" name="rereplyId" value="">
+						<input type="hidden" class="form-control" id="rereplyreportinput5" name="helpReReplyId" value="">
 						<div class="form-group">
 							<label for="reportinput2">작성자</label>
 							<input type="text" class="form-control" id="rereplyreportinput2" name="nickname" value="" readonly>
@@ -743,7 +743,7 @@ padding-inline
 			const reason = $("#replyReportReason").val(); // select에서 선택한 신고사유
 			const reasonDetail = $("#replyReportReasonDetail").val(); // select가 '기타'일 때 사용자가 직접 입력한 신고 사유 내용
 			const helpId = '${post.id}'; // 현재 게시판의 id, 동네 소식 게시판이 된다면 newsId가 됨.
-			const replyId = $("#replyreportinput5").val();//댓글 id
+			const helpReplyId = $("#replyreportinput5").val();//댓글 id
 			const report = {
 				boardName : boardName,
 				boardUrl : boardUrl,
@@ -753,7 +753,7 @@ padding-inline
 				reason : reason,
 				reasonDetail : reasonDetail,
 				helpId : helpId,
-				replyId : replyId
+				helpReplyId : helpReplyId
 			};
 			$.ajax({
 	        	url : appRoot + "/reportajax/register",
@@ -783,7 +783,7 @@ padding-inline
 			const reason = $("#rereplyReportReason").val(); // select에서 선택한 신고사유
 			const reasonDetail = $("#rereplyReportReasonDetail").val(); // select가 '기타'일 때 사용자가 직접 입력한 신고 사유 내용
 			const helpId = '${post.id}'; // 현재 게시판의 id, 동네 소식 게시판이 된다면 newsId가 됨.
-			const rereplyId = $("#rereplyreportinput5").val();//대댓글 id
+			const helpReReplyId = $("#rereplyreportinput5").val();//대댓글 id
 			const report = {
 				boardName : boardName,
 				boardUrl : boardUrl,
@@ -793,7 +793,7 @@ padding-inline
 				reason : reason,
 				reasonDetail : reasonDetail,
 				helpId : helpId,
-				rereplyId : rereplyId,
+				helpReReplyId : helpReReplyId,
 			};
 			$.ajax({
 	        	url : appRoot + "/reportajax/register",
@@ -1121,10 +1121,10 @@ padding-inline
 								$("#rereplyreport"+relist[i].id).click(function(e) {
 									const title = relist[i].reReply; // 대댓글내용
 									const nickname = relist[i].nickname; // 현재 댓글의 작성자
-									const rereplyId = relist[i].id// 대댓글 id
+									const helpReReplyId = relist[i].id// 대댓글 id
 									
 									$.ajax({
-										url : appRoot +"/reportajax/rrcount/"+rereplyId,
+										url : appRoot +"/reportajax/rrcount/"+helpReReplyId,
 										type : "get",
 										success : function(rrcnt){
 											if(rrcnt<5){
@@ -1133,7 +1133,7 @@ padding-inline
 												$("#rereplyReportOnProgress").hide();
 												$("#rereplyreportinput2").attr("value", nickname);
 												$("#rereplyreportinput3").attr("value", title);
-												$("#rereplyreportinput5").attr("value", rereplyId);
+												$("#rereplyreportinput5").attr("value", helpReReplyId);
 												
 											} else {
 												$("#rereplyReportForm").hide();
@@ -1270,10 +1270,10 @@ padding-inline
 					$("#replyreport"+replyId).click(function(e) {
 						const title = list[i].reply; // 댓글내용
 						const nickname = list[i].nickname; // 현재 댓글의 작성자
-						const replyId = list[i].id // 댓글id
+						const helpReplyId = list[i].id // 댓글id
 						
 						$.ajax({
-							url : appRoot +"/reportajax/rcount/"+replyId,
+							url : appRoot +"/reportajax/rcount/"+helpReplyId,
 							type : "get",
 							success : function(rcnt){
 								if(rcnt<5){
@@ -1283,7 +1283,7 @@ padding-inline
 									$("#replyReportOnProgress").hide();
 									$("#replyreportinput2").attr("value", nickname);
 									$("#replyreportinput3").attr("value", title);
-									$("#replyreportinput5").attr("value", replyId);
+									$("#replyreportinput5").attr("value", helpReplyId);
 									
 								} else {
 									$("#replyReportForm").hide();
