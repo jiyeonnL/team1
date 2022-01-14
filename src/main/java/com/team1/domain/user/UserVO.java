@@ -18,8 +18,8 @@ public class UserVO {
 	private String withdrawal;
 	private Integer adminQuali;
 	
-	//파일 넣은 aws url
+	//파일 넣은 aws url => 헤더나 일부 세션에서 필요
 	private String url;
-	
+	private String fileName;
 	UserFileVO file;
 }
