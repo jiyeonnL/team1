@@ -1,5 +1,6 @@
 package com.team1.controller.user;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team1.domain.board.HelpVO;
 import com.team1.domain.board.UserPostVO;
+import com.team1.domain.user.UserFileVO;
 import com.team1.domain.user.UserVO;
 import com.team1.service.user.UserService;
 
@@ -91,6 +94,7 @@ public class UserController {
 	public String login (String email, String pw, HttpSession session, RedirectAttributes rttr, Model model) {
 		UserVO vo = service.read(email);
 		
+		
 		if(vo == null || vo.getWithdrawal() == "O") {
 			
 			if (email != null) {
@@ -128,16 +132,17 @@ public class UserController {
 	}
 	
 	@PostMapping("/signup")
-	public String signup(UserVO user, RedirectAttributes rttr) {
+	public String signup(UserVO user, MultipartFile file, RedirectAttributes rttr) 
+			throws IllegalStateException, IOException {
 		
-		boolean ok = service.register(user);
+		service.register(user, file);
+		
 		String message = "가입완료 되었습니다!!";
-		if(ok) {
-			rttr.addFlashAttribute("ok", message);
-			return "redirect:/all/list";
-		}else {
-			return "redirect:/user/signup";
-		}
+		
+		rttr.addFlashAttribute("ok", message);
+		
+		return "redirect:/all/list";
+		
 	}
 	
 	
@@ -169,41 +174,45 @@ public class UserController {
 	
 	
 	@GetMapping("/infoModify")
-	public String modify(HttpSession session) {
+	public String modify(HttpSession session, Model model) {
 
 		UserVO vo = (UserVO) session.getAttribute("loginUser");
-
-	
-		if (vo == null) {
-			return "redirect:/user/login";
-		}
 		
+		UserVO uservo = (UserVO) service.read(vo.getEmail());
+		UserFileVO file = (UserFileVO) vo.getFile();
+		
+		model.addAttribute("user", uservo);
+		model.addAttribute("file", file);
 		return null;
 	}
 	
 	@PostMapping("/infoModify")
-	public String modify(UserVO user, HttpSession session, RedirectAttributes rttr) {
+	public String modify(UserVO user, String removeFile,
+			HttpSession session, MultipartFile file, RedirectAttributes rttr) 
+			throws IllegalStateException, IOException {
 
 		UserVO vo = (UserVO) session.getAttribute("loginUser");
 
-
+		
 		if (vo == null) {
 			return "redirect:/user/login";
 		}
 		
 		
 		// 로그인된 상태
-		boolean ok = service.modify(user);
-		
-		if (!ok) {
-			rttr.addFlashAttribute("modify", "회원 정보가 변경되었습니다. 로그아웃 후에 이용해주세요!");
-			session.setAttribute("loginUser", service.read(user.getEmail()));
-		} else {
+		if(removeFile !=null) {
 			
+			service.modify(user, removeFile, file);
+		}else {
+			service.modify(user);
 		}
+		rttr.addFlashAttribute("modify", "회원 정보가 변경되었습니다. 로그아웃 후에 이용해주세요!");
+		
 
 		return "redirect:/all/list";
 	}
+	
+	
 	@GetMapping("/remove")
 	public String remove(HttpSession session) {
 

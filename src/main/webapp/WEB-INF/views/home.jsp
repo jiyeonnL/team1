@@ -36,6 +36,14 @@
    <style>
 
 
+    <style>
+        body {
+            font-weight: bold;
+            font-family: 'Jua', sans-serif;
+            "overflow-x:hidden; 
+            background-color: beige;"
+        }
+
         /* visual  */
         .header {
             background-color: burlywood;
@@ -64,7 +72,7 @@
 
             height: 100%;
             /* 왼쪽에 있는 색 -> 오른쪽에 있는 색으로 변경 */
-            background: linear-gradient(to left, white 50%, lightblue 50%) right;
+            background: linear-gradient(to left, white 50%, #ffe164 50%) right;
             background-size: 200%;
             -webkit-animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.0s both;
             animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.0s both;
@@ -110,9 +118,11 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
-            animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
+            -webkit-animation: tracking-in-expand 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
+            animation: tracking-in-expand 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
         }
+
+
 
         @-webkit-keyframes tracking-in-expand {
             0% {
@@ -187,147 +197,112 @@
 
         /* 로고 텍스트 */
         .visual .logo-text {
-
-            font-size: 6rem;
+            font-weight: bold;
+            font-family: 'Jua', sans-serif;
+            color: white;
+            font-size: 7rem;
             display: flex;
             justify-content: center;
             align-items: center;
-/*             -webkit-animation: jello-vertical 0.9s 4.0s both;
-            animation: jello-vertical 0.9s 4.0s both; */
+            -webkit-animation: text-all 0.8s 4.8s both;
+            animation: text-all 0.8s 4.8s both;
         }
 
-        @-webkit-keyframes jello-vertical {
+        @-webkit-keyframes text-all {
             0% {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-            }
-
-            30% {
-                -webkit-transform: scale3d(0.75, 1.25, 1);
-                transform: scale3d(0.75, 1.25, 1);
-            }
-
-            40% {
-                -webkit-transform: scale3d(1.25, 0.75, 1);
-                transform: scale3d(1.25, 0.75, 1);
-            }
-
-            50% {
-                -webkit-transform: scale3d(0.85, 1.15, 1);
-                transform: scale3d(0.85, 1.15, 1);
-            }
-
-            65% {
-                -webkit-transform: scale3d(1.05, 0.95, 1);
-                transform: scale3d(1.05, 0.95, 1);
-            }
-
-            75% {
-                -webkit-transform: scale3d(0.95, 1.05, 1);
-                transform: scale3d(0.95, 1.05, 1);
+                color: #9ec6ee;
+                ;
             }
 
             100% {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
+                color: #264d73;
             }
         }
 
-        @keyframes jello-vertical {
+        @keyframes text-all {
             0% {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-            }
-
-            30% {
-                -webkit-transform: scale3d(0.75, 1.25, 1);
-                transform: scale3d(0.75, 1.25, 1);
-            }
-
-            40% {
-                -webkit-transform: scale3d(1.25, 0.75, 1);
-                transform: scale3d(1.25, 0.75, 1);
-            }
-
-            50% {
-                -webkit-transform: scale3d(0.85, 1.15, 1);
-                transform: scale3d(0.85, 1.15, 1);
-            }
-
-            65% {
-                -webkit-transform: scale3d(1.05, 0.95, 1);
-                transform: scale3d(1.05, 0.95, 1);
-            }
-
-            75% {
-                -webkit-transform: scale3d(0.95, 1.05, 1);
-                transform: scale3d(0.95, 1.05, 1);
+                color: #9ec6ee;
+                ;
             }
 
             100% {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
+                color: #264d73;
             }
         }
-
-
 
         .visual .logo-text .letter {}
 
         .visual .letter.delay-0 {
 
             -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.8s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.8s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.5s both;
         }
 
         .visual .letter.delay-1 {
 
             -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.9s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.9s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.6s both;
         }
 
         .visual .letter.delay-2 {
 
             -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.0s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.0s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.7s both;
         }
 
         .visual .letter.delay-3 {
 
             -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.1s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.1s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.8s both;
         }
 
         .visual .letter.delay-4 {
 
             -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.2s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.2s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.9s both;
         }
 
         .visual .letter.delay-5 {
 
             -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.3s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.3s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 4.0s both;
         }
 
+        /* 개별 글자에 적용 */
         @-webkit-keyframes text-color {
-            0% {}
+            0% {
+                color: #9ec6ee;
+            }
+
+            50% {
+                color: #264d73;
+            }
 
             100% {
-                color: yellow;
+                color: inherit;
             }
         }
 
         @keyframes text-color {
-            0% {}
+            0% {
+                color: #9ec6ee;
+            }
+
+            50% {
+                color: #264d73;
+            }
 
             100% {
-                color: yellow;
+                color: inherit;
             }
         }
 
+
+
         /* 소개 타이틀 */
         .visual .title {
+                    font-weight: bold;
+            font-family: 'Jua', sans-serif;
             position: absolute;
             top: 70%;
             left: 50%;
@@ -337,6 +312,8 @@
 
         /* 소개 서브타이틀 */
         .visual .subTitle {
+                    font-weight: bold;
+            font-family: 'Jua', sans-serif;
 
             position: absolute;
             top: 75%;
@@ -361,7 +338,7 @@
             display: flex;
             width: 100%;
             height: 400px;
-            background-color: aquamarine;
+            background-color: #264d73;
         }
 
         /* 커버 이미지 담는 div 영역 */
@@ -452,6 +429,8 @@
 
         /* a 링크를 버튼으로 만들고 hover 시 효과 부여 */
         .button {
+            text-align: center;
+            justify-content: center;
             text-decoration: none;
             margin-top: 10px;
             width: 150px;
@@ -459,13 +438,13 @@
             padding: 8px 16px;
             border-radius: 4px;
             cursor: pointer;
-            border: 2px solid orangeRed;
-            background: linear-gradient(45deg, #fff 50%, orangeRed 50%);
+            border: 2px solid black;
+            background: linear-gradient(45deg, black 50%, black 50%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
 
-            color: #fff;
+            color: black;
             /*For IE*/
         }
 
@@ -476,7 +455,8 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(45deg, orangeRed 50%, transparent 50%);
+            background: linear-gradient(45deg,
+                    #ffe164 50%, transparent 50%);
             z-index: -1;
         }
 
@@ -492,7 +472,6 @@
             background-position: 0;
             font-size: 1.1em;
 
-            color: orangeRed;
             /*For IE*/
         }
 
@@ -517,8 +496,6 @@
             color: #fff;
         } */
     </style>
-
-    </style>
        
 </head>
 
@@ -532,15 +509,15 @@
 
             <div class="logo">
                 <div class="logo-container">
-                    아이콘
+                    	아이콘
                 </div>
                 <div class="logo-text">
-                    <div class = "letter delay-0">사</div>
-                    <div class = "letter delay-1">용</div>
-                    <div class = "letter delay-2">할</div>
-                    <div class = "letter delay-3">로</div>
-                    <div class = "letter delay-4">고</div>
-                    <div class = "letter delay-5">명</div>
+                    <div class="letter delay-0">사</div>
+                    <div class="letter delay-1">용</div>
+                    <div class="letter delay-2">할</div>
+                    <div class="letter delay-3">로</div>
+                    <div class="letter delay-4">고</div>
+                    <div class="letter delay-5">명</div>
                 </div>
             </div>
 
@@ -561,7 +538,7 @@
                     alt="newsImage" />
             </div>
             <div class="text-left back-to-position to-left delay-1">
-                news 게시판 소개하는 안내문
+                이웃들과 나누고 싶은 새로운 소식이 있나요?
                 <a href="javascript:void(0)" class="button">바로가기</a>
             </div>
         </div>
@@ -575,16 +552,12 @@
                     alt="newsImage" />
             </div>
             <div class="text-right back-to-position to-right delay-1">
-                help 게시판 소개하는 안내문
+                도움이 필요하신가요? 이웃들에게 부탁해보세요!
                 <a href="javascript:void(0)" class="button">바로가기</a>
             </div>
 
         </div>
     </section>
-
-
-
-
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
 </body>
