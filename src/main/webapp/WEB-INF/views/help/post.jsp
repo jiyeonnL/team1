@@ -624,6 +624,7 @@ max-width:50%;
 					<form method="post" id="rereplyReportForm">
 						<input type="hidden" class="form-control" id="rereplyreportinput1" name="boardName" value="해주세요">
 						<input type="hidden" class="form-control" id="rereplyreportinput4" name="categories" value="댓글">
+						<input type="hidden" class="form-control" id="rereplyreportinput6" name="helpReplyId" value="">
 						<input type="hidden" class="form-control" id="rereplyreportinput5" name="helpReReplyId" value="">
 						<div class="form-group">
 							<label for="reportinput2">작성자</label>
@@ -794,6 +795,7 @@ max-width:50%;
 			const reason = $("#rereplyReportReason").val(); // select에서 선택한 신고사유
 			const reasonDetail = $("#rereplyReportReasonDetail").val(); // select가 '기타'일 때 사용자가 직접 입력한 신고 사유 내용
 			const helpId = '${post.id}'; // 현재 게시판의 id, 동네 소식 게시판이 된다면 newsId가 됨.
+			const helpReplyId = $("#rereplyreportinput6").val();//댓글 id
 			const helpReReplyId = $("#rereplyreportinput5").val();//대댓글 id
 			const report = {
 				boardName : boardName,
@@ -805,7 +807,9 @@ max-width:50%;
 				reasonDetail : reasonDetail,
 				helpId : helpId,
 				helpReReplyId : helpReReplyId,
+				helpReplyId : helpReplyId
 			};
+			console.log(report);
 			$.ajax({
 	        	url : appRoot + "/reportajax/register",
 				type : "post",
@@ -1132,8 +1136,9 @@ max-width:50%;
 								$("#rereplyreport"+relist[i].id).click(function(e) {
 									const title = relist[i].reReply; // 대댓글내용
 									const nickname = relist[i].nickname; // 현재 댓글의 작성자
-									const helpReReplyId = relist[i].id// 대댓글 id
-									
+									const helpReReplyId = relist[i].id;// 대댓글 id
+									const helpReplyId = replyId;
+									console.log("helpid : " +helpReplyId);
 									$.ajax({
 										url : appRoot +"/reportajax/helprrcount/"+helpReReplyId,
 										type : "get",
@@ -1145,6 +1150,7 @@ max-width:50%;
 												$("#rereplyreportinput2").attr("value", nickname);
 												$("#rereplyreportinput3").attr("value", title);
 												$("#rereplyreportinput5").attr("value", helpReReplyId);
+												$("#rereplyreportinput6").attr("value", helpReplyId);
 												
 											} else {
 												$("#rereplyReportForm").hide();
