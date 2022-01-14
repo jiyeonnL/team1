@@ -102,13 +102,11 @@ width: 20%;
            				 	</optgroup>
           				</select>
          			  </div>
-					<div class="form-group">
-						<label for="input7">Image</label> 						
-					</div>
+					
 					<div class="form-group">
 						<label for="input7">Image</label>
 						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" onchange=setThumbnail(event) multiple>
-				    	</div>
+				    </div>
 				    
 				    <!-- 구분 선 -->
 				    <div id="d-line"></div>

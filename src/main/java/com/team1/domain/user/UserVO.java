@@ -18,4 +18,8 @@ public class UserVO {
 	private String withdrawal;
 	private Integer adminQuali;
 	
+	//파일 넣은 aws url
+	private String url;
+	
+	UserFileVO file;
 }

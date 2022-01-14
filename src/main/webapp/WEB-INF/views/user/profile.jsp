@@ -75,8 +75,8 @@ margin-top:5px;
 			<div class="container-fluid my-1">
 				<div class="row md mx-3 mt-4 mb-2">
 					<div class="col-md-3 my-auto align-self-center ">
-						<img src="${user.profileurl}"
-							class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+						<img src = "${user.url}"
+							class ="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 					</div>
 					<div class="col-md-5 mx-3 my-auto align-self-center ">
 						<div class="h1">${user.nickname }</div>
@@ -158,6 +158,7 @@ margin-top:5px;
 		$("#profile-remove").click(function() {
 			location.href = "/controller1/user/remove"
 		});
+		
 	</script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"

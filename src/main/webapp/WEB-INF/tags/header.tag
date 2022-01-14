@@ -72,7 +72,7 @@ font-size:x-large;
 				<!-- 로그인 한 상태인 경우 프로필을 띄운다. -->
 				<c:if test="${not empty sessionScope.loginUser }">
 					<span>
-						<img src="${sessionScope.loginUser.profileurl }" width="50" height="50" class="rounded-circle me-3" alt="error" />
+						<img src="${sessionScope.loginUser.url }" width="50" height="50" class="rounded-circle me-3" alt="error" />
 					</span>
 					<span class="align-middle h3 dropdown-toggle" id="dropdownMenuButton1" data-toggle="dropdown" data-display="static" aria-expanded="false"> ${sessionScope.loginUser.nickname } </span>
 					<ul id="dropdown" class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton1">
