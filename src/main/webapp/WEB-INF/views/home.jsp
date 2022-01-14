@@ -33,23 +33,37 @@
         integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<style>
-   <style>
+        html {
+            overflow: hidden;
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
 
+        .html::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera*/
+        }
 
-    <style>
+        html,
         body {
+            display: block;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            background-color: beige;
             font-weight: bold;
             font-family: 'Jua', sans-serif;
-            "overflow-x:hidden; 
-            background-color: beige;"
         }
 
-        /* visual  */
-        .header {
-            background-color: burlywood;
-            height: 84px;
+        .scroll-section {
             width: 100%;
+            height: 100%;
+            position: relative;
         }
+
+
 
         /* 메인 화면 */
         .visual {
@@ -121,8 +135,6 @@
             -webkit-animation: tracking-in-expand 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
             animation: tracking-in-expand 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
         }
-
-
 
         @-webkit-keyframes tracking-in-expand {
             0% {
@@ -197,8 +209,6 @@
 
         /* 로고 텍스트 */
         .visual .logo-text {
-            font-weight: bold;
-            font-family: 'Jua', sans-serif;
             color: white;
             font-size: 7rem;
             display: flex;
@@ -297,12 +307,8 @@
             }
         }
 
-
-
         /* 소개 타이틀 */
         .visual .title {
-                    font-weight: bold;
-            font-family: 'Jua', sans-serif;
             position: absolute;
             top: 70%;
             left: 50%;
@@ -312,8 +318,6 @@
 
         /* 소개 서브타이틀 */
         .visual .subTitle {
-                    font-weight: bold;
-            font-family: 'Jua', sans-serif;
 
             position: absolute;
             top: 75%;
@@ -331,13 +335,92 @@
 
         }
 
-        /* 게시판 소개 영역 1개 엘리먼트 */
+        /* 2번 페이지 텍스트 css */
+        .intro .text-box {
+            position: absolute;
+            top: 150px;
+            left: 100px;
+            width: 600px;
+            height: 500px;
+            
+        }
+
+        .intro .text-box .text-title {
+
+            font-size: 4.5rem;
+            margin-bottom: 75px;
+            opacity: 0;
+            transform: translateX(-150px);
+        }
+
+        .intro .text-box .text-content {
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: translateX(-150px);
+        }
+
+        .intro .show .title-ani {
+            opacity: 1;
+            transition: 1s;
+            transform: translateX(0px);
+            transition-delay: 1.3s;
+        }
+
+        .intro .show .content-ani {
+            opacity: 1;
+            transition: 1s;
+            transform: translateX(0px);
+            transition-delay: 1.8s;
+        }
+
+        /* 2번 페이지 이미지 css */
+
+        .intro .image {
+            position: absolute;
+            object-fit: cover;
+            border: black 5px solid;
+            transform: translateX(150px);
+            opacity: 0;
+        }
+
+        .intro .image.image1 {
+            top: 120px;
+            right: 270px;
+            width: 480px;
+            height: 300px;
+
+        }
+
+        .intro .image.image2 {
+            top: 400px;
+            right: 100px;
+            width: 480px;
+            height: 300px;
+        }
+
+        /* 이미지의 효과 */
+        .intro .show .image1-ani {
+            opacity: 1;
+            transition: 1s;
+            transition-delay: 0.3s;
+            transform: translateX(0px);
+        }
+
+        .intro .show .image2-ani {
+            opacity: 1;
+            transition: 1s;
+            transition-delay: 0.9s;
+            transform: translateX(0px);
+        }
+
+
+        /* 게시판 소개 영역 1개 엘리먼트 정의 */
         .body .board {
-            margin-top: 100px;
+
             position: relative;
             display: flex;
             width: 100%;
-            height: 400px;
+            height: 300px;
             background-color: #264d73;
         }
 
@@ -500,65 +583,117 @@
 </head>
 
 <body>
-	<div id = "header">
-		<b:header></b:header>
-	</div>
-    <section class="visual">
-        <div class="inner">
-            <div class="main-cover"></div>
+    <!-- 헤더 -->
+    <div class="scroll-section">
+		
+		<div id=header>
+			<b:header></b:header>
+		</div>
 
-            <div class="logo">
-                <div class="logo-container">
-                    	아이콘
+        <section class="visual">
+            <div class="inner">
+                <div class="main-cover"></div>
+
+                <div class="logo">
+                    <div class="logo-container">
+                        아이콘
+                    </div>
+                    <div class="logo-text">
+                        <div class="letter delay-0">사</div>
+                        <div class="letter delay-1">용</div>
+                        <div class="letter delay-2">할</div>
+                        <div class="letter delay-3">로</div>
+                        <div class="letter delay-4">고</div>
+                        <div class="letter delay-5">명</div>
+                    </div>
                 </div>
-                <div class="logo-text">
-                    <div class="letter delay-0">사</div>
-                    <div class="letter delay-1">용</div>
-                    <div class="letter delay-2">할</div>
-                    <div class="letter delay-3">로</div>
-                    <div class="letter delay-4">고</div>
-                    <div class="letter delay-5">명</div>
+
+                <div class="title">
+                    WelCome to (프로젝트 이름)
+                </div>
+                <div class="subTitle">
+                    서브 타이틀 Lorem, ipsum dolor sit
                 </div>
             </div>
+        </section>
+    </div>
 
-            <div class="title">
-                WelCome to (프로젝트 이름)
-            </div>
-            <div class="subTitle">
-                서브 타이틀 Lorem, ipsum dolor sit
-            </div>
-        </div>
-    </section>
+    <div class="scroll-section">
 
-    <section class="body">
-        <div class="board scroll-spy">
-            <div class="image-container left back-to-position to-right delay-0">
-                <img class="cover-image left"
-                    src="http://www.nasa.gov/images/content/531265main_iss027e007014_1600_800-600.jpg"
-                    alt="newsImage" />
-            </div>
-            <div class="text-left back-to-position to-left delay-1">
-                이웃들과 나누고 싶은 새로운 소식이 있나요?
-                <a href="javascript:void(0)" class="button">바로가기</a>
-            </div>
-        </div>
-    </section>
+        <section class="intro">
+            <div class="text-box scroll-spy">
+                <div class="text-title title-ani">
+                    지역 기반의 커뮤니티
+                </div>
 
-    <section class="body">
-        <div class="board scroll-spy">
-            <div class="image-container right back-to-position to-left delay-0">
-                <img class="cover-image right"
-                    src="http://www.nasa.gov/images/content/531265main_iss027e007014_1600_800-600.jpg"
-                    alt="newsImage" />
+                <div class="text-content content-ani">
+                    (프로젝트명)은 지역 기반의 커뮤니티로... Excepturi veritatis placeat dignissimos
+                    nesciunt dolorem, laborum iusto voluptates distinctio voluptatibus, sapiente aut cumque voluptatum,
+                    quisquam error! Consequuntur blanditiis deleniti accusantium quaerat!
+                </div>
             </div>
-            <div class="text-right back-to-position to-right delay-1">
-                도움이 필요하신가요? 이웃들에게 부탁해보세요!
-                <a href="javascript:void(0)" class="button">바로가기</a>
+            <!-- 이미지 담긴 영역 -->
+            <div class="image-box scroll-spy">
+                <img class="image image1 image1-ani"
+                    src="https://images.pexels.com/photos/7150075/pexels-photo-7150075.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                <img class="image image2 image2-ani"
+                    src="https://images.pexels.com/photos/5935249/pexels-photo-5935249.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
             </div>
 
-        </div>
-    </section>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+        </section>
+
+
+
+    </div>
+
+    <div class="scroll-section">
+        <section class="body">
+            <div class="board scroll-spy">
+                <div class="image-container left back-to-position to-right delay-0">
+                    <img class="cover-image left"
+                        src="http://www.nasa.gov/images/content/531265main_iss027e007014_1600_800-600.jpg"
+                        alt="newsImage" />
+                </div>
+                <div class="text-left back-to-position to-left delay-1">
+                    이웃들과 나누고 싶은 새로운 소식이 있나요?
+                    <a href="javascript:void(0)" class="button">바로가기</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="body">
+            <div class="board scroll-spy">
+                <div class="image-container right back-to-position to-left delay-0">
+                    <img class="cover-image right"
+                        src="http://www.nasa.gov/images/content/531265main_iss027e007014_1600_800-600.jpg"
+                        alt="newsImage" />
+                </div>
+                <div class="text-right back-to-position to-right delay-1">
+                    도움이 필요하신가요? 이웃들에게 부탁해보세요!
+                    <a href="javascript:void(0)" class="button">바로가기</a>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <div class="scroll-section" style="background-color: aqua;">
+        <section class="body">
+            <div class="board scroll-spy">
+                <div class="image-container right back-to-position to-left delay-0">
+                    <img class="cover-image right"
+                        src="http://www.nasa.gov/images/content/531265main_iss027e007014_1600_800-600.jpg"
+                        alt="newsImage" />
+                </div>
+                <div class="text-right back-to-position to-right delay-1">
+                    도움이 필요하신가요? 이웃들에게 부탁해보세요!
+                    <a href="javascript:void(0)" class="button">바로가기</a>
+                </div>
+
+            </div>
+        </section>
+    </div>
 
 </body>
 <script>
@@ -569,39 +704,73 @@ gsap.from("#header", {
 
 })
 
+    gsap.from(".title", {
+        opacity: 0,
+        delay: 0.9,
+        duration: 0.7,
+        y: 50
+    })
 
-gsap.from(".title", {
-    opacity: 0,
-    delay: 0.9,
-    duration: 0.7,
-    y: 50
-})
+    gsap.from(".subTitle", {
+        opacity: 0,
+        delay: 1.2,
+        duration: 0.7,
+        y: 50
+    })
 
-gsap.from(".subTitle", {
-    opacity: 0,
-    delay: 1.2,
-    duration: 0.7,
-    y: 50
-})
+    gsap.from(".newsImage", {
+        opacity: 0,
+        duration: 0.7,
+        x: -100
+    })
 
-gsap.from(".newsImage", {
-    opacity: 0,
-    duration: 0.7,
-    x: -100
-})
+    const spyEls = document.querySelectorAll('.scroll-spy');
+    spyEls.forEach(function (spyEl) {
+        new ScrollMagic
+            .Scene({
+                triggerElement: spyEl, //보여짐 여부를 감시할 요소를 지정
+                triggerHook: 0.8 //뷰포트 기준 0.8 높이(밑에서 위로 20) 이상 올라오면 토글 트리거
+            })
+            .setClassToggle(spyEl, 'show')
+            .addTo(new ScrollMagic.Controller());
 
-const spyEls = document.querySelectorAll('.scroll-spy');
-spyEls.forEach(function (spyEl) {
-    console.log("aasdasd");
-    new ScrollMagic
-        .Scene({
-            triggerElement: spyEl, //보여짐 여부를 감시할 요소를 지정
-            triggerHook: 0.8 //뷰포트 기준 0.8 높이(밑에서 위로 20) 이상 올라오면 토글 트리거
-        })
-        .setClassToggle(spyEl, 'show')
-        .addTo(new ScrollMagic.Controller());
+    });
 
-});
+
+    /* 페이지 스크롤 관련 코드들 */
+
+    /* 기본 스크롤 이벤트를 막는다 */
+    window.addEventListener("wheel", function (e) {
+        e.preventDefault();
+    }, {
+        passive: false
+    });
+
+    var mHtml = $("html");
+    console.log(mHtml);
+    var page = 1;
+
+    mHtml.animate({
+        scrollTop: 0
+    }, 10);
+
+    /* 휠 이벤트 처리 */
+    $(window).on("wheel", function (e) {
+        console.log('wheel');
+        if (mHtml.is(":animated")) return;
+        if (e.originalEvent.deltaY > 0) {
+            if (page == 4) return;
+            page++;
+        } else if (e.originalEvent.deltaY < 0) {
+            if (page == 1) return;
+            page--;
+        }
+        var posTop = (page - 1) * $(window).height();
+
+        $('html, body').animate({
+            scrollTop: posTop
+        }, 680);
+    })
 </script>
 
 </html>
