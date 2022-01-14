@@ -119,7 +119,7 @@ a:hover {
 	font-size: large;
 }
 
-.게시글-수정-삭제, .게시글-뒤로가기 {
+.게시글-수정-삭제, .게시글-목록가기 {
 	background-color: #264d73;
 	color: white;
 	font-weight: bold;
@@ -397,7 +397,7 @@ padding-inline
 					</div>
 				</div>
 
-				<!-- 버튼 메뉴, 수정/삭제, 뒤로 -->
+				<!-- 버튼 메뉴, 수정/삭제, 목록 -->
 				<div id="buttonmenu" class="row d-flex justify-content-between">
 					<div class="col-md-auto my-auto px-auto ">
 						<c:if test="${sessionScope.loginUser.id eq post.memberId || sessionScope.loginUser.adminQuali eq 1 }">
@@ -407,8 +407,8 @@ padding-inline
 					</div>
 
 					<div class="col-md-auto my-auto px-auto">
-						<a href="${pageContext.request.contextPath }/help/list" class="btn btn-outline-secondary 게시글-뒤로가기">
-							<i class="fas fa-list"> 뒤로</i>
+						<a href="${pageContext.request.contextPath }/help/list" class="btn btn-outline-secondary 게시글-목록가기">
+							<i class="fas fa-list"> 목록</i>
 						</a>
 					</div>
 				</div>
@@ -561,14 +561,14 @@ padding-inline
 					<form method="post" id="replyReportForm">
 						<input type="hidden" class="form-control" id="replyreportinput1" name="boardName" value="해주세요">
 						<input type="hidden" class="form-control" id="replyreportinput4" name="categories" value="댓글">
-						<input type="hidden" class="form-control" id="replyreportinput5" name="replyId" value="">
+						<input type="hidden" class="form-control" id="replyreportinput5" name="helpReplyId" value="">
 						<div class="form-group">
 							<label for="reportinput2">작성자</label>
 							<input type="text" class="form-control" id="replyreportinput2" name="nickname" value="" readonly>
 						</div>
 						<div class="form-group">
 							<label for="replyreportinput3">댓글 내용</label>
-							<input type="text" class="form-control" name="title" value="${post.title}" id="replyreportinput3" readonly>
+							<input type="text" class="form-control" id="replyreportinput3" name="title" value="" readonly>
 						</div>
 						<div class="form-group">
 							<label for="replyReportReason">태그</label>
@@ -614,14 +614,14 @@ padding-inline
 					<form method="post" id="rereplyReportForm">
 						<input type="hidden" class="form-control" id="rereplyreportinput1" name="boardName" value="해주세요">
 						<input type="hidden" class="form-control" id="rereplyreportinput4" name="categories" value="댓글">
-						<input type="hidden" class="form-control" id="rereplyreportinput5" name="rereplyId" value="">
+						<input type="hidden" class="form-control" id="rereplyreportinput5" name="helpReReplyId" value="">
 						<div class="form-group">
 							<label for="reportinput2">작성자</label>
 							<input type="text" class="form-control" id="rereplyreportinput2" name="nickname" value="" readonly>
 						</div>
 						<div class="form-group">
 							<label for="replyreportinput3">댓글 내용</label>
-							<input type="text" class="form-control" name="title" value="${post.title}" id="rereplyreportinput3" readonly>
+							<input type="text" class="form-control" id="rereplyreportinput3" name="title" value="" readonly>
 						</div>
 						<div class="form-group">
 							<label for="rereplyReportReason">태그</label>
@@ -712,6 +712,7 @@ padding-inline
 				reasonDetail : reasonDetail,
 				helpId : helpId,
 			};
+			console.log(report);
 			$.ajax({
 	        	url : appRoot + "/reportajax/register",
 				type : "post",
@@ -743,7 +744,7 @@ padding-inline
 			const reason = $("#replyReportReason").val(); // select에서 선택한 신고사유
 			const reasonDetail = $("#replyReportReasonDetail").val(); // select가 '기타'일 때 사용자가 직접 입력한 신고 사유 내용
 			const helpId = '${post.id}'; // 현재 게시판의 id, 동네 소식 게시판이 된다면 newsId가 됨.
-			const replyId = $("#replyreportinput5").val();//댓글 id
+			const helpReplyId = $("#replyreportinput5").val();//댓글 id
 			const report = {
 				boardName : boardName,
 				boardUrl : boardUrl,
@@ -753,7 +754,7 @@ padding-inline
 				reason : reason,
 				reasonDetail : reasonDetail,
 				helpId : helpId,
-				replyId : replyId
+				helpReplyId : helpReplyId
 			};
 			$.ajax({
 	        	url : appRoot + "/reportajax/register",
@@ -783,7 +784,7 @@ padding-inline
 			const reason = $("#rereplyReportReason").val(); // select에서 선택한 신고사유
 			const reasonDetail = $("#rereplyReportReasonDetail").val(); // select가 '기타'일 때 사용자가 직접 입력한 신고 사유 내용
 			const helpId = '${post.id}'; // 현재 게시판의 id, 동네 소식 게시판이 된다면 newsId가 됨.
-			const rereplyId = $("#rereplyreportinput5").val();//대댓글 id
+			const helpReReplyId = $("#rereplyreportinput5").val();//대댓글 id
 			const report = {
 				boardName : boardName,
 				boardUrl : boardUrl,
@@ -793,7 +794,7 @@ padding-inline
 				reason : reason,
 				reasonDetail : reasonDetail,
 				helpId : helpId,
-				rereplyId : rereplyId,
+				helpReReplyId : helpReReplyId,
 			};
 			$.ajax({
 	        	url : appRoot + "/reportajax/register",
@@ -937,7 +938,7 @@ padding-inline
 											<button class="대댓글-작성-이모티콘" id="rereply-fold\${replyId}"><i class="far fa-comment-dots fa-2x 대댓글달기-이모티콘"></i></a>
 										</td>
 										<td colspan="2">
-											<div id = "reply-text\${replyId}" class="col h6" style="white-space: pre-wrap; overflow: auto"></div>
+											<div id = "reply-text\${replyId}" class="col h6" style="white-space: pre-wrap; overflow: initial"></div>
 											<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
 												<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
 												<div class="input-group-append">
@@ -956,6 +957,26 @@ padding-inline
 										</tr>
 									</tbody>
 								</table>
+								<div class="fold\${replyId}" style="display:none;">
+	                                <table class="table table-borderless ">
+	                                	<thead id="rereply-input-head">
+	                                		<tr>
+	                            				<c:if test="${not empty sessionScope.loginUser }">
+		                                			<th>
+		                                				<div class="rereplyinput input-group 대댓글인풋-전체박스">
+		                                    				<textarea id="rereplyTextarea\${list[i].id}" class="form-control re-reply-input" placeholder="대댓글을 남겨보세요!"></textarea>
+							                                <div class="col-2 input-group-append">
+							                                    <button id="sendReReply\${list[i].id}" class="btn btn-block send-rereply-btn 상세보기-대댓글-전송이모티콘">
+							                                        <i class="far fa-paper-plane fa-2x my-auto"></i>
+							                                    </button>
+							                                </div>
+		                                				</div>
+		                                			</th>
+	                          					</c:if>
+	                                		</tr>
+	                                	</thead>
+	                                </table>
+                               </div>
 								 <table class="table table-borderless ">
 		                               <tbody id="rereply-input-body">
 		                               		<tr>
@@ -966,26 +987,6 @@ padding-inline
 		                                	</tr>
 		                               	</tbody>
 		                           	 </table>
-								<div class="fold\${replyId}" style="display:none;">
-	                                <table class="table table-borderless ">
-	                                	<thead id="rereply-input-head">
-	                                		<tr>
-	                            				<c:if test="${not empty sessionScope.loginUser }">
-	                                			<th>
-	                                				<div class="rereplyinput input-group 대댓글인풋-전체박스">
-	                                    				<textarea id="rereplyTextarea\${list[i].id}" class="form-control re-reply-input" placeholder="대댓글을 남겨보세요!"></textarea>
-						                                <div class="col-2 input-group-append">
-						                                    <button id="sendReReply\${list[i].id}" class="btn btn-block send-rereply-btn 상세보기-대댓글-전송이모티콘">
-						                                        <i class="far fa-paper-plane fa-2x my-auto"></i>
-						                                    </button>
-						                                </div>
-	                                				</div>
-	                                			</th>
-	                          				</c:if>
-	                                		</tr>
-	                                	</thead>
-	                                </table>
-	                               </div>
 						`);
 					
 				    // 대댓글 리스트 함수 
@@ -1022,7 +1023,7 @@ padding-inline
 											<tbody id="rereplybody">
 												<tr>
 													<td colspan="3" class="대댓글-내용" style="vertical-align: bottom;">
-													<div id = "rereply-text\${relist[i].id}" class="col h6"></div>
+													<div id = "rereply-text\${relist[i].id}" class="col h6" style="white-space: pre-wrap; overflow: initial"></div>
 													<div class="input-group" id="re-input-group\${relist[i].id}" style="display:none;">
 														<textarea id="rereplyTextarea\${relist[i].id}" class="form-control re-reply-modi"></textarea>
 														<div class="input-group-append">
@@ -1121,10 +1122,10 @@ padding-inline
 								$("#rereplyreport"+relist[i].id).click(function(e) {
 									const title = relist[i].reReply; // 대댓글내용
 									const nickname = relist[i].nickname; // 현재 댓글의 작성자
-									const rereplyId = relist[i].id// 대댓글 id
+									const helpReReplyId = relist[i].id// 대댓글 id
 									
 									$.ajax({
-										url : appRoot +"/reportajax/rrcount/"+rereplyId,
+										url : appRoot +"/reportajax/helprrcount/"+helpReReplyId,
 										type : "get",
 										success : function(rrcnt){
 											if(rrcnt<5){
@@ -1133,7 +1134,7 @@ padding-inline
 												$("#rereplyReportOnProgress").hide();
 												$("#rereplyreportinput2").attr("value", nickname);
 												$("#rereplyreportinput3").attr("value", title);
-												$("#rereplyreportinput5").attr("value", rereplyId);
+												$("#rereplyreportinput5").attr("value", helpReReplyId);
 												
 											} else {
 												$("#rereplyReportForm").hide();
@@ -1270,10 +1271,10 @@ padding-inline
 					$("#replyreport"+replyId).click(function(e) {
 						const title = list[i].reply; // 댓글내용
 						const nickname = list[i].nickname; // 현재 댓글의 작성자
-						const replyId = list[i].id // 댓글id
+						const helpReplyId = list[i].id // 댓글id
 						
 						$.ajax({
-							url : appRoot +"/reportajax/rcount/"+replyId,
+							url : appRoot +"/reportajax/helprcount/"+helpReplyId,
 							type : "get",
 							success : function(rcnt){
 								if(rcnt<5){
@@ -1283,7 +1284,7 @@ padding-inline
 									$("#replyReportOnProgress").hide();
 									$("#replyreportinput2").attr("value", nickname);
 									$("#replyreportinput3").attr("value", title);
-									$("#replyreportinput5").attr("value", replyId);
+									$("#replyreportinput5").attr("value", helpReplyId);
 									
 								} else {
 									$("#replyReportForm").hide();

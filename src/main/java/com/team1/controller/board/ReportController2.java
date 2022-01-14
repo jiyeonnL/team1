@@ -1,16 +1,11 @@
 package com.team1.controller.board;
 
-import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,22 +28,61 @@ public class ReportController2 {
 	public ResponseEntity<String> register(ReportVO report, HttpSession session){
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 		if(uvo == null) {
+			System.out.println("UVO null");
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 		}else {
+			System.out.println("report : "+report.getBoardName());
 			service.register(report);
 			return ResponseEntity.status(HttpStatus.OK).build();
 		}
 	}
 	
-	@GetMapping("/rcount/{id}")
-	public Integer rcount(HttpSession session, @PathVariable Integer id){
-		Integer rcnt = service.countReplyId(id);
+	@GetMapping("/helprcount/{id}")
+	public Integer helprcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countHelpReplyId(id);
 		return rcnt;
 	}
 	
-	@GetMapping("/rrcount/{id}")
-	public Integer rrcount(HttpSession session, @PathVariable Integer id){
-		Integer rrcnt = service.countReReplyId(id);
-		return rrcnt;
+	@GetMapping("/lifercount/{id}")
+	public Integer lifercount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countLifeReplyId(id);
+		return rcnt;
 	}
+	
+	@GetMapping("/newsrcount/{id}")
+	public Integer newsrcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countNewsReplyId(id);
+		return rcnt;
+	}
+	
+	@GetMapping("/questionrcount/{id}")
+	public Integer questionrcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countQuestionReplyId(id);
+		return rcnt;
+	}
+	
+	@GetMapping("/helprrcount/{id}")
+	public Integer helprrcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countHelpReReplyId(id);
+		return rcnt;
+	}
+	
+	@GetMapping("/liferrcount/{id}")
+	public Integer liferrcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countLifeReReplyId(id);
+		return rcnt;
+	}
+	
+	@GetMapping("/newsrrcount/{id}")
+	public Integer newsrrcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countNewsReReplyId(id);
+		return rcnt;
+	}
+	
+	@GetMapping("/questionrrcount/{id}")
+	public Integer questionrrcount(HttpSession session, @PathVariable Integer id){
+		Integer rcnt = service.countQuestionReReplyId(id);
+		return rcnt;
+	}
+	
 }

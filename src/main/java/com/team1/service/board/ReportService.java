@@ -28,11 +28,35 @@ public class ReportService {
 		return mapper.delete(id) == 1;
 	}
 	
-	public Integer countReplyId(Integer id) {
-		return mapper.countReplyId(id);
+	public Integer countHelpReplyId(Integer id) {
+		return mapper.countHelpReplyId(id);
 	}
 	
-	public Integer countReReplyId(Integer id) {
-		return mapper.countReReplyId(id);
+	public Integer countLifeReplyId(Integer id) {
+		return mapper.countLifeReplyId(id);
+	}
+	
+	public Integer countNewsReplyId(Integer id) {
+		return mapper.countNewsReplyId(id);
+	}
+	
+	public Integer countQuestionReplyId(Integer id) {
+		return mapper.countQuestionReplyId(id);
+	}
+	
+	public Integer countHelpReReplyId(Integer id) {
+		return mapper.countHelpReReplyId(id);
+	}
+	
+	public Integer countLifeReReplyId(Integer id) {
+		return mapper.countLifeReReplyId(id);
+	}
+	
+	public Integer countNewsReReplyId(Integer id) {
+		return mapper.countNewsReReplyId(id);
+	}
+	
+	public Integer countQuestionReReplyId(Integer id) {
+		return mapper.countQuestionReReplyId(id);
 	}
 }

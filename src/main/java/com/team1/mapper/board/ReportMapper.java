@@ -19,10 +19,37 @@ public interface ReportMapper {
 	public int deleteByNewsId(Integer newsId);
 
 	public int deleteByQuestionId(Integer questionId);
+	
+	public int deleteByHelpReplyId(Integer helpReplyId);
+	
+	public int deleteByLifeReplyId(Integer lifeReplyId);
 
-	public Integer countReplyId(Integer id);
+	public int deleteByNewsReplyId(Integer newsReplyId);
 
-	public Integer countReReplyId(Integer id);
+	public int deleteByQuestionReplyId(Integer questionReplyId);
+	
+	public int deleteByHelpReReplyId(Integer helpReReplyId);
+	
+	public int deleteByLifeReReplyId(Integer lifeReReplyId);
 
+	public int deleteByNewsReReplyId(Integer newsReReplyId);
+
+	public int deleteByQuestionReReplyId(Integer questionReReplyId);
+
+	public Integer countHelpReplyId(Integer id);
+	
+	public Integer countLifeReplyId(Integer id);
+	
+	public Integer countNewsReplyId(Integer id);
+	
+	public Integer countQuestionReplyId(Integer id);
+
+	public Integer countHelpReReplyId(Integer id);
+	
+	public Integer countLifeReReplyId(Integer id);
+	
+	public Integer countNewsReReplyId(Integer id);
+	
+	public Integer countQuestionReReplyId(Integer id);
 
 }

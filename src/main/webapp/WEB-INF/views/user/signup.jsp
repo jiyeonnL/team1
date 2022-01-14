@@ -108,7 +108,7 @@ label {
 	margin: 0 auto;
 }
 
-#input7, #input5, #input6, #input4 {
+#input7, #input5, #input6, #input4, #input8 {
 	width: 320px;
 	background-color: rgba(255, 255, 255, 0.5);
 	margin: 0 auto;
@@ -180,7 +180,7 @@ label {
 				<div class="row">
 					<!-- <div class="col-md-4 border-bottom-left-radius">여기에 로고나 장식용 그림같은거 넣기</div> -->
 					<!-- <div class="col-md-8  border border-5 border-bottom-right-radius"> -->
-					<form method="post">
+					<form method="post" enctype="multipart/form-data">
 						<h3 class="signUpMain">회원가입 정보</h3>
 						<div class="form-group">
 							<label for="input1">아이디 및 별명</label>
@@ -233,7 +233,10 @@ label {
 								</optgroup>
 							</select>
 						</div>
-
+						<div class="form-group">
+							<label for="input6">프로필 사진</label>
+							<input type="file" class="form-control-file" id="input6" name="file" accept="image/*" multiple>
+				   		 </div>
 
 						<!-- textarea로 바꿔서 여러줄로 나타낼 수 있음 -->
 						<div class="form-group place">
