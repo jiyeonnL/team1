@@ -97,6 +97,8 @@
 		SELECT
 		q.id,
 		u.id,
+		f.userId,
+		f.url,
 		u.nickname,
 		q.memberId,
 		q.views,
@@ -117,6 +119,10 @@
 		LEFT
 		JOIN tb_reply_question r
 		ON q.id=r.boardId
+		JOIN
+		tb_file_user f 
+		ON
+		u.id = f.userId
 		
 		WHERE q.memberId = #{Id}
 		

@@ -17,9 +17,13 @@ public interface UserMapper {
 	
 	public UserVO selectByNickName(String nickname); // nickname으로 검색
 	
-	public UserVO selectByEmail(String email); // email로 검색
+	public UserVO hasByNickName(String nickname);
+	
+	public UserVO hasByEmail(String email); // email로 검색
 	
 	public UserVO readWithdrwal(String nickname); // id로 회원 탈퇴 여부 확인하기
 	
 	public List<HelpVO> selectUserBoardHelp(Integer id);
+
+	public UserVO selectlogin(String email); //로그인용 검색
 }

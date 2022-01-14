@@ -82,6 +82,8 @@
 	<select id="getListByUserId" resultMap="helpResult">
 		SELECT
 		p.id, p.memberId,
+		f.userId,
+		f.url,
 		p.location, (SELECT count(postId) FROM tb_board_help_up
 		WHERE postId =
 		p.id) up, p.views, p.tag,
@@ -98,6 +100,10 @@
 		LEFT
 		JOIN tb_reply_help r
 		ON p.id = r.boardId
+		JOIN
+		tb_file_user f 
+		ON
+		m.id = f.userId
 	
 		WHERE p.memberId = #{Id}
 		
@@ -156,6 +162,7 @@
 		p.memberId
 		LEFT JOIN tb_reply_help r
 		ON p.id = r.boardId
+		
 
 	<where>
 		<if test="query != null">
