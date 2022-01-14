@@ -5,8 +5,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +23,7 @@ import com.team1.domain.board.QuestionVO;
 import com.team1.domain.user.UserVO;
 import com.team1.service.board.QuestionReplyService;
 import com.team1.service.board.QuestionService;
+import com.team1.service.board.ReportService;
 
 import lombok.Setter;
 
@@ -36,6 +35,9 @@ public class QuestionController {
 	private QuestionService service;
 	@Setter(onMethod_ = @Autowired )
 	private QuestionReplyService replyservice;
+	@Setter(onMethod_ = @Autowired)
+	private ReportService reportservice;
+	
 	@GetMapping(value = "/list")
 	public void list(@RequestParam(value = "location", required = false) String location,
 			@RequestParam(value = "query", required = false) String query,
@@ -123,7 +125,15 @@ public class QuestionController {
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 		QuestionVO qvo = (QuestionVO) service.get(id);
 
-		if (uvo.getId() != qvo.getMemberId()) {
+		
+		if(uvo.getAdminQuali() == 1) { // 관리자가 글 수정하거나 지울 수 있음
+			QuestionVO board = service.get(id);
+			// String[] fileNames = service.getNamesByBoardId(id);
+			model.addAttribute("board", board);
+			
+			return "question/modify";
+			
+		} else if (uvo.getId() != qvo.getMemberId()) {
 			System.out.println("작성자가 아니면 수정할 수 없습니다.");
 			return "redirect:/question/list?page=";
 		}

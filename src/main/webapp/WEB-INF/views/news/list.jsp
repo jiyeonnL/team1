@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="b" tagdir="/WEB-INF/tags/"%>
@@ -9,22 +7,13 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>동네소식</title>
+<title>동네 소식</title>
 
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-	integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
-	crossorigin="anonymous">
-	
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-	integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <style>
 #help-body-font {
@@ -32,7 +21,7 @@
 	font-family: 'Jua', sans-serif;
 	font-size: 25px;
 	margin-top: 10px;
-	border-radius:7px;
+	border-radius: 7px;
 }
 
 #list-font {
@@ -42,10 +31,9 @@
 
 .list-background-color {
 	background-color: #eef2f6;
-	border: 2px solid #264d73;
+	border: 3px solid #264d73;
 	border-radius: 10px;
-	
-	
+	border-color: #264d73;
 }
 
 #body {
@@ -73,9 +61,10 @@
 	border-radius: 5px;
 	width: 80%;
 	border: solid;
-	border-color: #9999ff;
+	border-color: #f0615c;
 	background-color: white;
 	margin-bottom: 5px;
+	font-weight: bold;
 }
 
 #image {
@@ -112,6 +101,8 @@ a {
 a#title {
 	/* border-bottom: solid; */
 	font-weight: bold;
+	padding-bottom: 5px;
+	width: auto;
 }
 
 #contentBox {
@@ -122,25 +113,35 @@ a:hover {
 	text-decoration: none;
 	color: inherit;
 }
-.태그테두리{
-padding-left:0px;
-padding-right:0px;}
+
+.태그테두리 {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.badge {
+	
+}
 
 .제목아래보더 {
-	padding-top:8px;
-	padding-bottom:3px;
+	padding-top: 8px;
+	padding-bottom: 3px;
 	border-bottom: solid;
-	border-bottom-width: 3px;
+	border-bottom-width: 2px;
+	border-bottom-color: #264d73;
 }
-.닉네임위치{
-    padding-left: 23px;
-    }
+
+.닉네임위치 {
+	padding-left: 23px;
+	padding-bottom: 5px;
+	float: right;
+}
 
 #게시글-작성시간 {
 	font-size: medium;
 	text-align: right;
-	padding-top: 12px;
-	font-weight: bold;
+	margin-block: 11px;
+	margin-right: 10px
 }
 
 .댓글위의바 {
@@ -152,8 +153,14 @@ padding-right:0px;}
 	margin-top: 8px;
 	margin-bottom: 8px;
 }
-.fa-2x{
-font-size:1.5em;
+
+.fa-2x {
+	font-size: 1.3em;
+	margin-left: 5px;
+}
+
+.fa-fw {
+	width: 1em;
 }
 </style>
 </head>
@@ -163,8 +170,8 @@ font-size:1.5em;
 	<div id="body">
 		<div id="inner">
 			<b:innerNav></b:innerNav>
-			<b:cover></b:cover>		
-						<a href="${pageContext.request.contextPath }/news/register" id="help-body-font" class="btn">글쓰기</a>
+			<b:cover></b:cover>
+			<a href="${pageContext.request.contextPath }/news/register" id="help-body-font" class="btn">글쓰기</a>
 			<!-- 검색결과 리스트 -->
 			<!-- for 문 돌면서 list에 있는 요소(게시물)들 출력 -->
 			<c:forEach items="${list}" var="board" varStatus="vs">
@@ -172,13 +179,16 @@ font-size:1.5em;
 					<div class="container-fluid my-4 list-background-color" id="list-font-${vs.index }" style="display : ${vs.index < 5 ? '' : 'none' }">
 						<div class="row md mx-3 my-2 제목아래보더">
 							<div class="col-md-2 my-auto px-auto 태그테두리">
-								<div id="tag">${board.tag }</div>
+								<div id="tag">${board.tag } </div>
 							</div>
 							<div class="col-md-5 my-auto h5">
-								<div>
+								<div class="d-flex justify-content-start">
 									<a href="/controller1/news/list/${board.id}" id="title">
 										<c:out value="${board.title}" />
 									</a>
+									<c:if test="${board.newMark <2 }">
+										<span class="badge badge-danger" style="margin-left: 5px; line-height: 1; height: 25.5px;">new</span>
+									</c:if>
 								</div>
 							</div>
 							<div class="col-md-3 offset-md-2 my-auto h5">
@@ -208,7 +218,7 @@ font-size:1.5em;
 									<c:if test="${not empty board.fileList }">
 										<c:forEach items="${board.fileList }" var="file" varStatus="vs">
 											<c:if test="${file.isThumbnail eq 1 }">
-												<img src="${file.url}" class="d-block w-100" alt="${file.url}">
+												<img src="${file.url}"  style = "width: 600px; height: 300px; object-fit: cover;" alt="${file.url}">
 
 											</c:if>
 										</c:forEach>
@@ -228,15 +238,15 @@ font-size:1.5em;
 						<div class="row md mx-3 댓글위의바">
 							<div class="col-md-2 댓글창부분">
 								<c:if test="${board.upposession !=null}">
-									<i class="fa fa-thumbs-up fa-fw fa-2x m-r-3"></i>
+									<i class="fa fa-thumbs-up fa-fw fa-1x m-r-3"></i>
 								</c:if>
 								<c:if test="${empty board.upposession }">
-									<i class="far fa-thumbs-up fa-fw fa-2x m-r-3"></i>
+									<i class="far fa-thumbs-up fa-fw fa-1x m-r-3"></i>
 								</c:if>
 								<span class="fa-2x"> ${board.up} </span>
 							</div>
 							<div class="col-md-2 댓글창부분">
-								<i class="fa fa-comments fa-fw fa-2x m-r-3"></i>
+								<i class="fa fa-comments fa-fw fa-1x m-r-3"></i>
 								<span class="fa-2x"> ${board.replyCount } </span>
 							</div>
 							<div class="col-md-2 댓글창부분">
@@ -253,7 +263,9 @@ font-size:1.5em;
 			<b:copyright></b:copyright>
 		</div>
 	</div>
-			<!-- 태그 -->
+	<!-- 태그 -->
+
+
 
 
 	<!-- Result Modal -->
@@ -278,24 +290,31 @@ font-size:1.5em;
 		</div>
 	</c:if>
 
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-	crossorigin="anonymous"></script>
-
 	<script>
-		$(document).ready(function(){
-			$("#news").attr("class", "btn btn-outline ml-1 active");
-			var count = 5;
-			$(window).scroll(function() {
-				if ($(window).scrollTop() == $(document).height()	- $(window).height()) {
-					for (i = 0; i < 5; i++) {
-						$("#inner").find("#list-font-" + count).removeAttr("style", "none");
-						count++;
-					}
+	$(document).ready(function() {
+		var tag = "${tag}";
+		if(tag==='사건사고'){
+			$("#n_accident").attr("class", "btn btn-outline ml-1 active");
+		}
+		if(tag==='광고'){
+			$("#n_adv").attr("class", "btn btn-outline ml-1 active");
+		}
+		if(tag==='기타'){
+			$("#n_other").attr("class", "btn btn-outline ml-1 active");
+		}
+		$("#news").attr("class", "btn btn-outline ml-1 active");
+		var count = 5;
+		$(window).scroll(function() {
+			if ($(window).scrollTop() == $(document).height()	- $(window).height()) {
+				for (i = 0; i < 5; i++) {
+					$("#inner").find("#list-font-" + count).removeAttr("style", "none");
+					count++;
 				}
-			});
+			}
 		});
+	});
 	</script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 </body>
 </html>

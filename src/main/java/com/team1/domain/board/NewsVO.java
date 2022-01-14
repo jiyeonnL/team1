@@ -28,6 +28,14 @@ public class NewsVO {
 	private Integer replyCount;
 	
 	private Integer upposession;
+	// 현재시간 - 작성시간으로 new 마크를 해줄지 말지 결정
+	private Integer newMark;
+	//게시글 신고 누적 갯수
+	private Integer reportCount;
+	//댓글 신고 누적 갯수
+	private Integer replyReportCount;
+	//대댓글 신고 누적 갯수
+	private Integer rereplyReportCount;
 	
 	public UserPostVO toUserPostVO() {
 		

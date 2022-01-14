@@ -14,6 +14,8 @@ public interface LifeFileMapper {
 	
 	List<LifeFileVO> selectNamesByBoardId(Integer boardId);
 	
+	LifeFileVO selectByUrl(String url);
+	
 	void setThumbnailById(Integer Id);
 	
 	void unsetThumbnailById(Integer Id);

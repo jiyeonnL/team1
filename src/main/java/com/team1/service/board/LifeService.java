@@ -12,13 +12,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.team1.domain.board.HelpFileVO;
 import com.team1.domain.board.LifeFileVO;
 import com.team1.domain.board.LifeVO;
 import com.team1.mapper.board.LifeFileMapper;
 import com.team1.mapper.board.LifeMapper;
+import com.team1.mapper.board.LifeReReplyMapper;
 import com.team1.mapper.board.LifeReplyMapper;
 import com.team1.mapper.board.LifeUpMapper;
+import com.team1.mapper.board.ReportMapper;
 
 import lombok.Setter;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -37,6 +38,12 @@ public class LifeService {
 
 	@Setter(onMethod_ = @Autowired)
 	private LifeReplyMapper lifeReplyMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private LifeReReplyMapper lifeReReplyMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReportMapper reportMapper;
 
 	@Setter(onMethod_ = @Autowired)
 	private LifeFileMapper fileMapper;
@@ -216,11 +223,16 @@ public class LifeService {
 	
 	@Transactional
 	public boolean remove(Integer id) {
+		
+		//1.0 게시물에 달린 대댓글 지우기
+		lifeReReplyMapper.deleteByBoardId(id);
 
 		// 1.1 게시물에 달린 댓글 지우기
 		lifeReplyMapper.deleteByBoardId(id);
 		// 1.2 좋아요 지우기
 		upMapper.upDeleteByBoardId(id);
+		//1.3 신고내역 지우기 
+		reportMapper.deleteByLifeId(id);
 
 		// 2. 파일 지우기 , s3
 		// file system에서 삭제

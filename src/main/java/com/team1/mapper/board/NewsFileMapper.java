@@ -14,6 +14,8 @@ public interface NewsFileMapper {
 	
 	List<NewsFileVO> selectNamesByBoardId(Integer boardId);
 	
+	NewsFileVO selectByUrl(String url);
+	
 	void setThumbnailById(Integer Id);
 	
 	void unsetThumbnailById(Integer Id);

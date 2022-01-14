@@ -23,6 +23,7 @@ import com.team1.domain.board.LifeVO;
 import com.team1.domain.user.UserVO;
 import com.team1.service.board.LifeReplyService;
 import com.team1.service.board.LifeService;
+import com.team1.service.board.ReportService;
 
 import lombok.Setter;
 
@@ -35,6 +36,9 @@ public class LifeController {
 
 	@Setter(onMethod_ = @Autowired)
 	private LifeReplyService replyservice;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReportService reportservice;
 	
 	@GetMapping(value = "/list")
 	public void life(@RequestParam(value = "location", required = false) String location,
@@ -92,7 +96,13 @@ public class LifeController {
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 		LifeVO hvo = (LifeVO) service.get(id, uvo.getId());
 
-		if (uvo.getId() != hvo.getMemberId()) {
+		if(uvo.getAdminQuali() == 1) { // 관리자가 글 수정하거나 지울 수 있음
+			LifeVO board = service.get(id, uvo.getId());
+			// String[] fileNames = service.getNamesByBoardId(id);
+			model.addAttribute("board", board);
+			
+			return "life/modify";
+		} else if (uvo.getId() != hvo.getMemberId()) {
 			System.out.println("작성자가 아니면 수정할 수 없습니다.");
 			return "redirect:/all/list";
 		}
