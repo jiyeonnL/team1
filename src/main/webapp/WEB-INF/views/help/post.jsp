@@ -117,6 +117,8 @@ a:hover {
 
 .상세보기-본문 {
 	font-size: large;
+	white-space: pre-wrap;
+	word-wrap: break-word;
 }
 
 .게시글-수정-삭제, .게시글-목록가기 {
@@ -127,6 +129,10 @@ a:hover {
 
 .table th {
 	border-bottom: none;
+}
+
+.table td, .table th {
+	padding: 0.5rem;
 }
 
 .상세보기-이미지 {
@@ -142,6 +148,14 @@ table {
 .table {
 	margin-bottom: 0rem;
 }
+
+.table td {
+	vertical-align: middle;
+}
+
+/* .img-thumbnail{
+max-width:50%;
+} */
 /* th, td {
 
   padding: 1em;
@@ -161,8 +175,8 @@ table {
 }
 
 #userprofile {
-	height: 70px;
-	width: 70px;
+	height: 60px;
+	width: 90px;
 }
 
 #replyhead {
@@ -206,6 +220,10 @@ table {
 	padding-right: 0px;
 }
 
+#reply-profile {
+	max-width: 45px;
+}
+
 #reply-nickname {
 	width: 460px;
 	font-weight: bold;
@@ -224,11 +242,28 @@ table {
 	font-size: 17px;
 	float: right;
 	font-weight: 500;
+	white-space: nowrap;
+}
+
+#rereplyfold {
+	text-align: center;
 }
 
 .대댓글-작성-이모티콘 {
 	border: none;
-	background-color: gray;
+	background-color: white;
+}
+
+.대댓글달기-이모티콘 {
+	color: #ffe164;
+}
+
+.댓글-내용칸-패딩없애기 {
+	padding-left: 0px;
+}
+
+.댓글-내용칸 {
+	padding-left: 0px;
 }
 
 #replyModify {
@@ -251,7 +286,7 @@ table {
 
 .대댓글-위치 {
 	width: 97%;
-	margin-left: 35px;
+	margin-left: 30px;
 }
 
 .상세보기-대댓글-전송이모티콘 {
@@ -265,6 +300,10 @@ table {
 
 #rereplybody {
 	background-color: white;
+}
+
+#rereply-profile {
+	max-width: 45px;
 }
 
 #rereply-nickname {
@@ -281,54 +320,25 @@ table {
 	float: right;
 	font-weight: 500;
 	vertical-align: middle;
+	white-space: nowrap;
 }
 
 .rereplyinput {
 	padding-inline: 0px;
+	margin-top: 10px;
 }
 
-}
-.rereplyinput {
-	padding-inline: 0px;
-}
-
-:middle;font-size
-	: 17px; float :
-}
-
-:
-middle;
-font-size
-:
-17px;
-float
-:
-right;
-font-weight
-:
-500;
-vertical-align
-:
-middle;
-}
-.rereplyinput
-{
-padding-inline
-:
-0px;
-}
-}
-.rereplyinput
-{
-padding-inline
-:
-0px;
-}
 .re-reply-input {
 	padding: 5px;
 	border: 2px solid #264d73;
 	margin-left: 34px;
-	padding-right:
+}
+
+.대댓글-내용칸 {
+	white-space: pre-wrap;
+	overflow: initial;
+	word-break: break-all;
+	padding-left: 90px;
 }
 
 .send-rereply-btn {
@@ -937,8 +947,8 @@ padding-inline
 										<td id="rereplyfold">
 											<button class="대댓글-작성-이모티콘" id="rereply-fold\${replyId}"><i class="far fa-comment-dots fa-2x 대댓글달기-이모티콘"></i></a>
 										</td>
-										<td colspan="2">
-											<div id = "reply-text\${replyId}" class="col h6" style="white-space: pre-wrap; overflow: initial"></div>
+										<td colspan="2" class="댓글-내용칸-패딩없애기">
+											<div id = "reply-text\${replyId}" class="col h6 댓글-내용칸" style="white-space: pre-wrap; overflow: initial"></div>
 											<div class="input-group" id="input-group\${list[i].id}" style="display:none;">
 												<textarea id="replyTextarea\${list[i].id}" class="form-control reply-modi"></textarea>
 												<div class="input-group-append">
@@ -949,7 +959,7 @@ padding-inline
 												</div>
 											</div>
 										</td>
-										<td>
+										<td class="댓글-신고버튼-위치">
 											<button id="replyreport\${list[i].id}" class="btn btn-light 댓글-신고버튼" style="height: fit-content;" data-toggle="modal" data-target="#replyReportModal1">
 												<i class="fas fa-exclamation-triangle"> 신고</i> 
 											</button>
@@ -1023,7 +1033,7 @@ padding-inline
 											<tbody id="rereplybody">
 												<tr>
 													<td colspan="3" class="대댓글-내용" style="vertical-align: bottom;">
-													<div id = "rereply-text\${relist[i].id}" class="col h6" style="white-space: pre-wrap; overflow: initial"></div>
+													<div id = "rereply-text\${relist[i].id}" class="col h6 대댓글-내용칸" style="white-space: pre-wrap; overflow: initial"></div>
 													<div class="input-group" id="re-input-group\${relist[i].id}" style="display:none;">
 														<textarea id="rereplyTextarea\${relist[i].id}" class="form-control re-reply-modi"></textarea>
 														<div class="input-group-append">
@@ -1034,7 +1044,7 @@ padding-inline
 														</div>
 													</div>
 													</td>
-													<td>
+													<td class="대댓글-신고버튼-위치">
 														<button id="rereplyreport\${relist[i].id}" class="btn btn-light 대댓글-신고버튼" style="height: fit-content;" data-toggle="modal" data-target="#rereplyReportModal1">
 															<i class="fas fa-exclamation-triangle"> 신고</i> 
 														</button>
