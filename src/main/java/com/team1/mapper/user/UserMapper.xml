@@ -25,7 +25,8 @@
 	u.withdrawal, 
 	u.adminQuali,
 	f.userId,
-	f.url
+	f.url,
+	f.fileName
 	FROM 
 	tb_user u
 	JOIN
@@ -82,7 +83,8 @@
 	<select id="selectByNickName" resultType="com.team1.domain.user.UserVO">
 	SELECT u.id, u.pw, u.email, u.location, u.nickname, u.introduce, u.profileurl,
 	f.userId,
-	f.url
+	f.url,
+	f.fileName
 	FROM 
 	tb_user u
 	JOIN

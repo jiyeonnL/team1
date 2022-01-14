@@ -181,7 +181,7 @@ label {
 
 
 					<div class="form-group">
-						<label for="input5">지역 선택</label> <br> <select class="form-control" id="input5" required name="location" value="${sessionScope.loginUser.location }">
+						<label for="input5">지역 선택</label> <br> <select class="form-control" id="input5" required name="location">
 							<optgroup label="소식을 전해듣고 싶은 지역을 선택해주세요.">
 								<option>강남구</option>
 								<option>서초구</option>
@@ -207,9 +207,20 @@ label {
 											</div>
 										</td>
 										<td rowspan="2">
+										<c:choose>
+										<c:when test="${user.fileName !='' }">
 											<div class="col">
 												<img class="img-fluid" width="160" height="160" src="${user.url}" >
 											</div>
+										
+										</c:when>
+										<c:when test="${user.fileName =='' }">
+											<div class="col">
+												<img class="img-fluid" width="160" height="160" src="${user.profileurl}" >
+											</div>
+										
+										</c:when>
+										</c:choose>
 										</td>
 									</tr>
 									<tr>
@@ -231,7 +242,8 @@ label {
 					<!-- textarea로 바꿔서 여러줄로 나타낼 수 있음 -->
 					<div class="form-group">
 						<label for="exampleFormControlTextarea1">자기소개</label>
-						<textarea class="form-control" required name="introduce" id="input4" cols="40" rows="5" placeholder="나만의 개성을 나타낼수 있는 자기소개를 적어보세요!(최대 500글자)"></textarea>
+						<textarea class="form-control" required name="introduce" 
+						id="input4" cols="40" rows="5" placeholder="나만의 개성을 나타낼수 있는 자기소개를 적어보세요!(최대 500글자)">${sessionScope.loginUser.introduce }</textarea>
 					</div>
 					<button class="btn btn-outline-dark btn-lg place" id="submitButton1">수정</button>
 				</form>

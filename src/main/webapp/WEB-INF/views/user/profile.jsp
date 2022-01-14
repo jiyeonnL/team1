@@ -63,7 +63,13 @@ color:white;
 font-size:large;
 margin-top:5px;
 }
-
+#img-profile {
+  width : 200px;
+  height : 200px;
+  max-width: 200px;
+  max-height: 200px;
+  object-fit: cover;
+}
 </style>
 </head>
 <body>
@@ -74,10 +80,24 @@ margin-top:5px;
 			<b:innerNav></b:innerNav>
 			<div class="container-fluid my-1">
 				<div class="row md mx-3 mt-4 mb-2">
-					<div class="col-md-3 my-auto align-self-center ">
-						<img src = "${user.url}"
-							class ="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
-					</div>
+					<c:choose>
+						<c:when test="${user.fileName !='' }">
+						<div class="col-md-3 my-auto align-self-center ">
+					
+							<img src = "${user.url}" id="img-profile"
+								class ="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+						</div>
+					
+						</c:when>
+						<c:when test="${user.fileName =='' }">
+						<div class="col-md-3 my-auto align-self-center ">
+					
+							<img src = "${user.profileurl}" id="img-profile"
+								class ="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+						</div>
+					
+						</c:when>
+					</c:choose>
 					<div class="col-md-5 mx-3 my-auto align-self-center ">
 						<div class="h1">${user.nickname }</div>
 						<span class="h4 mt-3">${user.location }</span> <span

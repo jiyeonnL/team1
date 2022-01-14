@@ -198,7 +198,7 @@ a.goTop {
 				
 				<!-- 질문 -->
 				<li id="nav-question" class="nav-item">
-					<button type="button" id="question" class="btn btn-outline-dark ml-1">동네질문</button>
+					<button type="button" id="question" class="btn btn-outline-dark ml-1">동네신문고</button>
 					<ul id="nav-sub" class="question 메뉴바-아래-호버">
 						<!-- <li id="nav-sub" class="nav-item lostnfound">
 							<button type="button" id="q_all" class="btn btn-outline-dark ml-1">전체보기</button>
