@@ -255,7 +255,10 @@ max-width:50%;
 }
 
 .대댓글달기-이모티콘 {
-	color: #ffe164;
+	color: #264d73;
+}
+.대댓글달기-이모티콘:hover{
+	color:#b3b3ff;
 }
 
 .댓글-내용칸-패딩없애기 {
@@ -268,6 +271,7 @@ max-width:50%;
 
 #replyModify {
 	width: 40px;
+	margin-right: 5px;
 }
 
 /* 댓글 관련 끝 ----------------------------------*/
@@ -292,10 +296,11 @@ max-width:50%;
 .상세보기-대댓글-전송이모티콘 {
 	border-top-left-radius: none;
 	border-bottom-left-radius: none;
+	background-color: #b3cae6;
 }
 
 #rereplyhead {
-	background-color: #ffe164;
+	background-color: #b3cae6;
 }
 
 #rereplybody {
@@ -308,6 +313,7 @@ max-width:50%;
 
 #rereply-nickname {
 	font-weight: bold;
+	width: 440px;
 }
 
 #rereplytime {
@@ -323,6 +329,9 @@ max-width:50%;
 	white-space: nowrap;
 }
 
+.re-reply-modi{
+margin-left: 90px;
+}
 .rereplyinput {
 	padding-inline: 0px;
 	margin-top: 10px;
@@ -331,7 +340,8 @@ max-width:50%;
 .re-reply-input {
 	padding: 5px;
 	border: 2px solid #264d73;
-	margin-left: 34px;
+	margin-left: 20px;
+	margin-right:0px;
 }
 
 .대댓글-내용칸 {
@@ -342,10 +352,21 @@ max-width:50%;
 }
 
 .send-rereply-btn {
-	background-color: #ffe164;
 	color: black;
 	height: 64px;
 	border-radius: 5px;
+}
+
+#rereplyModify {
+	margin-right: 5px;
+}
+
+
+.대댓글-전체아래마진 {
+	margin-bottom: 20px;
+}
+#replyModify,#replyDelete,#rereplyModify,#rereplyDelete{
+background-color: #eef2f6;
 }
 /* 대댓글 관련 끝 ----------------------*/
 </style>
@@ -991,7 +1012,7 @@ max-width:50%;
 	                                	</thead>
 	                                </table>
                                </div>
-								 <table class="table table-borderless ">
+								 <table class="table table-borderless 대댓글-전체아래마진">
 		                               <tbody id="rereply-input-body">
 		                               		<tr>
 		                                		<td>
