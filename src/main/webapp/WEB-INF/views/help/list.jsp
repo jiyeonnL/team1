@@ -291,33 +291,31 @@ a:hover {
 	</c:if>
 
 	<script>
-		$(document).ready(
-				function() {
-					$("#help").attr("class", "btn btn-outline ml-1 active");
-					var count = 5;
-					$(window).scroll(function() {
-						if ($(window).scrollTop() == $(document).height()	- $(window).height()) {
-							for (i = 0; i < 5; i++) {
-								$("#inner").find("#list-font-" + count)
-										.removeAttr("style", "none");
-								count++;
-							};
-						}
-					});
-					/* 		var count = 0;
-					 //스크롤 바닥 감지
-					 window.onscroll = function(e) {
-					 //추가되는 임시 콘텐츠
-					 //window height + window scrollY 값이 document height보다 클 경우,
-					 if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-					 //실행할 로직 (콘텐츠 추가)
-					 count++;
-					 var addContent = '<div class="block"><p>'+ count +'번째로 추가된 콘텐츠</p></div>';
-					 //article에 추가되는 콘텐츠를 append
-					 $('article').append(addContent);
-					 }
-					 }; */
-				});
+	$(document).ready(function() {
+		var tag = "${tag}";
+		if(tag==='사다주세요'){
+			$("#h_buy").attr("class", "btn btn-outline ml-1 active");
+		}
+		if(tag==='맡아주세요'){
+			$("#h_care").attr("class", "btn btn-outline ml-1 active");
+		}
+		if(tag==='옮겨주세요'){
+			$("#h_move").attr("class", "btn btn-outline ml-1 active");
+		}
+		if(tag==='기타'){
+			$("#h_other").attr("class", "btn btn-outline ml-1 active");
+		}
+		$("#help").attr("class", "btn btn-outline ml-1 active");
+		var count = 5;
+		$(window).scroll(function() {
+			if ($(window).scrollTop() == $(document).height()	- $(window).height()) {
+				for (i = 0; i < 5; i++) {
+					$("#inner").find("#list-font-" + count).removeAttr("style", "none");
+					count++;
+				}
+			}
+		});
+	});
 	</script>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>

@@ -254,7 +254,6 @@ color:#ffe164;
 								<option value="기타" selected>태그 선택</option>
 								<option value="사다주세요">사다주세요</option>
 								<option value="맡아주세요">맡아주세요</option>
-								<option value="빌려주세요">빌려주세요</option>
 								<option value="옮겨주세요">옮겨주세요</option>
 								<option value="기타">기타</option>
 							</select>
