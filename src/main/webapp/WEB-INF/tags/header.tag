@@ -111,15 +111,14 @@ font-size:x-large;
 	$(document).ready(function(){
 		
 		//현재 경로를 가져온다. (controller1/help/list 이런 식으로)
-		var contextPath ="${appRoot}"
-		
+		var path = window.location.pathname;
 		//const main = $(location).attr('href'); 
-		//현재 링크가 다음 링크중 하나이면 모달을 띄우지 않고 로그인 창으로 이동시킨다.
-		console.log(contextPath);
-		if	(contextPath === '/controller1/all/list'
-				|| contextPath === '/controller1/user/signup' 
-				|| contextPath === '/controller1/login'
-				|| contextPath === '/controller1'){
+		
+		//현재 링크가 다음 링크중 하나이면 모달을 띄우지 않고 로그인 창으로 이동시킨다
+		if(path === '/controller1/all/list'
+				|| path === '/controller1/user/signup' 
+				|| path === '/controller1/user/login'
+				|| path === '/controller1/'){
 			
 			$("#login").click(function() {
 				location.href="/controller1/user/login"
