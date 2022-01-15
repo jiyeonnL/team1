@@ -110,7 +110,7 @@ font-size:x-large;
 
 	$(document).ready(function(){
 		const main = $(location).attr('href'); 
-		
+		console.log(main)
 		if(main === 'http://localhost:8080/controller1/all/list'
 				|| main === 'http://localhost:8080/controller1/user/signup' 
 				|| main === 'http://localhost:8080/controller1/user/login'){

@@ -556,7 +556,7 @@
             justify-content: center;
             text-decoration: none;
             margin-top: 10px;
-            width: 150px;
+            width: 180px;
             display: block;
             padding: 8px 16px;
             border-radius: 4px;
@@ -693,7 +693,7 @@
                 </div>
                 <div class="text-left back-to-position to-left delay-1">
                     이웃들과 나누고 싶은 새로운 소식이 있나요?
-                    <a href="javascript:void(0)" class="button">바로가기</a>
+                    <a href="/controller1/news/list" class="button">바로가기</a>
                 </div>
             </div>
         </section>
@@ -710,7 +710,7 @@
                     <div>
                         도움이 필요하신가요? 이웃들에게 부탁해보세요!
                     </div>
-                    <a href="javascript:void(0)" class="button" style="float: right;">바로가기</a>
+                    <a href="/controller1/help/list" class="button" style="float: right;">바로가기</a>
                 </div>
 
             </div>
@@ -728,7 +728,7 @@
                 </div>
                 <div class="text-left back-to-position to-left delay-1">
                     궁금한게 있나요? 이웃들에게 물어보세요!
-                    <a href="javascript:void(0)" class="button">바로가기</a>
+                    <a href="/controller1/question/list?page=1" class="button">바로가기</a>
                 </div>
             </div>
         </section>
@@ -738,14 +738,14 @@
                 <div class="triangle left"></div>
                 <div class="image-container right back-to-position to-left delay-0">
                     <img class="cover-image right"
-                        src="https://cdn.pixabay.com/photo/2017/10/13/12/29/hands-2847508_960_720.jpg"
+                        src="https://images.pexels.com/photos/414628/pexels-photo-414628.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
                         alt="lifeImage" />
                 </div>
                 <div class="text-right back-to-position to-right delay-1">
                     <div>
                         이웃들과 여러분의 일상을 공유해보세요!
                     </div>
-                    <a href="javascript:void(0)" class="button" style="float: right;">바로가기</a>
+                    <a href="/controller1/life/list" class="button" style="float: right;">바로가기</a>
                 </div>
 
             </div>
