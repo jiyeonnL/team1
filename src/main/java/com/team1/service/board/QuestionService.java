@@ -12,14 +12,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.team1.domain.board.HelpFileVO;
-import com.team1.domain.board.HelpVO;
 import com.team1.domain.board.QuestionFileVO;
 import com.team1.domain.board.QuestionPageInfoVO;
 import com.team1.domain.board.QuestionVO;
 import com.team1.mapper.board.QuestionFileMapper;
 import com.team1.mapper.board.QuestionMapper;
+import com.team1.mapper.board.QuestionReReplyMapper;
 import com.team1.mapper.board.QuestionReplyMapper;
+import com.team1.mapper.board.QuestionUpMapper;
+import com.team1.mapper.board.ReportMapper;
 
 import lombok.Setter;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -42,6 +43,15 @@ public class QuestionService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private QuestionReplyMapper questionReplyMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private QuestionReReplyMapper questionReReplyMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReportMapper reportMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private QuestionUpMapper upMapper;
 	
 	
 	@Value("${aws.accessKeyId}")
@@ -208,7 +218,9 @@ public class QuestionService {
 				// 1. write file to filesystem, s3
 				
 				QuestionFileVO questionFileVO = new QuestionFileVO();
-				String key = "board/help-board/" + board.getId() + "/" + file.getOriginalFilename();
+				
+				// 여기 board/help-board/ 로 되어있어서 help 를 quesiton 으로 수정했어요 (지연) 
+				String key = "board/quesiton-board/" + board.getId() + "/" + file.getOriginalFilename();
 				putObject(key, file.getSize(), file.getInputStream());
 				String url = "https://" + bucketName + ".s3." + region.toString() +".amazonaws.com/" +key;
 				questionFileVO.setFileName(file.getOriginalFilename());
@@ -226,8 +238,15 @@ public class QuestionService {
 
 	public boolean remove(Integer id) {
 		
+		//1.0 게시물에 달린 대댓글 지우기
+		questionReReplyMapper.deleteByBoardId(id);
+		
 		// 1.1 게시물에 달린 댓글 지우기
 		questionReplyMapper.deleteByBoardId(id);
+		// 1.2 좋아요 지우기
+		upMapper.upDeleteByBoardId(id);
+		//1.3 신고내역 지우기 
+		reportMapper.deleteByQuestionId(id);
 
 		// 2. 파일 지우기 , s3
 		// file system에서 삭제

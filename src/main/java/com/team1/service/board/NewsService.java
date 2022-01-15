@@ -12,13 +12,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.team1.domain.board.LifeFileVO;
 import com.team1.domain.board.NewsFileVO;
 import com.team1.domain.board.NewsVO;
 import com.team1.mapper.board.NewsFileMapper;
 import com.team1.mapper.board.NewsMapper;
+import com.team1.mapper.board.NewsReReplyMapper;
 import com.team1.mapper.board.NewsReplyMapper;
 import com.team1.mapper.board.NewsUpMapper;
+import com.team1.mapper.board.ReportMapper;
 
 import lombok.Setter;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -37,6 +38,12 @@ public class NewsService {
 
 	@Setter(onMethod_ = @Autowired)
 	private NewsReplyMapper newsReplyMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private NewsReReplyMapper newsReReplyMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReportMapper reportMapper;
 
 	@Setter(onMethod_ = @Autowired)
 	private NewsFileMapper fileMapper;
@@ -216,11 +223,16 @@ public class NewsService {
 	
 	@Transactional
 	public boolean remove(Integer id) {
+		
+		//1.0 게시물에 달린 대댓글 지우기
+		newsReReplyMapper.deleteByBoardId(id);
 
 		// 1.1 게시물에 달린 댓글 지우기
 		newsReplyMapper.deleteByBoardId(id);
 		// 1.2 좋아요 지우기
 		upMapper.upDeleteByBoardId(id);
+		//1.3 신고내역 지우기 
+		reportMapper.deleteByNewsId(id);
 
 		// 2. 파일 지우기 , s3
 		// file system에서 삭제

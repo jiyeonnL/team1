@@ -19,6 +19,9 @@ public class NewsReplyVO {
 	private String userprofile;
 	private Integer uid;
 	
+	// 관리자 권한
+	private Integer adminQuali;
+	
 	// 댓글을 작성하는데 탈퇴한 회원과 닉네임이 같을 때 필터
 	
 	public String getInserted() {

@@ -3,6 +3,7 @@ package com.team1.mapper.board;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+
 import com.team1.domain.board.QuestionFileVO;
 import com.team1.domain.board.QuestionVO;
 
@@ -34,5 +35,11 @@ public interface QuestionMapper {
 	public int upViews(Integer id);
 
 	public List<QuestionVO> getListPageByNotice();
+	
+	public int upUps(Integer id);
+	
+	public List<QuestionVO> getListSearchByContent(String search);
+	
+	public List<QuestionVO> getListByConditions(@Param("location") String location, @Param("tag") String tag, @Param("query") String query, @Param("loginId") Integer loginId);
 	
 }
