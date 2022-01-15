@@ -26,7 +26,7 @@
 	AND 
 		u.withdrawal = 'X'
 	ORDER BY
-		r.id DESC;
+		r.id;
   </select>
   
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">

@@ -192,7 +192,7 @@ height: 40%;
 	width: 900px;
 }
 
-.btn-register, .btn-cancel {
+.btn-register, .btn-cancel{
 	font-size: xx-large;
 	margin-bottom:40px;
 	border-radius: 8px;
@@ -206,9 +206,9 @@ height: 40%;
 .btn-cancel {
 	color: white;
 	padding: 7.5px;
-	padding-block: 9px;
+	padding-block: 6px;
 	background-color: #264d73;
-	border: 2px solid;
+	border: 1px solid;
 	border-color:#264d73;
 	margin-left:15px;
 }
@@ -244,24 +244,24 @@ color:#ffe164;
 						<input type="text" class="form-control 인풋-글씨" name="location" value="${sessionScope.loginUser.location }" id="input5" readonly>
 					</div>
 					<div class="row">
-          			<div class="form-group1 게시물-테두리-패딩 col-md-8" >
-            			<label for="input3" class="게시물-글씨" >게시물 제목</label>
-           				<input type="text" class="form-control 인풋-글씨" id="input3" name="title">
-          			</div>
-  		 		    <div class="form-group1 게시물-테두리-패딩 col-md-4">
-           				 <label for="input6" class="게시물-글씨">태그</label>
-           				 <select class="form-control 인풋-글씨 태그-패딩" id="input6" name="tag">
-          				  	<option value="기타" selected>태그 선택</option>
-          				  	<option value="일상">일상 </option>
-           				 	<option value="취미">취미 </option>
-           				 	<option value="영화&드라마">영화&드라마</option>
-           				 	<option value="반려동물">반려동물</option>
-           				 	<option value="기타">기타</option>
-          				</select>
-         			  </div>
+						<div class="form-group1 게시물-테두리-패딩 col-md-8">
+							<label for="input3" class="게시물-글씨">게시물 제목</label>
+							<input type="text" class="form-control 인풋-글씨" id="input3" name="title">
+						</div>
+						<div class="form-group1 게시물-테두리-패딩 col-md-4">
+							<label for="input6" class="게시물-글씨">태그</label>
+							<select class="form-control 인풋-글씨 태그-패딩" id="input6" name="tag">
+								<option value="기타" selected>태그 선택</option>
+								<option value="일상">일상</option>
+								<option value="취미">취미</option>
+								<option value="영화드라마">영화드라마</option>
+								<option value="반려동물">반려동물</option>
+								<option value="기타">기타</option>
+							</select>
+						</div>
 					</div>
-          
-         			 <div class="form-group1 게시물-테두리-패딩">
+
+					<div class="form-group1 게시물-테두리-패딩">
            				 <label for="input4" class="게시물-글씨">내용</label>
           				 <textarea class="form-control 인풋-글씨" id="input4" name="content"></textarea>
           			</div>
@@ -281,8 +281,9 @@ color:#ffe164;
 				    <!-- 이미지들 미리보기 컨테이너 -->
 					<div id="image_container" class="d-flex"></div>
 
-					<button class="btn-register" type="submit">등록</button>
-					<a href="${pageContext.request.contextPath }/life/list" class="btn-cancel">취소</a>
+
+					<button class="btn btn-register" type="submit">등록</button>
+					<a href="${pageContext.request.contextPath }/life/list" class="btn btn-cancel">취소</a>
 				</form>
 
 			</div>

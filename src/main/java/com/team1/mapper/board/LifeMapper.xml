@@ -66,6 +66,7 @@
 		tb_board_life_up lu WHERE lu.userId =
 		#{loginId} AND lu.postId=p.id)
 		upposession
+		datediff(now(), p.inserted) newMark
 		FROM tb_board_life p
 		JOIN tb_user m
 		ON m.id = p.memberId
@@ -78,7 +79,6 @@
 		DESC;
 	</select>
 
-
 	<select id="read" resultMap="lifeResult">
 		SELECT
 		p.id, p.memberId, p.location,
@@ -89,7 +89,8 @@
 		COUNT(r.id) replyCount,
 		(SELECT hu.userId FROM tb_board_life_up hu
 		WHERE hu.userId =
-		#{loginId} AND hu.postId=p.id) upposession
+		#{loginId} AND hu.postId=p.id) upposession,
+		(SELECT count(id) FROM tb_report WHERE lifeId=#{id} AND categories = '게시글') reportCount
 		FROM
 		tb_board_life p
 		JOIN tb_user m
@@ -113,7 +114,8 @@
 		COUNT(r.id) replyCount,
 		(SELECT hu.userId FROM tb_board_life_up hu
 		WHERE hu.userId =
-		#{loginId} AND hu.postId=p.id) upposession
+		#{loginId} AND hu.postId=p.id) upposession,
+		datediff(now(), p.inserted) newMark
 		FROM
 		tb_board_life p
 		JOIN tb_user m
@@ -146,7 +148,8 @@
 		hu.userId FROM tb_board_life_up hu WHERE hu.userId =
 		#{loginId}
 		AND
-		hu.postId=p.id) upposession
+		hu.postId=p.id) upposession,
+		datediff(now(), p.inserted) newMark
 		FROM tb_board_life p
 		JOIN tb_user m
 		ON
