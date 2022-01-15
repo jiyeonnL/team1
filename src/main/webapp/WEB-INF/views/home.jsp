@@ -32,7 +32,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"
         integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<style>
+    <style>
         html {
             overflow: hidden;
             -ms-overflow-style: none;
@@ -48,13 +48,13 @@
 
         html,
         body {
+            font-weight: bold;
+            font-family: 'Jua', sans-serif;
             display: block;
             width: 100%;
             height: 100%;
             margin: 0;
             background-color: beige;
-            font-weight: bold;
-            font-family: 'Jua', sans-serif;
         }
 
         .scroll-section {
@@ -63,7 +63,12 @@
             position: relative;
         }
 
-
+        /* visual  */
+        .header {
+            background-color: burlywood;
+            height: 84px;
+            width: 100%;
+        }
 
         /* 메인 화면 */
         .visual {
@@ -86,7 +91,7 @@
 
             height: 100%;
             /* 왼쪽에 있는 색 -> 오른쪽에 있는 색으로 변경 */
-            background: linear-gradient(to left, white 50%, #ffe164 50%) right;
+            background: linear-gradient(to left, beige 50%, #ffe164 50%) right;
             background-size: 200%;
             -webkit-animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.0s both;
             animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.0s both;
@@ -342,7 +347,7 @@
             left: 100px;
             width: 600px;
             height: 500px;
-            
+
         }
 
         .intro .text-box .text-title {
@@ -417,11 +422,43 @@
         /* 게시판 소개 영역 1개 엘리먼트 정의 */
         .body .board {
 
-            position: relative;
+            position: absolute;
             display: flex;
             width: 100%;
             height: 300px;
+            background-color: #ffe164;
+            border: black 5px so;
+
+        }
+
+        .body .board.upper {
+            top: 40px;
+        }
+
+        .body .board.downer {
+            bottom: 40px;
+        }
+
+        .body .triangle {
+            position: absolute;
+            height: 300px;
+            width: 300px;
             background-color: #264d73;
+        }
+
+        .body .triangle.left {
+            left: 0px;
+            bottom: 0px;
+            clip-path: polygon(0 0, 0% 100%, 100% 100%);
+            -webkit-clip-path: polygon(0 0, 0% 100%, 100% 100%);
+
+        }
+
+        .body .triangle.right {
+            right: 0px;
+            bottom: 0px;
+            clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+            -webkit-clip-path: polygon(100% 0, 0% 100%, 100% 100%);
         }
 
         /* 커버 이미지 담는 div 영역 */
@@ -458,20 +495,21 @@
         .cover-image.right {
             -webkit-clip-path: polygon(100% 0, 0% 0, 55% 100%, 100% 100%);
             clip-path: polygon(100% 0, 0% 0, 50% 100%, 100% 100%);
-
         }
+
+
 
         .body .board .text-left {
             position: absolute;
             top: 120px;
-            right: 50px;
+            left: 700px;
             font-size: 2.0rem;
         }
 
         .body .board .text-right {
             position: absolute;
             top: 120px;
-            left: 50px;
+            right: 700px;
             font-size: 2.0rem;
         }
 
@@ -510,6 +548,8 @@
             transition-delay: 1.2s;
         }
 
+
+
         /* a 링크를 버튼으로 만들고 hover 시 효과 부여 */
         .button {
             text-align: center;
@@ -521,13 +561,13 @@
             padding: 8px 16px;
             border-radius: 4px;
             cursor: pointer;
-            border: 2px solid black;
-            background: linear-gradient(45deg, black 50%, black 50%);
+            border: 3px solid black;
+            /* 글자 색상을 여기서 바꾼다 */
+            background: linear-gradient(45deg, white 50%, black 50%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
 
-            color: black;
             /*For IE*/
         }
 
@@ -539,7 +579,7 @@
             left: 0;
             right: 0;
             background: linear-gradient(45deg,
-                    #ffe164 50%, transparent 50%);
+                    #264d73 50%, transparent 50%);
             z-index: -1;
         }
 
@@ -554,7 +594,6 @@
         .button:hover:after {
             background-position: 0;
             font-size: 1.1em;
-
             /*For IE*/
         }
 
@@ -582,14 +621,16 @@
        
 </head>
 
+
 <body>
+
     <!-- 헤더 -->
     <div class="scroll-section">
 		
-		<div id=header>
+		<div id="header">
 			<b:header></b:header>
 		</div>
-
+		
         <section class="visual">
             <div class="inner">
                 <div class="main-cover"></div>
@@ -627,32 +668,27 @@
                 </div>
 
                 <div class="text-content content-ani">
-                    (프로젝트명)은 지역 기반의 커뮤니티로... Excepturi veritatis placeat dignissimos
-                    nesciunt dolorem, laborum iusto voluptates distinctio voluptatibus, sapiente aut cumque voluptatum,
-                    quisquam error! Consequuntur blanditiis deleniti accusantium quaerat!
+                    (프로젝트명)은 지역 기반의 커뮤니티로 지역 근처 주민들과 다양한 주제로 여러분의 일상이나 느낀점, 의견을 공유하거나 여러분의 이웃이 올린 게시물을 불 수 있습니다.
+                    (프로젝트명)으로 여러분의 이웃과 함께 해보세요!
                 </div>
             </div>
             <!-- 이미지 담긴 영역 -->
             <div class="image-box scroll-spy">
                 <img class="image image1 image1-ani"
-                    src="https://images.pexels.com/photos/7150075/pexels-photo-7150075.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                    src="https://images.pexels.com/photos/6205453/pexels-photo-6205453.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" />
                 <img class="image image2 image2-ani"
                     src="https://images.pexels.com/photos/5935249/pexels-photo-5935249.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
             </div>
-
-
         </section>
-
-
-
     </div>
 
     <div class="scroll-section">
-        <section class="body">
-            <div class="board scroll-spy">
+        <section class="body ">
+            <div class="board upper scroll-spy">
+                <div class="triangle right"></div>
                 <div class="image-container left back-to-position to-right delay-0">
                     <img class="cover-image left"
-                        src="http://www.nasa.gov/images/content/531265main_iss027e007014_1600_800-600.jpg"
+                        src="https://images.pexels.com/photos/3341508/pexels-photo-3341508.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
                         alt="newsImage" />
                 </div>
                 <div class="text-left back-to-position to-left delay-1">
@@ -663,32 +699,53 @@
         </section>
 
         <section class="body">
-            <div class="board scroll-spy">
+            <div class="board downer scroll-spy">
+                <div class="triangle left"></div>
                 <div class="image-container right back-to-position to-left delay-0">
                     <img class="cover-image right"
-                        src="http://www.nasa.gov/images/content/531265main_iss027e007014_1600_800-600.jpg"
+                        src="https://cdn.pixabay.com/photo/2017/10/13/12/29/hands-2847508_960_720.jpg"
                         alt="newsImage" />
                 </div>
                 <div class="text-right back-to-position to-right delay-1">
-                    도움이 필요하신가요? 이웃들에게 부탁해보세요!
-                    <a href="javascript:void(0)" class="button">바로가기</a>
+                    <div>
+                        도움이 필요하신가요? 이웃들에게 부탁해보세요!
+                    </div>
+                    <a href="javascript:void(0)" class="button" style="float: right;">바로가기</a>
                 </div>
 
             </div>
         </section>
     </div>
 
-    <div class="scroll-section" style="background-color: aqua;">
+    <div class="scroll-section">
+        <section class="body ">
+            <div class="board upper scroll-spy">
+                <div class="triangle right"></div>
+                <div class="image-container left back-to-position to-right delay-0">
+                    <img class="cover-image left"
+                        src="https://images.pexels.com/photos/7235606/pexels-photo-7235606.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                        alt="qeustionImage" />
+                </div>
+                <div class="text-left back-to-position to-left delay-1">
+                    궁금한게 있나요? 이웃들에게 물어보세요!
+                    <a href="javascript:void(0)" class="button">바로가기</a>
+                </div>
+            </div>
+        </section>
+
         <section class="body">
-            <div class="board scroll-spy">
+            <div class="board downer scroll-spy">
+                <div class="triangle left"></div>
                 <div class="image-container right back-to-position to-left delay-0">
                     <img class="cover-image right"
-                        src="http://www.nasa.gov/images/content/531265main_iss027e007014_1600_800-600.jpg"
-                        alt="newsImage" />
+                        src="https://cdn.pixabay.com/photo/2017/10/13/12/29/hands-2847508_960_720.jpg"
+                        alt="lifeImage" />
                 </div>
                 <div class="text-right back-to-position to-right delay-1">
-                    도움이 필요하신가요? 이웃들에게 부탁해보세요!
-                    <a href="javascript:void(0)" class="button">바로가기</a>
+                    <div>
+                        이웃들과 여러분의 일상을 공유해보세요!
+                    </div>
+                    <a href="javascript:void(0)" class="button" style="float: right;">바로가기</a>
                 </div>
 
             </div>
