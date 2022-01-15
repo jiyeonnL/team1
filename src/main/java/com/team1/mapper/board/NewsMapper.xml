@@ -65,7 +65,8 @@
 		(SELECT nu.userId FROM
 		tb_board_news_up nu WHERE nu.userId =
 		#{loginId} AND nu.postId=p.id)
-		upposession
+		upposession,
+		datediff(now(), p.inserted) newMark
 		FROM tb_board_news p
 		JOIN tb_user m
 		ON m.id = p.memberId
@@ -89,7 +90,8 @@
 		COUNT(r.id) replyCount,
 		(SELECT hu.userId FROM tb_board_news_up hu
 		WHERE hu.userId =
-		#{loginId} AND hu.postId=p.id) upposession
+		#{loginId} AND hu.postId=p.id) upposession,
+		(SELECT count(id) FROM tb_report WHERE newsId=#{id} AND categories = '게시글') reportCount
 		FROM
 		tb_board_news p
 		JOIN tb_user m
@@ -113,7 +115,8 @@
 		COUNT(r.id) replyCount,
 		(SELECT hu.userId FROM tb_board_news_up hu
 		WHERE hu.userId =
-		#{loginId} AND hu.postId=p.id) upposession
+		#{loginId} AND hu.postId=p.id) upposession,
+		datediff(now(), p.inserted) newMark
 		FROM
 		tb_board_news p
 		JOIN tb_user m
@@ -146,7 +149,8 @@
 		hu.userId FROM tb_board_news_up hu WHERE hu.userId =
 		#{loginId}
 		AND
-		hu.postId=p.id) upposession
+		hu.postId=p.id) upposession,
+		datediff(now(), p.inserted) newMark
 		FROM tb_board_news p
 		JOIN tb_user m
 		ON

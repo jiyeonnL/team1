@@ -41,4 +41,10 @@
 		WHERE id =
 		#{Id}
 	</update>
+	
+	<select id="selectByUrl"
+		resultType="com.team1.domain.board.LifeFileVO">
+		SELECT id, postId, fileName, url, isThumbnail FROM
+		tb_file_life WHERE url =#{url}
+	</select>
 </mapper>

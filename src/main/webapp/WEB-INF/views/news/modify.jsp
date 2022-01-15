@@ -74,7 +74,8 @@
 }
 
 #input1 {
-	width: 65%;
+	width: 100%;
+	height: 40%;
 }
 
 #input2 {
@@ -84,16 +85,35 @@
 #input3 {
 	border: solid;
 	border-color: #264d73;
-	width: 30%;
+	width: 100%;
 	padding-top: 4px;
+	height: 40%;
+}
+
+.게시물수정-이미지 {
+	width: 50%;
 }
 
 #image_container {
 	border-bottom: solid;
 	border-bottom-color: lightgray;
 	margin-bottom: 20px;
-	padding-bottom:15px;
-	
+	padding-bottom: 15px;
+}
+
+.상세보기-이미지박스 {
+	text-align: center;
+}
+
+.상세보기-이미지-첫번째칸 {
+	width: 84px;
+}
+.상세보기-이미지-두번째칸{
+	padding-bottom: 23px;
+}
+.상세보기-이미지-세번째칸 {
+	width: 66px;
+	padding-bottom: 23px;
 }
 
 .container_radio {
@@ -158,6 +178,35 @@
 	background-color: lightgray;
 	width: 900px;
 }
+
+.btn-modify, .btn-cancel, .btn-delete {
+	font-size: xx-large;
+	margin-bottom: 40px;
+	border-radius: 8px;
+}
+
+.btn-modify {
+	color: #f0615c;
+	background-color: #ffe164;
+}
+
+.btn-danger {
+	margin-left: 10px;
+}
+
+.btn-cancel {
+	color: white;
+	padding: 7.5px;
+	padding-block: 6px;
+	background-color: #264d73;
+	border: 1px solid;
+	border-color: #264d73;
+	margin-left: 10px;
+}
+
+.btn-cancel:hover {
+	color: #ffe164;
+}
 </style>
 
 <title>게시물 수정</title>
@@ -172,32 +221,34 @@
 
 				<form id="modifyForm" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="id" value="${board.id }">
-
-					<div class="form-group1 게시물-테두리-패딩">
+					
+					<div class="row">
+					<div class="form-group1 게시물-테두리-패딩 col-md-8">
 						<label for="input1" class="게시물-글씨">제목</label>
 						<input type="text" class="form-control 인풋-글씨" value="${board.title }" id="input1" name="title">
 					</div>
-
+						<div class="form-group1 게시물-테두리-패딩 col-md-4">
+							<label for="input3" class="게시물-글씨">태그</label>
+							<select class="form-control " id="input3" name="tag">
+								<option value="사건사고" <c:if test="${board.tag eq '사건사고'}">selected</c:if>>사건사고</option>
+								<option value="광고" <c:if test="${board.tag  eq '광고'}">selected</c:if>>광고</option>
+								<option value="기타" <c:if test="${board.tag  eq '기타'}">selected</c:if>>기타</option>
+							</select>
+						</div>
+					</div>
 					<div class="form-group1 게시물-테두리-패딩">
 						<label for="input2" class="게시물-글씨">내용</label>
 						<textarea class="form-control 인풋-글씨" id="input2" name="content">${board.content }</textarea>
 					</div>
 
-					<div class="form-group1 게시물-테두리-패딩">
-						<label for="input3" class="게시물-글씨">태그</label>
-						<select class="form-control " id="input3" name="tag">
-							<option value="사건사고" <c:if test="${board.tag eq '사건사고'}">selected</c:if>>사건사고</option>
-							<option value="광고" <c:if test="${board.tag  eq '광고'}">selected</c:if>>광고</option>
-							<option value="기타" <c:if test="${board.tag  eq '기타'}">selected</c:if>>기타</option>
-						</select>
-					</div>
+					
 
-					<table class="table table-hover table-bordered">
+					<table class="table table-hover table-bordered 상세보기-이미지박스">
 						<thead class="thead-dark">
 							<tr>
-								<th>삭제할 파일 선택</th>
-								<th>이미지</th>
-								<th>썸네일</th>
+								<th class="상세보기-이미지-첫번째칸">삭제할 파일 선택</th>
+								<th class="상세보기-이미지-두번째칸" style="vertical-align: middle;">이미지</th>
+								<th class="상세보기-이미지-세번째칸" style="vertical-align: middle;">썸네일</th>
 							</tr>
 						</thead>
 						<c:if test="${not empty board.fileList }">
@@ -211,7 +262,7 @@
 										</td>
 										<td>
 											<div class="col">
-												<img class="img-fluid" src="${file.url}" alt="${file.url }">
+												<img class="img-fluid 게시물수정-이미지" src="${file.url}" alt="${file.url }">
 											</div>
 										</td>
 										<td>
@@ -245,13 +296,12 @@
 					
 					<!-- 이미지들 미리보기 컨테이너 -->
 					<div id="image_container" class="d-flex"></div>
-					
 				</form>
 				<c:if test="${sessionScope.loginUser.nickname eq board.nickname }">
-					<button id="modifySubmitButton" class="btn btn-outline-primary" type="submit">수정</button>
+					<button id="modifySubmitButton" class="btn btn-modify" type="submit">수정</button>
 				</c:if>
-				<button id="" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmModal1"><i class="fas fa-trash"> 삭제</i></button>
-				<a href="${pageContext.request.contextPath }/news/list/${board.id }" class="btn btn-outline-secondary">취소</a>
+				<button id="" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirmModal1"> 삭제</i></button>
+				<a href="${pageContext.request.contextPath }/news/list/${board.id }" class="btn btn-cancel">취소</a>
 			</div>
 		</div>
 	</div>
@@ -311,7 +361,6 @@
         var dt = new DataTransfer();
         var input = document.getElementById('input4');
         var { files } = input;
-        console.log("삭제 인덱스", index);
 
 
 		var radio_new;
@@ -419,8 +468,7 @@
             input.files = dt.files
 			
         }
-
-
+        
 		/* 현재 미리보기는 모두 지워야 한다. */
 		$("#image_container").empty();
 		$("#d-line").empty();

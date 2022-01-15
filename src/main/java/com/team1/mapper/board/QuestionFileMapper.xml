@@ -24,6 +24,12 @@
 		WHERE 
 		postId =#{boardId}
 	</select>
+	
+	<select id="selectByUrl"
+		resultType="com.team1.domain.board.QuestionFileVO">
+		SELECT id, postId, fileName, url FROM
+		tb_file_question WHERE url =#{url}
+	</select>
   	
   	<delete id="deleteByBoardId">
 		DELETE FROM tb_file_question WHERE postId = #{boardId}

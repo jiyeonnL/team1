@@ -23,6 +23,7 @@ import com.team1.domain.board.NewsVO;
 import com.team1.domain.user.UserVO;
 import com.team1.service.board.NewsReplyService;
 import com.team1.service.board.NewsService;
+import com.team1.service.board.ReportService;
 
 import lombok.Setter;
 
@@ -35,6 +36,9 @@ public class NewsController {
 
 	@Setter(onMethod_ = @Autowired)
 	private NewsReplyService replyservice;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReportService reportservice;
 
 	
 	@GetMapping(value = "/list")
@@ -92,7 +96,13 @@ public class NewsController {
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 		NewsVO hvo = (NewsVO) service.get(id, uvo.getId());
 
-		if (uvo.getId() != hvo.getMemberId()) {
+		if(uvo.getAdminQuali() == 1) { // 관리자가 글 수정하거나 지울 수 있음
+			NewsVO board = service.get(id, uvo.getId());
+			// String[] fileNames = service.getNamesByBoardId(id);
+			model.addAttribute("board", board);
+			
+			return "news/modify";
+		} else if (uvo.getId() != hvo.getMemberId()) {
 			System.out.println("작성자가 아니면 수정할 수 없습니다.");
 			return "redirect:/all/list";
 		}
