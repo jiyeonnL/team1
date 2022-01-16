@@ -158,6 +158,11 @@ a.goTop {
 #wrap>ul>li:hover>ul {
 	display: block;
 }
+
+nav{
+	margin-right: 0px !important;
+	padding-right: 0px !important;
+}
 </style>
 
 <nav class="navbar navbar-expand-sm navbar-dark sticky-top" aria-label="Third navbar example" id="nav-color">
