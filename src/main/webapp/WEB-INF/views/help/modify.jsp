@@ -232,7 +232,6 @@
 							<select class="form-control " id="input3" name="tag">
 								<option value="사다주세요" <c:if test="${board.tag eq '사다주세요'}">selected</c:if>>사다주세요</option>
 								<option value="맡아주세요" <c:if test="${board.tag  eq '맡아주세요'}">selected</c:if>>맡아주세요</option>
-								<option value="빌려주세요" <c:if test="${board.tag  eq '빌려주세요'}">selected</c:if>>빌려주세요</option>
 								<option value="옮겨주세요" <c:if test="${board.tag  eq '옮겨주세요'}">selected</c:if>>옮겨주세요</option>
 								<option value="기타" <c:if test="${board.tag  eq '기타'}">selected</c:if>>기타</option>
 							</select>
