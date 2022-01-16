@@ -533,7 +533,7 @@ background-color: #eef2f6;
 					<c:choose>
 						<c:when test="${post.reportCount<5 }">
 							<form method="post" id="reportForm">
-								<input type="hidden" class="form-control" id="reportinput1" name="boardName" value="해주세요">
+								<input type="hidden" class="form-control" id="reportinput1" name="boardName" value="일상생활">
 								<input type="hidden" class="form-control" id="reportinput4" name="categories" value="게시글">
 								<div class="form-group">
 									<label for="reportinput2">작성자</label>
@@ -590,7 +590,7 @@ background-color: #eef2f6;
 				</div>
 				<div class="replyReportModalBody modal-body">
 					<form method="post" id="replyReportForm">
-						<input type="hidden" class="form-control" id="replyreportinput1" name="boardName" value="해주세요">
+						<input type="hidden" class="form-control" id="replyreportinput1" name="boardName" value="일상생활">
 						<input type="hidden" class="form-control" id="replyreportinput4" name="categories" value="댓글">
 						<input type="hidden" class="form-control" id="replyreportinput5" name="lifeReplyId" value="">
 						<div class="form-group">
@@ -643,7 +643,7 @@ background-color: #eef2f6;
 				</div>
 				<div class="rereplyReportModalBody modal-body">
 					<form method="post" id="rereplyReportForm">
-						<input type="hidden" class="form-control" id="rereplyreportinput1" name="boardName" value="해주세요">
+						<input type="hidden" class="form-control" id="rereplyreportinput1" name="boardName" value="일상생활">
 						<input type="hidden" class="form-control" id="rereplyreportinput4" name="categories" value="댓글">
 						<input type="hidden" class="form-control" id="rereplyreportinput6" name="lifeReplyId" value="">
 						<input type="hidden" class="form-control" id="rereplyreportinput5" name="lifeReReplyId" value="">
