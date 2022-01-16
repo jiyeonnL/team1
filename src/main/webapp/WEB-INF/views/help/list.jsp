@@ -179,7 +179,7 @@ a:hover {
 					<div class="container-fluid my-4 list-background-color" id="list-font-${vs.index }" style="display : ${vs.index < 5 ? '' : 'none' }">
 						<div class="row md mx-3 my-2 제목아래보더">
 							<div class="col-md-2 my-auto px-auto 태그테두리">
-								<div id="tag">${board.tag } </div>
+								<div id="tag">${board.tag }</div>
 							</div>
 							<div class="col-md-5 my-auto h5">
 								<div class="d-flex justify-content-start">
@@ -218,7 +218,7 @@ a:hover {
 									<c:if test="${not empty board.fileList }">
 										<c:forEach items="${board.fileList }" var="file" varStatus="vs">
 											<c:if test="${file.isThumbnail eq 1 }">
-												<img src="${file.url}"  style = "width: 600px; height: 300px; object-fit: cover;" alt="${file.url}">
+												<img src="${file.url}" style="width: 600px; height: 300px; object-fit: cover;" alt="${file.url}">
 
 											</c:if>
 										</c:forEach>
@@ -259,10 +259,10 @@ a:hover {
 						</div>
 					</div>
 				</c:if>
-			</c:forEach>
-			<b:copyright></b:copyright>
+				</c:forEach>
 		</div>
 	</div>
+	<b:copyright></b:copyright>
 	<!-- 태그 -->
 
 
@@ -309,6 +309,7 @@ a:hover {
 		var count = 5;
 		$(window).scroll(function() {
 			if ($(window).scrollTop() == $(document).height()	- $(window).height()) {
+				alert("밑에 옴");
 				for (i = 0; i < 5; i++) {
 					$("#inner").find("#list-font-" + count).removeAttr("style", "none");
 					count++;

@@ -50,15 +50,15 @@ font-size:x-large;
 
 			<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 header-size">
 
-				<li><a href="${pageContext.request.contextPath }/all/list" class="nav-link px-2 text-white"> 
+				<li><a href="${pageContext.request.contextPath }" class="nav-link px-3 text-white"> 
 				<i class="fas fa-home" id="icon-header"></i> 홈 
 				</a></li>
-				<li><a href="/" class="nav-link px-2 text-white"> 
-				<i class="far fa-file-alt" id="icon-header"></i> 미정   
+				<li><a href="/controller1/news/list" class="nav-link px-3 text-white"> 
+				<i class="fas fa-th-list" id="icon-header"></i> 동네 살펴보기   
 				</a></li>
-				<li><a href="/" class="nav-link px-2 text-white"> 
-				<i class="fas fa-question-circle" id="icon-header"></i> 자주묻는 질문 </a></li>
-				<li><a href="/" class="nav-link px-2 text-white"> 
+				<!-- <li><a href="/" class="nav-link px-2 text-white"> 
+				<i class="fas fa-question-circle" id="icon-header"></i> 자주묻는 질문 </a></li> -->
+				<li><a href="/" class="nav-link px-3 text-white"> 
 				<i class="fas fa-user-edit" id="icon-header"></i> 제작자 </a></li>
 
 			</ul>
@@ -87,7 +87,7 @@ font-size:x-large;
 					<ul id="dropdown" class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton1">
 
 						<li>
-							<a class="dropdown-item" href="${pageContext.request.contextPath }/user/profile/${sessionScope.loginUser.nickname}">프로필 수정</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath }/user/profile/${sessionScope.loginUser.nickname}">프로필 보기 / 수정</a>
 						</li>
 						<c:if test="${sessionScope.loginUser.adminQuali eq 1 }">
 						<li>

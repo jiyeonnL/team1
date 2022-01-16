@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <style>
-#location, #all, #news, #question, #life, #help, #keyword, #icon {
+#location, #news, #question, #life, #help, #keyword, #icon {
 	border: 3px solid;
 	border-color: #2f6091;
 	border-radius: 4px;
@@ -11,19 +11,24 @@
 	margin-bottom: 8px;
 }
 
-#n_all, #n_accident, #n_adv, #n_other, 
-#q_all, #q_question, #q_suggest, #q_declaration, #q_other, 
-#l_all, #l_life, #l_hobby, #l_movdra, #l_pet, #l_other, 
-#h_All, #h_buy, #h_care,	#h_move, #h_other {
+#news, #question, #life, #help {
+	margin-inline: 1px;
+	padding-inline: 15px;
+}
+
+#n_all, #n_accident, #n_adv, #n_other, #q_all, #q_question, #q_suggest,
+	#q_declaration, #q_other, #l_all, #l_life, #l_hobby, #l_movdra, #l_pet,
+	#l_other, #h_All, #h_buy, #h_care, #h_move, #h_other {
 	border: 2px solid;
 	border-color: #2f6091;
 	border-radius: 4px;
 	font-size: medium;
 }
 
-.메뉴바-아래-호버{
-border-radius: 7px;
+.메뉴바-아래-호버 {
+	border-radius: 7px;
 }
+
 #nav-color {
 	background-color: #ffe164;
 	border-radius: 6px;
@@ -36,9 +41,14 @@ border-radius: 7px;
 	padding-bottom: 0px;
 }
 
+#keyword {
+	height: 43px;
+	width: 325px;
+}
+
 #icon {
 	float: right;
-	margin-top: -49px;
+	margin-top: -50px;
 	background-color: #f5f5f5;
 	padding: 10px 12px;
 	height: 41px;
@@ -59,6 +69,13 @@ a.goTop {
 	color: #264d73;
 	z-index: 999;
 	width: 8.5%;
+}
+
+#위로-가자 {
+	color: white;
+	background-color: #2f6091;
+	border-color: 2px solid white;
+	border-radius: 5px;
 }
 
 .active {
@@ -112,11 +129,11 @@ a.goTop {
 	position: absolute;
 	top: 53px;
 	left: 120px;
-	padding : 5px;
+	padding: 5px;
 	background-color: #ffe164;
 	border: 3px solid #2f6091;
 	border-top: 0px;
-	height : fit-content;
+	height: fit-content;
 }
 
 #wrap li ul.question {
@@ -124,11 +141,11 @@ a.goTop {
 	position: absolute;
 	top: 53px;
 	left: 160px;
-	padding : 5px;
+	padding: 5px;
 	background-color: #ffe164;
 	border: 3px solid #2f6091;
 	border-top: 0px;
-	height : fit-content;
+	height: fit-content;
 }
 
 #wrap li ul.life {
@@ -136,11 +153,11 @@ a.goTop {
 	position: absolute;
 	top: 53px;
 	left: 220px;
-	padding : 5px;
+	padding: 5px;
 	background-color: #ffe164;
 	border: 3px solid #2f6091;
 	border-top: 0px;
-	height : fit-content;
+	height: fit-content;
 }
 
 #wrap li ul.help {
@@ -148,18 +165,18 @@ a.goTop {
 	position: absolute;
 	top: 53px;
 	left: 320px;
-	padding : 5px;
+	padding: 5px;
 	background-color: #ffe164;
 	border: 3px solid #2f6091;
 	border-top: 0px;
-	height : fit-content;
+	height: fit-content;
 }
 
 #wrap>ul>li:hover>ul {
 	display: block;
 }
 
-nav{
+nav {
 	margin-right: 0px !important;
 	padding-right: 0px !important;
 }
@@ -180,9 +197,9 @@ nav{
 					</form>
 				</li>
 				<!-- 나중엘 radio 버튼으로 교체 -->
-				<li id="nav-all" class="nav-item">
+				<!-- <li id="nav-all" class="nav-item">
 					<button type="button" id="all" class="btn btn-outline-dark ml-1">전체보기</button>
-				</li>
+				</li> -->
 				<li id="nav-news" class="nav-item">
 					<button type="button" id="news" class="btn btn-outline-dark ml-1">동네소식</button>
 					<ul id="nav-sub" class="news 메뉴바-아래-호버">
@@ -271,7 +288,7 @@ nav{
 				</li>
 			</ul>
 
-			<form class="ml-auto" method="get" onsubmit="return false;">
+			<form class="ml-1" method="get" onsubmit="return false;">
 				<input class="form-control" type="text" placeholder="검색어를 입력하세요" id="keyword" aria-label="Search" />
 				<label id=icon>
 					<i class="fa fa-search" aria-hidden="true"></i>
@@ -545,5 +562,6 @@ function locationChange() {
 </script>
 
 <a class="goTop" href="#top">
-	<i class="fas fa-arrow-up a-fw fa-3x m-r-3 go-to-the-top"></i>
+<!-- 	<i class="fas fa-arrow-up a-fw fa-3x m-r-3 go-to-the-top"></i> -->
+	<button class="goTop" id="위로-가자"><i class="fas fa-chevron-up fa-3x"></i> <h3>Top</h3></button>
 </a>

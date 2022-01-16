@@ -29,7 +29,7 @@ a:hover {
 }
 
 #body {
-	height: 150vh;
+	height: auto;
 	/* height: calc(100vh-72px); */
 	width: 100%;
 	justify-content: center;
@@ -69,6 +69,10 @@ a:hover {
 	border-color: #264d73;
 }
 
+div.container{
+	font-family: 'IBM Plex Sans KR', sans-serif;
+	}
+
 table {
 	border-radius: 0.7em;
 	overflow: hidden;
@@ -78,7 +82,7 @@ table {
 	border-style: hidden;
 	box-shadow: 0 0 0 2px #264d73;
 	margin-bottom: 30px;
-	margin-top: 10px;
+	margin-top: 30px;
 }
 
 #selfintrohead {
@@ -147,7 +151,7 @@ table {
 
 						</c:when>
 					</c:choose>
-					<div class="col-md-5 mx-3 my-auto align-self-center ">
+					<div class="col-md-4 mx-3 my-auto align-self-center ">
 						<div class="h1">${user.nickname }</div>
 						<span class="h4 mt-3">${user.location }</span>
 						<span class="h4 mt-3 ms-3">#${user.id }</span>
@@ -156,7 +160,7 @@ table {
 
 					<c:if test="${not empty sessionScope.loginUser && sessionScope.loginUser.id eq user.id}">
 
-						<div class="col-md-3 offset-md-2 mx-auto my-auto ">
+						<div class="col-md-2 offset-md-2 mx-auto my-auto ">
 							<button type="button" id="profile-modify" class="btn btn-lg">정보수정</button>
 							<button type="button" id="profile-remove" class="btn btn-lg ">회원탈퇴</button>
 						</div>
@@ -201,8 +205,12 @@ table {
 								<tbody id="mypostbody">
 									<c:forEach items="${list }" var="list">
 										<tr>
-											<td>${list.boardType }</td>
-											<td>${list.tag }</td>
+											<td>
+												<a href="/controller1/${list.link}/list">${list.boardType }</a>
+											</td>
+											<td>
+												<a href="/controller1/${list.link }/list?tag=${list.tag }"> ${list.tag } </a>
+											</td>
 											<td>
 												<a href="/controller1/${list.link}/list/${list.postId}"> ${list.title } </a>
 											</td>
