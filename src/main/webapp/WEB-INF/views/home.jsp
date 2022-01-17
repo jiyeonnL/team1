@@ -432,11 +432,11 @@
         }
 
         .body .board.upper {
-            top: 40px;
+            top: 60px;
         }
 
         .body .board.downer {
-            bottom: 40px;
+            bottom: 60px;
         }
 
         .body .triangle {
@@ -697,7 +697,46 @@
                 </div>
             </div>
         </section>
+        
+         <section class="body">
+            <div class="board downer scroll-spy">
+                <div class="triangle left"></div>
+                <div class="image-container right back-to-position to-left delay-0">
+                    <img class="cover-image right"
+                        src="https://images.pexels.com/photos/7235606/pexels-photo-7235606.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                        alt="newsImage" />
+                </div>
+                <div class="text-right back-to-position to-right delay-1">
+                    <div>
+                    궁금한게 있나요? 이웃들에게 물어보세요!
+                    </div>
+                    <a href="/controller1/help/list" class="button" style="float: right;">바로가기</a>
+                </div>
+            </div>
+        </section>
 
+    </div>
+
+    <div class="scroll-section">
+    
+            <section class="body">
+            <div class="board upper scroll-spy">
+                <div class="triangle right"></div>
+                <div class="image-container left back-to-position to-right delay-0">
+                    <img class="cover-image left"
+                        src="https://images.pexels.com/photos/414628/pexels-photo-414628.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                        alt="lifeImage" />
+                </div>
+                <div class="text-left back-to-position to-left delay-1">
+                    <div>
+                        이웃들과 여러분의 일상을 공유해보세요!
+                    </div>
+                    <a href="/controller1/life/list" class="button" style="float: right;">바로가기</a>
+                </div>
+
+            </div>
+        </section>
+        
         <section class="body">
             <div class="board downer scroll-spy">
                 <div class="triangle left"></div>
@@ -715,41 +754,7 @@
 
             </div>
         </section>
-    </div>
 
-    <div class="scroll-section">
-        <section class="body ">
-            <div class="board upper scroll-spy">
-                <div class="triangle right"></div>
-                <div class="image-container left back-to-position to-right delay-0">
-                    <img class="cover-image left"
-                        src="https://images.pexels.com/photos/7235606/pexels-photo-7235606.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                        alt="qeustionImage" />
-                </div>
-                <div class="text-left back-to-position to-left delay-1">
-                    궁금한게 있나요? 이웃들에게 물어보세요!
-                    <a href="/controller1/question/list?page=1" class="button">바로가기</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="body">
-            <div class="board downer scroll-spy">
-                <div class="triangle left"></div>
-                <div class="image-container right back-to-position to-left delay-0">
-                    <img class="cover-image right"
-                        src="https://images.pexels.com/photos/414628/pexels-photo-414628.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                        alt="lifeImage" />
-                </div>
-                <div class="text-right back-to-position to-right delay-1">
-                    <div>
-                        이웃들과 여러분의 일상을 공유해보세요!
-                    </div>
-                    <a href="/controller1/life/list" class="button" style="float: right;">바로가기</a>
-                </div>
-
-            </div>
-        </section>
     </div>
 
 </body>
