@@ -91,10 +91,10 @@
 
             height: 100%;
             /* 왼쪽에 있는 색 -> 오른쪽에 있는 색으로 변경 */
-            background: linear-gradient(to left, beige 50%, #ffe164 50%) right;
-            background-size: 200%;
-            -webkit-animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.0s both;
-            animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.0s both;
+            background: linear-gradient(to bottom, #ffe164 50%, beige 50%) bottom;
+            background-size: 100% 200%;
+            -webkit-animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.2s both;
+            animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.2s both;
             /* Full height */
             /*             width: 100%;
             height: 100%;
@@ -112,7 +112,7 @@
             0% {}
 
             100% {
-                background-position: left;
+                background-position: top;
             }
 
         }
@@ -123,7 +123,7 @@
 
             100% {
 
-                background-position: left;
+                background-position: top;
             }
         }
 
@@ -731,7 +731,7 @@
                     <div>
                         이웃들과 여러분의 일상을 공유해보세요!
                     </div>
-                    <a href="/controller1/life/list" class="button" style="float: right;">바로가기</a>
+                    <a href="/controller1/life/list" class="button">바로가기</a>
                 </div>
 
             </div>
