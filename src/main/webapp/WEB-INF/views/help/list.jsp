@@ -309,7 +309,7 @@ a:hover {
 		var count = 5;
 		$(window).scroll(function() {
 			if ($(window).scrollTop() == $(document).height()	- $(window).height()) {
-				alert("밑에 옴");
+				/* alert("밑에 옴"); */
 				for (i = 0; i < 5; i++) {
 					$("#inner").find("#list-font-" + count).removeAttr("style", "none");
 					count++;
