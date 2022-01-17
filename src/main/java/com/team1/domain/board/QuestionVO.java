@@ -24,6 +24,8 @@ public class QuestionVO {
 	// 새로운 글 표시 해줄 기준 (오늘 - 작성일 < 지정한 일수) 지정한 일 수는 jsp 제목 부분 c:if 에서 직접 설정
 	private Integer newMark;
 	
+	private Integer upposession;
+	
 	//게시글 신고 누적 갯수
 	private Integer reportCount;
 	//댓글 신고 누적 갯수
