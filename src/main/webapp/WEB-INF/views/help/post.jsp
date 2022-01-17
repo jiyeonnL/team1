@@ -383,7 +383,7 @@ background-color: #eef2f6;
 					<div class="row md ms-4 px-2 align-middle 상세보기-헤더 상세보기-게시물-내용">
 						<div class="col-md-1 px-1 py-0 my-0">
 							<img id="상세보기-프로필" 
-							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+							src="${post.url }" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 						</div>
 						
 						<div class="col-md-7 my-auto h2 align-middle 상세보기-제목"> 
@@ -948,13 +948,12 @@ background-color: #eef2f6;
 	          	for (let i = 0; i < list.length; i++) {
 					const replyId = list[i].id;
 					const replyMediaObject = $(`
-							
 							<table class="table table-borderless 기본댓글-테이블">
 								<thead id="replyhead" class="">
 									<tr>
 										<th id="userprofile">
 												<img	id = "reply-profile" 
-												src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
+												src="\${list[i].url}" class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
 										</th>
 										<th id="replynickname">
 											<div id ="reply-nickname" class="h5"></div>
@@ -1042,7 +1041,7 @@ background-color: #eef2f6;
 												<tr>
 													<th id="userprofile">
 														<img	id = "rereply-profile" 
-														src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
+														src="\${relist[i].url}"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
 													</th>
 													<th id="rereplynickname">
 														<div id ="rereply-nickname" class="h5"></div>

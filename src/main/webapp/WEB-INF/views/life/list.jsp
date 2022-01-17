@@ -179,7 +179,7 @@ a:hover {
 					<div class="container-fluid my-4 list-background-color" id="list-font-${vs.index }" style="display : ${vs.index < 5 ? '' : 'none' }">
 						<div class="row md mx-3 my-2 제목아래보더">
 							<div class="col-md-2 my-auto px-auto 태그테두리">
-								<div id="tag">${board.tag } </div>
+								<div id="tag">${board.tag } <br> (${board.location })</div>
 							</div>
 							<div class="col-md-5 my-auto h5">
 								<div class="d-flex justify-content-start">

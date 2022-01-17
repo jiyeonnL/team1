@@ -548,7 +548,7 @@ function locationChange() {
 		function getLocation() {
 
 
-			var location = '${sessionScope.loginUser.location}';
+			var location = '';
 			console.log(location);
 			if (location == "") {
 				return "";

@@ -383,11 +383,11 @@ background-color: #eef2f6;
 					<div class="row md ms-4 px-2 align-middle 상세보기-헤더 상세보기-게시물-내용">
 						<div class="col-md-1 px-1 py-0 my-0">
 							<img id="상세보기-프로필" 
-							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+							src="${post.url }" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 						</div>
 						
 						<div class="col-md-7 my-auto h2 align-middle 상세보기-제목"> 
-							<a href = "${pageContext.request.contextPath }/user/profile/${post.nickname}"> ${post.nickname} </a>
+							<a href = "${pageContext.request.contextPath }/user/profile/${post.nickname}"> ${post.nickname} (${post.location })</a>
 						</div>
 
 						<div class=" my-auto h4 ml-auto 게시물-조회수-작성시간">
@@ -478,7 +478,7 @@ background-color: #eef2f6;
 					</button>
 				</div>
 				<div class="row 댓글입력창">
-					<c:if test="${not empty sessionScope.loginUser }">
+					<c:if test="${not empty sessionScope.loginUser && sessionScope.loginUser.location eq post.location}">
 						<div class="col-10 replyinput">
 							<textarea id="replyTextarea" class="form-control" placeholder="댓글을 남겨보세요!"></textarea>
 						</div>
@@ -954,7 +954,7 @@ background-color: #eef2f6;
 									<tr>
 										<th id="userprofile">
 												<img	id = "reply-profile" 
-												src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
+												src="\${list[i].url}"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
 										</th>
 										<th id="replynickname">
 											<div id ="reply-nickname" class="h5"></div>
@@ -996,7 +996,7 @@ background-color: #eef2f6;
 	                                <table class="table table-borderless ">
 	                                	<thead id="rereply-input-head">
 	                                		<tr>
-	                            				<c:if test="${not empty sessionScope.loginUser }">
+                            					<c:if test="${not empty sessionScope.loginUser && sessionScope.loginUser.location eq post.location}">
 		                                			<th>
 		                                				<div class="rereplyinput input-group 대댓글인풋-전체박스">
 		                                    				<textarea id="rereplyTextarea\${list[i].id}" class="form-control re-reply-input" placeholder="대댓글을 남겨보세요!"></textarea>
@@ -1042,7 +1042,7 @@ background-color: #eef2f6;
 												<tr>
 													<th id="userprofile">
 														<img	id = "rereply-profile" 
-														src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
+														src="\${relist[i].url}" class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
 													</th>
 													<th id="rereplynickname">
 														<div id ="rereply-nickname" class="h5"></div>

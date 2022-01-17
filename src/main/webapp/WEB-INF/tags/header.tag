@@ -83,7 +83,7 @@ font-size:x-large;
 					</span>
 				</c:when>
 				</c:choose>
-					<span class="align-middle h3 dropdown-toggle" id="dropdownMenuButton1" data-toggle="dropdown" data-display="static" aria-expanded="false"> ${sessionScope.loginUser.nickname } </span>
+					<span class="align-middle h3 dropdown-toggle" id="dropdownMenuButton1" data-toggle="dropdown" data-display="static" aria-expanded="false"> ${sessionScope.loginUser.nickname } (${sessionScope.loginUser.location})</span>
 					<ul id="dropdown" class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton1">
 
 						<li>

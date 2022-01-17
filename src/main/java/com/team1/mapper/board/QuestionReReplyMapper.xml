@@ -15,13 +15,18 @@
 	r.updated,
 	u.nickname,
 	u.id uid,
-	u.adminQuali
+	u.adminQuali,
+	fu.url
 FROM
 	tb_rereply_question r
 JOIN
 	tb_user u
 ON
 	r.nickname = u.nickname
+JOIN
+	tb_file_user fu
+ON
+	u.id = fu.userId
 WHERE
 	r.replyId = #{replyId} AND 
 	u.withdrawal = 'X'
