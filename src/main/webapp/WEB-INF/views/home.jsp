@@ -33,6 +33,127 @@
         integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
+    	
+        @media (max-width:360px) {
+            html {
+                .scroll-section: 10px;
+            }
+        }
+
+        @media (min-width:361px) and (max-width:399px) {
+            html {
+                font-size: 11px;
+            }
+        }
+
+        @media (min-width:400px) and (max-width:439px) {
+            html {
+                font-size: 12px;
+            }
+        }
+
+        @media (min-width:440px) and (max-width:479px) {
+            html {
+                font-size: 13px;
+            }
+        }
+
+        @media (min-width:480px) and (max-width:519px) {
+            html {
+                font-size: 14px;
+            }
+        }
+
+        @media (min-width:520px) and (max-width:559px) {
+            scroll-section {
+                font-size: 15px;
+            }
+        }
+
+        @media (min-width:560px) and (max-width:599px) {
+            .scroll-section {
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width:600px) and (max-width:639px) {
+            .scroll-section {
+                font-size: 17px;
+            }
+        }
+
+        @media (min-width:640px) and (max-width:679px) {
+            .scroll-section {
+                font-size: 18px;
+            }
+        }
+
+        @media (min-width:680px) and (max-width:719px) {
+            .scroll-section {
+                font-size: 19px;
+            }
+        }
+
+        @media (min-width:720px) and (max-width:759px) {
+            .scroll-section {
+                font-size: 20px;
+            }
+        }
+
+        @media (min-width:760px) and (max-width:799px) {
+            .scroll-section {
+                font-size: 21px;
+            }
+        }
+
+        @media (min-width:800px) and (max-width:839px) {
+            .scroll-section {
+                font-size: 22px;
+            }
+        }
+
+        @media (min-width:840px) and (max-width:879px) {
+            .scroll-section {
+                font-size: 23px;
+            }
+        }
+
+        @media (min-width:880px) and (max-width:919px) {
+            .scroll-section {
+               font-size: 24px;
+            }
+        }
+
+        @media (min-width:920px) and (max-width:959px) {
+            .scroll-section {
+                font-size: 25px;
+            }
+        }
+
+        @media (min-width:960px) and (max-width:999px) {
+            .scroll-section {
+                font-size: 26px;
+            }
+        }
+
+        @media (min-width:1000px) and (max-width:1039px) {
+            .scroll-section {
+                font-size: 27px;
+            }
+        }
+
+        @media (min-width:1040px) and (max-width:1079px) {
+            .scroll-section {
+                font-size: 28px;
+            }
+        }
+
+        @media (min-width:1080px) {
+            .scroll-section {
+                font-size: 29px;
+            }
+        } 
+    
         html {
             overflow: hidden;
             -ms-overflow-style: none;
@@ -91,10 +212,10 @@
 
             height: 100%;
             /* 왼쪽에 있는 색 -> 오른쪽에 있는 색으로 변경 */
-            background: linear-gradient(to left, beige 50%, #ffe164 50%) right;
-            background-size: 200%;
-            -webkit-animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.0s both;
-            animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.0s both;
+            background: linear-gradient(to bottom, #ffe164 50%, beige 50%) bottom;
+            background-size: 100% 200%;
+            -webkit-animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.2s both;
+            animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.2s both;
             /* Full height */
             /*             width: 100%;
             height: 100%;
@@ -112,7 +233,7 @@
             0% {}
 
             100% {
-                background-position: left;
+                background-position: top;
             }
 
         }
@@ -123,7 +244,7 @@
 
             100% {
 
-                background-position: left;
+                background-position: top;
             }
         }
 
@@ -174,8 +295,8 @@
         /* 로고 이미지(아이콘) 담는 컨테이너 div */
         .visual .logo-container {
             margin-right: 30px;
-            height: 200px;
-            width: 200px;
+            height: 27vh;
+            width: 27vh;
             background-color: blueviolet;
             -webkit-animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;
             animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;
@@ -215,7 +336,7 @@
         /* 로고 텍스트 */
         .visual .logo-text {
             color: white;
-            font-size: 7rem;
+            font-size: 4.5em;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -318,7 +439,7 @@
             top: 70%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 1.7rem;
+            font-size: 1.7em;
         }
 
         /* 소개 서브타이틀 */
@@ -329,7 +450,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
 
-            font-size: 1.2rem;
+            font-size: 1.2em;
         }
 
         .visual .image1 {
@@ -343,24 +464,24 @@
         /* 2번 페이지 텍스트 css */
         .intro .text-box {
             position: absolute;
-            top: 150px;
-            left: 100px;
-            width: 600px;
-            height: 500px;
+            top: 22vh;
+            left: 8vw;
+            width: 40vw;
+            height: 40vh;
 
         }
 
         .intro .text-box .text-title {
 
-            font-size: 4.5rem;
+            font-size: 2.5em;
             margin-bottom: 75px;
             opacity: 0;
             transform: translateX(-150px);
         }
 
         .intro .text-box .text-content {
-            font-size: 1.5rem;
-            opacity: 0;
+            font-size: 1.0em;
+            opacity: 0;	
             transform: translateX(-150px);
         }
 
@@ -389,18 +510,18 @@
         }
 
         .intro .image.image1 {
-            top: 120px;
-            right: 270px;
-            width: 480px;
-            height: 300px;
+            top: 15vh;
+            right: 15vw;
+            width: 32vw;
+            height: 40vh;
 
         }
 
         .intro .image.image2 {
-            top: 400px;
-            right: 100px;
-            width: 480px;
-            height: 300px;
+            top: 50vh;
+            right: 8vw;
+            width: 32vw;
+            height: 40vh;
         }
 
         /* 이미지의 효과 */
@@ -427,7 +548,7 @@
             width: 100%;
             height: 37.5vh;
             background-color: #ffe164;
-            border: black 5px so;
+
 
         }
 
@@ -441,8 +562,9 @@
 
         .body .triangle {
             position: absolute;
-            height: 37.5vh;;
-            width: 37.5vh;;
+            height: 37.5vh;
+            width: 37.5vh;
+
             background-color: #264d73;
         }
 
@@ -465,7 +587,7 @@
         .body .board .image-container {
             position: absolute;
             height: 100%;
-            width: 500px;
+            width: 30vw;
         }
 
         .image-container.left {
@@ -497,20 +619,18 @@
             clip-path: polygon(100% 0, 0% 0, 50% 100%, 100% 100%);
         }
 
-
-
         .body .board .text-left {
             position: absolute;
-            top: 120px;
-            left: 700px;
-            font-size: 2.0rem;
+            top: 12vh;
+            left: 30vw;
+            font-size: 1.5em;
         }
 
         .body .board .text-right {
             position: absolute;
-            top: 120px;
-            right: 700px;
-            font-size: 2.0rem;
+            top: 12vh;
+            right: 30vw;
+            font-size: 1.5em;
         }
 
         .back-to-position {
@@ -556,7 +676,7 @@
             justify-content: center;
             text-decoration: none;
             margin-top: 10px;
-            width: 180px;
+            width: 15vw;
             display: block;
             padding: 8px 16px;
             border-radius: 4px;
@@ -596,27 +716,6 @@
             font-size: 1.1em;
             /*For IE*/
         }
-
-        /* 링크를 버튼으로 만든다. */
-        /*         .btn {
-            margin-top: 30px;
-            width: 160px;
-            padding: 20px;
-            border: 2px solid #333;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: 700;
-            text-align: center;
-            cursor: pointer;
-            box-sizing: border-box;
-            display: block;
-            transition: 0.4s;
-        }
-
-        .btn:hover {
-            background-color: #333;
-            color: #fff;
-        } */
     </style>
        
 </head>
@@ -731,7 +830,7 @@
                     <div>
                         이웃들과 여러분의 일상을 공유해보세요!
                     </div>
-                    <a href="/controller1/life/list" class="button" style="float: right;">바로가기</a>
+                    <a href="/controller1/life/list" class="button">바로가기</a>
                 </div>
 
             </div>
