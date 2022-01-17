@@ -185,8 +185,8 @@ label {
 						 <select class="form-control" id="input5" required name="location">
 							<optgroup label="소식을 전해듣고 싶은 지역을 선택해주세요.">
 								<option>강남구</option>
-								<option>서초구</option>
 								<option>마포구</option>
+								<option>서초구</option>
 							</optgroup>
 						</select>
 					</div>

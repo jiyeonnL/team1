@@ -51,7 +51,7 @@ a:hover {
 	background-color: #f0615c;
 	color: white;
 	font-size: large;
-	margin-top: 5px;
+	/* margin-top: 5px; */
 }
 
 #img-profile {
@@ -69,20 +69,27 @@ a:hover {
 	border-color: #264d73;
 }
 
-div.container{
-	font-family: 'IBM Plex Sans KR', sans-serif;
-	}
-
+/* #profilebox{
+	font-family: 'IBM padding: ;lex Sans KR', sans-serif;
+	} */
 table {
 	border-radius: 0.7em;
 	overflow: hidden;
 }
 
-#selfintro{
+.프로필-수정삭제버튼 {
+	margin-top: 40px;
+}
+.프로필-닉네임{
+font-weight: bold;
+}
+
+#selfintro {
 	border-style: hidden;
 	box-shadow: 0 0 0 2px #264d73;
 	margin-bottom: 30px;
 	margin-top: 30px;
+	font-family: 'IBM padding: ;lex Sans KR', sans-serif;
 }
 
 #selfintrohead {
@@ -96,22 +103,27 @@ table {
 	background-color: white;
 	font-size: 20px;
 	padding-left: 30px;
-	
 }
-#userintrohead{
+
+#userintrohead {
 	padding-left: 20px;
 }
+
 #userintrobody {
 	white-space: pre-wrap;
 	margin-bottom: 0px;
 	margin-left: 10px;
 }
-
+.프로필-내가-쓴-글{
+font-weight:bold;
+font-family: 'IBM padding: ;lex Sans KR', sans-serif;
+}
 #mypost {
 	border-style: hidden;
 	box-shadow: 0 0 0 2px #264d73;
 	margin-bottom: 30px;
 	margin-top: 10px;
+	font-family: 'IBM padding: ;lex Sans KR', sans-serif;
 }
 
 #myposthead {
@@ -124,7 +136,6 @@ table {
 	background-color: white;
 	text-align: center;
 }
-
 </style>
 </head>
 <body>
@@ -151,21 +162,23 @@ table {
 
 						</c:when>
 					</c:choose>
-					<div class="col-md-4 mx-3 my-auto align-self-center ">
-						<div class="h1">${user.nickname }</div>
-						<span class="h4 mt-3">${user.location }</span>
-						<span class="h4 mt-3 ms-3">#${user.id }</span>
-						<div class="h4 mt-3">${user.signupday }</div>
-					</div>
-
-					<c:if test="${not empty sessionScope.loginUser && sessionScope.loginUser.id eq user.id}">
-
-						<div class="col-md-2 offset-md-2 mx-auto my-auto ">
-							<button type="button" id="profile-modify" class="btn btn-lg">정보수정</button>
-							<button type="button" id="profile-remove" class="btn btn-lg ">회원탈퇴</button>
+					<div class="col-md-9 프로필-수정삭제버튼">
+						<div class="col-md-12 mx-3 my-auto align-self-center 프로필보기-개인정보">
+							<div class="h1 프로필-닉네임">${user.nickname }</div>
+							<span class="h4 mt-3">${user.location }</span>
+							<span class="h4 mt-3 ms-3">#${user.id }</span>
+							<div class="h4 mt-3">${user.signupday }</div>
 						</div>
-
-					</c:if>
+	
+						<c:if test="${not empty sessionScope.loginUser && sessionScope.loginUser.id eq user.id}">
+	
+							<div class="col-md-12 mx-auto my-auto 프로필보기-수정-탈퇴-버튼 text-right">
+								<button type="button" id="profile-modify" class="btn btn-lg">정보수정</button>
+								<button type="button" id="profile-remove" class="btn btn-lg ">회원탈퇴</button>
+							</div>
+	
+						</c:if>
+					</div>
 				</div>
 				<div class="container">
 					<div class="row">
@@ -192,7 +205,7 @@ table {
 				<div class="container">
 					<div class="row">
 						<div class="col">
-							<h3>내가 쓴 글</h3>
+							<h3 class="프로필-내가-쓴-글">내가 쓴 글</h3>
 							<table id="mypost" class="table">
 								<thead id="myposthead">
 									<tr>

@@ -177,7 +177,9 @@
             margin: 0;
             background-color: beige;
         }
-
+			.header{
+			font-weight: normal;
+			}
         .scroll-section {
             width: 100%;
             height: 100%;

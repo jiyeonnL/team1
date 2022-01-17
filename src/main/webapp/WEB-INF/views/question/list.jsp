@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>동네 신문고</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -40,6 +40,14 @@
 	background-color: #ffe164;
 	font-size: 25px;
 	font-weight: bold;
+	float:right;
+}
+
+#question-body-font:hover{
+color:white;}
+
+#공지사항-바탕{
+background-color: #eef2f6 
 }
 
 table {
@@ -52,7 +60,30 @@ border-bottom: 1px solid lightgray;
 
 #boardid {
 	text-align: left;
+	color:black;
 }
+
+.동네신문고-공지사항-제목,.동네신문고-공지사항-닉네임,.동네신문고-제목,.동네신문고-닉네임{
+color:#4080bf;
+}
+.동네신문고-페이지네이션{
+background-color: #264d73;
+}
+
+.page-item.active .page-link{
+background-color:#eef2f6;
+color:black;
+border-color: darkblue;
+}
+.page-item.active {
+background-color:#eef2f6;
+color:black;
+}
+.page-link{
+color:white;
+
+}
+
 </style>
 </head>
 <body>
@@ -72,9 +103,10 @@ border-bottom: 1px solid lightgray;
 						<table class="table">
 							<thead class="컬럼-이름-로우">
 								<tr>
-									<th>
+									<!-- <th>
 										<i class="fab fa-slack-hash"></i>
-									</th>
+									</th> -->
+									<th>지역</th>
 									<th>tag</th>
 									<th>제목</th>
 									<th>
@@ -87,11 +119,12 @@ border-bottom: 1px solid lightgray;
 							</thead>
 							<tbody>
 								<c:forEach items="${listNotice }" var="board1">
-									<tr>
-										<td>${board1.id }</td>
+									<tr id="공지사항-바탕">
+										<%-- <td>${board1.id }</td> --%>
+										<td>-</td>
 										<td>${board1.tag }</td>
 										<td id="boardid">
-											<a href="list/${board1.id }">
+											<a href="list/${board1.id }" class="동네신문고-공지사항-제목">
 												<%-- <c:if test="${not empty board.fileList }">
                     	<c:out value="${board.title }"/><i class="bi bi-image"></i> 
                 	</c:if>
@@ -107,7 +140,7 @@ border-bottom: 1px solid lightgray;
 											</a>
 										</td>
 										<td>
-											<a href="../user/profile/${board1.nickname }">
+											<a href="../user/profile/${board1.nickname }" class="동네신문고-공지사항-닉네임">
 												<c:out value="${board1.nickname }" />
 											</a>
 										</td>
@@ -121,10 +154,11 @@ border-bottom: 1px solid lightgray;
 								<c:forEach items="${list }" var="board">
 									<c:if test="${board.notice < 2 }">
 										<tr>
-											<td>${board.id }</td>
+											<%-- <td>${board.id }</td> --%>
+											<td>${board.location}</td>
 											<td>${board.tag }</td>
 											<td id="boardid">
-												<a href="list/${board.id }">
+												<a href="list/${board.id }" class="동네신문고-제목">
 													<%-- <c:if test="${not empty board.fileList }">
                     	<c:out value="${board.title }"/><i class="bi bi-image"></i> 
                 	</c:if>
@@ -140,7 +174,7 @@ border-bottom: 1px solid lightgray;
 												</a>
 											</td>
 											<td>
-												<a href="../user/profile/${board.nickname }">
+												<a href="../user/profile/${board.nickname }" class="동네신문고-닉네임">
 													<c:out value="${board.nickname }" />
 												</a>
 											</td>
@@ -158,14 +192,14 @@ border-bottom: 1px solid lightgray;
 		</div>
 	</div>
 
-	<nav aria-label="Page navigation example">
+	<nav aria-label="Page navigation example" style="margin-bottom: 50px;">
 		<ul class="pagination justify-content-center">
 			<c:if test="${pageInfo.hasPrevButton }">
 				<c:url value="/question/list" var="pageLink">
 					<c:param name="page" value="${pageInfo.leftPageNumber - 1 }"></c:param>
 				</c:url>
-				<li class="page-item">
-					<a class="page-link" href="#" onclick="getlink(${pageInfo.leftPageNumber - 1}" aria-label="Previous">
+				<li class="page-item ">
+					<a class="page-link 동네신문고-페이지네이션" href="#" onclick="getlink(${pageInfo.leftPageNumber - 1}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					</a>
 				</li>
@@ -177,8 +211,8 @@ border-bottom: 1px solid lightgray;
 					<c:param name="location" value="${location }"></c:param>
 				</c:url>
 
-				<li class="page-item ${pageInfo.currentPage == pageNumber ? 'active' : '' }">
-					<a class="page-link" href="#" onclick="getlink(${pageNumber})">${pageNumber}</a>
+				<li class="page-item  ${pageInfo.currentPage == pageNumber ? 'active' : '' }">
+					<a class="page-link 동네신문고-페이지네이션" href="#" onclick="getlink(${pageNumber})">${pageNumber}</a>
 				</li>
 			</c:forEach>
 
@@ -186,8 +220,8 @@ border-bottom: 1px solid lightgray;
 				<c:url value="/question/list" var="pageLink">
 					<c:param name="page" value="${pageInfo.rightPageNumber + 1 } "></c:param>
 				</c:url>
-				<li class="page-item">
-					<a class="page-link" href="#" onclick="getlink(${pageInfo.rightPageNumber + 1})" aria-label="Next">
+				<li class="page-item ">
+					<a class="page-link 동네신문고-페이지네이션" href="#" onclick="getlink(${pageInfo.rightPageNumber + 1})" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					</a>
 				</li>

@@ -386,7 +386,7 @@ background-color: #eef2f6;
 							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-iBqF1VCpU79WLGw_qgx0jFSuMlmLRTO25mJkJKqJ7KArrxjWB-eu2KQAFrOdW2fFKso&usqp=CAU" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
 						</div>
 						
-						<div class="col-md-5 my-auto h2 align-middle 상세보기-제목"> 
+						<div class="col-md-7 my-auto h2 align-middle 상세보기-제목"> 
 							<a href = "${pageContext.request.contextPath }/user/profile/${post.nickname}"> ${post.nickname} (${post.location })</a>
 						</div>
 
