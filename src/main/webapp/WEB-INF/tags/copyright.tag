@@ -17,6 +17,10 @@ color:white;
 height: 100px;
 background-color: #264d73;
 }
+
+hr {
+	background-color : #eef2f6 ;
+}
 </style>
 <div id="전체-아래-카피라이트">
 <hr>

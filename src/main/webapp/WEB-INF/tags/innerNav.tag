@@ -128,7 +128,7 @@ a.goTop {
 	display: none;
 	position: absolute;
 	top: 53px;
-	left: 120px;
+	left: 40px;
 	padding: 5px;
 	background-color: #ffe164;
 	border: 3px solid #2f6091;
@@ -140,7 +140,7 @@ a.goTop {
 	display: none;
 	position: absolute;
 	top: 53px;
-	left: 160px;
+	left: 100px;
 	padding: 5px;
 	background-color: #ffe164;
 	border: 3px solid #2f6091;
@@ -152,7 +152,7 @@ a.goTop {
 	display: none;
 	position: absolute;
 	top: 53px;
-	left: 220px;
+	left: 170px;
 	padding: 5px;
 	background-color: #ffe164;
 	border: 3px solid #2f6091;
@@ -164,7 +164,7 @@ a.goTop {
 	display: none;
 	position: absolute;
 	top: 53px;
-	left: 320px;
+	left: 250px;
 	padding: 5px;
 	background-color: #ffe164;
 	border: 3px solid #2f6091;
@@ -548,8 +548,8 @@ function locationChange() {
 		function getLocation() {
 
 
-			var location = "${location}";
-
+			var location = '${sessionScope.loginUser.location}';
+			console.log(location);
 			if (location == "") {
 				return "";
 			} else {
