@@ -425,24 +425,24 @@
             position: absolute;
             display: flex;
             width: 100%;
-            height: 300px;
+            height: 37.5vh;
             background-color: #ffe164;
             border: black 5px so;
 
         }
 
         .body .board.upper {
-            top: 60px;
+            top: 10vh;
         }
 
         .body .board.downer {
-            bottom: 60px;
+            bottom: 10vh;
         }
 
         .body .triangle {
             position: absolute;
-            height: 300px;
-            width: 300px;
+            height: 37.5vh;;
+            width: 37.5vh;;
             background-color: #264d73;
         }
 
@@ -465,7 +465,7 @@
         .body .board .image-container {
             position: absolute;
             height: 100%;
-            width: 700px;
+            width: 500px;
         }
 
         .image-container.left {
