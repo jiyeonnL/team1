@@ -241,7 +241,8 @@ label {
 						<!-- textarea로 바꿔서 여러줄로 나타낼 수 있음 -->
 						<div class="form-group place">
 							<label for="exampleFormControlTextarea1">자기소개</label>
-							<textarea class="form-control" required name="introduce" id="input4" cols="40" rows="5" value="${user.introduce }" placeholder="나만의 개성을 나타낼수 있는 &#13;&#10;자기소개를 적어보세요! (최대 500글자)"></textarea>
+							<textarea class="form-control" required name="introduce" 
+							maxlength="200" id="input4" cols="40" rows="5" value="${user.introduce }" placeholder="나만의 개성을 나타낼수 있는 &#13;&#10;자기소개를 적어보세요! (최대 500글자)"></textarea>
 						</div>
 						<button class="btn btn-outline-dark btn-lg place" id="submitButton1">가입</button>
 						<br>
