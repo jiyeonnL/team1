@@ -19,7 +19,7 @@
 	height: 100%;
 }
 
-.container {
+.listcontainer {
 	margin-top: 15px;
 	margin-bottom: 15px;
 }
@@ -65,7 +65,7 @@ border-bottom: 1px solid lightgray;
 			<b:cover></b:cover>
 			<!-- 태그 -->
 
-			<div class="container">
+			<div class="listcontainer">
 				<div class="row">
 					<div class="col">
 						<!-- 공지사항 글 -->
@@ -194,6 +194,7 @@ border-bottom: 1px solid lightgray;
 			</c:if>
 		</ul>
 	</nav>
+	<b:copyright></b:copyright>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
 	<script>

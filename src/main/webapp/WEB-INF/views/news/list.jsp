@@ -260,9 +260,9 @@ a:hover {
 					</div>
 				</c:if>
 			</c:forEach>
-			<b:copyright></b:copyright>
 		</div>
 	</div>
+	<b:copyright></b:copyright>
 	<!-- 태그 -->
 
 
