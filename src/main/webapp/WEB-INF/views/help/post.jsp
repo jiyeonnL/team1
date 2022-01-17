@@ -387,7 +387,7 @@ background-color: #eef2f6;
 						</div>
 						
 						<div class="col-md-5 my-auto h2 align-middle 상세보기-제목"> 
-							<a href = "${pageContext.request.contextPath }/user/profile/${post.nickname}"> ${post.nickname} </a>
+							<a href = "${pageContext.request.contextPath }/user/profile/${post.nickname}"> ${post.nickname} (${post.location })</a>
 						</div>
 
 						<div class=" my-auto h4 ml-auto 게시물-조회수-작성시간">
@@ -467,7 +467,7 @@ background-color: #eef2f6;
 				</div>
 
 				<!-- 댓글 창 -->
-				<!-- 로그인 한 사용자에게만 보여야 한다. -->
+				<!-- 로그인 하고 같은 지역의 사용자에게만 보여야 한다. -->
 
 				<div class="row 댓글아이콘 justify-content-between">
 					<div style="margin-bottom: 0px;" class="replyCount fa-2x">
@@ -478,7 +478,7 @@ background-color: #eef2f6;
 					</button>
 				</div>
 				<div class="row 댓글입력창">
-					<c:if test="${not empty sessionScope.loginUser }">
+					<c:if test="${not empty sessionScope.loginUser && sessionScope.loginUser.location eq post.location}">
 						<div class="col-10 replyinput">
 							<textarea id="replyTextarea" class="form-control" placeholder="댓글을 남겨보세요!"></textarea>
 						</div>
@@ -996,7 +996,7 @@ background-color: #eef2f6;
 	                                <table class="table table-borderless ">
 	                                	<thead id="rereply-input-head">
 	                                		<tr>
-	                            				<c:if test="${not empty sessionScope.loginUser }">
+	                            				<c:if test="${not empty sessionScope.loginUser && sessionScope.loginUser.location eq post.location }">
 		                                			<th>
 		                                				<div class="rereplyinput input-group 대댓글인풋-전체박스">
 		                                    				<textarea id="rereplyTextarea\${list[i].id}" class="form-control re-reply-input" placeholder="대댓글을 남겨보세요!"></textarea>
