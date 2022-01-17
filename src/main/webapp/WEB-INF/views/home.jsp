@@ -710,7 +710,7 @@
                     <div>
                     궁금한게 있나요? 이웃들에게 물어보세요!
                     </div>
-                    <a href="/controller1/help/list" class="button" style="float: right;">바로가기</a>
+                    <a href="/controller1/question/list?page=1" class="button" style="float: right;">바로가기</a>
                 </div>
             </div>
         </section>
