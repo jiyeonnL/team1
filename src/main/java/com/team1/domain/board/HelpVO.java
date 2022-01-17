@@ -16,6 +16,7 @@ public class HelpVO {
 	private String tag;
 	private String title;
 	private String content;
+	private String url;
 	private LocalDateTime inserted;
 	private LocalDateTime updated;
 	private String nickname;

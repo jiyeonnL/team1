@@ -14,13 +14,19 @@
 	r.inserted,
 	r.updated,
 	u.nickname,
-	u.id uid
+	u.id uid,
+	u.adminQuali,
+	fu.url
 FROM
 	tb_reply_news r
 JOIN
 	tb_user u
 ON
 	r.nickname = u.nickname
+JOIN
+	tb_file_user fu
+ON
+	u.id = fu.userId
 WHERE
 	r.boardId = #{id} AND 
 	u.withdrawal = 'X'

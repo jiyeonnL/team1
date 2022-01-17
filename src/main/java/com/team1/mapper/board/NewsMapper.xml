@@ -86,7 +86,7 @@
 		(SELECT count(postId) FROM tb_board_news_up
 		WHERE postId = p.id) up,
 		p.views, p.tag,
-		p.title, p.content, p.inserted, p.updated, m.nickname,
+		p.title, p.content, p.inserted, p.updated, m.nickname, fu.url,
 		COUNT(r.id) replyCount,
 		(SELECT hu.userId FROM tb_board_news_up hu
 		WHERE hu.userId =
@@ -99,7 +99,9 @@
 		LEFT JOIN
 		tb_reply_news r
 		ON p.id = r.boardId
-
+		JOIN
+		tb_file_user fu
+		ON m.id = fu.userId
 		WHERE p.id = #{id}
 	</select>
 	

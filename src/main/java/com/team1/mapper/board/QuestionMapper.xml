@@ -207,7 +207,8 @@
 		q.notice,
 		COUNT(r.id) replyCount,
 		u.nickname,
-		u.profileurl
+		u.profileurl,
+		fu.url
 
 		FROM
 		tb_board_question q
@@ -218,7 +219,9 @@
 		LEFT JOIN
 		tb_reply_question r
 		ON q.id = r.boardId
-		
+		JOIN
+		tb_file_user fu
+		ON m.id = fu.userId
 		WHERE q.id = #{id}
 
 	</select>

@@ -1,6 +1,8 @@
 package com.team1.controller.user;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.team1.domain.board.HelpVO;
 import com.team1.domain.board.UserPostVO;
 import com.team1.domain.user.UserFileVO;
 import com.team1.domain.user.UserVO;
@@ -91,7 +92,7 @@ public class UserController {
 //	}
 	
 	@RequestMapping("/login")
-	public String login (String email, String pw, HttpSession session, RedirectAttributes rttr, Model model) {
+	public String login (String email, String pw, HttpSession session, RedirectAttributes rttr, Model model) throws UnsupportedEncodingException {
 		UserVO vo = service.read(email);
 		
 		
@@ -114,15 +115,15 @@ public class UserController {
 		
 		session.setAttribute("loginUser",vo);
 		rttr.addFlashAttribute("result", vo.getNickname() + "님 환영합니다.");
-		
-		return "redirect:/all/list";
+		//String encodeLoc = URLEncoder.encode(vo.getLocation(), "UTF-8");
+		return "redirect:/";
 		
 	}
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/all/list";
+		return "redirect:/";
 	}
 
 	
@@ -141,7 +142,7 @@ public class UserController {
 		
 		rttr.addFlashAttribute("ok", message);
 		
-		return "redirect:/all/list";
+		return "redirect:/";
 		
 	}
 	
@@ -209,7 +210,7 @@ public class UserController {
 		rttr.addFlashAttribute("modify", "회원 정보가 변경되었습니다. 로그아웃 후에 이용해주세요!");
 		
 
-		return "redirect:/all/list";
+		return "redirect:/";
 	}
 	
 	

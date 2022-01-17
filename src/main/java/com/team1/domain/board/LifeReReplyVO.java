@@ -12,6 +12,7 @@ public class LifeReReplyVO {
 	private String nickname;
 	private String reReply;
 	private Integer boardId;
+	private String url;
 	private LocalDateTime inserted;
 	private LocalDateTime updated;
 	

@@ -11,6 +11,7 @@ import lombok.Data;
 		private Integer boardId;
 		private String nickname;
 		private String reply;
+		private String url;
 		private LocalDateTime inserted;
 		private LocalDateTime updated;
 		
