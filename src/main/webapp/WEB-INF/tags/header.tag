@@ -17,10 +17,6 @@ font-size: x-large;
 margin-right:auto;
 }
 
-header {
-	font-size: x-large;
-}
-
 .header-size{
 font-size: x-large;
 }
