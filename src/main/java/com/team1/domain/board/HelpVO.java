@@ -17,14 +17,15 @@ public class HelpVO {
 	private String title;
 	private String content;
 	private String url;
+	private String fileName;
 	private LocalDateTime inserted;
 	private LocalDateTime updated;
 	private String nickname;
+	private String profileurl; // 유저 기본 프로필
 	private String userprofile;
 	
 	//해당 post가 가지고 있는 파일 리스트
 	List<HelpFileVO> fileList;
-
 	private Integer replyCount;
 	
 	private Integer upposession;
