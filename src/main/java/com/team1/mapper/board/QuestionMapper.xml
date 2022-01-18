@@ -144,6 +144,7 @@
 		q.inserted,
 		q.updated,
 		q.notice,
+		
 		datediff(now(), q.inserted) newMark
 		FROM
 		tb_user u
@@ -221,7 +222,7 @@
 		ON q.id = r.boardId
 		JOIN
 		tb_file_user fu
-		ON m.id = fu.userId
+		ON u.id = fu.userId
 		WHERE q.id = #{id}
 
 	</select>
