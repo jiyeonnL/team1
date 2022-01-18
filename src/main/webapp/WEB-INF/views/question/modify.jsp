@@ -50,8 +50,8 @@ width: 20%;
 	<b:header></b:header>
 	<div class="container" id="body">
 		<div class="row" id="inner">
+			<b:innerNav></b:innerNav>
 			<div class="col">
-				<b:innerNav></b:innerNav>
 				<h1>게시물 수정</h1>
 
 				<form id="modifyForm" method="post" enctype="multipart/form-data">
