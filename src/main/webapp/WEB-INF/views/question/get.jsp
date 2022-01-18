@@ -382,8 +382,14 @@ background-color: #eef2f6;
 					<!-- 헤더 -->
 					<div class="row md ms-4 px-2 align-middle 상세보기-헤더 상세보기-게시물-내용">
 						<div class="col-md-1 px-1 py-0 my-0">
-							<img id="상세보기-프로필" 
-							src="${post.url }" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+							<c:if test="${empty post.url }">
+								<img id="상세보기-프로필" 
+								src="https://s20211227-dotori-team-project.s3.ap-northeast-2.amazonaws.com/board/user.png" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+							</c:if>
+							<c:if test="${not empty post.url }">
+								<img id="상세보기-프로필" 
+								src="${post.url }" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+							</c:if>
 						</div>
 						
 						<div class="col-md-5 my-auto h2 align-middle 상세보기-제목"> 
