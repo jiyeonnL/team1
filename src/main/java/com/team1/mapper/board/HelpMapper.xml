@@ -84,11 +84,12 @@
 		p.id, p.memberId,
 		f.userId,
 		f.url,
+		f.fileName,
 		p.location, (SELECT count(postId) FROM tb_board_help_up
 		WHERE postId =
 		p.id) up, p.views, p.tag,
 		p.title, p.content, p.inserted, p.updated,
-		m.nickname, COUNT(r.id) replyCount,
+		m.nickname, m.profileurl, COUNT(r.id) replyCount,
 		(SELECT hu.userId FROM
 		tb_board_help_up hu WHERE hu.userId =
 		#{loginId} AND hu.postId=p.id)
@@ -121,7 +122,7 @@
 		(SELECT count(postId) FROM tb_board_help_up
 		WHERE postId = p.id) up,
 		p.views, p.tag,
-		p.title, p.content, p.inserted, p.updated, m.nickname, fu.url,
+		p.title, p.content, p.inserted, p.updated, m.nickname, m.profileurl, fu.url, fu.fileName,
 		COUNT(r.id) replyCount,
 		(SELECT hu.userId FROM tb_board_help_up hu
 		WHERE hu.userId =
