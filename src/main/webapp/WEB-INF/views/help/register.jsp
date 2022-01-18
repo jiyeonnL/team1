@@ -190,6 +190,7 @@ height: 40%;
 	height: 2.4px;
 	background-color: lightgray;
 	width: 900px;
+	margin-bottom: 15px;
 }
 
 .btn-register, .btn-cancel{
@@ -304,10 +305,6 @@ color:#ffe164;
 	
 	function check(event) {
   		
-		console.log(content);
-		console.log(isEmpty(title.value));
-		console.log(isEmpty(content.value));
-		
 		if(isEmpty(title.value) || isEmpty(content.value)) {
 			alert("제목과 내용은 필수 입력 사항입니다!");
 			event.preventDefault();
@@ -336,6 +333,14 @@ color:#ffe164;
 			if (index !== i) dt.items.add(file);
 			input.files = dt.files
 		}
+		
+		if(!queue.length) {
+			$("#d-line").empty();
+		}
+		
+		if(queue.length <= 1) {
+			$("#choose_preview").empty();
+		}
 
 		if (currentThumbnail == i) {
 			if(input.files == 0) {
@@ -349,7 +354,6 @@ color:#ffe164;
 			}
 
 		}
-		console.log("currentThumbnail", currentThumbnail);
 		render(input.files, currentThumbnail);
 
 	}

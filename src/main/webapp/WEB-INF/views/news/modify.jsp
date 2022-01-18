@@ -177,6 +177,7 @@
 	height: 2.4px;
 	background-color: lightgray;
 	width: 900px;
+	margin-bottom: 15px;
 }
 
 .btn-modify, .btn-cancel, .btn-delete {
@@ -351,46 +352,61 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 	<script>
 	
-	var queue = [];
-	var currentThumbnail;
 
+	function isEmpty(str) {
+    	return !str.trim().length;
+	}
+	
+	const title = document.getElementById('input1');
+	const content = document.getElementById('input2');
+	
+	var queue = [];
+	var currentThumbnail = document.querySelector('input[name="thumbNailChoice"]:checked').id.replace("thumbNailChoice", "");
+	var uploadedNum = "${fn:length(board.fileList)}";
+	
 	function delRef(index) {
-				
+		var dIndex = index - uploadedNum;
 		$("#image_container").empty();
 		
         var dt = new DataTransfer();
         var input = document.getElementById('input4');
         var { files } = input;
 
-
-		var radio_new;
-		if(radio_now == null) {
-			radio_new == 0;
-			//현재 썸네일 설정된 사진이 지워지면
-		} else if (radio_now == index) {
-			radio_new == 0;
-		} else if (radio_now < index) {
-			radio_new = radio_now
- 		} else if (radio_now > radio_new) {
-			radio_new = radio_now - 1;
-		 }
-
 		//큐 에서도 삭제
-		
-		queue.splice(index, 1);
+
+		queue.splice(dIndex, 1);
         for (var i = 0; i < files.length; i++) {
             var file = files[i]
-            if (index !== i) dt.items.add(file) 
+            if (dIndex !== i) dt.items.add(file) 
             input.files = dt.files
         }
         
-        render(input.files, radio_new);
-        
+		if(!queue.length) {
+			$("#d-line").empty();
+		}
+		
+		var newRadio;
+		
+		if(index == currentThumbnail) {
+	        render(input.files, null);
+			moveThumbNail();
+			newRadio = null;
+		} else if ((index > uploadedNum-1) && index > currentThumbnail) {
+			console.log("radio 유지")
+			newRadio = currentThumbnail;
+			render(input.files, newRadio);
+			
+		} else {
+			newRadio = currentThumbnail-1;
+			currentThumbnail = currentThumbnail-1
+			render(input.files, newRadio);
+		}
+                
     }
 	
 	function render(files, radioIndex) {
 
-		var i = 0;
+		var i = uploadedNum;
 		for (const image of files) {
 			
 			var check;
@@ -436,6 +452,12 @@
 				i++;
 			};
 	}
+	
+	function radioClick(index) {
+		console.log("index", index);
+		currentThumbnail = index;
+	
+	}
 
 
 	function setThumbnail(event) {
@@ -463,9 +485,9 @@
         var input = document.getElementById('input4');
 
         for (var i = 0; i < queue.length; i++) {
-            var file = queue[i]
-			dt.items.add(file) 
-            input.files = dt.files
+            var file = queue[i];
+			dt.items.add(file) ;
+            input.files = dt.files;
 			
         }
         
@@ -478,7 +500,7 @@
 		$("#d-line").append(line);
 		
 		//이미지 생성
-		render(event.target.files, null);
+		render(event.target.files, currentThumbnail);
 	}
 	
 
@@ -494,11 +516,40 @@
 			//매칭되는 radio 버튼을 막아버린다.
 	        radio.disabled =true;
 	        radio.checked = false;
-			
+	        if(currentThumbnail == id) {
+	        	moveThumbNail();
+	        }
+	        
 		} else {
 			 radio.disabled =false;
+			 if(currentThumbnail == null) {
+				 moveThumbNail();
+			 }
+			 
 		}
 		
+	}
+	
+	function moveThumbNail() {
+		var length = Number(queue.length) + Number(uploadedNum);
+		
+		for(var i = 0; i<length; i++) {
+			
+			var radioId = "thumbNailChoice"+i;
+			const radio = document.getElementById(radioId);
+
+			if(radio.disabled) {
+				
+			} else {
+				console.log(radio);
+				currentThumbnail = i;
+				radio.checked = true;
+				return;
+			}
+			
+			currentThumbnail = null;
+			
+		}
 	}
 	
 	//딜레이 만드는 함수
@@ -514,7 +565,11 @@
 			});
 			$("#modifySubmitButton").click(function(e) {
 				e.preventDefault();
-				$("#modifyForm").attr("action", "modify").submit();
+				if(isEmpty(title.value) || isEmpty(content.value)) {
+					alert("제목과 내용은 필수 입력 사항입니다!");
+				} else {
+					$("#modifyForm").attr("action", "modify").submit();
+				}
 			});
 			if (history.state == null) {
 				$("#modal1").modal('show');
