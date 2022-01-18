@@ -51,4 +51,9 @@
     <url-pattern>/news/modify</url-pattern>
     <url-pattern>/report/list</url-pattern>
   </filter-mapping>
+  
+  <!-- 세션 유지시간 설정  -->
+	<session-config> 
+		<session-timeout>60</session-timeout>
+	</session-config>
 </web-app>

@@ -312,7 +312,11 @@ max-width:50%;
 }
 
 #rereply-profile {
-	max-width: 45px;
+	width: 45px;
+    height: 45px;
+    max-width: 45px;
+    max-height: 45px;
+    object-fit: cover;
 }
 
 #rereply-nickname {
