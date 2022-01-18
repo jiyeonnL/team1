@@ -46,7 +46,7 @@ public class QuestionVO {
 		
 		UserPostVO postVO = new UserPostVO();
 		postVO.setLink("question");
-		postVO.setBoardType("동네질문");
+		postVO.setBoardType("동네신문고");
 		postVO.setPostId(this.id);
 		postVO.setTag(this.tag);
 		postVO.setTitle(this.title);

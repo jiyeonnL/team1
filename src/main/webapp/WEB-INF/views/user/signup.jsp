@@ -130,9 +130,6 @@ label {
 	border-color: #2f6091;
 }
 
-#input2-1 {
-	width: 320px;
-}
 
 #input3 {
 	background-color: rgba(255, 255, 255, 0.5);
@@ -168,6 +165,9 @@ label {
 .nickNameRed {
 	color: #f0615c
 }
+small{
+	width: 320px;
+}
 </style>
 </head>
 <body>
@@ -197,7 +197,7 @@ label {
 						</div>
 						<div class="form-group place">
 							<label for="input2">비밀번호</label>
-							<div class="input-group" id="input2-1">
+							<div class="input-group">
 								<input type="password" class="form-control" id="input2" required name="pw" value="${user.pw }">
 								<small class="form-text" id="pwCheckMessage"></small>
 							</div>
@@ -450,22 +450,22 @@ label {
 								
 									pwCheck = true;
 									$('#pwCheckMessage').text('비밀번호 확인 완료!')
-														.removeClass("text-danger")
+														.removeClass("nickNameRed")
 														.addClass("text-primary");
 								
 								} else if(!pwTest){
 									
 									pwCheck = false;
-									$('#pwCheckMessage').text('비밀번호 형식에 맞지 않습니다(  문자 / 숫자 / 특수문자 포함 형태의 8~16)')
+									$('#pwCheckMessage').text('형식에 맞지 않습니다(문자 / 숫자 / 특수문자 포함 형태의 8~16)')
 														.removeClass("text-primary")
-														.addClass("text-danger");
+														.addClass("nickNameRed");
 
 									
 								}else if(pwValue !== pwConfirmValue){
 									pwCheck = false;
 									$('#pwCheckMessage').text('비밀번호를 다시 확인해주세요')
-									.removeClass("text-primary")
-									.addClass("text-danger");
+									.removeClass("text-primary ")
+									.addClass("nickNameRed");
 								}
 									
 								//일치 할 경우 서브밋 버튼 활성화

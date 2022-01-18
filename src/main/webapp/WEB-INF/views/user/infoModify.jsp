@@ -136,8 +136,11 @@ label {
 	width: 320px;
 	margin: 0 auto;
 }
+.nickNameRed {
+	color: #f0615c
+}
 #pwCheckMessage{
-	text-align: center;
+	width: 320px;
 }
 
 </style>
@@ -361,7 +364,7 @@ label {
 									
 									pwCheck = true;
 									$('#pwCheckMessage').text('비밀번호 확인 완료!')
-														.removeClass("text-danger")
+														.removeClass("nickNameRed")
 														.addClass("text-primary");
 								
 								} else if(!pwTest){
@@ -369,14 +372,14 @@ label {
 									pwCheck = false;
 									$('#pwCheckMessage').text('비밀번호 형식에 맞지 않습니다(문자 / 숫자 / 특수문자 포함 형태의 8~16)')
 														.removeClass("text-primary")
-														.addClass("text-danger");
+														.addClass("nickNameRed");
 
 									
 								}else if(pwValue !== pwConfirmValue){
 									pwCheck = false;
 									$('#pwCheckMessage').text('비밀번호를 다시 확인해주세요')
 									.removeClass("text-primary")
-									.addClass("text-danger");
+									.addClass("nickNameRed");
 								}
 									
 								//일치 할 경우 서브밋 버튼 활성화
