@@ -97,8 +97,10 @@
 		SELECT
 		q.id,
 		u.id,
+		u.profileurl,
 		f.userId,
 		f.url,
+		f.fileName,
 		u.nickname,
 		q.memberId,
 		q.views,
@@ -209,8 +211,8 @@
 		COUNT(r.id) replyCount,
 		u.nickname,
 		u.profileurl,
-		fu.url
-
+		fu.url,
+		fu.fileName
 		FROM
 		tb_board_question q
 		JOIN

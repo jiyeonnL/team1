@@ -368,6 +368,13 @@ margin-left: 90px;
 #replyModify,#replyDelete,#rereplyModify,#rereplyDelete{
 background-color: #eef2f6;
 }
+#상세보기-프로필{
+	width : 65px;
+	height : 65px;
+	max-width : 65px;
+	max-height : 65px;
+	object-fit: cover;
+}
 /* 대댓글 관련 끝 ----------------------*/
 </style>
 </head>
@@ -382,18 +389,18 @@ background-color: #eef2f6;
 					<!-- 헤더 -->
 					<div class="row md ms-4 px-2 align-middle 상세보기-헤더 상세보기-게시물-내용">
 						<div class="col-md-1 px-1 py-0 my-0">
-							<c:if test="${empty post.url }">
-								<img id="상세보기-프로필" 
-								src="https://s20211227-dotori-team-project.s3.ap-northeast-2.amazonaws.com/board/user.png" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
-							</c:if>
-							<c:if test="${not empty post.url }">
-								<img id="상세보기-프로필" 
-								src="${post.url }" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
-							</c:if>
+						<c:choose>
+							<c:when test="${post.fileName !='' }">
+								<img src="${post.url}"  id="상세보기-프로필" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+							</c:when>
+							<c:when test="${post.fileName =='' }">
+								<img src="${post.profileurl}"  id="상세보기-프로필" class="img-thumbnail rounded-circle mx-auto d-block " alt="..." />
+							</c:when>
+						</c:choose>
 						</div>
 						
 						<div class="col-md-5 my-auto h2 align-middle 상세보기-제목"> 
-							<a href = "${pageContext.request.contextPath }/user/profile/${post.nickname}"> ${post.nickname} </a>
+							<a href = "${pageContext.request.contextPath }/user/profile/${post.nickname}"> ${post.nickname}(${post.location }) </a>
 						</div>
 
 						<div class=" my-auto h4 ml-auto 게시물-조회수-작성시간">
