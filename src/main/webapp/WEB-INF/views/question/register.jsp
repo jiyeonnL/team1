@@ -190,6 +190,7 @@ height: 40%;
 	height: 2.4px;
 	background-color: lightgray;
 	width: 900px;
+	margin-bottom: 15px;
 }
 
 .btn-register, .btn-cancel{
@@ -230,7 +231,7 @@ color:#ffe164;
 				<h1 class="게시글-타이틀">게시물 작성</h1>
 
 
-			<form method="post" enctype="multipart/form-data">
+			<form method="post" id = "form" enctype="multipart/form-data">
 				
 				<input type="hidden" class="form-control" id="input1" name="memberId" value="${sessionScope.loginUser.id }">
 
@@ -283,15 +284,12 @@ color:#ffe164;
 
 					<div class="form-group1 게시물-테두리-패딩 이미지-아래-테두리">
 						<label for="input7" class="게시물-글씨 ">Image</label>
-						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" onchange=setThumbnail(event) multiple>
+						<input type="file" class="form-control-file" id="input7" name="files" accept="image/*" onchange=fileUploaded(event) multiple>
 				    </div>
 				    
 				    <!-- 구분 선 -->
 				    <div id="d-line"></div>
 				    
-				    <!-- 미리보기 선택 알림 -->
-				    <div id="choose_preview" class="d-flex"></div>
-				    	
 				    <!-- 이미지들 미리보기 컨테이너 -->
 					<div id="image_container" class="d-flex"></div>
 
@@ -307,8 +305,26 @@ color:#ffe164;
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="	crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 	<script>
+	
+	function isEmpty(str) {
+    	return !str.trim().length;
+	}
+	
+	const title = document.getElementById('input3');
+	const content = document.getElementById('input4');
+	
+	function check(event) {
+  		
+		if(isEmpty(title.value) || isEmpty(content.value)) {
+			alert("제목과 내용은 필수 입력 사항입니다!");
+			event.preventDefault();
+		}
+	}
+	
+	const form = document.getElementById('form');
+	form.addEventListener('submit', check);
+	
 	var queue = [];
-	var currentThumbnail;
 
 	function delRef(index) {
 
@@ -326,53 +342,24 @@ color:#ffe164;
 			input.files = dt.files
 		}
 
-		if (currentThumbnail == i) {
-			if(input.files == 0) {
-				currentThumbnail = null;
-			} else {
-				currentThumbnail = 1;
-			}
-		} else {
-			if(currentThumbnail > index) {
-				currentThumbnail = currentThumbnail-1;
-			}
-
+		if(!queue.length) {
+			$("#d-line").empty();
 		}
-		console.log("currentThumbnail", currentThumbnail);
-		render(input.files, currentThumbnail);
+
+		
+		render(input.files);
 
 	}
 
-	function render(files, radioIndex) {
+	function render(files) {
 
 		var i = 0;
 		for (const image of files) {
 			
-			var check;
-			if (i == radioIndex) {
-			check = "checked";
-			} else {
-			check = "";
-			}
 			const url = window.URL.createObjectURL(image); // blob:http://localhost:1234/28ff8746-94eb-4dbe-9d6c-2443b581dd30
 			
 				const replyMediaObject = $(`
             	<span id = "\${i}" style="height: 200px; width: 200px; position:relative;">
-				
-            	<div style = "position: absolute; z-index:100; opacity:1; top: 8px; left: 8px;">
-					<label class= "container_radio">
-						<input 
-							\${check}
-							type="radio" 
-							id="thumbNailChoice\${i}"
-							name="thumbNailChoice"
-							value="\${image.name}"
-							style = "position: relatve; z-index:101; opacity:0;"
-							onclick="radioClick(\${i})"
-						/>
-						<span class="checkmark"></span>
-					</label>
-				</div>
 				
 				<div 
 					class = "closeButton"
@@ -392,22 +379,17 @@ color:#ffe164;
 			};
 	}
 
-	function setThumbnail(event) {
+	function fileUploaded(event) {
 
 		//파일명 변경하기
 			var newFiles = [];
 			//파일명 변경하기
 			for (file of event.target.files) {
-				//var fileType = file.name.slice(file.name.indexOf("."));
-				//console.log(fileType);
 
 				var new_file = new File([file], Date.now() + file.name);
 				console.log("new file", new_file);
 				newFiles.push(new_file);
-				// Object.defineProperty(file, 'name', {
-				// 	writable: true,
-				// 	value: Date.now() + file.name
-				// });
+
 				sleep(10);
 			}
 
@@ -424,10 +406,6 @@ color:#ffe164;
 
 		}
 
-		if(currentThumbnail == null) {
-			currentThumbnail = 0;
-		} 
-
 		/* 현재 미리보기는 모두 지워야 한다. */
 		$("#image_container").empty();
 		$("#d-line").empty();
@@ -437,32 +415,14 @@ color:#ffe164;
 
 		$("#d-line").append(line);
 
-		//업로드한 이미지가 하나 이상일 경우 썸네일 고르라는 문구를 띄운다.
-		if (input.files.length > 1) {
-
-			const notation = $(`<p id="썸네일-글씨">썸네일로 보여줄 이미지를 선택하세요 ! </p>`);
-
-			$("#choose_preview").append(notation);
-
-		} else {
-			$("#choose_preview").empty();
-		}
-
 		//이미지 생성
-		render(input.files, currentThumbnail);
+		render(input.files);
 
 	}
 	$(document).ready(function () {
 
-
 		$("#question").attr("class", "btn btn-outline ml-1 active");
 	});
-
-	function radioClick(index) {
-		console.log("index", index);
-		currentThumbnail = index;
-	
-	}
 
 	//딜레이 만드는 함수
 	function sleep(ms) {

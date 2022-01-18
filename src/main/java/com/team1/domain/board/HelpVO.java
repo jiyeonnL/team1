@@ -24,7 +24,6 @@ public class HelpVO {
 	
 	//해당 post가 가지고 있는 파일 리스트
 	List<HelpFileVO> fileList;
-
 	private Integer replyCount;
 	
 	private Integer upposession;

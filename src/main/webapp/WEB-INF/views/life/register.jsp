@@ -190,6 +190,7 @@ height: 40%;
 	height: 2.4px;
 	background-color: lightgray;
 	width: 900px;
+	margin-bottom: 15px;
 }
 
 .btn-register, .btn-cancel{
@@ -230,7 +231,7 @@ color:#ffe164;
 				<h1 class="게시글-타이틀">게시물 작성</h1>
 
 
-			<form method="post" enctype="multipart/form-data">
+			<form method="post" id="form" enctype="multipart/form-data">
 				
 				<input type="hidden" class="form-control" id="input1" name="memberId" value="${sessionScope.loginUser.id }">
 
@@ -293,7 +294,26 @@ color:#ffe164;
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="	crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 	<script>
+	
+	function isEmpty(str) {
+    	return !str.trim().length;
+	}
+	
+	const title = document.getElementById('input3');
+	const content = document.getElementById('input4');
+	
+	function check(event) {
+  		
+		if(isEmpty(title.value) || isEmpty(content.value)) {
+			alert("제목과 내용은 필수 입력 사항입니다!");
+			event.preventDefault();
+		}
+	}
+	
+	const form = document.getElementById('form');
+	form.addEventListener('submit', check);
 	var queue = [];
+	
 	var currentThumbnail;
 
 	function delRef(index) {
@@ -310,6 +330,14 @@ color:#ffe164;
 			var file = files[i]
 			if (index !== i) dt.items.add(file);
 			input.files = dt.files
+		}
+		
+		if(!queue.length) {
+			$("#d-line").empty();
+		}
+		
+		if(queue.length <= 1) {
+			$("#choose_preview").empty();
 		}
 
 		if (currentThumbnail == i) {
