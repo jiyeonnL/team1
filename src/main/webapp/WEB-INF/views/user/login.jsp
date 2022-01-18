@@ -72,8 +72,9 @@ background-color: #ffe164;}
 }
 
 #loginButton {
+	display : inline-block;
 	position: relative;
-	top: 14px;
+	top: 10px;
 	border: 3px solid;
 	border-color: #2f6091;
 }
@@ -85,13 +86,19 @@ background-color: #ffe164;}
 
 p {
 	position: relative;
-	top: 50px;
+	top: 30px;
 }
 
 #goSignUp {
 	position: relative;
-	top: 35px;
+	top: 15px;
 	color: #f0615c;
+}
+#result{
+	color: #f0615c;
+	display: block;
+    position: relative;
+    margin-top: 7px;
 }
 </style>
 <title>Login!</title>
@@ -114,6 +121,10 @@ p {
 						<label for="input2" id="korean">패스워드</label>
 						<input id="inputPw" type="password" class="form-control" name="pw" required>
 					</div>
+					<c:if test="${not empty result }">
+          				<small id="result">${result }</small>
+    				</c:if> 			
+
 					<button class="btn btn-outline-dark" id="loginButton">로그인</button>
 					<p>만약 계정이 없으시다면,</p>
 					<a href="${pageContext.request.contextPath }/user/signup" id="goSignUp">회원가입</a>
@@ -123,9 +134,6 @@ p {
 			</div>
 		</div>
 	</div>
-	<c:if test="${not empty result }">
-          <div class="alert alert-warning">${result }</div>
-    </c:if> 			
-
+	
 </body>
 </html>
