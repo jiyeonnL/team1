@@ -63,7 +63,7 @@ background-color: #ffe164;}
 	text-align: center;
 	border: 3px solid;
 	border-color: #2f6091;
-	margin-bottom: 30px;
+	
 }
 #lead{
 	position: relative;
@@ -73,6 +73,10 @@ background-color: #ffe164;}
 	text-align: left;
 	position: relative;
 	margin-bottom:10px;
+	margin-top: 15px;
+}
+#pwCheckMessage{
+	color: #f0615c
 }
 </style>
 <title>회원탈퇴</title>
@@ -94,7 +98,9 @@ background-color: #ffe164;}
                    	<div class="remove-group">
                    		<input type="password" id = "pw" required name="pw" class="form-control form-control-inline text-center" placeholder="비밀번호" />
                	 	</div>
-               
+              	 	<c:if test="${msg == false}">
+						<small id="pwCheckMessage">비밀번호가 맞지 않습니다</small>
+					</c:if>
     				<div class="context">
     					<h5>* 아래 조항을 반드시 읽고 동의하신다면 체크해 주세요 *</h5>
     						<ul style="border:1px dashed red;" >
@@ -106,13 +112,11 @@ background-color: #ffe164;}
     						</ul>
     					<input class="check" type="checkbox" name="agree"><span> 동의합니다.</span> 
     				</div>
-                	<button type="button" id="removeButton" name="remove" class="btn btn-danger">회원탈퇴</button> <a href="../user/profile" class="btn btn-primary">취소</a>
+                	<button type="button" id="removeButton" name="remove" class="btn btn-danger">회원탈퇴</button> <a href="../user/profile/${sessionScope.loginUser.nickname }" class="btn btn-primary">취소</a>
     				</form>
             </div>
     		
-			<c:if test="${msg == false}">
-				비밀번호가 맞지 않습니다.
-			</c:if>
+			
 		</div>
 	</div>
 	
