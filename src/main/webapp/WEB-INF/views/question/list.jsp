@@ -126,11 +126,11 @@ color:white;
 										<td id="boardid">
 											<a href="list/${board1.id }" class="동네신문고-공지사항-제목">
 												<%-- <c:if test="${not empty board.fileList }">
-								                    	<c:out value="${board.title }"/><i class="bi bi-image"></i> 
-								                	</c:if>
-								                	<c:if test="${board.newMark <2 }">
-								                    	<span class="badge badge-danger">new!</span>
-								                    </c:if> --%>
+                    	<c:out value="${board.title }"/><i class="bi bi-image"></i> 
+                	</c:if>
+                	<c:if test="${board.newMark <2 }">
+                    	<span class="badge badge-danger">new!</span>
+                    </c:if> --%>
 												<c:if test="${empty board1.fileList }">
 													<c:out value="${board1.title } " />
 												</c:if>
@@ -150,7 +150,7 @@ color:white;
 								</c:forEach>
 
 								<!-- table.table>thead>tr>th*4^^tbody 
-        	  						공지사항을 제외한 나머지 글-->
+        	  공지사항을 제외한 나머지 글-->
 								<c:forEach items="${list }" var="board">
 									<c:if test="${board.notice < 2 }">
 										<tr>
@@ -160,11 +160,11 @@ color:white;
 											<td id="boardid">
 												<a href="list/${board.id }" class="동네신문고-제목">
 													<%-- <c:if test="${not empty board.fileList }">
-										                    	<c:out value="${board.title }"/><i class="bi bi-image"></i> 
-										                	</c:if>
-										                	<c:if test="${board.newMark <2 }">
-										                    	<span class="badge badge-danger">new!</span>
-										                    </c:if> --%>
+                    	<c:out value="${board.title }"/><i class="bi bi-image"></i> 
+                	</c:if>
+                	<c:if test="${board.newMark <2 }">
+                    	<span class="badge badge-danger">new!</span>
+                    </c:if> --%>
 													<c:if test="${empty board.fileList }">
 														<c:out value="${board.title } " />
 													</c:if>
