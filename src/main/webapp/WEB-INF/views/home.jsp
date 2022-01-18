@@ -6,6 +6,7 @@
 <html>
 <head>
 	<title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
@@ -72,67 +73,67 @@
 
         @media (min-width:560px) and (max-width:599px) {
             .scroll-section {
-                font-size: 16px;
+                font-size: 14px;
             }
         }
 
         @media (min-width:600px) and (max-width:639px) {
             .scroll-section {
-                font-size: 17px;
+                font-size: 14px;
             }
         }
 
         @media (min-width:640px) and (max-width:679px) {
             .scroll-section {
-                font-size: 18px;
+                font-size: 15px;
             }
         }
 
         @media (min-width:680px) and (max-width:719px) {
             .scroll-section {
-                font-size: 19px;
+                font-size: 15px;
             }
         }
 
         @media (min-width:720px) and (max-width:759px) {
             .scroll-section {
-                font-size: 20px;
+                font-size: 17px;
             }
         }
 
         @media (min-width:760px) and (max-width:799px) {
             .scroll-section {
-                font-size: 21px;
+                font-size: 18px;
             }
         }
 
         @media (min-width:800px) and (max-width:839px) {
             .scroll-section {
-                font-size: 22px;
+                font-size: 20px;
             }
         }
 
         @media (min-width:840px) and (max-width:879px) {
             .scroll-section {
-                font-size: 23px;
+                font-size: 20px;
             }
         }
 
         @media (min-width:880px) and (max-width:919px) {
             .scroll-section {
-               font-size: 24px;
+               font-size: 21px;
             }
         }
 
         @media (min-width:920px) and (max-width:959px) {
             .scroll-section {
-                font-size: 25px;
+                font-size: 22px;
             }
         }
 
         @media (min-width:960px) and (max-width:999px) {
             .scroll-section {
-                font-size: 26px;
+                font-size: 22px;
             }
         }
 
@@ -177,20 +178,20 @@
             margin: 0;
             background-color: beige;
         }
-			.header{
-			font-weight: normal;
-			}
+        
+		a.goTop {
+			position: fixed;
+			right: 50px;
+			bottom: 30px;
+			color: #264d73;
+			z-index: 999;
+			width: 8.5%;
+		}
+		
         .scroll-section {
             width: 100%;
             height: 100%;
             position: relative;
-        }
-
-        /* visual  */
-        .header {
-            background-color: burlywood;
-            height: 84px;
-            width: 100%;
         }
 
         /* 메인 화면 */
@@ -338,7 +339,7 @@
         /* 로고 텍스트 */
         .visual .logo-text {
             color: white;
-            font-size: 4.5em;
+            font-size: 4.0em;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -348,7 +349,7 @@
 
         @-webkit-keyframes text-all {
             0% {
-                color: #9ec6ee;
+                color: #9ec6ee;		
                 ;
             }
 
@@ -441,7 +442,7 @@
             top: 70%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 1.7em;
+            font-size: 1.2em;
         }
 
         /* 소개 서브타이틀 */
@@ -452,7 +453,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
 
-            font-size: 1.2em;
+            font-size: 0.9em;
         }
 
         .visual .image1 {
@@ -475,14 +476,14 @@
 
         .intro .text-box .text-title {
 
-            font-size: 2.5em;
+            font-size: 2.0em;
             margin-bottom: 75px;
             opacity: 0;
             transform: translateX(-150px);
         }
 
         .intro .text-box .text-content {
-            font-size: 1.0em;
+            font-size: 0.8em;
             opacity: 0;	
             transform: translateX(-150px);
         }
@@ -625,14 +626,14 @@
             position: absolute;
             top: 12vh;
             left: 30vw;
-            font-size: 1.5em;
+            font-size: 1.2em;
         }
 
         .body .board .text-right {
             position: absolute;
             top: 12vh;
             right: 30vw;
-            font-size: 1.5em;
+            font-size: 1.2em;
         }
 
         .back-to-position {
@@ -678,7 +679,7 @@
             justify-content: center;
             text-decoration: none;
             margin-top: 10px;
-            width: 15vw;
+            width: 12vw;
             display: block;
             padding: 8px 16px;
             border-radius: 4px;
@@ -689,6 +690,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
+            font-size: 0.8em;
 
             /*For IE*/
         }
@@ -715,7 +717,7 @@
         .button:hover,
         .button:hover:after {
             background-position: 0;
-            font-size: 1.1em;
+            font-size: 0.9em;
             /*For IE*/
         }
     </style>
@@ -728,9 +730,13 @@
     <!-- 헤더 -->
     <div class="scroll-section">
 		
-		<div id="header">
+		<div id="header" style="font-weight: normal">
 			<b:header></b:header>
 		</div>
+		
+		<a class="goTop" href="#top">
+			<button class="goTop" id="위로-가자"><i class="fas fa-chevron-up fa-3x"></i> <h3>Top</h3></button>
+		</a>
 		
         <section class="visual">
             <div class="inner">
