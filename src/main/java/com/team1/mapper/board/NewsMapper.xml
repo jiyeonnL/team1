@@ -86,7 +86,7 @@
 		(SELECT count(postId) FROM tb_board_news_up
 		WHERE postId = p.id) up,
 		p.views, p.tag,
-		p.title, p.content, p.inserted, p.updated, m.nickname, fu.url,
+		p.title, p.content, p.inserted, p.updated, m.nickname, m.profileurl, fu.url, fu.fileName,
 		COUNT(r.id) replyCount,
 		(SELECT hu.userId FROM tb_board_news_up hu
 		WHERE hu.userId =
@@ -110,10 +110,11 @@
 		p.id, p.memberId, p.location,
 		f.userId,
 		f.url,
+		f.fileName,
 		(SELECT count(postId) FROM tb_board_news_up
 		WHERE postId = p.id) up,
 		p.views, p.tag,
-		p.title, p.content, p.inserted, p.updated, m.nickname,
+		p.title, p.content, p.inserted, p.updated, m.nickname, m.profileurl,
 		COUNT(r.id) replyCount,
 		(SELECT hu.userId FROM tb_board_news_up hu
 		WHERE hu.userId =
