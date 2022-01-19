@@ -58,7 +58,7 @@ font-size:x-large;
 				</a></li>
 				<!-- <li><a href="/" class="nav-link px-2 text-white"> 
 				<i class="fas fa-question-circle" id="icon-header"></i> 자주묻는 질문 </a></li> -->
-				<li><a href="/" class="nav-link px-3 text-white"> 
+				<li><a href="/controller1/dev" class="nav-link px-3 text-white"> 
 				<i class="fas fa-user-edit" id="icon-header"></i> 제작자 </a></li>
 
 			</ul>
