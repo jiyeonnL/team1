@@ -84,8 +84,8 @@ color:white;
 
 }
 .table td, .table th{
-	padding-left : 0.6rem;
-	padding-right: 0.6rem;
+	padding-left : 0.4rem;
+	padding-right: 0.45rem;
 	padding-top: 0.75rem;
 	padding-bottom: 0.75rem;
 } 
