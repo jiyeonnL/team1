@@ -949,6 +949,7 @@ gsap.from("#header", {
     })
     
     function toTop() {
+    	page = 1;
      $('html, body').animate({
         scrollTop: 0
      }, 900);
