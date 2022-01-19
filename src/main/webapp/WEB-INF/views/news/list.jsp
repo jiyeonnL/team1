@@ -305,7 +305,13 @@ a:hover {
 		$("#news").attr("class", "btn btn-outline ml-1 active");
 		var count = 5;
 		$(window).scroll(function() {
-			if ($(window).scrollTop() == $(document).height()	- $(window).height()) {
+			console.log($(window).scrollTop());
+			console.log($(document).height());
+			console.log($(window).height());
+			console.log($(document).height()-$(window).height());
+			
+			if ($(window).scrollTop() >= $(document).height()	- $(window).height()) {
+				/* alert("밑에 옴"); */
 				for (i = 0; i < 5; i++) {
 					$("#inner").find("#list-font-" + count).removeAttr("style", "none");
 					count++;
