@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="b" tagdir="/WEB-INF/tags/"%>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <html>
 <head>
 	<title>Home</title>
@@ -73,13 +73,13 @@
 
         @media (min-width:560px) and (max-width:599px) {
             .scroll-section {
-                font-size: 14px;
+                font-size: 15px;
             }
         }
 
         @media (min-width:600px) and (max-width:639px) {
             .scroll-section {
-                font-size: 14px;
+                font-size: 15px;
             }
         }
 
@@ -133,7 +133,7 @@
 
         @media (min-width:960px) and (max-width:999px) {
             .scroll-section {
-                font-size: 22px;
+                font-size: 24px;
             }
         }
 
@@ -187,6 +187,13 @@
 			z-index: 999;
 			width: 8.5%;
 		}
+		
+		#위로-가자 {
+            color: white;
+            background-color: #2f6091;
+            border-color: 2px solid white;
+            border-radius: 5px;
+        }
 		
         .scroll-section {
             width: 100%;
@@ -726,16 +733,16 @@
 
 
 <body>
-
     <!-- 헤더 -->
     <div class="scroll-section">
 		
-		<div id="header" style="font-weight: normal">
 			<b:header></b:header>
-		</div>
 		
-		<a class="goTop" href="#top">
-			<button class="goTop" id="위로-가자"><i class="fas fa-chevron-up fa-3x"></i> <h3>Top</h3></button>
+		
+		<a class="goTop" href="#top" onclick="toTop()">
+			<button class="goTop" id="위로-가자">
+			<i class="fas fa-chevron-up fa-2x"></i> 
+			<h4>Top</h4></button>
 		</a>
 		
         <section class="visual">
@@ -861,9 +868,9 @@
 
             </div>
         </section>
-
     </div>
-
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 </body>
 <script>
 gsap.from("#header", {
@@ -940,6 +947,13 @@ gsap.from("#header", {
             scrollTop: posTop
         }, 680);
     })
+    
+    function toTop() {
+    	page = 1;
+     $('html, body').animate({
+        scrollTop: 0
+     }, 900);
+    }
 </script>
 
 </html>
