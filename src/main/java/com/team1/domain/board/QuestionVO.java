@@ -41,6 +41,7 @@ public class QuestionVO {
 	List<QuestionFileVO> fileList;
 	
 	private Integer replyCount;
+	private Integer fileCount;
 	
 	public UserPostVO toUserPostVO() {
 		
