@@ -83,6 +83,12 @@ color:black;
 color:white;
 
 }
+.table td, .table th{
+	padding-left : 0.6rem;
+	padding-right: 0.6rem;
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
+} 
 
 </style>
 </head>

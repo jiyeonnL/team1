@@ -90,13 +90,13 @@ background-color: #ffe164;}
 				<h1 id="removeText">회원탈퇴</h1>
 					<form method="post" id = "removeForm">
     			
-                	<div class="lead">${sessionScope.loginUser.nickname }님! 탈퇴하려면 비밀번호를 입력해주세요.</div>
+                	<div class="lead">${sessionScope.loginUser.nickname }님! 탈퇴 확인을 위해, 본인 계정의 비밀번호를 입력해주세요!</div>
                 <!--  email hidden -->
                 	<div class="remove-group email" style="display: none;">
 						<input type="email"  name="email" value="${sessionScope.loginUser.email }">
 					</div>	
                    	<div class="remove-group">
-                   		<input type="password" id = "pw" required name="pw" class="form-control form-control-inline text-center" placeholder="비밀번호" />
+                   		<input type="password" id = "pw" required name="pw" class="form-control form-control-inline text-center" placeholder="탈퇴 확인을 위한 비밀번호" />
                	 	</div>
               	 	<c:if test="${msg == false}">
 						<small id="pwCheckMessage">비밀번호가 맞지 않습니다</small>
@@ -104,7 +104,7 @@ background-color: #ffe164;}
     				<div class="context">
     					<h5>* 아래 조항을 반드시 읽고 동의하신다면 체크해 주세요 *</h5>
     						<ul style="border:1px dashed red;" >
-    							<li>탈퇴하셔도 다른 올뺌들이 게시글을 읽을 수 있어요</li>
+    							<li>탈퇴하셔도 다른 올뺌들이 ${sessionScope.loginUser.nickname}님의 게시글을 읽을 수 있어요</li>
     							<li>사용하신 아이디(${sessionScope.loginUser.nickname})는 복구가 불가능해요</li>
     							<li>다른 올뺌들이 슬퍼해요</li>
     							<li>노력하는 '올뺌'이 되겠습니다..!!</li>

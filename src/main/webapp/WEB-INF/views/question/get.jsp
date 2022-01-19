@@ -314,6 +314,13 @@ max-width:50%;
     max-height: 45px;
     object-fit: cover;
 }
+#rereply-profile {
+    width: 45px;
+    height: 45px;
+    max-width: 45px;
+    max-height: 45px;
+    object-fit: cover;
+}
 
 #rereply-nickname {
 	font-weight: bold;
@@ -403,7 +410,7 @@ background-color: #eef2f6;
 						</c:choose>
 						</div>
 						
-						<div class="col-md-5 my-auto h2 align-middle 상세보기-제목"> 
+						<div class="col-md-6 my-auto h2 align-middle 상세보기-제목"> 
 							<a href = "${pageContext.request.contextPath }/user/profile/${post.nickname}"> ${post.nickname}(${post.location }) </a>
 						</div>
 
