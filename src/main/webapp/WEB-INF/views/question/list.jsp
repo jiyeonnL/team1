@@ -140,10 +140,16 @@ color:white;
 												<c:if test="${empty board1.fileList }">
 													<c:out value="${board1.title } " />
 												</c:if>
-												<c:if test="${board1.newMark <3 }">
-													<span class="badge badge-danger">new</span>
-												</c:if>
 											</a>
+											<c:if test="${board.fileCount > 0 }">
+												<span> <i class="fas fa-images"></i> </span>
+											</c:if>
+											<c:if test="${board.replyCount > 0 }">
+												<span> <i class="fas fa-comment"></i> (${board.replyCount}) </span>
+											</c:if>
+											<c:if test="${board.newMark <3 }">
+												<span class="badge badge-danger">new</span>
+											</c:if>
 										</td>
 										<td>
 											<a href="../user/profile/${board1.nickname }" class="동네신문고-공지사항-닉네임">
@@ -155,8 +161,7 @@ color:white;
 									</tr>
 								</c:forEach>
 
-								<!-- table.table>thead>tr>th*4^^tbody 
-        	  						공지사항을 제외한 나머지 글-->
+								<!-- table.table>thead>tr>th*4^^tbody 공지사항을 제외한 나머지 글-->
 								<c:forEach items="${list }" var="board">
 									<c:if test="${board.notice < 2 }">
 										<tr>
@@ -174,10 +179,16 @@ color:white;
 													<c:if test="${empty board.fileList }">
 														<c:out value="${board.title } " />
 													</c:if>
-													<c:if test="${board.newMark <3 }">
-														<span class="badge badge-danger">new</span>
-													</c:if>
 												</a>
+												<c:if test="${board.fileCount > 0 }">
+													<span> <i class="fas fa-images"></i> </span>
+												</c:if>
+												<c:if test="${board.replyCount > 0 }">
+													<span> <i class="fas fa-comment"></i> (${board.replyCount}) </span>
+												</c:if>
+												<c:if test="${board.newMark <3 }">
+													<span class="badge badge-danger">new</span>
+												</c:if>
 											</td>
 											<td>
 												<a href="../user/profile/${board.nickname }" class="동네신문고-닉네임">

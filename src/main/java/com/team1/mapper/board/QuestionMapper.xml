@@ -67,13 +67,23 @@
 		q.inserted,
 		q.updated,
 		q.notice,
-		datediff(now(), q.inserted) newMark
+		datediff(now(), q.inserted) newMark,
+		COUNT(rq.id) replyCount,
+		COUNT(fq.id) fileCount
 		FROM
 		tb_user u
 		JOIN
 		tb_board_question q
 		ON
 		u.id = q.memberId
+		LEFT JOIN
+		tb_reply_question rq
+		ON
+		q.id = rq.boardId
+		LEFT JOIN
+		tb_file_question fq
+		ON
+		q.id = fq.postId
 
 		<where>
 			<if test="query != null">
@@ -146,14 +156,23 @@
 		q.inserted,
 		q.updated,
 		q.notice,
-		
-		datediff(now(), q.inserted) newMark
+		datediff(now(), q.inserted) newMark,
+		COUNT(rq.id) replyCount,
+		COUNT(fq.id) fileCount
 		FROM
 		tb_user u
 		JOIN
 		tb_board_question q
 		ON
 		u.id = q.memberId
+		LEFT JOIN
+		tb_reply_question rq
+		ON
+		q.id = rq.boardId
+		LEFT JOIN
+		tb_file_question fq
+		ON
+		q.id = fq.postId
 
 		WHERE q.notice = 1
 		GROUP BY q.id
@@ -212,7 +231,8 @@
 		u.nickname,
 		u.profileurl,
 		fu.url,
-		fu.fileName
+		fu.fileName,
+		(SELECT count(id) FROM tb_report WHERE questionId=#{id} AND categories = '게시글') reportCount
 		FROM
 		tb_board_question q
 		JOIN
