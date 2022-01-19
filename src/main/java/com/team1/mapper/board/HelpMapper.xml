@@ -166,7 +166,6 @@
 		LEFT JOIN tb_reply_help r
 		ON p.id = r.boardId
 		
-
 	<where>
 		<if test="query != null">
 			AND p.content like concat('%',#{query},'%' )

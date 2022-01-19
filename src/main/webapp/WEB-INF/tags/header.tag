@@ -43,7 +43,7 @@ font-size:x-large;
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Jua&display=swap" rel="stylesheet">
 
-<header class="p-3 text-white " style="background-color: #264d73;" id="head-all">
+<header class="p-3 text-white " style="background-color: #264d73;" id="head-all">	
 	<div class="container">
 		<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 			<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none" id="header-jua"></a>

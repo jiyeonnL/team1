@@ -273,8 +273,9 @@ public class UserService {
 				return Long.valueOf(timeC2).compareTo(timeC1); 
 			};
 			
-			
 			Collections.sort(postVOs, comparator);
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
