@@ -10,9 +10,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,7 +48,9 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @Service
 public class UserService {
-
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper mapper;
@@ -81,7 +87,6 @@ public class UserService {
 	private S3Client s3;
 	
 	@PostConstruct
-	
 	public void init() {
 		// spring bean이 만들어 진 후 최초로 실행되는 코드 작성
 
@@ -282,6 +287,30 @@ public class UserService {
 		}   
 		
 		return postVOs;
+	}
+	
+	public void sendPassWordFindEmail(String email) throws MessagingException {
+		
+		UserVO userVO = mapper.select(email);
+		
+        String subject = "타운&스토리에서 알려드립니다.";
+        String content = "회원님의 비밀번호는 : " + userVO.getPw() +"입니다.";
+        String from = "sasa5680@naver.com";
+        String to = email;
+		
+		
+		MimeMessage mail = mailSender.createMimeMessage();
+        MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
+        
+        mailHelper.setFrom(from);
+        // 빈에 아이디 설정한 것은 단순히 smtp 인증을 받기 위해 사용 따라서 보내는이(setFrom())반드시 필요
+        // 보내는이와 메일주소를 수신하는이가 볼때 모두 표기 되게 원하신다면 아래의 코드를 사용하시면 됩니다.
+        //mailHelper.setFrom("보내는이 이름 <보내는이 아이디@도메인주소>");
+        mailHelper.setTo(to);
+        mailHelper.setSubject(subject);
+        mailHelper.setText(content, true);
+        
+        mailSender.send(mail);
 	}
 
 	
