@@ -132,9 +132,10 @@ a:hover {
 }
 
 .닉네임위치 {
-	padding-left: 23px;
 	padding-bottom: 5px;
-	float: right;
+    float: right;
+    width: 200px;
+    text-align: right;
 }
 
 #게시글-작성시간 {

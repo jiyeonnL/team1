@@ -80,6 +80,7 @@ label {
 
 #submitButton1 {
 	margin-top: 6px;
+	margin-bottom: 10px;
 	margin-right: 2px;
 	margin-left: 2px;
 	border: 3px solid;
