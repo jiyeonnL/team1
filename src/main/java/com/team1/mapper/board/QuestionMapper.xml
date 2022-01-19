@@ -232,7 +232,12 @@
 		u.profileurl,
 		fu.url,
 		fu.fileName,
-		(SELECT count(id) FROM tb_report WHERE questionId=#{id} AND categories = '게시글') reportCount
+		(SELECT count(id) FROM tb_report WHERE questionId=#{id} AND categories = '게시글') reportCount,
+		(SELECT hu.userId FROM tb_board_help_up hu
+		WHERE hu.userId =
+		#{loginId} AND hu.postId=q.id) upposession,
+		(SELECT count(postId) FROM tb_board_help_up
+		WHERE postId = q.id) up
 		FROM
 		tb_board_question q
 		JOIN

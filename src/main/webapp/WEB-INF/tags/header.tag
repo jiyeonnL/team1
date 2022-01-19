@@ -3,7 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="b" tagdir="/WEB-INF/tags/"%>
 
-
 <style>
 
 .container{
