@@ -24,10 +24,7 @@ import com.team1.service.user.UserService;
 @Controller
 public class HomeController {
 	
-	
-	@Autowired
-	UserService service;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
@@ -42,7 +39,6 @@ public class HomeController {
 		model.addAttribute("login",vo);
 		
 		
-		service.sendPassWordFindEmail("sasa5680@naver.com");
 		
 		return "home";
 	}
