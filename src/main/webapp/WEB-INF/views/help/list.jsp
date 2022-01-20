@@ -15,7 +15,7 @@
 <link href="<%=request.getContextPath()%>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
 
 <style>
-#help-body-font {
+#help-body-font, #help-body-font2 {
 	background-color: #ffe164;
 	font-family: 'Jua', sans-serif;
 	font-size: 25px;
@@ -171,7 +171,12 @@ a:hover {
 		<div id="inner">
 			<b:innerNav></b:innerNav>
 			<b:cover></b:cover>
-			<a href="${pageContext.request.contextPath }/help/register" id="help-body-font" class="btn">글쓰기</a>
+			<c:if test="${not empty sessionScope.loginUser }">
+				<a href="${pageContext.request.contextPath }/news/register" id="help-body-font" class="btn">글쓰기</a>
+			</c:if>
+			<c:if test="${empty sessionScope.loginUser }">
+				<a id="help-body-font2" class="btn">글쓰기</a>
+			</c:if>
 			<!-- 검색결과 리스트 -->
 			<!-- for 문 돌면서 list에 있는 요소(게시물)들 출력 -->
 			<c:forEach items="${list}" var="board" varStatus="vs">
@@ -308,11 +313,6 @@ a:hover {
 		$("#help").attr("class", "btn btn-outline ml-1 active");
 		var count = 5;
 		$(window).scroll(function() {
-			console.log($(window).scrollTop());
-			console.log($(document).height());
-			console.log($(window).height());
-			console.log($(document).height()-$(window).height());
-			
 			if ($(window).scrollTop() >= $(document).height()	- $(window).height()) {
 				/* alert("밑에 옴"); */
 				for (i = 0; i < 5; i++) {
