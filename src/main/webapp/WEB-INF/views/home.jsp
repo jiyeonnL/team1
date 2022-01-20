@@ -158,8 +158,7 @@
         }
         html,
         body {
-            font-weight: bold;
-            font-family: 'Jua', sans-serif;
+
             display: block;
             width: 100%;
             height: 100%;
@@ -184,6 +183,8 @@
         }
 		
         .scroll-section {
+            font-weight: bold;
+            font-family: 'Jua', sans-serif;
             width: 100%;
             height: 100%;
             position: relative;
@@ -675,7 +676,8 @@
                   	  타운&스토리는 지역을 기반으로 한 온라인 커뮤니티 서비스로,<br> 
                                               다양한 주제의 게시물을 통하여 지역 주민들의 의견과 생각을 공유할 수 있는 소셜 플랫폼입니다.<br>
                     <br>
-                                             타운&스토리로 이웃들과 함께 스토리를 만들어가 보세요!
+                                             타운&스토리로 이웃들과 함께<br> 
+                                             여러분만의 스토리를 만들어가 보세요!
                 </div>
             </div>
             <!-- 이미지 담긴 영역 -->
