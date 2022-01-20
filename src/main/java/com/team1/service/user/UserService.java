@@ -307,7 +307,7 @@ public class UserService {
 
 			
 	        String subject = "[타운&스토리] 비밀번호 찾기 안내 메일입니다.";
-	        String content = "안녕하세요?" +userVO.getNickname()+ " 회원님, 타운&스토리입니다.\r\n" + 
+	        String content = "안녕하세요? " +userVO.getNickname()+ " 회원님, 타운&스토리입니다.\r\n" + 
 	        		day+"에 회원님의 계정의 비밀번호 찾기 요청이 있어서 메일 발송해드립니다.\r\n" + 
 	        		"\r\n" + 
 	        		userVO.getNickname()+"님의 비밀번호는 "+userVO.getPw()+"입니다.\r\n" + 
