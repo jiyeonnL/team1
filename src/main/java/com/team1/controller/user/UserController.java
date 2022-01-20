@@ -251,7 +251,6 @@ public class UserController {
 				return "redirect:/user/login";
 	}
 	
-	@CrossOrigin(origins="*")
 	@RequestMapping("/pwFind")
 	@ResponseBody
 	public String remove(String email) {
