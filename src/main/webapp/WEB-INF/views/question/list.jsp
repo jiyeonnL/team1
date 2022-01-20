@@ -37,7 +37,7 @@
 	display: flex;
 }
 
-#question-body-font {
+#question-body-font, #question-body-font2 {
 	background-color: #ffe164;
 	font-size: 25px;
 	font-weight: bold;
@@ -206,7 +206,12 @@ color:white;
 					</div>
 				</div>
 			</div>
-			<a href="${pageContext.request.contextPath }/question/register" id="question-body-font" class="btn">글쓰기</a>
+			<c:if test="${not empty sessionScope.loginUser }">
+				<a href="${pageContext.request.contextPath }/question/register" id="question-body-font" class="btn">글쓰기</a>
+			</c:if>
+			<c:if test="${empty sessionScope.loginUser }">
+				<a id="question-body-font2" class="btn">글쓰기</a>
+			</c:if>
 		</div>
 	</div>
 

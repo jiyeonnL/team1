@@ -91,8 +91,8 @@ public class QuestionController {
 	@GetMapping("/register")
 	public String register(HttpSession session) {
 		UserVO vo = (UserVO) session.getAttribute("loginUser");
-
 		if (vo == null) {
+			System.out.println("로그인 안하고 들어옴");
 			return "redirect:/user/login";
 		}
 

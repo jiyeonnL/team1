@@ -5,11 +5,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -92,7 +95,7 @@ public class UserController {
 //	}
 	
 	@RequestMapping("/login")
-	public String login (String email, String pw, HttpSession session, RedirectAttributes rttr, Model model) throws UnsupportedEncodingException {
+	public String login (String email, String pw, HttpSession session, RedirectAttributes rttr, Model model, HttpServletRequest request) throws UnsupportedEncodingException {
 		UserVO vo = service.read(email);
 		
 		
@@ -112,18 +115,24 @@ public class UserController {
 			
 			return null;
 		}
-		
+		String path = (String)request.getHeader("REFERER");
+
+		System.out.println("path : "+path);
 		session.setAttribute("loginUser",vo);
 		rttr.addFlashAttribute("result", vo.getNickname() + "님 환영합니다.");
 		//String encodeLoc = URLEncoder.encode(vo.getLocation(), "UTF-8");
-		return "redirect:/";
-		
+		if(path.contains("login")) {
+			return "redirect:/";
+		}else {
+			return "redirect:"+ path;
+		}
 	}
 	
 	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, HttpServletRequest request) {
 		session.invalidate();
-		return "redirect:/";
+		String path = (String)request.getHeader("REFERER");
+		return "redirect:"+path;
 	}
 
 	
@@ -247,5 +256,25 @@ public class UserController {
 				service.remove(vo.getEmail());
 				session.invalidate();
 				return "redirect:/user/login";
-			}
+	}
+	
+	@RequestMapping("/pwFind")
+	@ResponseBody
+	public String remove(String email) {
+		
+		System.out.println(email);
+
+		String result;
+		
+		try {
+			result = service.sendPassWordFindEmail(email);
+			System.out.println(result);
+			return result;
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "error";
+		}
+	}
+	
 }

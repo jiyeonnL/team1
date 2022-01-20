@@ -175,7 +175,6 @@
             display: block;
             width: 100%;
             height: 100%;
-            margin: 0;
             background-color: beige;
         }
         
@@ -186,6 +185,7 @@
 			color: #264d73;
 			z-index: 999;
 			width: 8.5%;
+			visibility: hidden;
 		}
 		
 		#위로-가자 {
@@ -221,8 +221,8 @@
         .visual .inner .main-cover {
 
             height: 100%;
-            /* 왼쪽에 있는 색 -> 오른쪽에 있는 색으로 변경 */
-            background: linear-gradient(to bottom, #ffe164 50%, beige 50%) bottom;
+            /* 오른쪽에 있는 색 -> 왼에 있는 색으로 변경 */
+            background: linear-gradient(to bottom, beige 50%, white 50%) bottom;	
             background-size: 100% 200%;
             -webkit-animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.2s both;
             animation: chagecolor 1.0s cubic-bezier(0.250, 0.460, 0.450, 1.000) 0.2s both;
@@ -446,20 +446,19 @@
         /* 소개 타이틀 */
         .visual .title {
             position: absolute;
-            top: 70%;
+            top: 73%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 1.2em;
+
         }
 
         /* 소개 서브타이틀 */
         .visual .subTitle {
 
-            position: absolute;
-            top: 75%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-size: 0.9em;
         }
 
@@ -735,11 +734,13 @@
 <body>
     <!-- 헤더 -->
     <div class="scroll-section">
-		
+		<div style="font-weight: normal;">
 			<b:header></b:header>
+		</div>
+			
 		
 		
-		<a class="goTop" href="#top" onclick="toTop()">
+		<a class="goTop" id="goTop" onclick="goTop()">
 			<button class="goTop" id="위로-가자">
 			<i class="fas fa-chevron-up fa-2x"></i> 
 			<h4>Top</h4></button>
@@ -754,20 +755,18 @@
                         아이콘
                     </div>
                     <div class="logo-text">
-                        <div class="letter delay-0">사</div>
-                        <div class="letter delay-1">용</div>
-                        <div class="letter delay-2">할</div>
-                        <div class="letter delay-3">로</div>
-                        <div class="letter delay-4">고</div>
-                        <div class="letter delay-5">명</div>
+                        <div class="letter delay-0">타</div>
+                        <div class="letter delay-1">운</div>
+                        <div class="letter delay-2">&</div>
+                        <div class="letter delay-3">스</div>
+                        <div class="letter delay-4">토</div>
+                        <div class="letter delay-5">리</div>
                     </div>
                 </div>
 
                 <div class="title">
-                    WelCome to (프로젝트 이름)
-                </div>
-                <div class="subTitle">
-                    서브 타이틀 Lorem, ipsum dolor sit
+                	<div class = "subTitle" style="font-size: 1.1em;"> Welcome to 올뺌타운! </div>
+                    <div class = "subTitle" >이웃과 함께 만들어가는  스토리</div>
                 </div>
             </div>
         </section>
@@ -782,8 +781,8 @@
                 </div>
 
                 <div class="text-content content-ani">
-                    (프로젝트명)은 지역 기반의 커뮤니티로 지역 근처 주민들과 다양한 주제로 여러분의 일상이나 느낀점, 의견을 공유하거나 여러분의 이웃이 올린 게시물을 불 수 있습니다.
-                    (프로젝트명)으로 여러분의 이웃과 함께 해보세요!
+                                            타운&스토리는 지역 기반의 커뮤니티로 지역 근처 주민들과 다양한 주제로 여러분의 일상이나 느낀점, 의견을 공유하거나 여러분의 이웃이 올린 게시물을 불 수 있습니다.
+                                           타운&스토리로 여러분의 이웃과 함께 해보세요!
                 </div>
             </div>
             <!-- 이미지 담긴 영역 -->
@@ -869,7 +868,47 @@
             </div>
         </section>
     </div>
-	
+		<c:if test="${not empty result }">
+		<div class="modal" tabindex="-1" id="modal1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">어서오세요!</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>${result }</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</c:if>
+
+	<c:if test="${not empty modify }">
+		<div class="modal" tabindex="-1" id="modal1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">정보 수정 완료</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>${modify }</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</c:if>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 </body>
 <script>
@@ -892,12 +931,6 @@ gsap.from("#header", {
         delay: 1.2,
         duration: 0.7,
         y: 50
-    })
-
-    gsap.from(".newsImage", {
-        opacity: 0,
-        duration: 0.7,
-        x: -100
     })
 
     const spyEls = document.querySelectorAll('.scroll-spy');
@@ -932,7 +965,7 @@ gsap.from("#header", {
 
     /* 휠 이벤트 처리 */
     $(window).on("wheel", function (e) {
-        console.log('wheel');
+    	
         if (mHtml.is(":animated")) return;
         if (e.originalEvent.deltaY > 0) {
             if (page == 4) return;
@@ -942,18 +975,31 @@ gsap.from("#header", {
             page--;
         }
         var posTop = (page - 1) * $(window).height();
+        
+    	if(page==1) {
+    		console.log("page1");
+    		$("#goTop").css("visibility", "hidden");
+    	} else {
+    		console.log("page else");
+    		$("#goTop").css("visibility", "visible");
+    	}
 
         $('html, body').animate({
             scrollTop: posTop
         }, 680);
     })
     
-    function toTop() {
+    function goTop() {
     	page = 1;
+    	$("#goTop").css("visibility", "hidden");
      $('html, body').animate({
         scrollTop: 0
      }, 900);
     }
+    if (history.state == null) {
+        $("#modal1").modal('show');
+        history.replaceState({}, null);
+      }
 </script>
 
 </html>

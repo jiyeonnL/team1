@@ -14,7 +14,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link href="<%=request.getContextPath()%>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
 <style>
 /*노랑 배경색 : #ffe164
   파랑 배경색 : #264d73
@@ -38,7 +39,7 @@ background-color: #ffe164;}
 #loginForm {
 	position: absolute;
 	width: 400px;
-	height: 400px;
+	height: 435px;
 	padding: 30px, 20px;
 	background-color: #FFFFFF;
 	text-align: center;
@@ -72,11 +73,14 @@ background-color: #ffe164;}
 }
 
 #loginButton {
-	display : inline-block;
+	display : block;
 	position: relative;
-	top: 10px;
+	top: 20px;
 	border: 3px solid;
 	border-color: #2f6091;
+	width: 70px;
+    margin: auto;
+    margin-bottom: 55px;
 }
 
 .pw {
@@ -86,20 +90,38 @@ background-color: #ffe164;}
 
 p {
 	position: relative;
-	top: 30px;
 }
 
 #goSignUp {
 	position: relative;
-	top: 15px;
+	
 	color: #f0615c;
 }
+
 #result{
 	color: #f0615c;
 	display: block;
     position: relative;
     margin-top: 7px;
 }
+
+#login-findPWButton {
+	
+	cursor: pointer;
+	color: #264d73;
+}
+#noId{
+	width: 50%;
+	float: left;
+    box-sizing: border-box;
+}
+
+#findPw{
+	width: 50%;
+	float: right;
+    box-sizing: border-box;
+}
+
 </style>
 <title>Login!</title>
 </head>
@@ -124,16 +146,28 @@ p {
 					<c:if test="${not empty result }">
           				<small id="result">${result }</small>
     				</c:if> 			
-
-					<button class="btn btn-outline-dark" id="loginButton">로그인</button>
-					<p>만약 계정이 없으시다면,</p>
-					<a href="${pageContext.request.contextPath }/user/signup" id="goSignUp">회원가입</a>
 					
+					
+					<button class="btn btn-outline-dark" id="loginButton">로그인</button>
+					
+					<div id="noId">만약 계정이 없으시다면,<br>
+						<a href="${pageContext.request.contextPath }/user/signup" id="goSignUp">회원가입</a>
+					</div>
+					<div id="findPw">비밀번호를 잊으셨나요?<br>
+						<p  id="login-findPWButton">비밀번호 찾기</p>
+					</div>
 					
 				</form>
 			</div>
 		</div>
 	</div>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+	<script>
+	$("#login-findPWButton").click(function() {
+		console.log("ccccc");
+		$("#pwModal").modal("show");
+	});
+	</script>
 	
 </body>
 </html>

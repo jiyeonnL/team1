@@ -56,15 +56,19 @@
 }
 #modal-go-sign-up{
 	display: flex;
-		justify-content: flex-end;
-		color:#f0615c;
-		font-size:large;
+	justify-content: flex-end;
+	color:#f0615c;
+	font-size:large;
 }
-#modal-login-button{
-	background-color: #264d73;
-	color:white;
-	font-size:x-large;
-}
+
+
+#modal-login-button {
+    background-color: #264d73;
+    color: white;
+    font-size: x-large;
+        }
+
+
 </style>
 <!-- Modal HTML -->
 <div id="myModal" class="modal fade " tabindex="-1">
@@ -95,6 +99,9 @@
 						<input type="checkbox" class="form-check-input" id="rememberMe" />
 						<label class="form-check-label" for="rememberMe">아이디와 비밀번호 기억하기</label>
 					</div>
+					<div class="mb-3 form-check">
+						<label class="form-check-label" id="findPWButton">비밀번호 찾기</label>
+					</div>
 					<div class="modal-footer modal-end">
 						<p class="float-start">
 							아직 계정이 없으시다면,
@@ -111,5 +118,10 @@
 <script>
 	$("#close").click(function() {
 		$("#myModal").modal("hide");
+	});
+	
+	$("#findPWButton").click(function() {
+		$("#myModal").modal("hide");
+		$("#pwModal").modal("show");
 	});
 </script>
