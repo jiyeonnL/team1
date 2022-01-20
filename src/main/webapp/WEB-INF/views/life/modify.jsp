@@ -304,7 +304,7 @@
 				<c:if test="${sessionScope.loginUser.nickname eq board.nickname }">
 					<button id="modifySubmitButton" class="btn btn-modify" type="submit">수정</button>
 				</c:if>
-				<button id="" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirmModal1"> 삭제</i></button>
+				<button id="" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#confirmModal1"> 삭제</button>
 				<a href="${pageContext.request.contextPath }/life/list/${board.id }" class="btn btn-cancel">취소</a>
 			</div>
 		</div>
