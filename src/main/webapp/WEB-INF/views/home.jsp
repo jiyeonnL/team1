@@ -36,37 +36,37 @@
     <style>
     	
         @media (max-width:360px) {
-            html {
-                .scroll-section: 10px;
+            .scroll-section {
+                .font-size: 10px;
             }
         }
 
         @media (min-width:361px) and (max-width:399px) {
-            html {
-                font-size: 11px;
+            .scroll-section {
+               .font-size: 11px;
             }
         }
 
         @media (min-width:400px) and (max-width:439px) {
-            html {
-                font-size: 12px;
+            .scroll-section {
+               .font-size: 12px;
             }
         }
 
         @media (min-width:440px) and (max-width:479px) {
-            html {
+            .scroll-section {
                 font-size: 13px;
             }
         }
 
         @media (min-width:480px) and (max-width:519px) {
-            html {
+            .scroll-section {
                 font-size: 14px;
             }
         }
 
         @media (min-width:520px) and (max-width:559px) {
-            scroll-section {
+            .scroll-section {
                 font-size: 15px;
             }
         }
@@ -109,31 +109,31 @@
 
         @media (min-width:800px) and (max-width:839px) {
             .scroll-section {
-                font-size: 20px;
+                font-size: 19px;
             }
         }
 
         @media (min-width:840px) and (max-width:879px) {
             .scroll-section {
-                font-size: 20px;
+                font-size: 19px;
             }
         }
 
         @media (min-width:880px) and (max-width:919px) {
             .scroll-section {
-               font-size: 21px;
+               font-size: 20px;
             }
         }
 
         @media (min-width:920px) and (max-width:959px) {
             .scroll-section {
-                font-size: 22px;
+                font-size: 20px;
             }
         }
 
         @media (min-width:960px) and (max-width:999px) {
             .scroll-section {
-                font-size: 24px;
+                font-size: 20px;
             }
         }
 
@@ -268,8 +268,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            -webkit-animation: tracking-in-expand 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
-            animation: tracking-in-expand 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
+            -webkit-animation: tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
+            animation: tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
         }
 
         @-webkit-keyframes tracking-in-expand {
@@ -308,8 +308,8 @@
             height: 27vh;
             width: 27vh;
             background-color: blueviolet;
-            -webkit-animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;
-            animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;
+            /*-webkit-animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;
+            animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;*/
 
         }
 
@@ -350,8 +350,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            -webkit-animation: text-all 0.8s 4.8s both;
-            animation: text-all 0.8s 4.8s both;
+            -webkit-animation: text-all 0.8s 3.5s both;
+            animation: text-all 0.8s 3.5s both;
         }
 
         @-webkit-keyframes text-all {
@@ -378,40 +378,41 @@
 
         .visual .logo-text .letter {}
 
+
         .visual .letter.delay-0 {
 
-            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.8s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.5s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.2s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.2s both;
         }
 
         .visual .letter.delay-1 {
 
-            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.9s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.6s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.3s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.3s both;
         }
 
         .visual .letter.delay-2 {
 
-            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.0s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.7s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.4s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.4s both;
         }
 
         .visual .letter.delay-3 {
 
-            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.1s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.8s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.5s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.5s both;
         }
 
         .visual .letter.delay-4 {
 
-            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.2s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.9s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.6s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.6s both;
         }
 
         .visual .letter.delay-5 {
 
-            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.3s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 4.0s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.7s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.7s both;
         }
 
         /* 개별 글자에 적용 */
@@ -450,6 +451,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 1.2em;
+            color: #264d73;
 
         }
 
@@ -460,6 +462,7 @@
             justify-content: center;
             align-items: center;
             font-size: 0.9em;
+            color: #264d73;
         }
 
         .visual .image1 {
@@ -482,14 +485,14 @@
 
         .intro .text-box .text-title {
 
-            font-size: 2.0em;
+            font-size: 2.3em;
             margin-bottom: 75px;
             opacity: 0;
             transform: translateX(-150px);
         }
 
         .intro .text-box .text-content {
-            font-size: 0.8em;
+            font-size:  1.1em;
             opacity: 0;	
             transform: translateX(-150px);
         }
@@ -781,8 +784,10 @@
                 </div>
 
                 <div class="text-content content-ani">
-                                            타운&스토리는 지역 기반의 커뮤니티로 지역 근처 주민들과 다양한 주제로 여러분의 일상이나 느낀점, 의견을 공유하거나 여러분의 이웃이 올린 게시물을 불 수 있습니다.
-                                           타운&스토리로 여러분의 이웃과 함께 해보세요!
+                  	  타운&스토리는 지역 기반의 온라인 커뮤니티로,<br> 
+                                             다양한 주제의 게시물을 통하여 지역 주민들의 의견과 생각을 공유할 수 있는 소셜 플랫폼입니다.<br>
+                    <br>
+                                             타운&스토리로 이웃들과 함께 스토리를 만들어가 보세요!
                 </div>
             </div>
             <!-- 이미지 담긴 영역 -->
@@ -921,14 +926,14 @@ gsap.from("#header", {
 
     gsap.from(".title", {
         opacity: 0,
-        delay: 0.9,
+        delay: 4.0,
         duration: 0.7,
         y: 50
     })
 
     gsap.from(".subTitle", {
         opacity: 0,
-        delay: 1.2,
+        delay: 4.0,
         duration: 0.7,
         y: 50
     })
