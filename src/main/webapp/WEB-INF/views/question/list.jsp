@@ -89,7 +89,11 @@ color:white;
 	padding-right: 0.45rem;
 	padding-top: 0.75rem;
 	padding-bottom: 0.75rem;
-} 
+}
+#inserted{
+	font-size: 13px;
+	vertical-align: middle;
+}
 
 </style>
 </head>
@@ -157,7 +161,7 @@ color:white;
 												<c:out value="${board1.nickname }" />
 											</a>
 										</td>
-										<td>${board1.inserted }</td>
+										<td id="inserted">${board1.inserted }</td>
 
 									</tr>
 								</c:forEach>
@@ -196,7 +200,7 @@ color:white;
 													<c:out value="${board.nickname }" />
 												</a>
 											</td>
-											<td>${board.inserted }</td>
+											<td id="inserted">${board.inserted }</td>
 
 										</tr>
 									</c:if>
