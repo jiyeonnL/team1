@@ -142,13 +142,13 @@ color:white;
 													<c:out value="${board1.title } " />
 												</c:if>
 											</a>
-											<c:if test="${board.fileCount > 0 }">
+											<c:if test="${board1.fileCount > 0 }">
 												<span> <i class="fas fa-images"></i> </span>
 											</c:if>
-											<c:if test="${board.replyCount > 0 }">
+											<c:if test="${board1.replyCount > 0 }">
 												<span> <i class="fas fa-comment"></i> (${board.replyCount}) </span>
 											</c:if>
-											<c:if test="${board.newMark <3 }">
+											<c:if test="${board1.newMark <3 }">
 												<span class="badge badge-danger">new</span>
 											</c:if>
 										</td>
