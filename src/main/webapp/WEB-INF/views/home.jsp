@@ -540,13 +540,13 @@
             position: absolute;
             top: 12vh;
             left: 30vw;
-            font-size: 1.2em;
+            font-size: 1.6em;
         }
         .body .board .text-right {
             position: absolute;
             top: 12vh;
             right: 30vw;
-            font-size: 1.2em;
+            font-size: 1.6em;
         }
         .back-to-position {
             opacity: 0;
