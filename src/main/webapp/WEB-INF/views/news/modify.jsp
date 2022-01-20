@@ -362,7 +362,16 @@
 	const content = document.getElementById('input2');
 	
 	var queue = [];
-	var currentThumbnail = document.querySelector('input[name="thumbNailChoice"]:checked').id.replace("thumbNailChoice", "");
+	
+	try{
+		currentThumbnail = document.querySelector('input[name="thumbNailChoice"]:checked').id.replace("thumbNailChoice", "");
+	}catch(error){
+	    console.log(error.message);
+	    currentThumbnail = null;
+	}finally{
+	    console.log("완료");
+	}
+	
 	var uploadedNum = "${fn:length(board.fileList)}";
 	
 	function delRef(index) {
@@ -491,6 +500,10 @@
             input.files = dt.files;
 			
         }
+        
+		if(currentThumbnail == null) {
+			currentThumbnail = uploadedNum;
+		}
         
 		/* 현재 미리보기는 모두 지워야 한다. */
 		$("#image_container").empty();
