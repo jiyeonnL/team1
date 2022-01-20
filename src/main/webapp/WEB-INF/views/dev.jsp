@@ -13,22 +13,23 @@
 <link href="<%=request.getContextPath()%>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
 
 <style>
-#img{
-	width: 1311.8px;
-	height: 732.2px;
+#img {
+	margin-top: 32px;
+	width: 1554.8px;
+	height: 898.2px;
 }
 </style>
 <title>제작자</title>
 </head>
 <body>
-<b:header></b:header>
-<div class="container">
-	<div class="row">
-		<div class="col">
-			<img id="img" src="https://s20211227-dotori-team-project.s3.ap-northeast-2.amazonaws.com/profile/%EB%B0%B0%EC%82%AC+final.png"></img>
+	<b:header></b:header>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<img id="img" src="https://s20211227-dotori-team-project.s3.ap-northeast-2.amazonaws.com/profile/%EB%B0%B0%EC%82%AC+final.png" style="margin-left: -220px;"></img>
+			</div>
 		</div>
 	</div>
-</div>
 
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
