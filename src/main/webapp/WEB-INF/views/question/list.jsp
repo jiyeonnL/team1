@@ -89,7 +89,11 @@ color:white;
 	padding-right: 0.45rem;
 	padding-top: 0.75rem;
 	padding-bottom: 0.75rem;
-} 
+}
+#inserted{
+	font-size: 13px;
+	vertical-align: middle;
+}
 
 </style>
 </head>
@@ -142,13 +146,13 @@ color:white;
 													<c:out value="${board1.title } " />
 												</c:if>
 											</a>
-											<c:if test="${board.fileCount > 0 }">
+											<c:if test="${board1.fileCount > 0 }">
 												<span> <i class="fas fa-images"></i> </span>
 											</c:if>
-											<c:if test="${board.replyCount > 0 }">
+											<c:if test="${board1.replyCount > 0 }">
 												<span> <i class="fas fa-comment"></i> (${board.replyCount}) </span>
 											</c:if>
-											<c:if test="${board.newMark <3 }">
+											<c:if test="${board1.newMark <3 }">
 												<span class="badge badge-danger">new</span>
 											</c:if>
 										</td>
@@ -157,7 +161,7 @@ color:white;
 												<c:out value="${board1.nickname }" />
 											</a>
 										</td>
-										<td>${board1.inserted }</td>
+										<td id="inserted">${board1.inserted }</td>
 
 									</tr>
 								</c:forEach>
@@ -196,7 +200,7 @@ color:white;
 													<c:out value="${board.nickname }" />
 												</a>
 											</td>
-											<td>${board.inserted }</td>
+											<td id="inserted">${board.inserted }</td>
 
 										</tr>
 									</c:if>

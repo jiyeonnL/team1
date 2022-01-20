@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<link href="<%=request.getContextPath()%>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" />
+	<link href="<%=request.getContextPath()%>/resource/favicon/favicon.png" rel="icon" type="image/x-icon" sizes="16x16" />
     <!-- 스크롤 관련 자바스크립트 라이브러리 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
         integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
@@ -311,7 +311,7 @@
             /*-webkit-animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;
             animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;*/
 
-        }
+
 
         /* 로고 아이콘 회전주는 애니메이션 */
         @-webkit-keyframes rotate-in-center {
@@ -755,7 +755,7 @@
 
                 <div class="logo">
                     <div class="logo-container">
-                        아이콘
+                        <img src="<%=request.getContextPath()%>/resource/logo/Logo.png" alt="타운&스토리" style="object-fit : fill; margin-right: 30px; height: 27vh; width: 27vh;">
                     </div>
                     <div class="logo-text">
                         <div class="letter delay-0">타</div>
@@ -788,6 +788,7 @@
                                              다양한 주제의 게시물을 통하여 지역 주민들의 의견과 생각을 공유할 수 있는 소셜 플랫폼입니다.<br>
                     <br>
                                              타운&스토리로 이웃들과 함께 스토리를 만들어가 보세요!
+
                 </div>
             </div>
             <!-- 이미지 담긴 영역 -->
@@ -826,7 +827,7 @@
                 </div>
                 <div class="text-right back-to-position to-right delay-1">
                     <div>
-                    궁금한게 있나요? 이웃들에게 물어보세요!
+                    동네 이웃들과 함께 의견을 나누고 싶으신가요?
                     </div>
                     <a href="/controller1/question/list?page=1" class="button" style="float: right;">바로가기</a>
                 </div>
