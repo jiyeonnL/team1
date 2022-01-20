@@ -11,6 +11,7 @@
 <style>
 .display-44, .lead4, .plist {
 	text-align: center;
+	font-weight: bold;
 }
 
 #전체-아래-카피라이트 {
@@ -124,17 +125,17 @@ hr {
 	margin-bottom: 0;
 }
 
-#footer-logo{ 
+#footer-logo {
 	height: 40px;
 	width: 40px;
 	margin-bottom: 15px;
 }
 
-.container-logo{
+.container-logo {
 	align-content: center;
 }
 
-.item{
+.item {
 	font-family: 'IBM Plex Sans KR', sans-serif;
 	font-weight: bold;
 }
@@ -143,12 +144,11 @@ hr {
 <body>
 	<div id="전체-아래-카피라이트">
 		<hr>
-		<div class="container-logo">
-		</div>
-		<h1 class="display-44"> Welcome to 올뺌타운
+		<h1 class="display-44">
+			Welcome to 올뺌타운
 			<img src="<%=request.getContextPath()%>/resource/logo/Logo.png" alt="타운&스토리" id="footer-logo">
 		</h1>
-		<p class="lead4">지역 기반 게시판 켜뮤니티입니다. 거주하는 지역을 선택하시고 주변 주민들과 소통하세요.</p>
+		<p class="lead4">지역 기반 게시판 커뮤니티입니다. 거주하는 지역을 선택하시고 주변 주민들과 소통하세요.</p>
 		<hr class="my-4">
 		<div class="footer-dark">
 			<footer>
