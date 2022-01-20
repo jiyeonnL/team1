@@ -172,7 +172,7 @@ a:hover {
 			<b:innerNav></b:innerNav>
 			<b:cover></b:cover>
 			<c:if test="${not empty sessionScope.loginUser }">
-				<a href="${pageContext.request.contextPath }/news/register" id="help-body-font" class="btn">글쓰기</a>
+				<a href="${pageContext.request.contextPath }/help/register" id="help-body-font" class="btn">글쓰기</a>
 			</c:if>
 			<c:if test="${empty sessionScope.loginUser }">
 				<a id="help-body-font2" class="btn">글쓰기</a>
