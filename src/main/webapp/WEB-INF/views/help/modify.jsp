@@ -363,7 +363,17 @@
 	const content = document.getElementById('input2');
 	
 	var queue = [];
-	var currentThumbnail = document.querySelector('input[name="thumbNailChoice"]:checked').id.replace("thumbNailChoice", "");
+	var currentThumbnail; 
+	
+	try{
+		currentThumbnail = document.querySelector('input[name="thumbNailChoice"]:checked').id.replace("thumbNailChoice", "");
+	}catch(error){
+	    console.log(error.message);
+	    currentThumbnail = null;
+	}finally{
+	    console.log("완료");
+	}
+		
 	var uploadedNum = "${fn:length(board.fileList)}";
 	
 	function delRef(index) {
@@ -500,6 +510,10 @@
 		const line = $(`<div id="line"></div>`)
 		
 		$("#d-line").append(line);
+		
+		if(currentThumbnail == null) {
+			currentThumbnail = uploadedNum;
+		}
 		
 		//이미지 생성
 		render(event.target.files, currentThumbnail);
