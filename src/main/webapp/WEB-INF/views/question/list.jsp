@@ -48,7 +48,7 @@
 color:white;}
 
 #공지사항-바탕{
-background-color: #eef2f6 
+background-color: #eef2f6; 
 }
 
 table {
@@ -132,9 +132,9 @@ color:white;
 								<c:forEach items="${listNotice }" var="board1">
 									<tr id="공지사항-바탕">
 										<%-- <td>${board1.id }</td> --%>
-										<td>-</td>
-										<td>${board1.tag }</td>
-										<td id="boardid">
+										<td style="vertical-align: middle;">-</td>
+										<td style="vertical-align: middle;">${board1.tag }</td>
+										<td id="boardid" style="vertical-align: middle;">
 											<a href="list/${board1.id }" class="동네신문고-공지사항-제목">
 												<%-- <c:if test="${not empty board.fileList }">
 								                    	<c:out value="${board.title }"/><i class="bi bi-image"></i> 
@@ -158,7 +158,7 @@ color:white;
 										</td>
 										<td>
 											<a href="../user/profile/${board1.nickname }" class="동네신문고-공지사항-닉네임">
-												<c:out value="${board1.nickname }" />
+												<c:out value="${board1.nickname }" /><br>(관리자)
 											</a>
 										</td>
 										<td id="inserted">${board1.inserted }</td>
