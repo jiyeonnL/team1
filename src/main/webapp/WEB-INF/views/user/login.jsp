@@ -149,7 +149,7 @@ p {
 					
 					
 					<button class="btn btn-outline-dark" id="loginButton">로그인</button>
-					<div id="line"></div>
+					
 					<div id="noId">만약 계정이 없으시다면,<br>
 						<a href="${pageContext.request.contextPath }/user/signup" id="goSignUp">회원가입</a>
 					</div>
