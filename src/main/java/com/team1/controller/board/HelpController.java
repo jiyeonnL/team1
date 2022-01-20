@@ -155,9 +155,6 @@ public class HelpController {
 	@PostMapping("/modify")
 	public String modify(HelpVO board, String[] removeFile, MultipartFile[] files, String thumbNailChoice,
 			RedirectAttributes rttr) {
-
-		System.out.println("/modify로 잘 옴.");
-
 		try {
 			if (service.modify(board, removeFile, files, thumbNailChoice)) {
 				rttr.addFlashAttribute("result", board.getId() + "번 게시글이 수정되었습니다.");
@@ -166,7 +163,7 @@ public class HelpController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "redirect:/help/list";
+		return "redirect:/help/list/"+board.getId();
 	}
 
 	@GetMapping("/register")
@@ -184,7 +181,7 @@ public class HelpController {
 		System.out.println(thumbNailChoice);
 		rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
 
-		return "redirect:/help/list";
+		return "redirect:/help/list/"+board.getId();
 	}
 	
 	@PostMapping("/remove")
