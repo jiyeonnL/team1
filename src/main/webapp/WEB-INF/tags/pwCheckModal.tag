@@ -42,15 +42,24 @@
     </div>
     <script>
     
+    	function clearModal() {
+    		
+    		$("#modal-check-email").val("");
+    		$("#result").empty();
+			
+		}
+    
     	const appRoot = '${pageContext.request.contextPath}';	
     
         $("#pwModal-close").click(function () {
-            $("#pwModal").modal("hide");
+        	clearModal();
+        	$("#pwModal").modal("hide");
+            
         });
 
         $("#modal-find-goto-login").click(function () {
-            $("#pwModal").modal("hide");   
-            
+        	 clearModal();
+        	$("#pwModal").modal("hide");   
             //login 페이지가 아닐 경우에만 로그인 모달을 다시 띄운다.
             if(window.location.pathname == '/controller1/user/login') {
             } else {
