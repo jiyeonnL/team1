@@ -133,7 +133,7 @@ public class NewsController {
 
 	@GetMapping("/register")
 	public void register() {
-
+		
 	}
 
 	// newsVO와 이미지 파일, 썸네일로 지정된 파일명을 받아온다(thumbNail).

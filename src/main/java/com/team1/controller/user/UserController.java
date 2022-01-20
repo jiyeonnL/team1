@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +95,7 @@ public class UserController {
 //	}
 	
 	@RequestMapping("/login")
-	public String login (String email, String pw, HttpSession session, RedirectAttributes rttr, Model model) throws UnsupportedEncodingException {
+	public String login (String email, String pw, HttpSession session, RedirectAttributes rttr, Model model, HttpServletRequest request) throws UnsupportedEncodingException {
 		UserVO vo = service.read(email);
 		
 		
@@ -114,18 +115,24 @@ public class UserController {
 			
 			return null;
 		}
-		
+		String path = (String)request.getHeader("REFERER");
+
+		System.out.println("path : "+path);
 		session.setAttribute("loginUser",vo);
 		rttr.addFlashAttribute("result", vo.getNickname() + "님 환영합니다.");
 		//String encodeLoc = URLEncoder.encode(vo.getLocation(), "UTF-8");
-		return "redirect:/";
-		
+		if(path.contains("login")) {
+			return "redirect:/";
+		}else {
+			return "redirect:"+ path;
+		}
 	}
 	
 	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, HttpServletRequest request) {
 		session.invalidate();
-		return "redirect:/";
+		String path = (String)request.getHeader("REFERER");
+		return "redirect:"+path;
 	}
 
 	

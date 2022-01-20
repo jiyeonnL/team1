@@ -128,6 +128,12 @@ font-size:x-large;
 			$("#login").click(function() {
 				$('#myModal').modal('show');
 			});
+			$("#help-body-font2").click(function() {
+				$('#myModal').modal('show');
+			});
+			$("#question-body-font2").click(function() {
+				$('#myModal').modal('show');
+			});
 		};
 		$("#signup").click(function() {
 			location.href="/controller1/user/signup"

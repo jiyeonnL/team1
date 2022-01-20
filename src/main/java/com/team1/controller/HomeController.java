@@ -35,7 +35,6 @@ public class HomeController {
 	public String home(Locale locale, Model model, HttpSession session) throws MessagingException {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		UserVO vo = (UserVO) session.getAttribute("loginUser");
-		System.out.println("user vo : "+vo);
 		model.addAttribute("login",vo);
 		
 		
