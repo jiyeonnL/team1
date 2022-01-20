@@ -73,11 +73,14 @@ background-color: #ffe164;}
 }
 
 #loginButton {
-	display : inline-block;
+	display : block;
 	position: relative;
-	top: 10px;
+	top: 20px;
 	border: 3px solid;
 	border-color: #2f6091;
+	width: 70px;
+    margin: auto;
+    margin-bottom: 55px;
 }
 
 .pw {
@@ -87,12 +90,11 @@ background-color: #ffe164;}
 
 p {
 	position: relative;
-	top: 30px;
 }
 
 #goSignUp {
 	position: relative;
-	top: 15px;
+	
 	color: #f0615c;
 }
 
@@ -106,9 +108,20 @@ p {
 #login-findPWButton {
 	
 	cursor: pointer;
-	margin-bottom: 10px
-
+	color: #264d73;
 }
+#noId{
+	width: 50%;
+	float: left;
+    box-sizing: border-box;
+}
+
+#findPw{
+	width: 50%;
+	float: right;
+    box-sizing: border-box;
+}
+
 </style>
 <title>Login!</title>
 </head>
@@ -134,14 +147,15 @@ p {
           				<small id="result">${result }</small>
     				</c:if> 			
 					
-					<div class="mb-3">
-						<p  id="login-findPWButton">비밀번호 찾기</p>
-					</div>
 					
 					<button class="btn btn-outline-dark" id="loginButton">로그인</button>
-					<p>만약 계정이 없으시다면,</p>
-					<a href="${pageContext.request.contextPath }/user/signup" id="goSignUp">회원가입</a>
 					
+					<div id="noId">만약 계정이 없으시다면,<br>
+						<a href="${pageContext.request.contextPath }/user/signup" id="goSignUp">회원가입</a>
+					</div>
+					<div id="findPw">비밀번호를 잊으셨나요?<br>
+						<p  id="login-findPWButton">비밀번호 찾기</p>
+					</div>
 					
 				</form>
 			</div>
