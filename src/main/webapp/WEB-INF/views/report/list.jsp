@@ -15,7 +15,7 @@
 
 <style>
 .table td, .table th{
-padding: 0.6rem;
+padding: 0.5rem;
 }
 
 #location{
