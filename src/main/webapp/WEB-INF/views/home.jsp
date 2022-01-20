@@ -40,85 +40,75 @@
                 .scroll-section: 10px;
             }
         }
-
         @media (min-width:361px) and (max-width:399px) {
             html {
                 font-size: 11px;
             }
         }
-
         @media (min-width:400px) and (max-width:439px) {
             html {
                 font-size: 12px;
             }
         }
-
         @media (min-width:440px) and (max-width:479px) {
             html {
                 font-size: 13px;
             }
         }
-
         @media (min-width:480px) and (max-width:519px) {
             html {
                 font-size: 14px;
             }
         }
-
         @media (min-width:520px) and (max-width:559px) {
             scroll-section {
                 font-size: 15px;
             }
         }
-
         @media (min-width:560px) and (max-width:599px) {
             .scroll-section {
                 font-size: 15px;
             }
         }
-
         @media (min-width:600px) and (max-width:639px) {
             .scroll-section {
                 font-size: 15px;
             }
         }
-
         @media (min-width:640px) and (max-width:679px) {
             .scroll-section {
                 font-size: 15px;
             }
         }
-
         @media (min-width:680px) and (max-width:719px) {
             .scroll-section {
                 font-size: 15px;
             }
         }
-
         @media (min-width:720px) and (max-width:759px) {
             .scroll-section {
                 font-size: 17px;
             }
         }
-
+        
         @media (min-width:760px) and (max-width:799px) {
             .scroll-section {
                 font-size: 18px;
             }
         }
-
+        
         @media (min-width:800px) and (max-width:839px) {
             .scroll-section {
                 font-size: 20px;
             }
         }
-
+        
         @media (min-width:840px) and (max-width:879px) {
             .scroll-section {
                 font-size: 20px;
             }
         }
-
+        
         @media (min-width:880px) and (max-width:919px) {
             .scroll-section {
                font-size: 21px;
@@ -127,13 +117,13 @@
 
         @media (min-width:920px) and (max-width:959px) {
             .scroll-section {
-                font-size: 22px;
+                font-size: 20px;
             }
         }
 
         @media (min-width:960px) and (max-width:999px) {
             .scroll-section {
-                font-size: 24px;
+                font-size: 20px;
             }
         }
 
@@ -162,16 +152,13 @@
             scrollbar-width: none;
             /* Firefox */
         }
-
         .html::-webkit-scrollbar {
             display: none;
             /* Chrome, Safari, Opera*/
         }
-
         html,
         body {
-            font-weight: bold;
-            font-family: 'Jua', sans-serif;
+
             display: block;
             width: 100%;
             height: 100%;
@@ -196,30 +183,26 @@
         }
 		
         .scroll-section {
+            font-weight: bold;
+            font-family: 'Jua', sans-serif;
             width: 100%;
             height: 100%;
             position: relative;
         }
-
         /* 메인 화면 */
         .visual {
             overflow: hidden;
             /* default color */
-
             /* "to left" / "to right" - affects initial color */
             width: 100%;
-
         }
-
         /* 전체 화면(100 view height)에서 헤더 높이(84px) 뺀 값 */
         .visual .inner {
             height: calc(100vh - 84px);
             width: 100%;
         }
-
         /* 배경 이미지  */
         .visual .inner .main-cover {
-
             height: 100%;
             /* 오른쪽에 있는 색 -> 왼에 있는 색으로 변경 */
             background: linear-gradient(to bottom, beige 50%, white 50%) bottom;	
@@ -235,29 +218,19 @@
             background-size: cover;
             filter: blur(2px);
             -webkit-filter: blur(2px); */
-
         }
-
         @-webkit-keyframes chagecolor {
-
             0% {}
-
             100% {
                 background-position: top;
             }
-
         }
-
         @keyframes chagecolor {
-
             0% {}
-
             100% {
-
                 background-position: top;
             }
         }
-
         /*로고 */
         .visual .logo {
             justify-content: center;
@@ -271,47 +244,39 @@
             -webkit-animation: tracking-in-expand 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
             animation: tracking-in-expand 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
         }
-
         @-webkit-keyframes tracking-in-expand {
             0% {
                 letter-spacing: -0.5em;
                 opacity: 0;
             }
-
             40% {
                 opacity: 0.6;
             }
-
             100% {
                 opacity: 1;
             }
         }
-
         @keyframes tracking-in-expand {
             0% {
                 letter-spacing: -0.5em;
                 opacity: 0;
             }
-
             40% {
                 opacity: 0.6;
             }
-
             100% {
                 opacity: 1;
             }
         }
-
         /* 로고 이미지(아이콘) 담는 컨테이너 div */
         .visual .logo-container {
             margin-right: 30px;
             height: 27vh;
             width: 27vh;
-            -webkit-animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;
-            animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;
+            /*-webkit-animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;
+            animation: rotate-in-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.0s both;*/
 			
         }
-
         /* 로고 아이콘 회전주는 애니메이션 */
         @-webkit-keyframes rotate-in-center {
             0% {
@@ -319,29 +284,24 @@
                 transform: rotate(-360deg);
                 opacity: 0;
             }
-
             100% {
-
                 -webkit-transform: rotate(0);
                 transform: rotate(0);
                 opacity: 1;
             }
         }
-
         @keyframes rotate-in-center {
             0% {
                 -webkit-transform: rotate(-360deg);
                 transform: rotate(-360deg);
                 opacity: 0;
             }
-
             100% {
                 -webkit-transform: rotate(0);
                 transform: rotate(0);
                 opacity: 1;
             }
         }
-
         /* 로고 텍스트 */
         .visual .logo-text {
             color: white;
@@ -349,99 +309,86 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            -webkit-animation: text-all 0.8s 4.8s both;
-            animation: text-all 0.8s 4.8s both;
+            -webkit-animation: text-all 0.8s 3.5s both;
+            animation: text-all 0.8s 3.5s both;
         }
-
         @-webkit-keyframes text-all {
             0% {
                 color: #9ec6ee;		
                 ;
             }
-
             100% {
                 color: #264d73;
             }
         }
-
         @keyframes text-all {
             0% {
                 color: #9ec6ee;
                 ;
             }
-
             100% {
                 color: #264d73;
             }
         }
-
         .visual .logo-text .letter {}
-
         .visual .letter.delay-0 {
 
-            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.8s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.5s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.2s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.2s both;
         }
 
         .visual .letter.delay-1 {
 
-            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.9s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.6s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.3s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.3s both;
         }
 
         .visual .letter.delay-2 {
 
-            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.0s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.7s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.4s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.4s both;
         }
 
         .visual .letter.delay-3 {
 
-            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.1s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.8s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.5s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.5s both;
         }
 
         .visual .letter.delay-4 {
 
-            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.2s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.9s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.6s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.6s both;
         }
 
         .visual .letter.delay-5 {
 
-            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 3.3s both;
-            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 4.0s both;
+            -webkit-animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.7s both;
+            animation: text-color 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) 2.7s both;
         }
-
         /* 개별 글자에 적용 */
         @-webkit-keyframes text-color {
             0% {
                 color: #9ec6ee;
             }
-
             50% {
                 color: #264d73;
             }
-
             100% {
                 color: inherit;
             }
         }
-
         @keyframes text-color {
             0% {
                 color: #9ec6ee;
             }
-
             50% {
                 color: #264d73;
             }
-
             100% {
                 color: inherit;
             }
         }
-
         /* 소개 타이틀 */
         .visual .title {
             position: absolute;
@@ -449,26 +396,21 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 1.2em;
-
+            color: #264d73;
         }
-
         /* 소개 서브타이틀 */
         .visual .subTitle {
-
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 0.9em;
+            color: #264d73;
         }
-
         .visual .image1 {
-
             position: absolute;
             bottom: 80px;
             right: 150px;
-
         }
-
         /* 2번 페이지 텍스트 css */
         .intro .text-box {
             position: absolute;
@@ -476,39 +418,31 @@
             left: 8vw;
             width: 40vw;
             height: 40vh;
-
         }
-
         .intro .text-box .text-title {
-
-            font-size: 2.0em;
+            font-size: 2.3em;
             margin-bottom: 75px;
             opacity: 0;
             transform: translateX(-150px);
         }
-
         .intro .text-box .text-content {
-            font-size: 0.8em;
+            font-size: 1.1em;
             opacity: 0;	
             transform: translateX(-150px);
         }
-
         .intro .show .title-ani {
             opacity: 1;
             transition: 1s;
             transform: translateX(0px);
             transition-delay: 1.3s;
         }
-
         .intro .show .content-ani {
             opacity: 1;
             transition: 1s;
             transform: translateX(0px);
             transition-delay: 1.8s;
         }
-
         /* 2번 페이지 이미지 css */
-
         .intro .image {
             position: absolute;
             object-fit: cover;
@@ -516,22 +450,18 @@
             transform: translateX(150px);
             opacity: 0;
         }
-
         .intro .image.image1 {
             top: 15vh;
             right: 15vw;
             width: 32vw;
             height: 40vh;
-
         }
-
         .intro .image.image2 {
             top: 50vh;
             right: 8vw;
             width: 32vw;
             height: 40vh;
         }
-
         /* 이미지의 효과 */
         .intro .show .image1-ani {
             opacity: 1;
@@ -539,145 +469,112 @@
             transition-delay: 0.3s;
             transform: translateX(0px);
         }
-
         .intro .show .image2-ani {
             opacity: 1;
             transition: 1s;
             transition-delay: 0.9s;
             transform: translateX(0px);
         }
-
-
         /* 게시판 소개 영역 1개 엘리먼트 정의 */
         .body .board {
-
             position: absolute;
             display: flex;
             width: 100%;
             height: 37.5vh;
             background-color: #ffe164;
-
-
         }
-
         .body .board.upper {
             top: 10vh;
         }
-
         .body .board.downer {
             bottom: 10vh;
         }
-
         .body .triangle {
             position: absolute;
             height: 37.5vh;
             width: 37.5vh;
-
             background-color: #264d73;
         }
-
         .body .triangle.left {
             left: 0px;
             bottom: 0px;
             clip-path: polygon(0 0, 0% 100%, 100% 100%);
             -webkit-clip-path: polygon(0 0, 0% 100%, 100% 100%);
-
         }
-
         .body .triangle.right {
             right: 0px;
             bottom: 0px;
             clip-path: polygon(100% 0, 0% 100%, 100% 100%);
             -webkit-clip-path: polygon(100% 0, 0% 100%, 100% 100%);
         }
-
         /* 커버 이미지 담는 div 영역 */
         .body .board .image-container {
             position: absolute;
             height: 100%;
             width: 30vw;
         }
-
         .image-container.left {
             top: 0px;
             left: 0px;
         }
-
         .image-container.right {
             top: 0px;
             right: 0px;
         }
-
         .cover-image {
             object-fit: cover;
             display: block;
             width: 100%;
             height: 100%;
-
         }
-
         /* 마름모꼴 만드는 코드 */
         .cover-image.left {
             -webkit-clip-path: polygon(0 0, 100% 0, 55% 100%, 0% 100%);
             clip-path: polygon(0 0, 100% 0, 50% 100%, 0% 100%);
         }
-
         .cover-image.right {
             -webkit-clip-path: polygon(100% 0, 0% 0, 55% 100%, 100% 100%);
             clip-path: polygon(100% 0, 0% 0, 50% 100%, 100% 100%);
         }
-
         .body .board .text-left {
             position: absolute;
             top: 12vh;
             left: 30vw;
             font-size: 1.2em;
         }
-
         .body .board .text-right {
             position: absolute;
             top: 12vh;
             right: 30vw;
             font-size: 1.2em;
         }
-
         .back-to-position {
             opacity: 0;
             transition: 1s;
         }
-
         .back-to-position.to-right {
             transform: translateX(-150px);
         }
-
         .back-to-position.to-left {
             transform: translateX(150px);
         }
-
         .show .back-to-position {
             opacity: 1;
             transform: translateX(0);
         }
-
         /* 애니메이션에 딜레이 얼마나 줄지 결정 */
         .show .back-to-position.delay-0 {
             transition-delay: 0.3s;
         }
-
         .show .back-to-position.delay-1 {
             transition-delay: 0.6s;
         }
-
         .show .back-to-position.delay-2 {
             transition-delay: 0.9s;
         }
-
         .show .back-to-position.delay-3 {
             transition-delay: 1.2s;
         }
-
-
-
         /* a 링크를 버튼으로 만들고 hover 시 효과 부여 */
         .button {
             text-align: center;
@@ -696,10 +593,8 @@
             -webkit-text-fill-color: transparent;
             position: relative;
             font-size: 0.8em;
-
             /*For IE*/
         }
-
         .button:after {
             content: "";
             position: absolute;
@@ -711,14 +606,12 @@
                     #264d73 50%, transparent 50%);
             z-index: -1;
         }
-
         .button,
         .button:after {
             background-size: 300%;
             background-position: 100%;
             transition: 0.7s, font-size 0.2s;
         }
-
         .button:hover,
         .button:hover:after {
             background-position: 0;
@@ -780,11 +673,11 @@
                 </div>
 
                 <div class="text-content content-ani">
-                                            타운&스토리는 지역 기반의 커뮤니티로, <br>
-                                            동네 이웃의 게시물을 통하여 <br>
-                                            지역 주민들의 의견과 생각을 공유 할 수있는 창구입니다. <br>
-                                         	<br>
-                                            타운&스토리로 이웃과 함께 스토리를 만들어가보세요!
+                  	  타운&스토리는 지역을 기반으로 한 온라인 커뮤니티 서비스로,<br> 
+                                              다양한 주제의 게시물을 통하여 지역 주민들의 의견과 생각을 공유할 수 있는 소셜 플랫폼입니다.<br>
+                    <br>
+                                             타운&스토리로 이웃들과 함께<br> 
+                                             여러분만의 스토리를 만들어가 보세요!
                 </div>
             </div>
             <!-- 이미지 담긴 영역 -->
@@ -918,23 +811,21 @@ gsap.from("#header", {
     opacity: 0,
     delay: 0.0,
     duration: 0.7,
-
 })
-
     gsap.from(".title", {
         opacity: 0,
-        delay: 0.9,
+        delay: 4.0,
         duration: 0.7,
         y: 50
     })
 
     gsap.from(".subTitle", {
         opacity: 0,
-        delay: 1.2,
+        delay: 4.0,
         duration: 0.7,
         y: 50
     })
-
+    
     const spyEls = document.querySelectorAll('.scroll-spy');
     spyEls.forEach(function (spyEl) {
         new ScrollMagic
@@ -944,27 +835,20 @@ gsap.from("#header", {
             })
             .setClassToggle(spyEl, 'show')
             .addTo(new ScrollMagic.Controller());
-
     });
-
-
     /* 페이지 스크롤 관련 코드들 */
-
     /* 기본 스크롤 이벤트를 막는다 */
     window.addEventListener("wheel", function (e) {
         e.preventDefault();
     }, {
         passive: false
     });
-
     var mHtml = $("html");
     console.log(mHtml);
     var page = 1;
-
     mHtml.animate({
         scrollTop: 0
     }, 10);
-
     /* 휠 이벤트 처리 */
     $(window).on("wheel", function (e) {
     	
@@ -985,7 +869,6 @@ gsap.from("#header", {
     		console.log("page else");
     		$("#goTop").css("visibility", "visible");
     	}
-
         $('html, body').animate({
             scrollTop: posTop
         }, 680);

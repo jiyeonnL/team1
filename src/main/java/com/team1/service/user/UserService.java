@@ -2,6 +2,7 @@ package com.team1.service.user;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -300,12 +301,30 @@ public class UserService {
 			result = "fail";
 		}  else {
 			
-	        String subject = "타운&스토리에서 알려드립니다.";
-	        String content = "회원님의 비밀번호는 : " + userVO.getPw() +"입니다.";
+			long time = System.currentTimeMillis(); 
+			SimpleDateFormat simpl = new SimpleDateFormat("yyyy년 MM월 dd일 aa hh시 mm분 "); 
+			String day = simpl.format(time);
+
+			
+	        String subject = "[타운&스토리] 비밀번호 찾기 안내 메일입니다.";
+	        String content = "안녕하세요?" +userVO.getNickname()+ " 회원님, 타운&스토리입니다.\r\n" + 
+	        		day+"에 회원님의 계정의 비밀번호 찾기 요청이 있어서 메일 발송해드립니다.\r\n" + 
+	        		"\r\n" + 
+	        		userVO.getNickname()+"님의 비밀번호는 "+userVO.getPw()+"입니다.\r\n" + 
+	        		"\r\n" + 
+	        		"앞으로도 꾸준한 타운&스토리 이용 부탁드립니다.\r\n" + 
+	        		"\r\n" + 
+	        		"\r\n" + 
+	        		"* 본 메일은 발신 전용 메일이므로 답장을 받을 수 없는 메일입니다.\r\n" + 
+	        		"* 본 메일은 회원가입 시 입력한 이메일 주소로 발송된 메일입니다.";
+	        
+	        
 	        String from = "sasa5680@naver.com";
 	        String to = email;
 			
 			
+	        System.out.println(content);
+	        
 			MimeMessage mail = mailSender.createMimeMessage();
 	        MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
 	        
@@ -315,7 +334,7 @@ public class UserService {
 	        //mailHelper.setFrom("보내는이 이름 <보내는이 아이디@도메인주소>");
 	        mailHelper.setTo(to);
 	        mailHelper.setSubject(subject);
-	        mailHelper.setText(content, true);
+	        mailHelper.setText(content, false);
 	        
 	        mailSender.send(mail);
 	        
