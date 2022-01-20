@@ -102,6 +102,7 @@ font-size:x-large;
 		</div>
 	</div>
 	<b:loginModal></b:loginModal>
+	<b:pwCheckModal></b:pwCheckModal>
 </header>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
