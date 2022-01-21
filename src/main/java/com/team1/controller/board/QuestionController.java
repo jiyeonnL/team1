@@ -108,15 +108,11 @@ public class QuestionController {
 			// 3. business logic
 			service.register(board, files);
 			// 4. add attribute
-			
-			
 			rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
-			
-	
 
 		// 5. forward / redirect
 		// 책: 목록으로 redirect
-		return "redirect:/question/list?page=";
+		return "redirect:/question/list/"+board.getId();
 	}
 	
 	@GetMapping("/modify")
@@ -147,9 +143,6 @@ public class QuestionController {
 	
 	@PostMapping("/modify")
 	public String modify(QuestionVO board, String[] removeFile, MultipartFile[] files, RedirectAttributes rttr) {
-
-		
-
 		try {
 			if (service.modify(board, removeFile, files)) {
 				rttr.addFlashAttribute("result", board.getId() + "번 게시글이 수정되었습니다.");
@@ -158,7 +151,7 @@ public class QuestionController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "redirect:/question/list?page=";
+		return "redirect:/question/list/"+board.getId();
 	}
 	
 	@PostMapping("/remove")

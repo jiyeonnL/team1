@@ -128,7 +128,7 @@ public class NewsController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "redirect:/news/list";
+		return "redirect:/news/list/"+board.getId();
 	}
 
 	@GetMapping("/register")
@@ -146,7 +146,7 @@ public class NewsController {
 		System.out.println(thumbNailChoice);
 		rttr.addFlashAttribute("result", board.getId() + "번 게시글이 등록되었습니다.");
 
-		return "redirect:/news/list";
+		return "redirect:/news/list/"+board.getId();
 	}
 
 	@PostMapping("/remove")
