@@ -95,10 +95,10 @@
 							<i class="fa fa-key modal-icon" aria-hidden="true"></i>
 						</label>
 					</div>
-					<div class="mb-3 form-check">
+<!-- 					<div class="mb-3 form-check">
 						<input type="checkbox" class="form-check-input" id="rememberMe" />
 						<label class="form-check-label" for="rememberMe">아이디와 비밀번호 기억하기</label>
-					</div>
+					</div> -->
 					<div class="mb-3 form-check">
 						<label class="form-check-label" id="findPWButton">비밀번호 찾기</label>
 					</div>
