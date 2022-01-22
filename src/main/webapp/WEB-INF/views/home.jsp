@@ -696,7 +696,7 @@
                 <div class="title">
                 	<div class = "subTitle" style="font-size: 1.1em;"> Welcome to 올뺌타운! </div>
                     <div class = "subTitle">이웃과 함께 만들어가는  스토리</div><br>
-					<div class = "notation"><i class="fas fa-chevron-down fa-2x" style="margin-bottom: 16px; margin-right: 16px; "></i> <p>더 많은 정보를 아래서 확인하세요!</p>	 <i class="fas fa-chevron-down fa-2x" style="margin-bottom: 16px; margin-left: 16px; "></i></div>
+					<div class = "notation"><i class="fas fa-chevron-down fa-2x" style="margin-bottom: 16px; margin-right: 16px; "></i> <p>더 많은 정보를 아래에서 확인하세요!</p>	 <i class="fas fa-chevron-down fa-2x" style="margin-bottom: 16px; margin-left: 16px; "></i></div>
                 </div>
             </div>
         </section>
