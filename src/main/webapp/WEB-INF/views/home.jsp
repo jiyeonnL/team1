@@ -392,7 +392,7 @@
         /* 소개 타이틀 */
         .visual .title {
             position: absolute;
-            top: 73%;
+            top: 82%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 1.2em;
@@ -406,6 +406,43 @@
             font-size: 0.9em;
             color: #264d73;
         }
+        
+        .visual .notation {
+        	font-size: 1.1em;
+        	margin-top: 20px;
+        	display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1em;
+            color: #264d73;
+        	-webkit-animation: blink-1 0.9s 4.5s both;
+	        animation: blink-1 0.9s 4.5s both;
+        }
+        
+        @-webkit-keyframes blink-1 {
+  		  0%,
+  		  50%,
+  		  100% {
+    		opacity: 1;
+		  }
+		  25%,
+		  75% {
+		    opacity: 0;
+		  }
+		}
+		
+		@keyframes blink-1 {
+		  0%,
+		  50%,
+		  100% {
+		    opacity: 1;
+		  }
+		  25%,
+		  75% {
+		    opacity: 0;
+		  }
+		}
+        
         .visual .image1 {
             position: absolute;
             bottom: 80px;
@@ -659,7 +696,7 @@
                 <div class="title">
                 	<div class = "subTitle" style="font-size: 1.1em;"> Welcome to 올뺌타운! </div>
                     <div class = "subTitle">이웃과 함께 만들어가는  스토리</div><br>
-					<div class = "subTitle" style="font-size: 1.1em;"><i class="fas fa-chevron-down fa-2x" style="margin-bottom: 16px; margin-right: 16px; "></i> <p>더 많은 정보를 아래서 확인하세요!</p>	 <i class="fas fa-chevron-down fa-2x" style="margin-bottom: 16px; margin-left: 16px; "></i></div>
+					<div class = "notation"><i class="fas fa-chevron-down fa-2x" style="margin-bottom: 16px; margin-right: 16px; "></i> <p>더 많은 정보를 아래에서 확인하세요!</p>	 <i class="fas fa-chevron-down fa-2x" style="margin-bottom: 16px; margin-left: 16px; "></i></div>
                 </div>
             </div>
         </section>
@@ -815,17 +852,12 @@ gsap.from("#header", {
 })
     gsap.from(".title", {
         opacity: 0,
-        delay: 4.0,
+        delay: 3.8,
         duration: 0.7,
         y: 50
     })
 
-    gsap.from(".subTitle", {
-        opacity: 0,
-        delay: 4.0,
-        duration: 0.7,
-        y: 50
-    })
+
     
     const spyEls = document.querySelectorAll('.scroll-spy');
     spyEls.forEach(function (spyEl) {
