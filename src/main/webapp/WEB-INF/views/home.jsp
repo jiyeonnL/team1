@@ -409,7 +409,7 @@
         
         .visual .notation {
         	font-size: 1.1em;
-        	margin-top: 20px;
+        	margin-top: 40px;
         	display: flex;
             justify-content: center;
             align-items: center;
@@ -696,7 +696,7 @@
                 <div class="title">
                 	<div class = "subTitle" style="font-size: 1.1em;"> Welcome to 올뺌타운! </div>
                     <div class = "subTitle">이웃과 함께 만들어가는  스토리</div><br>
-					<div class = "notation"><i class="fas fa-chevron-down fa-1x" style="margin-bottom: 16px; margin-right: 16px; "></i> <p style="font-size:25px">더 많은 정보를 아래에서 확인하세요!</p>	 <i class="fas fa-chevron-down fa-2x" style="margin-bottom: 16px; margin-left: 16px; "></i></div>
+					<div class = "notation"><i class="fas fa-chevron-down fa-1x" style="margin-bottom: 16px; margin-right: 16px; "></i> <p style="font-size:25px">더 많은 정보를 아래에서 확인하세요!</p>	 <i class="fas fa-chevron-down fa-1x" style="margin-bottom: 16px; margin-left: 16px; "></i></div>
                 </div>
             </div>
         </section>
