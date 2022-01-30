@@ -219,13 +219,13 @@ font-family: 'IBM padding: ;lex Sans KR', sans-serif;
 									<c:forEach items="${list }" var="list">
 										<tr>
 											<td>
-												<a href="/controller1/${list.link}/list">${list.boardType }</a>
+												<a href="${pageContext.request.contextPath }/${list.link}/list">${list.boardType }</a>
 											</td>
 											<td>
-												<a href="/controller1/${list.link }/list?tag=${list.tag }"> ${list.tag } </a>
+												<a href="${pageContext.request.contextPath }/${list.link }/list?tag=${list.tag }"> ${list.tag } </a>
 											</td>
 											<td>
-												<a href="/controller1/${list.link}/list/${list.postId}"> ${list.title } </a>
+												<a href="${pageContext.request.contextPath }/${list.link}/list/${list.postId}"> ${list.title } </a>
 											</td>
 											<td>${list.inserted }</td>
 									</c:forEach>
@@ -239,11 +239,11 @@ font-family: 'IBM padding: ;lex Sans KR', sans-serif;
 	</div>
 	<script>
 		$("#profile-modify").click(function() {
-			location.href = "/controller1/user/infoModify"
+			location.href = "${pageContext.request.contextPath }/user/infoModify"
 		});
 
 		$("#profile-remove").click(function() {
-			location.href = "/controller1/user/remove"
+			location.href = "${pageContext.request.contextPath }/user/remove"
 		});
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>

@@ -188,7 +188,7 @@ a:hover {
 							</div>
 							<div class="col-md-5 my-auto h5">
 								<div class="d-flex justify-content-start">
-									<a href="/controller1/news/list/${board.id}" id="title">
+									<a href="${pageContext.request.contextPath }/news/list/${board.id}" id="title">
 										<c:out value="${board.title}" />
 									</a>
 									<c:if test="${board.newMark <2 }">

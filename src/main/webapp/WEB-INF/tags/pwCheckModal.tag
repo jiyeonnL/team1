@@ -61,7 +61,7 @@
         	 clearModal();
         	$("#pwModal").modal("hide");   
             //login 페이지가 아닐 경우에만 로그인 모달을 다시 띄운다.
-            if(window.location.pathname == '/controller1/user/login') {
+            if(window.location.pathname == '${pageContext.request.contextPath }/user/login') {
             } else {
             	$('#myModal').modal('show');
             }

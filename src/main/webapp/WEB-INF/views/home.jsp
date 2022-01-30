@@ -739,7 +739,7 @@
                 </div>
                 <div class="text-left back-to-position to-left delay-1">
                     이웃들과 나누고 싶은 새로운 소식이 있나요?
-                    <a href="/controller1/news/list" class="button">바로가기</a>
+                    <a href="${pageContext.request.contextPath }/news/list" class="button">바로가기</a>
                 </div>
             </div>
         </section>
@@ -756,7 +756,7 @@
                     <div>
                     동네 이웃들과 함께 의견을 나누고 싶으신가요?
                     </div>
-                    <a href="/controller1/question/list?page=1" class="button" style="float: right;">바로가기</a>
+                    <a href="${pageContext.request.contextPath }/question/list?page=1" class="button" style="float: right;">바로가기</a>
                 </div>
             </div>
         </section>
@@ -777,7 +777,7 @@
                     <div>
                         이웃들과 여러분의 일상을 공유해보세요!
                     </div>
-                    <a href="/controller1/life/list" class="button">바로가기</a>
+                    <a href="${pageContext.request.contextPath }/life/list" class="button">바로가기</a>
                 </div>
 
             </div>
@@ -795,7 +795,7 @@
                     <div>
                         도움이 필요하신가요? 이웃들에게 부탁해보세요!
                     </div>
-                    <a href="/controller1/help/list" class="button" style="float: right;">바로가기</a>
+                    <a href="${pageContext.request.contextPath }/help/list" class="button" style="float: right;">바로가기</a>
                 </div>
 
             </div>

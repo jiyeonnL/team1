@@ -281,7 +281,7 @@ color:white;
 				tag = "&tag="+tag;
 			}
 			
-			window.location.href = "/controller1/question/list?page=" + pageNum + location + tag;
+			window.location.href = "${pageContext.request.contextPath }/question/list?page=" + pageNum + location + tag;
 		}
 </script>
 </body>

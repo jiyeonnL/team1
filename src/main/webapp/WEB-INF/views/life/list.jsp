@@ -188,7 +188,7 @@ a:hover {
 							</div>
 							<div class="col-md-5 my-auto h5">
 								<div class="d-flex justify-content-start">
-									<a href="/controller1/life/list/${board.id}" id="title">
+									<a href="${pageContext.request.contextPath }/life/list/${board.id}" id="title">
 										<c:out value="${board.title}" />
 									</a>
 									<c:if test="${board.newMark <2 }">
@@ -209,7 +209,7 @@ a:hover {
 
 						<!-- 여기가 컨텐츠 표현 부분입니다. a 태그로 내용을 표시합니다. -->
 						<div id="contentBox" class="row md px-0 mx-3 h5">
-							<a href="/controller1/life/list/${board.id}" id="내용">
+							<a href="${pageContext.request.contextPath }/life/list/${board.id}" id="내용">
 								<c:out value="${board.content}" />
 							</a>
 						</div>
@@ -217,7 +217,7 @@ a:hover {
 						<!-- preview에 올릴 한장의 이미지, 썸네일 한장만 표시한다. -->
 						<div class="row md px-0 mx-0 justify-content-center">
 							<div class="col-md-8 my-auto mx-0 d-flex justify-content-center">
-								<a id="thumbnail" href="/controller1/life/list/${board.id}">
+								<a id="thumbnail" href="${pageContext.request.contextPath }/life/list/${board.id}">
 
 									<!-- postVO가 가진 file List 중 썸네일로 지정된 이미지만 띄운다. -->
 									<c:if test="${not empty board.fileList }">

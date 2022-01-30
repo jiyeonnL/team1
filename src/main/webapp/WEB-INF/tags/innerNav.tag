@@ -330,7 +330,7 @@ function locationChange() {
 			tag = "&tag="+tag;
 		}
 		
-		window.location.href = "/controller1/question/list?page=1"+location+tag;
+		window.location.href = "${pageContext.request.contextPath }/question/list?page=1"+location+tag;
 		return 
 	}
 	
@@ -350,7 +350,7 @@ function locationChange() {
 		tag = "&tag="+tag;
 	}
 	
-	window.location.href = "/controller1/"+board+"/list"+location+tag;
+	window.location.href = "${pageContext.request.contextPath }/"+board+"/list"+location+tag;
 
 	/*
 	var link = window.location.href;
@@ -434,89 +434,89 @@ function locationChange() {
 		//model attribute에서 현재 어느 태그인지 검사하고 select의 현재 상태 변경시기키 (model 값을 스크립트 내부에서 사용해야 한다.)
 		$("#all").click(function() {
 			var loc = $("#location option:selected").val();
-			location.href = "/controller1/all/list";
+			location.href = "${pageContext.request.contextPath }/all/list";
 		});
 		
 		//-----------------------news 버튼들 -----------------------
 		$("#news").click(function() {
 			var loc = $("#location option:selected").val();
-			location.href = "/controller1/news/list";
+			location.href = "${pageContext.request.contextPath }/news/list";
 		});
 		
 		$("#n_all").click(function() {
-			location.href = "/controller1/news/list?"+ getLocation();
+			location.href = "${pageContext.request.contextPath }/news/list?"+ getLocation();
 		});
 		
 		$("#n_news").click(function() {
-			location.href = "/controller1/news/list?tag=동네소식"+ getLocation();
+			location.href = "${pageContext.request.contextPath }/news/list?tag=동네소식"+ getLocation();
 		});
 		
 		$("#n_accident").click(function() {
-			location.href = "/controller1/news/list?tag=사건사고"+ getLocation();
+			location.href = "${pageContext.request.contextPath }/news/list?tag=사건사고"+ getLocation();
 		});
 		
 		$("#n_adv").click(function() {
-			location.href = "/controller1/news/list?tag=광고"+ getLocation();
+			location.href = "${pageContext.request.contextPath }/news/list?tag=광고"+ getLocation();
 		});
 		
 		$("#n_other").click(function() {
-			location.href = "/controller1/news/list?tag=기타"+ getLocation();
+			location.href = "${pageContext.request.contextPath }/news/list?tag=기타"+ getLocation();
 		});
 		
 		//-----------------------question 버튼들 -----------------------
 		$("#question").click(function() {
 			var loc = $("#location option:selected").val();
-			location.href = "/controller1/question/list?page=1";
+			location.href = "${pageContext.request.contextPath }/question/list?page=1";
 		});
 		
 		$("#q_all").click(function() {
-			location.href = "/controller1/question/list?page=1"+ getLocation();
+			location.href = "${pageContext.request.contextPath }/question/list?page=1"+ getLocation();
 		});
 		
 		$("#q_question").click(function() {
-			window.location.href = "/controller1/question/list?page=1&tag=질문"+ getLocation();
+			window.location.href = "${pageContext.request.contextPath }/question/list?page=1&tag=질문"+ getLocation();
 		})
 
 		$("#q_declaration").click(function() {
-			window.location.href = "/controller1/question/list?page=1&tag=신고합니다!"+ getLocation();
+			window.location.href = "${pageContext.request.contextPath }/question/list?page=1&tag=신고합니다!"+ getLocation();
 		})
 
 		$("#q_suggest").click(function() {
-			window.location.href = "/controller1/question/list?page=1&tag=건의사항" + getLocation();
+			window.location.href = "${pageContext.request.contextPath }/question/list?page=1&tag=건의사항" + getLocation();
 		})
 
 		$("#q_other").click(function() {
-			window.location.href = "/controller1/question/list?page=1&tag=기타" + getLocation();
+			window.location.href = "${pageContext.request.contextPath }/question/list?page=1&tag=기타" + getLocation();
 		})
 
 		//----------------------- life 버튼들 -----------------------
 		$("#life").click(function() {
 			var loc = $("#location option:selected").val();
-			location.href = "/controller1/life/list";
+			location.href = "${pageContext.request.contextPath }/life/list";
 		});
 		
 		$("#l_all").click(function() {
-			window.location.href = "/controller1/life/list?" + getLocation();
+			window.location.href = "${pageContext.request.contextPath }/life/list?" + getLocation();
 		})
 		
 		$("#l_life").click(function() {
-			window.location.href = "/controller1/life/list?tag=일상" + getLocation();
+			window.location.href = "${pageContext.request.contextPath }/life/list?tag=일상" + getLocation();
 		})
 		
 		$("#l_hobby").click(function() {
-			window.location.href = "/controller1/life/list?tag=취미" + getLocation();
+			window.location.href = "${pageContext.request.contextPath }/life/list?tag=취미" + getLocation();
 		})
 		
 		$("#l_movdra").click(function() {
-			window.location.href = "/controller1/life/list?tag=영화드라마" + getLocation();
+			window.location.href = "${pageContext.request.contextPath }/life/list?tag=영화드라마" + getLocation();
 		})
 		
 		$("#l_pet").click(function() {
-			window.location.href = "/controller1/life/list?tag=반려동물" + getLocation();
+			window.location.href = "${pageContext.request.contextPath }/life/list?tag=반려동물" + getLocation();
 		})
 		
 		$("#l_other").click(function() {
-			window.location.href = "/controller1/life/list?tag=기타" + getLocation();
+			window.location.href = "${pageContext.request.contextPath }/life/list?tag=기타" + getLocation();
 		})
 
 		
@@ -524,23 +524,23 @@ function locationChange() {
 		//----------------------- help 버튼들 -----------------------
 		$("#help").click(function() {
 			var loc = $("#location option:selected").val();
-			location.href = "/controller1/help/list"
+			location.href = "${pageContext.request.contextPath }/help/list"
 		});
 		
 		$("#h_All").click(function() {
-			location.href = "/controller1/help/list?" + getLocation();
+			location.href = "${pageContext.request.contextPath }/help/list?" + getLocation();
 		})
 		$("#h_buy").click(function() {
-			window.location.href = "/controller1/help/list?tag=사다주세요"+ getLocation();
+			window.location.href = "${pageContext.request.contextPath }/help/list?tag=사다주세요"+ getLocation();
 		})
 		$("#h_care").click(function() {
-			window.location.href = "/controller1/help/list?tag=맡아주세요"+ getLocation();
+			window.location.href = "${pageContext.request.contextPath }/help/list?tag=맡아주세요"+ getLocation();
 		})
 		$("#h_move").click(	function() {
-			window.location.href = "/controller1/help/list?tag=옮겨주세요"+ getLocation();
+			window.location.href = "${pageContext.request.contextPath }/help/list?tag=옮겨주세요"+ getLocation();
 		})
 		$("#h_other").click(function() {
-			location.href = "/controller1/help/list?tag=기타" + getLocation();
+			location.href = "${pageContext.request.contextPath }/help/list?tag=기타" + getLocation();
 		})
 		
 		

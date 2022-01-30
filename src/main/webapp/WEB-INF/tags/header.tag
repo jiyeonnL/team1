@@ -52,12 +52,12 @@ font-size:x-large;
 				<li><a href="${pageContext.request.contextPath }" class="nav-link px-3 text-white"> 
 				<i class="fas fa-home" id="icon-header"></i> 홈 
 				</a></li>
-				<li><a href="/controller1/news/list" class="nav-link px-3 text-white"> 
+				<li><a href="${pageContext.request.contextPath }/news/list" class="nav-link px-3 text-white"> 
 				<i class="fas fa-th-list" id="icon-header"></i> 동네 살펴보기   
 				</a></li>
 				<!-- <li><a href="/" class="nav-link px-2 text-white"> 
 				<i class="fas fa-question-circle" id="icon-header"></i> 자주묻는 질문 </a></li> -->
-				<li><a href="/controller1/dev" class="nav-link px-3 text-white"> 
+				<li><a href="${pageContext.request.contextPath }/dev" class="nav-link px-3 text-white"> 
 				<i class="fas fa-user-edit" id="icon-header"></i> 제작자 </a></li>
 
 			</ul>
@@ -115,13 +115,13 @@ font-size:x-large;
 		//const main = $(location).attr('href'); 
 		
 		//현재 링크가 다음 링크중 하나이면 모달을 띄우지 않고 로그인 창으로 이동시킨다
-		if(path === '/controller1/all/list'
-				|| path === '/controller1/user/signup' 
-				|| path === '/controller1/user/login'
-				|| path === '/controller1/'){
+		if(path === '${pageContext.request.contextPath }/all/list'
+				|| path === '${pageContext.request.contextPath }/user/signup' 
+				|| path === '${pageContext.request.contextPath }/user/login'
+				|| path === '${pageContext.request.contextPath }/'){
 			
 			$("#login").click(function() {
-				location.href="/controller1/user/login"
+				location.href="${pageContext.request.contextPath }/user/login"
 			});
 	
 		}else{
@@ -136,7 +136,7 @@ font-size:x-large;
 			});
 		};
 		$("#signup").click(function() {
-			location.href="/controller1/user/signup"
+			location.href="${pageContext.request.contextPath }/user/signup"
 		});
 	});
 

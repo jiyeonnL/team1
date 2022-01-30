@@ -107,8 +107,8 @@ background-color: #ffe164;}
     							<li>탈퇴하셔도 다른 올뺌들이 ${sessionScope.loginUser.nickname}님의 게시글을 읽을 수 있어요</li>
     							<li>사용하신 아이디(${sessionScope.loginUser.nickname})는 복구가 불가능해요</li>
     							<li>다른 올뺌들이 슬퍼해요</li>
-    							<li>노력하는 '올뺌'이 되겠습니다..!!</li>
-    							<li>다음에 오셨을 땐, 사이트가 더 발전해있을거에요!!!</li>
+    							<li>노력하는 '올뺌'이 되겠습니다</li>
+    							<li>다음에 오셨을 땐, 사이트가 더 발전해있을거에요!</li>
     						</ul>
     					<input class="check" type="checkbox" name="agree"><span> 동의합니다.</span> 
     				</div>

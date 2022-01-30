@@ -105,7 +105,7 @@
 					<div class="modal-footer modal-end">
 						<p class="float-start">
 							아직 계정이 없으시다면,
-							<a href="/controller1/user/signup" id="modal-go-sign-up">회원 가입</a>
+							<a href="${pageContext.request.contextPath }/user/signup" id="modal-go-sign-up">회원 가입</a>
 						</p>
 						<button type="submit" id="modal-login-button" class="btn float-end">로그인</button>
 					</div>
