@@ -39,6 +39,7 @@ public class NewsReplyController {
 				reply.setOwn(loggedIn.getNickname().equals(writerId)); // 로그인한 사람과 댓글 작성자가 같을 때 true
 			}
 		}
+		System.out.println(list);
 		return list;
 	}
 	

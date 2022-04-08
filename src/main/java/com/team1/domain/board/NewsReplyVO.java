@@ -14,6 +14,8 @@ public class NewsReplyVO {
 	private String url;
 	private LocalDateTime inserted;
 	private LocalDateTime updated;
+	private String fileName;
+	private String profileurl; // 유저 기본 프로필
 	
 	// 댓글 수정 삭제 버튼 여부
 	private Boolean own;

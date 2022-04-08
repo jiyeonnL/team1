@@ -16,7 +16,9 @@
 	u.nickname,
 	u.id uid,
 	u.adminQuali,
-	fu.url
+	u.profileurl,
+	fu.url, 
+	fu.fileName
 FROM
 	tb_reply_help r
 JOIN

@@ -229,6 +229,14 @@ max-width:50%;
     object-fit: cover;
 }
 
+.reply-profile {
+    width: 45px;
+    height: 45px;
+    max-width: 45px;
+    max-height: 45px;
+    object-fit: cover;
+}
+
 #reply-nickname {
 	width: 460px;
 	font-weight: bold;
@@ -969,14 +977,25 @@ background-color: #eef2f6;
 	        	let a = 0;
 	          	for (let i = 0; i < list.length; i++) {
 					const replyId = list[i].id;
+					console.log(i);
+					console.log(list[i].fileName);
+					console.log(list[i].fileName !='');
+					console.log(list[i].url);
+					console.log(list[i].profileurl);
 					const replyMediaObject = $(`
 							
 							<table class="table table-borderless 기본댓글-테이블">
 								<thead id="replyhead" class="">
 									<tr>
 										<th id="userprofile">
-												<img	id = "reply-profile" 
-												src="\${list[i].url}"class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
+										<c:choose>
+											<c:when  test="\${list[i].fileName != '' }">  
+												<img src="\${list[i].url}" class="img-thumbnail rounded-circle mx-auto d-block reply-profile" alt="..." />
+											</c:when>
+											<c:when test="\${list[i].fileName == '' }"> 
+												<img src="\${list[i].profileurl}" class="img-thumbnail rounded-circle mx-auto d-block reply-profile" alt="..." />
+											</c:when>
+									    </c:choose>  
 										</th>
 										<th id="replynickname">
 											<div id ="reply-nickname" class="h5"></div>
@@ -1064,7 +1083,7 @@ background-color: #eef2f6;
 												<tr>
 													<th id="userprofile">
 														<img	id = "rereply-profile" 
-														src="\${relist[i].url}" class="img-thumbnail rounded-circle mx-auto d-block " alt="UserProfile Picture"/>
+														src="\${relist[i].url}" class="img-thumbnail rounded-circle mx-auto d-block " alt="..."/>
 													</th>
 													<th id="rereplynickname">
 														<div id ="rereply-nickname" class="h5"></div>
