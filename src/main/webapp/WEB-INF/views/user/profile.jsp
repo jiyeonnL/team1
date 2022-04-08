@@ -90,6 +90,9 @@ font-weight: bold;
 	margin-bottom: 30px;
 	margin-top: 30px;
 	font-family: 'IBM padding: ;lex Sans KR', sans-serif;
+/* 	display: inline-block;
+	overflow: hidden;	
+	word-break: break-all; */
 }
 
 #selfintrohead {
